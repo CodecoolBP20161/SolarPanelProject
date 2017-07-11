@@ -1,0 +1,556 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+   <title>Gardener Care - Garden, Gardening and Landscaping Responsive HTML5 Template</title>
+    <link href="favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<div id="layout">
+	<aside id="menu">
+        <div class="logo">
+            <a href="#">Gardener Care</a>
+        </div>
+        <div class="menu-links">
+            <ul>
+                <li>
+                    <a href="#getting-started">Getting Started</a>
+                    <ul>
+                        <li><a href="#requirements">Requirements</a>
+                        <li><a href="#installation">Installation</a>
+                    </ul>
+                </li>
+                <li><a href="#preloader">Preloader</a></li>
+                <li><a href="#favicon">Favicon</a></li>
+                 <li><a href="#themes">Themes</a></li>
+                <li>
+                    <a href="#grid-system">Modular Grid</a>
+                    <ul>
+                        <li><a href="#twboot">Twitter Bootstrap</a>
+                       
+                        <li><a href="#grid-padding">Paddings and Margins</a>
+                        
+                    </ul>
+                </li>
+               
+                    
+                </li>
+                
+				<!--
+                 <li>
+                    <a href="#page-header">Header</a>
+                    
+                </li>
+                  <li>
+                    <a href="#patterns">Patterns</a>
+                    
+                </li>
+                  <li>
+                    <a href="#boxed">Boxed Layout</a>
+                    
+                </li>
+                -->
+                 
+
+                <li>
+                    <a href="#sliders">Sliders</a>
+                    
+                </li>
+             
+                
+                <li><a href="#gmaps">Google Maps</a></li>
+                
+                <li><a href="#errorpage">Error Pages</a></li>
+                <li><a href="#forms">Forms</a>
+                   
+                </li>
+               
+                <li><a href="#font-settings">Fonts settngs</a></li>
+            </ul>
+        </div>
+	</aside>
+    <!-- /#menu -->
+
+	<section id="main">
+        <nav class="slideshow-bar">
+            <a id="menu-link" href="#menu"></a>
+            <a id="scrolltop" href="#"></a>
+        </nav>
+        <!-- /.slideshow-bar -->
+
+        <header class="header content">
+            <div>
+                <h1>Gardener Care - Documentation</h1>
+                <small class="version">Version 1.0</small>
+                <h4>Cross Browser, High Quality and Responsive Multipurpose HTML Template.</h4>
+                <p>Thank you very much for purchasing our template. It is built with the latest HTML5 and CSS3 technologies, but at the same time it is also made compatible with older browser versions. If you have any questions that aren’t covered in this article, please feel free to email us on our user page, you can find the contact form <a href="">here</a>.</p>
+                <p>Don’t forget to rate this template, it helps us improve our products. <img src="images/rate.png" alt=""></p>
+               
+                <h4>Thanks so much!</h4>
+            </div>
+        </header>
+        <!-- /.header -->
+
+        <section id="getting-started" class="content slide">
+            <div>
+                <h2>Getting Started</h2>
+                <h4 id="requirements">Requirements</h4>
+                <p>For installing this template you need to make sure that you have the following extensions on your webserver. You will need to contact your webhost if the following requirements are missing.</p>
+                <ul>
+                    <li>PHP 5.2+;</li>
+                    <li>PHP Mail support;</li>
+                    <li>Enabling JavaScript in the web browser.</li>
+                </ul>
+                <h4 id="installation">Installation</h4>
+                <p>Unzip the downloaded files to the local disk on your computer. Inside the extracted folder there will be contents and folder with documentation. Copy all contents, except from folder with documentation, to your server via FTP client.</p>
+               
+            </div>
+        </section>
+        <!-- #getting-started -->
+
+        <section id="preloader" class="content slide">
+            <div>
+                <h2>Preloader</h2>
+                <p>Before the main contents of the website are loaded, there is an opportunity to show the preloader of the site. It can be any image, a gif-animated icon. You can change the path to the image.</p>
+               
+                <p>If you don’t need the preloader, you can delete div with id <strong>preloader</strong> and comment/remove some lines in custom.js file.</p>
+                <pre class="snippet" data-language="html">
+                    <!-- Preloader -->
+                   <div id="preloader">
+						&emsp;<div class="sk-circle">
+  	&emsp;&emsp;<div class="sk-circle1 sk-child"></div>
+  	&emsp;&emsp; <div class="sk-circle2 sk-child"></div>
+ 	&emsp;&emsp; <div class="sk-circle3 sk-child"></div>
+ 	&emsp;&emsp;<div class="sk-circle4 sk-child"></div>
+  	&emsp;&emsp; <div class="sk-circle5 sk-child"></div>
+  	&emsp;&emsp; <div class="sk-circle6 sk-child"></div>
+  	&emsp;&emsp; <div class="sk-circle7 sk-child"></div>
+  	&emsp;&emsp;<div class="sk-circle8 sk-child"></div>
+  	&emsp;&emsp;<div class="sk-circle9 sk-child"></div>
+  	&emsp;&emsp; <div class="sk-circle10 sk-child"></div>
+  	&emsp;&emsp;<div class="sk-circle11 sk-child"></div>
+  	&emsp;&emsp;<div class="sk-circle12 sk-child"></div>
+ 	&emsp;</div>
+					</div>
+                </pre>
+                <pre class="snippet" data-language="html">
+                    $(window).load(function() {
+									&emsp;$("#preloader").fadeOut();
+									
+										&emsp;})
+                </pre>
+            </div>
+        </section>
+        <!-- #preloader -->
+
+        <section id="favicon" class="content slide">
+            <div>
+                <h2>Favicon</h2>
+                <p>To change the favicon of your site, you need to load a new image in a site root or to point out a new address of the image.</p>
+                <pre class="snippet" data-language="js">
+                    &lt;link href=&quot;favicon.ico&quot; rel=&quot;shortcut icon&quot; type=&quot;image/x-icon&quot;&gt;
+                </pre>
+            </div>
+        </section>
+        <!-- /#favicon -->
+
+        <section id="themes" class="content slide">
+            <div>
+                <h2>Color themes</h2>
+                <p>There have already been created a few special <code>CSS</code> file for the theme, which stylize a color scheme.</p>
+                <ul>
+                   
+                    <li><strong>amethyst.css</strong> - a VioletDark color</li>
+                    <li><strong>asphalt.css</strong> - a DarkSlateGray color;</li>
+                    <li><strong>steelblue</strong> - an steelblue color;</li>
+                    <li><strong>emerland </strong> - a emerland color;</li>
+                    <li><strong>green </strong> - a green color;</li>
+                    <li><strong>lightorange </strong> - a lightorange color;</li>
+                    <li><strong>peterriver </strong> - a peterriver color;</li>
+                    <li><strong>pink </strong> - a pink color;</li>
+                    <li><strong>pomegranate </strong> - a pomegranate color;</li>
+                    <li><strong>pumpkin </strong> - a pumpkin color;</li>
+                    <li><strong>purple </strong> - a purple color;</li>
+                    <li><strong>red </strong> - a red color;</li>
+                    <li><strong>yellow </strong> - a yellow color;</li>
+                    <li><strong>sunflower </strong> - a sunflower color;</li>
+                    
+                </ul>
+                <pre class="snippet" data-language="html">
+                  <link href="assets/css/theme-color/default.css" rel="stylesheet" id="theme-color" type="text/css">
+                </pre>
+                <p class="warning">The file <strong>theme.css</strong> it set by default. Also you have to change <code>css/theme-color/theme.css</code> file into the <code>head</code> tag.</p>
+				
+				<p>Also you have to change <strong>theme.scss</strong> file into online compiler 
+				<a href="http://www.sassmeister.com/" target="_blank">Here</a> to "unlimited colors"  </p>
+                <pre class="snippet" data-language="html">
+                  $theme-color: #19b5fe;// Change here your theme color
+                </pre>
+           
+            </div>
+        </section>
+        <!-- /#themes -->
+
+        <section id="grid-system" class="content slide">
+            <div>
+                <h2>Modular grid</h2>
+                <p>The Template is built on the system by using a 12-column markup. With the help of the given system you can create almost any modular grid and insert a necessary content in created modules.</p>
+                
+                <h3 id="grid-padding">Paddings and Margins</h3>
+                <p>If it’s necessary to add a padding on the top or bottom or both, it’s enough to add one of the classes that will set up padding:</p>
+               <pre class="snippet" data-language="js">
+                    
+.no-padding {
+    padding: 0 !important;
+}
+
+.padding-30 {
+    padding: 30px !important;
+}
+
+.padding-40 {
+    padding: 40px !important;
+}
+
+.plr-0 {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.pl-0 {
+    padding-left: 0;
+}
+
+.pr-0 {
+    padding-right: 0;
+}
+
+.ptb-0 {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+}
+
+.pt-0 {
+    padding-top: 0px !important;
+}
+
+.pb-0 {
+    padding-bottom: 0px !important;
+}
+.pt-30 {
+    padding-top: 30px !important;
+}
+.ptb {
+    padding-top:60px;
+    padding-bottom: 60px;
+}
+
+.pt {
+    padding-top: 110px;
+}
+
+.pb {
+    padding-bottom: 110px;
+}
+
+.ptb-15 {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.pt-15 {
+    padding-top: 15px;
+}
+
+.pb-15 {
+    padding-bottom: 15px;
+}
+
+.ptb-60 {
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+.pt-60 {
+    padding-top: 60px;
+}
+
+.pb-60 {
+    padding-bottom: 60px;
+}
+
+.ptb-80 {
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+.pt-80 {
+    padding-top: 80px;
+}
+
+.pb-80 {
+    padding-bottom: 80px;
+}
+
+.mtb-0 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.mlr-0 {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.mt-0 {
+    margin-top: 0px !important;
+}
+
+.mb-0 {
+    margin-bottom: 0px !important;
+}
+
+.ml-0 {
+    margin-left: 0px !important;
+}
+
+.mr-0 {
+    margin-right: 0px !important;
+}
+
+.mtb-80 {
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+.mt-80 {
+    margin-top: 80px;
+}
+
+.mb-80 {
+    margin-bottom: 80px;
+}
+
+.mtb-60 {
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+.mt-60 {
+    margin-top: 60px;
+}
+
+.mb-60 {
+    margin-bottom: 60px;
+}
+
+.mtb-45 {
+    margin-top: 45px;
+    margin-bottom: 45px;
+}
+
+.mt-45 {
+    margin-top: 45px;
+}
+
+.mb-45 {
+    margin-bottom: 45px;
+}
+
+.mtb-30 {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.mt-30 {
+    margin-top: 30px;
+}
+
+.mb-30 {
+    margin-bottom: 30px;
+}
+
+.ml-30 {
+    margin-left: 30px;
+}
+
+.mr-30 {
+    margin-right: 30px;
+}
+
+.mtb-25 {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.mt-25 {
+    margin-top: 25px;
+}
+
+.mb-25 {
+    margin-bottom: 25px;
+}
+
+.mtb-15 {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.mt-15 {
+    margin-top: 15px;
+}
+
+.mb-15 {
+    margin-bottom: 15px;
+}
+</pre>
+                </ul>
+                <pre class="snippet" data-language="js">
+                    <div class="container pt">
+                        &emsp;<div class="row text-center">
+                        &emsp;&emsp;<div class="col-md-3 col-sm-6 margin-top-big">
+                        &emsp;&emsp;&emsp;…
+                        &emsp;&emsp;</div>
+                        &emsp;</div>
+                    </div>
+                </pre>
+                <p>You can change the size of paddings in the css/style.css file or you can add a new class in which you set up user’s paddings.</p>
+              
+
+        
+        <!-- /#ecommerce -->
+
+        <section id="gmaps" class="content slide">
+            <div>
+                <h2>Google Maps</h2>
+                <pre class="snippet" data-language="js">
+                    <!-- CONTACT-map -->
+                    <div class="map">
+						<div id="map"></div>
+                    </div>
+                </pre>
+                <p>In <strong>HTML</strong> file you should write only single line, with unique <code>id</code> attribute.</p>
+                <p>To set Google map you need to edit the <code>custom.js</code> file. To get the longitude and latitude you can use the <a href="http://itouchmap.com/latlong.html" target="_blank">following service</a>. Click a map and replace a marker into the place you need after switching to a link. Then insert the received coordinates into the <code>custom.js</code> file.</p>
+                <p class="path" >custom.js</p>
+                <pre class="snippet" data-language="js">
+                var myCenter = new google.maps.LatLng(51.528308, -0.3817765); Set Your Location Hare
+                
+                </pre>
+                
+            </div>
+        </section>
+        <!-- /#gmaps -->
+        <!-- /#gmaps -->
+
+
+        <section id="errorpage" class="content slide">
+            <div>
+                <h2>Error Pages</h2>
+                <p>For special pages, like 404 or 505 or under Gardener Care use a few another markup. At first, you should add class <code>page404</code> for HTML tag. This pages do not contain header and footer like in another pages. For more details information look at <strong>404.html</strong>. By analogy of this pages you may create suitable and needed for your purposes pages.</p>
+            </div>
+        </section>
+        <!-- #errorpage -->
+
+          <section id="forms" class="content slide">
+            <div>
+                <h2>Forms</h2>
+               <p>All the areas must be in the <code>form</code> tag. add Id <strong>contact-form</strong> in form tag. The tag must have obligatory attributes:</p>
+                <pre class="snippet" data-language="js">
+                   <form id="contact-form" class="contact-form">
+                   	<ul class="col-xs-12 col-sm-6">
+                   		<li>
+						<input id="name" class="name" type="text" name="name" placeholder="Name*">
+						</li>
+						<li>
+						<input id="email" class="email" type="email" name="email" placeholder="E-Mail*">
+						</li>
+						<li>
+						<input id="sub" class="sub" type="text" name="sub" placeholder="subject*">
+						</li>
+
+						</ul>
+						<ul class="col-xs-12 col-sm-6">
+						<li>
+						<textarea id="message" class="message" name="message" placeholder="Message:"></textarea>
+						</li>
+						</ul>
+						<div class="col-xs-12">
+						<input id="submit" class="send-btn" type="button" name="send-btn" value="Send">
+						
+						</div>
+						</form>
+                </pre>
+                
+                <p>Change here the Success msg content</p>
+                 <pre class="snippet" data-language="js">
+                 	<div id="success">
+						<div class="alert alert-success">
+						     <strong>Thanks</strong> for using our template. Your message has been sent.
+						</div>
+					</div>
+                 </pre>	
+                
+               
+                <p class="question">In the <code>mail.php</code> file you can change the address of message receiving, a message topic, also the whole text that will deliver to the administrator of the site.</p>
+                <pre class="snippet" data-language="js">
+                	// Global Configuration start: From here you can change the email-id of receiver, cc, from email-id & subject;
+				$to = "support@theembazaar.com";
+				$cc = "support@theembazaar.com";
+				$from = "test@theembazaar.com";
+				$subject = "Email Submission";
+				// Global configuration end			
+                </pre>	
+                
+                
+            </div>
+        </section>
+        <!-- #forms -->
+        
+
+        <section id="font-settings" class="content slide last">
+            <div>
+                <h2>Font Settings</h2>
+                <p>To change the font-family you will have to edit the file <code>css/style.css</code>. If the font is a standard one, built the system by default, you can just write it here.</p>
+                <pre class="snippet" data-language="js">
+                   body { font-family: 'Open Sans', Arial, Helvetica, sans-serif;  } // or whatever you want (e.g. "lato")
+                </pre>
+                <p class="warning">Also you can use <a href="http://www.google.com/fonts" target="_blank" title="Google Font">Google Font</a> and connect it to your website.</p>
+                <ol>
+                    <li>Go to <a href="http://www.google.com/fonts" target="_blank">http://www.google.com/fonts</a>.</li>
+                    <li>Choose the appropriate font.</li>
+                    <li>Click the <strong>Quick-use</strong> button (<img src="images/quick_use_static.png" alt="">).</li>
+                    <li>Choose the styles that you want;</li>
+                    <li>Choose the character sets that you want.</li>
+                    <li>Below that click on the @import tab and copy this line.</li>
+                    <li>Paste this line to that <code>css/style.css</code> file on 3d line instead of the default (e.g.):
+                        <pre class="snippet" data-language="css">
+                            @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800%7COswald:300,400,700);
+                        </pre>
+                    </li>
+                    <li>At last, copy font-family name from Google Fonts website and paste on <code>css/style.css</code>:
+                        <pre class="snippet" data-language="js">
+                            body { font-family: 'Open Sans', Arial, Helvetica, sans-serif;  }
+                        </pre>
+                    </li>
+                </ol>
+            </div>
+        </section>
+        <!-- /#font-settings -->
+
+        <footer id="footer">
+           Thank You, Gardener Care
+        </footer>
+        <!-- /#footer -->
+
+	</section>
+    <!-- /#main -->
+</div>
+<script src="js/jquery-2.1.1.min.js"></script>
+<script src="js/jquery.plugins.js"></script>
+<script src="js/custom.js"></script>
+
+</body>
+
+</html>
