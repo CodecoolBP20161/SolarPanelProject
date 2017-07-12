@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<body>
+
+
+<!--Navbar-->
+<div th:fragment="navbar">
+
+    <!--Start mainmenu area-->
+    <section class="mainmenu-area">
+        <div class="container">
+            <div class="mainmenu-bg">
+                <div class="row">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <!--Start mainmenu-->
+                        <nav class="main-menu">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                            </div>
+                            <div class="navbar-collapse collapse clearfix">
+                                <ul class="navigation clearfix">
+                                    <li>
+                                        <a th:href="@{/}">Főoldal</a>
+
+                                    </li>
+
+                                    <li>
+                                        <a th:href="@{/rolunk}">Rólunk</a>
+
+                                    </li>
+
+                                    <li>
+                                        <a href="#!">Termékeink</a>
+                                        <!-- Nav Dropdown -->
+                                        <ul class="sub-nav">
+
+                                            <li>
+                                                <a href="#!">Growatt</a>
+                                            </li>
+                                            <li>
+                                                <a href="#!">Solaredge</a>
+                                            </li>
+
+                                        </ul>
+                                        <!-- End Nav Dropdown -->
+                                    </li>
+
+                                    <li>
+                                        <a th:href="@{/ajanlat}">Árajánlat</a>
+
+                                    </li>
+
+                                    <li>
+                                        <a href="contact2.html">Üzenet</a>
+                                    </li>
+
+
+                                </ul>
+
+                                <!-- ==============================
+                                =========Mobile Navigation==========
+                                ==================================== -->
+                                <ul class="mobile-menu clearfix">
+                                    <li>
+                                        <a th:href="@{/}">Főoldal</a><span class="submenu-button"></span>
+
+                                    </li>
+
+                                    <li>
+                                        <a th:href="@{/rolunk}">Rólunk</a><span class="submenu-button"></span>
+
+                                    </li>
+
+                                    <li>
+                                        <a href="#!">Termékeink</a><span class="submenu-button"></span>
+                                        <!-- Nav Dropdown -->
+                                        <ul class="sub-nav">
+
+                                            <li>
+                                                <a href="#!">Growatt</a>
+                                            </li>
+                                            <li>
+                                                <a href="#!">Solaredge</a>
+                                            </li>
+                                        </ul>
+                                        <!-- End Nav Dropdown -->
+                                    </li>
+
+                                    <li>
+                                        <a th:href="@{/ajanlat}">Árajánlat</a><span class="submenu-button"></span>
+                                    </li>
+
+                                    <li>
+                                        <a href="contact2.html">Üzenet</a><span class="submenu-button"></span>
+                                    </li>
+
+                                </ul>
+
+                            </div>
+                        </nav>
+                        <!--End mainmenu-->
+
+                    </div>
+
+                </div>
+                <div class="right-column">
+                    <div class="right-area">
+                        <div class="nav_side_content">
+                            <div class="search_option">
+                                <button class="search tran3s dropdown-toggle color1_bg" id="searchDropdown">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </button>
+                                <form action="#" class="dropdown-menu dropdown-input" >
+                                    <input type="text" placeholder="Search...">
+                                    <button class="close-input">
+                                        <i class="fa fa-close" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                            </div>
+
+                        </div>
+                        <div class="link_btn float_right">
+                            <a href="get-a-quote.html" class="thm-btn bg-clr1">GET A Quote</a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</div>
+</body>
+</html>
