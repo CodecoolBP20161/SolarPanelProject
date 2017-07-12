@@ -1,33 +1,10 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>Gardener Care - Garden, Gardening and Landscaping Responsive HTML5 Template</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-    <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 
-    <!-- Favicone Icon -->
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-    <!-- CSS -->
-    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,700,800%7CLato:300,400,700" rel="stylesheet" type="text/css">
-    <link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css">
-    <link href="assets/css/font-awesome.css" rel="stylesheet" type="text/css">
-    <link href="assets/css/ionicons.css" rel="stylesheet" type="text/css">
-    <link href="assets/css/flaticon.css" rel="stylesheet" type="text/css">
-    <!-- carousel -->
-    <link href="assets/css/owl.carousel.css" rel="stylesheet" type="text/css">
-    <!--Light box-->
-    <link href="assets/css/jquery.fancybox.css" rel="stylesheet" type="text/css">
-    <!-- Revolution Style-sheet -->
-    <link rel="stylesheet" type="text/css" href="assets/rs-slider/rs-plugin/css/settings.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/rev-style.css">
-    <!--Main Style-->
-    <link href="assets/css/navigation.css" rel="stylesheet" type="text/css">
-    <link href="assets/css/style.css" rel="stylesheet" type="text/css">
+<head th:replace="fragments/head :: head"></head>
 
-    <!--Theme Color-->
-    <link href="assets/css/theme-color/default.css" rel="stylesheet" id="theme-color" type="text/css">
-</head>
 <body class="full-intro background--dark">
 <!--loader-->
 <div id="preloader">
@@ -57,12 +34,12 @@
             <div class="clearfix">
                 <div class="pull-left">
                     <p>
-                        Welcome to our Gardener Care
+                        Üdvözöljük a Solár veboldalon
                     </p>
                 </div>
                 <div class="pull-right">
                     <p>
-                        <i class="fa fa-clock-o"></i>Monday - Friday : 8:00 AM to 7:00 Pm
+                        <i class="fa fa-clock-o"></i>Hétfő - Péntek : 8:00 - 17:00
                     </p>
                 </div>
             </div>
@@ -88,9 +65,9 @@
                                 </div>
                                 <div class="text-holder">
 
-                                    <h6>123 Main Street,NW Ste</h6>
+                                    <h6>Dóczy József utca 30 C ép. 2.</h6>
                                     <p>
-                                        Washington, DC,USA
+                                        Miskolc, Magyarország
                                     </p>
                                 </div>
                             </li>
@@ -99,9 +76,9 @@
                                     <span class="fa fa-phone-square"></span>
                                 </div>
                                 <div class="text-holder">
-                                    <h6>Call Us On</h6>
+                                    <h6>Telefon</h6>
                                     <p>
-                                        1-012-345-6789
+                                        06-12-123-45-67
                                     </p>
                                 </div>
                             </li>
@@ -110,10 +87,10 @@
                                     <span class="fa fa-envelope"></span>
                                 </div>
                                 <div class="text-holder">
-                                    <h6>Mail Us @</h6>
+                                    <h6>Email</h6>
                                     <a href="#">
                                         <p>
-                                            theembazaar@gmail.com
+                                            email@email.hu
                                         </p></a>
                                 </div>
                             </li>
@@ -125,313 +102,9 @@
         </div>
     </header>
     <!--End header area-->
-    <!--Start mainmenu area-->
-    <section class="mainmenu-area">
-        <div class="container">
-            <div class="mainmenu-bg">
-                <div class="row">
-                    <div class="col-md-9 col-sm-12 col-xs-12">
-                        <!--Start mainmenu-->
-                        <nav class="main-menu">
-                            <div class="navbar-header">
-                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                </button>
-                            </div>
-                            <div class="navbar-collapse collapse clearfix">
-                                <ul class="navigation clearfix">
-                                    <li>
-                                        <a href="index.html">index</a>
+    <!-- Navbar -->
+    <div th:replace="fragments/navbar :: navbar"></div>
 
-                                    </li>
-                                    <li>
-                                        <a href="#!">Services</a>
-                                        <!-- Nav Dropdown -->
-                                        <ul class="sub-nav">
-
-                                            <li>
-                                                <a href="services.html">Services</a>
-                                            </li>
-                                            <li>
-                                                <a href="services-details.html">Services Details</a>
-                                            </li>
-
-                                        </ul>
-                                        <!-- End Nav Dropdown -->
-                                    </li>
-
-                                    <li>
-                                        <a href="#!">Blog</a>
-                                        <!-- Nav Dropdown -->
-                                        <ul class="sub-nav">
-                                            <li>
-                                                <a href="blog-list.html">Blog List</a>
-                                            </li>
-                                            <li>
-                                                <a href="blog-grid.html">Blog grid</a>
-                                            </li>
-                                            <li>
-                                                <a href="blog-detail.html">Blog detail</a>
-                                            </li>
-                                        </ul>
-                                        <!-- End Nav Dropdown -->
-
-                                    </li>
-                                    <li class="nav-has-sub">
-                                        <a href="#!">Page</a>
-                                        <!-- Nav Dropdown -->
-                                        <ul class="sub-nav">
-                                            <li>
-                                                <a href="portfolio-grid-2.html">Gallery Grid 2</a>
-                                            </li>
-                                            <li>
-                                                <a href="portfolio-grid-3.html">Gallery Grid 3</a>
-                                            </li>
-                                            <li>
-                                                <a href="portfolio-grid-4.html">Gallery Grid 4</a>
-                                            </li>
-                                            <li>
-                                                <a href="portfolio-single.html">Gallery single</a>
-                                            </li>
-                                            <li>
-                                                <a href="about.html">About</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="team.html">Team</a>
-                                            </li>
-                                            <li>
-                                                <a href="pricing.html">pricing</a>
-                                            </li>
-                                            <li>
-                                                <a href="get-a-quote.html">get a quote</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="faq.html">Faq</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="register.html">Register</a>
-                                            </li>
-                                            <li>
-                                                <a href="login.html">login</a>
-                                            </li>
-                                            <li>
-                                                <a href="testimonial.html">Testimonials</a>
-                                            </li>
-                                            <li>
-                                                <a href="404.html">404 Error</a>
-                                            </li>
-                                            <li>
-                                                <a href="blank.html">blank</a>
-                                            </li>
-                                        </ul>
-                                        <!-- End Nav Dropdown-->
-                                    </li>
-                                    <li>
-                                        <a href="#!">Shop</a>
-                                        <!-- Nav Dropdown -->
-                                        <ul class="sub-nav">
-                                            <li>
-                                                <a href="shop.html">Shop</a>
-                                            </li>
-                                            <li>
-                                                <a href="shop-sidebar.html">shop sidebar</a>
-                                            </li>
-                                            <li>
-                                                <a href="shop-details.html">shop details</a>
-                                            </li>
-                                            <li>
-                                                <a href="cart.html">cart</a>
-                                            </li>
-                                            <li>
-                                                <a href="checkout.html">Checkout</a>
-                                            </li>
-                                        </ul>
-                                        <!-- End Nav Dropdown -->
-                                    </li>
-                                    <li>
-                                        <a href="#!">Contact Us</a>
-                                        <!-- Nav Dropdown -->
-                                        <ul class="sub-nav">
-                                            <li>
-                                                <a href="contact1.html">Contact 1</a>
-                                            </li>
-                                            <li>
-                                                <a href="contact2.html">Contact 2</a>
-                                            </li>
-                                        </ul>
-                                        <!-- End Nav Dropdown -->
-                                    </li>
-                                </ul>
-
-                                <!-- ==============================
-                                =========Mobile Navigation==========
-                                ==================================== -->
-                                <ul class="mobile-menu clearfix">
-                                    <li>
-                                        <a href="index.html">index</a><span class="submenu-button"></span>
-
-                                    </li>
-                                    <li>
-                                        <a href="#!">Services</a><span class="submenu-button"></span>
-                                        <!-- Nav Dropdown -->
-                                        <ul class="sub-nav">
-
-                                            <li>
-                                                <a href="services.html">Services</a>
-                                            </li>
-                                            <li>
-                                                <a href="services-details.html">Services Details</a>
-                                            </li>
-                                        </ul>
-                                        <!-- End Nav Dropdown -->
-                                    </li>
-
-                                    <li>
-                                        <a href="#!">Blog</a><span class="submenu-button"></span>
-                                        <!-- Nav Dropdown -->
-                                        <ul class="sub-nav">
-                                            <li>
-                                                <a href="blog-list.html">Blog List</a>
-                                            </li>
-                                            <li>
-                                                <a href="blog-grid.html">Blog grid</a>
-                                            </li>
-                                            <li>
-                                                <a href="blog-detail.html">Blog detail</a>
-                                            </li>
-                                        </ul>
-                                        <!-- End Nav Dropdown -->
-
-                                    </li>
-                                    <li class="nav-has-sub">
-                                        <a href="#!">Page</a><span class="submenu-button"></span>
-                                        <!-- Nav Dropdown -->
-                                        <ul class="sub-nav">
-                                            <li>
-                                                <a href="portfolio-grid-2.html">Gallery Grid 2</a>
-                                            </li>
-                                            <li>
-                                                <a href="portfolio-grid-3.html">Gallery Grid 3</a>
-                                            </li>
-                                            <li>
-                                                <a href="portfolio-grid-4.html">Gallery Grid 4</a>
-                                            </li>
-                                            <li>
-                                                <a href="portfolio-single.html">Gallery single</a>
-                                            </li>
-                                            <li>
-                                                <a href="about.html">About Us</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="team.html">Team</a>
-                                            </li>
-                                            <li>
-                                                <a href="pricing.html">pricing</a>
-                                            </li>
-                                            <li>
-                                                <a href="get-a-quote.html">get a quote</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="faq.html">Faq</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="register.html">Register</a>
-                                            </li>
-                                            <li>
-                                                <a href="login.html">login</a>
-                                            </li>
-                                            <li>
-                                                <a href="testimonial.html">Testimonials</a>
-                                            </li>
-                                            <li>
-                                                <a href="404.html">404 Error</a>
-                                            </li>
-                                            <li>
-                                                <a href="blank.html">blank</a>
-                                            </li>
-                                        </ul>
-                                        <!-- End Nav Dropdown-->
-                                    </li>
-                                    <li class="shop_sub_menu">
-                                        <a href="#!">Shop</a><span class="submenu-button"></span>
-                                        <!-- Nav Dropdown -->
-                                        <ul class="sub-nav">
-                                            <li>
-                                                <a href="shop.html">Shop</a>
-                                            </li>
-                                            <li>
-                                                <a href="shop-sidebar.html">shop sidebar</a>
-                                            </li>
-                                            <li>
-                                                <a href="shop-details.html">shop details</a>
-                                            </li>
-                                            <li>
-                                                <a href="cart.html">cart</a>
-                                            </li>
-                                            <li>
-                                                <a href="checkout.html">Checkout</a>
-                                            </li>
-                                        </ul>
-                                        <!-- End Nav Dropdown -->
-                                    </li>
-                                    <li>
-                                        <a href="#!">Contact Us</a><span class="submenu-button"></span>
-                                        <!-- Nav Dropdown -->
-                                        <ul class="sub-nav">
-                                            <li>
-                                                <a href="contact1.html">Contact 1</a>
-                                            </li>
-                                            <li>
-                                                <a href="contact2.html">Contact 2</a>
-                                            </li>
-                                        </ul>
-                                        <!-- End Nav Dropdown -->
-                                    </li>
-                                </ul>
-
-                            </div>
-                        </nav>
-                        <!--End mainmenu-->
-
-                    </div>
-
-                </div>
-                <div class="right-column">
-                    <div class="right-area">
-                        <div class="nav_side_content">
-                            <div class="search_option">
-                                <button class="search tran3s dropdown-toggle color1_bg" id="searchDropdown">
-                                    <i class="fa fa-search" aria-hidden="true"></i>
-                                </button>
-                                <form action="#" class="dropdown-menu dropdown-input" >
-                                    <input type="text" placeholder="Search...">
-                                    <button class="close-input">
-                                        <i class="fa fa-close" aria-hidden="true"></i>
-                                    </button>
-                                </form>
-                            </div>
-
-                        </div>
-                        <div class="link_btn float_right">
-                            <a href="get-a-quote.html" class="thm-btn bg-clr1">GET A Quote</a>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-    </section>
-    <!--End mainmenu area-->
-    <!-- END HEADER -->
 
     <!--  Main Banner Start Here-->
     <section class="hero">
@@ -682,7 +355,8 @@
                     <a href="#">
                         <div class="featured-item feature-bg-box mb-100 gray-bg">
                             <div class="icon">
-                                <i class="flaticon-black"></i>
+                                <img src="assets/images/solar.png">
+
                             </div>
                             <div class="title text-uppercase">
                                 <h4>Rubbish Removal</h4>
@@ -778,15 +452,26 @@
 
                 <div class="col-sm-6">
                     <div class="creative_heading light-color pb-30">
-                        <h2>Why Choose Us</h2>
+                        <h2>Miért mi?</h2>
                     </div>
 
+                    <div class="media ">
+                        <div class="media-left">
+                            <i class="flaticon-nature fontsize_28"></i>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="text-uppercase"><a href="offer.html">Kedvező finanszírozási feltételek</a></h4>
+                            <p>
+                                clita kasd guberren no sea takimata sanctus est
+                            </p>
+                        </div>
+                    </div>
                     <div class="media">
                         <div class="media-left">
                             <i class="flaticon-people-2 fontsize_28"></i>
                         </div>
                         <div class="media-body">
-                            <h4 class="text-uppercase"><a href="services.html">expert farmer</a></h4>
+                            <h4 class="text-uppercase"><a href="#!">Megbízható szakemberek</a></h4>
 
                             <p>
                                 at vero eos et accusam justo duo dolores
@@ -795,21 +480,10 @@
                     </div>
                     <div class="media ">
                         <div class="media-left">
-                            <i class="flaticon-nature fontsize_28"></i>
-                        </div>
-                        <div class="media-body">
-                            <h4 class="text-uppercase"><a href="services.html">home gardening</a></h4>
-                            <p>
-                                clita kasd guberren no sea takimata sanctus est
-                            </p>
-                        </div>
-                    </div>
-                    <div class="media ">
-                        <div class="media-left">
                             <i class="flaticon-people-1 fontsize_28"></i>
                         </div>
                         <div class="media-body">
-                            <h4 class="text-uppercase"><a href="services.html">clean working</a></h4>
+                            <h4 class="text-uppercase"><a href="#!">Tiszta munka</a></h4>
                             <p>
                                 lorem ipsum dolor sit amet, consetetur
                             </p>
@@ -823,174 +497,7 @@
         <div class="image_cover image_cover_right"></div>
     </section>
 
-    <!--Team Section-->
-    <section id="team" class="team-section padding ptb-xs-40">
 
-        <div class="container">
-            <div class="row text-center pb-30">
-                <div class="col-sm-12">
-                    <div class="heading-box ">
-                        <h2><span>Our</span> Team</h2>
-                        <span class="b-line line-h"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="row text-center">
-                <div class=" team-carousel team-pagination owl-carousel" data-pagination="false" data-items="4" data-autoplay="false" data-loop="true" data-margin="10" data-center="false" data-navigation="true" data-desktop="4" data-desktopsmall="3" data-tablet="2" data-mobile="1">
-
-                    <!--Team Member-->
-                    <div class="team-member col-md-4 col-sm-6 col-xs-12">
-                        <div class="box-hover img-scale">
-                            <figure>
-                                <img src="http://placehold.it/300x300" alt="">
-                            </figure>
-
-                            <div class="team-block">
-                                <strong>Elizabeth Jones</strong>
-                                <span>Gardener</span>
-                                <hr class="small-divider border-white">
-                                <ul class="social-icons">
-                                    <li>
-                                        <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                                    </li>
-
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="team-member col-md-4 col-sm-6 col-xs-12">
-                        <div class="box-hover img-scale">
-                            <figure>
-                                <img src="http://placehold.it/300x300" alt="">
-                            </figure>
-
-                            <div class="team-block">
-                                <strong>Tommy Woodhouse</strong>
-                                <span>Worker</span>
-                                <hr class="small-divider border-white">
-                                <ul class="social-icons">
-                                    <li>
-                                        <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                                    </li>
-
-                                </ul>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="team-member col-md-4 col-sm-6 col-xs-12">
-                        <div class="box-hover img-scale">
-                            <figure>
-                                <img src="http://placehold.it/300x300" alt="">
-                            </figure>
-
-                            <div class="team-block">
-                                <strong>Danny Burton</strong>
-                                <span>Senior Gardener</span>
-                                <hr class="small-divider border-white">
-                                <ul class="social-icons">
-                                    <li>
-                                        <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                                    </li>
-
-                                </ul>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="team-member col-md-4 col-sm-6 col-xs-12">
-                        <div class="box-hover img-scale">
-                            <figure>
-                                <img src="http://placehold.it/300x300" alt="">
-                            </figure>
-
-                            <div class="team-block">
-                                <strong>Melody Clark</strong>
-                                <span>Worker</span>
-                                <hr class="small-divider border-white">
-                                <ul class="social-icons">
-                                    <li>
-                                        <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                                    </li>
-
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="team-member col-md-4 col-sm-6 col-xs-12">
-                        <div class="box-hover img-scale">
-                            <figure>
-                                <img src="http://placehold.it/300x300" alt="">
-                            </figure>
-
-                            <div class="team-block">
-                                <strong>Melody Clark</strong>
-                                <span>Founder</span>
-                                <hr class="small-divider border-white">
-                                <ul class="social-icons">
-                                    <li>
-                                        <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                                    </li>
-
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-    </section>
-    <!--Team Section End-->
     <!-- Counter Section -->
     <div class="fact-counter-wrapper padding ptb-xs-40 light-color parallax overlay-dark">
         <div class="container text-center">
@@ -1043,360 +550,7 @@
         </div>
     </div>
     <!-- Counter Section End-->
-    <!-- Work Section -->
-    <section id="work" class="padding ptb-xs-40">
-        <div class="container-fluid">
-            <div class="row text-center pb-30">
-                <div class="col-sm-12">
-                    <div class="heading-box ">
-                        <h2><span>Our</span> Project</h2>
-                        <span class="b-line line-h"></span>
-                    </div>
-                </div>
-            </div>
-            <!-- work Filter -->
-            <div class="row">
-                <ul class="container-filter categories-filter">
-                    <li>
-                        <a class="categories active" data-filter="*">All</a>
-                    </li>
-                    <li>
-                        <a class="categories" data-filter=".branding">Lawn</a>
-                    </li>
-                    <li>
-                        <a class="categories" data-filter=".design">Garden</a>
-                    </li>
-                    <li>
-                        <a class="categories" data-filter=".photo">Planting</a>
-                    </li>
-                    <li>
-                        <a class="categories" data-filter=".coffee">Rubbish Removal</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- End work Filter -->
-            <div class="row container-grid nf-col-4">
 
-                <div class="nf-item branding coffee no-spacing">
-                    <div class="item-box">
-                        <a> <img alt="1" src="http://placehold.it/500x400" class="item-container"> </a>
-                        <div class="link-zoom">
-                            <a href="project-details1.html" class="project_links"> <i class="fa fa-link"> </i> </a>
-                            <a href="http://placehold.it/500x400" class="fancylight popup-btn" data-fancybox-group="light" > <i class="fa fa-search-plus"></i> </a>
-                        </div>
-                        <div class="gallery-heading">
-                            <h4><a href="#">Home Cleaning</a></h4>
-                            <p>
-                                At vero eos et rebum
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="nf-item photo no-spacing">
-                    <div class="item-box">
-                        <a> <img alt="1" src="http://placehold.it/500x400" class="item-container"> </a>
-                        <div class="link-zoom">
-                            <a href="project-details1.html" class="project_links"> <i class="fa fa-link"> </i> </a>
-                            <a href="http://placehold.it/500x400" class="fancylight popup-btn" data-fancybox-group="light" > <i class="fa fa-search-plus"></i> </a>
-                        </div>
-                        <div class="gallery-heading">
-                            <h4><a href="#">Home Cleaning</a></h4>
-                            <p>
-                                At vero eos et rebum
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="nf-item branding coffee no-spacing">
-                    <div class="item-box">
-                        <a> <img alt="1" src="http://placehold.it/500x400" class="item-container"> </a>
-                        <div class="link-zoom">
-                            <a href="project-details1.html" class="project_links"> <i class="fa fa-link"> </i> </a>
-                            <a href="http://placehold.it/500x400" class="fancylight popup-btn" data-fancybox-group="light" > <i class="fa fa-search-plus"></i> </a>
-                        </div>
-                        <div class="gallery-heading">
-                            <h4><a href="#">Home Cleaning</a></h4>
-                            <p>
-                                At vero eos et rebum
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="nf-item design no-spacing">
-                    <div class="item-box">
-                        <a> <img alt="1" src="http://placehold.it/500x400" class="item-container"> </a>
-                        <div class="link-zoom">
-                            <a href="project-details1.html" class="project_links"> <i class="fa fa-link"> </i> </a>
-                            <a href="http://placehold.it/500x400" class="fancylight popup-btn" data-fancybox-group="light" > <i class="fa fa-search-plus"></i> </a>
-                        </div>
-                        <div class="gallery-heading">
-                            <h4><a href="#">Home Cleaning</a></h4>
-                            <p>
-                                At vero eos et rebum
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="nf-item branding no-spacing">
-                    <div class="item-box">
-                        <a> <img alt="1" src="http://placehold.it/500x400" class="item-container"> </a>
-                        <div class="link-zoom">
-                            <a href="project-details1.html" class="project_links"> <i class="fa fa-link"> </i> </a>
-                            <a href="http://placehold.it/500x400" class="fancylight popup-btn" data-fancybox-group="light" > <i class="fa fa-search-plus"></i> </a>
-                        </div>
-                        <div class="gallery-heading">
-                            <h4><a href="#">Home Cleaning</a></h4>
-                            <p>
-                                At vero eos et rebum
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="nf-item photo no-spacing">
-                    <div class="item-box">
-                        <a> <img alt="1" src="http://placehold.it/500x400" class="item-container"> </a>
-                        <div class="link-zoom">
-                            <a href="project-details1.html" class="project_links"> <i class="fa fa-link"> </i> </a>
-                            <a href="http://placehold.it/500x400" class="fancylight popup-btn" data-fancybox-group="light" > <i class="fa fa-search-plus"></i> </a>
-                        </div>
-                        <div class="gallery-heading">
-                            <h4><a href="#">Home Cleaning</a></h4>
-                            <p>
-                                At vero eos et rebum
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="nf-item branding no-spacing">
-                    <div class="item-box">
-                        <a> <img alt="1" src="http://placehold.it/500x400" class="item-container"> </a>
-                        <div class="link-zoom">
-                            <a href="project-details1.html" class="project_links"> <i class="fa fa-link"> </i> </a>
-                            <a href="http://placehold.it/500x400" class="fancylight popup-btn" data-fancybox-group="light" > <i class="fa fa-search-plus"></i> </a>
-                        </div>
-                        <div class="gallery-heading">
-                            <h4><a href="#">Home Cleaning</a></h4>
-                            <p>
-                                At vero eos et rebum
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="nf-item photo no-spacing">
-                    <div class="item-box">
-                        <a> <img alt="1" src="http://placehold.it/500x400" class="item-container"> </a>
-                        <div class="link-zoom">
-                            <a href="project-details1.html" class="project_links"> <i class="fa fa-link"> </i> </a>
-                            <a href="http://placehold.it/500x400" class="fancylight popup-btn" data-fancybox-group="light" > <i class="fa fa-search-plus"></i> </a>
-                        </div>
-                        <div class="gallery-heading">
-                            <h4><a href="#">Home Cleaning</a></h4>
-                            <p>
-                                At vero eos et rebum
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </section>
-    <!-- End Work Section -->
-    <!-- Pricing Table -->
-
-    <section class="page-section pricing-2 padding ptb-xs-40 columns_padding_25 pricing-style2" id="pricing_table">
-        <div class="container">
-            <div class="row text-center pb-30">
-                <div class="col-sm-12">
-                    <div class="heading-box ">
-                        <h2><span>Our</span> Pricing</h2>
-                        <span class="b-line line-h"></span>
-                    </div>
-                </div>
-            </div>
-            <!-- row end -->
-            <div class="row">
-                <div class="col-md-4 col-sm-6 col-xs-12 mb-xs-30">
-                    <div class="pricing_table">
-                        <div class="package_title">
-                            <div class="pricing-top bg-color">
-                                <p>
-                                    BASIC
-                                </p>
-                            </div>
-                            <div class="package-price">
-                                <span class="currency-symbol">$</span><span class="price">149</span><span class="duration">/month</span>
-                            </div>
-
-                        </div>
-                        <ul class="price_feature">
-                            <li>
-                                Garden Care & Lawn Moving
-                            </li>
-                            <li>
-                                Free Rubbish Removal
-                            </li>
-                            <li>
-                                Watering Garden With
-                            </li>
-                            <li>
-                                Planting
-                            </li>
-                            <li>
-                                Free Landscape Design
-                            </li>
-                        </ul>
-                        <div class="price_btn">
-                            <a href="#!" class="btn xplus-btn pricing">Buy Now</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- table end -->
-                <div class="col-md-4 col-sm-6 col-xs-12 mb-xs-30 mb-sm-30">
-                    <div class="pricing_table shadow">
-                        <div class="package_title">
-                            <div class="pricing-top secondary_bg">
-                                <p>
-                                    STANDARED
-                                </p>
-                            </div>
-                            <div class="package-price">
-                                <span class="currency-symbol">$</span><span class="price">249</span><span class="duration">/month</span>
-                            </div>
-
-                        </div>
-                        <ul class="price_feature">
-                            <li>
-                                Garden Care & Lawn Moving
-                            </li>
-                            <li>
-                                Free Rubbish Removal
-                            </li>
-                            <li>
-                                Watering Garden With
-                            </li>
-                            <li>
-                                Planting
-                            </li>
-                            <li>
-                                Free Landscape Design
-                            </li>
-                        </ul>
-                        <div class="price_btn">
-                            <a href="#!" class="btn xplus-btn pricing">Buy Now</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- table end -->
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="pricing_table">
-                        <div class="package_title">
-                            <div class="pricing-top bg-color3">
-                                <p>
-                                    PREMIUM
-                                </p>
-                            </div>
-                            <div class="package-price">
-                                <span class="currency-symbol">$</span><span class="price">299</span><span class="duration">/month</span>
-                            </div>
-
-                        </div>
-                        <ul class="price_feature">
-                            <li>
-                                Garden Care & Lawn Moving
-                            </li>
-                            <li>
-                                Free Rubbish Removal
-                            </li>
-                            <li>
-                                Watering Garden With
-                            </li>
-                            <li>
-                                Planting
-                            </li>
-                            <li>
-                                Free Landscape Design
-                            </li>
-                        </ul>
-                        <div class="price_btn =">
-                            <a href="#!" class="btn xplus-btn pricing ">Buy Now</a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <!-- row end -->
-        </div>
-    </section>
-
-    <!-- Pricing Table End-->
-
-    <!-- Testimonial -->
-    <section class="testimonial-section padding ptb-xs-40 light-color parallax overlay-dark ">
-        <div class="container">
-            <div class="row text-center pb-30">
-                <div class="col-sm-12">
-                    <div class="heading-box ">
-                        <h2><span>Our</span> Testimonials</h2>
-                        <span class="b-line line-h"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-
-                <div class="carousel-slider nf-carousel-theme arrow_theme owl-carousel" data-pagination="false" data-items="3" data-autoplay="true" data-loop="true" data-margin="10" data-center="false" data-navigation="true" data-desktop="3" data-desktopsmall="3" data-tablet="2" data-mobile="1">
-                    <div class="carousel-item col-sm-4 ">
-                        <div class="testimonial-block cyan-background">
-                            <figure class="testimonial-img">
-                                <img class="img-circle img-border" src="http://placehold.it/250x250" alt="">
-                            </figure>
-                            <h3 class="testimonial-author">Selly Thomas</h3>
-                            <hr class="small-divider">
-                            <p>
-                                At vero eos et accusamus et iusto odio dignissimos ducimus qui.
-                            </p>
-                            <span class="star"> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> </span>
-                        </div>
-                    </div>
-                    <div class="carousel-item col-sm-4 ">
-                        <div class="testimonial-block cyan-background">
-                            <figure class="testimonial-img">
-                                <img class="img-circle img-border" src="http://placehold.it/250x250" alt="">
-                            </figure>
-                            <h3 class="testimonial-author writer">Jane Anselmo</h3>
-                            <hr class="small-divider">
-                            <p>
-                                At vero eos et accusamus et iusto odio dignissimos ducimus qui.
-                            </p>
-                            <span class="star"> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> </span>
-                        </div>
-                    </div>
-                    <div class="carousel-item col-sm-4 ">
-                        <div class="testimonial-block cyan-background">
-                            <figure class="testimonial-img">
-                                <img class="img-circle img-border" src="http://placehold.it/250x250" alt="">
-                            </figure>
-                            <h3 class="testimonial-author">Melissa O’Barry</h3>
-                            <hr class="small-divider">
-                            <p>
-                                At vero eos et accusamus et iusto odio dignissimos ducimus qui.
-                            </p>
-                            <span class="star"> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Testimonial -->
     <!-- Get a Qoute -->
     <section class="get-qoute padding ptb-xs-40 get-qoute">
         <div class="container">
@@ -1543,231 +697,36 @@
     </section>
     <!-- Get a Qoute -->
 
-    <!-- Blog Section -->
-    <section id="blog" class="padding ptb-xs-40  gray-bg new-blog">
-        <div class="container">
-            <div class="row text-center pb-30">
-                <div class="col-sm-12">
-                    <div class="heading-box ">
-                        <h2><span>Our</span> Blog</h2>
-                        <span class="b-line line-h"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4 mb-xs-30">
-                    <div class="blog-post">
-                        <div class="post-media">
-                            <img src="http://placehold.it/500x400" alt="">
-                        </div>
-                        <div class="post-meta">
-                            <span>by <a href="javascript:avoid(0);">Admin</a>,</span><span> <a href="javascript:avoid(0);"><i class="fa fa-comment-o"></i> 25</a>,</span><span> <a href="javascript:avoid(0);"><i class="fa fa-heart-o"></i> 57</a>,</span>
-                        </div>
-                        <div class="post-header">
-                            <h4><a href="blog-detail.html">Maecenas nec odio ante varcy tincidunt</a></h4>
-                        </div>
-                        <div class="post-entry">
-                            <p>
-                                Perspiciatis unde omnis iste natus doxes sit voluptatem accusantium dantiumeaque ipsa quae ab illos
-                            </p>
-                        </div>
-                        <div class="post-more-link pull-left">
-                            <a href="blog-detail.html" class="btn-text ">Read More</a>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-sm-4 mb-xs-30">
-                    <div class="blog-post">
-                        <div class="post-media">
-                            <img src="http://placehold.it/500x400" alt="">
-                        </div>
-                        <div class="post-meta">
-                            <span>by <a href="javascript:avoid(0);">Admin</a>,</span><span> <a href="javascript:avoid(0);"><i class="fa fa-comment-o"></i> 15</a>,</span><span> <a href="javascript:avoid(0);"><i class="fa fa-heart-o"></i> 39</a>,</span>
-                        </div>
-                        <div class="post-header">
-                            <h4><a href="blog-detail.html">Maecenas nec odio ante varcy tincidunt</a></h4>
-                        </div>
-                        <div class="post-entry">
-                            <p>
-                                Perspiciatis unde omnis iste natus doxes sit voluptatem accusantium dantiumeaque ipsa quae ab illos
-                            </p>
-                        </div>
-                        <div class="post-more-link pull-left">
-                            <a href="blog-detail.html" class="btn-text">Read More</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 mb-xs-30">
-                    <div class="blog-post">
-                        <div class="post-media">
-                            <img src="http://placehold.it/500x400" alt="">
-                        </div>
-                        <div class="post-meta">
-                            <span>by <a href="javascript:avoid(0);">Admin</a>,</span><span> <a href="javascript:avoid(0);"><i class="fa fa-comment-o"></i> 25</a>,</span><span> <a href="javascript:avoid(0);"><i class="fa fa-heart-o"></i> 57</a>,</span>
-                        </div>
-                        <div class="post-header">
-                            <h4><a href="blog-detail.html">Maecenas nec odio ante varcy tincidunt</a></h4>
-                        </div>
-                        <div class="post-entry">
-                            <p>
-                                Perspiciatis unde omnis iste natus doxes sit voluptatem accusantium dantiumeaque ipsa quae ab illos
-                            </p>
-                        </div>
-                        <div class="post-more-link pull-left">
-                            <a href="blog-detail.html" class="btn-text ">Read More</a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </section>
-    <!-- End Blog Section -->
 
     <!-- FOOTER -->
-    <footer class="footer pt-80 pt-xs-60">
-        <div class="container">
-            <!--Footer Info -->
-            <div class="row footer-info mb-60">
-                <div class="col-md-3 col-sm-4 col-xs-12 mb-sm-30">
-                    <h4 class="mb-30">CONTACT Us</h4>
-                    <address>
-                        <i class="ion-ios-location fa-icons"></i> 123 Main Street, St. NW Ste, 1 Washington, DC,USA.
-                    </address>
-                    <ul class="link-small">
-                        <li>
-                            <a href="mailto:business@support.com"><i class="ion-ios-email fa-icons"></i>business@support.com</a>
-                        </li>
-                        <li>
-                            <a><i class="ion-ios-telephone fa-icons"></i>+56 (0) 012 345 6789</a>
-                        </li>
-                    </ul>
-                    <div class="icons-hover-black">
-                        <a href="javascript:avoid(0);"> <i class="fa fa-facebook"></i> </a><a href="javascript:avoid(0);"> <i class="fa fa-twitter"></i> </a><a href="javascript:avoid(0);"> <i class="fa fa-youtube"></i> </a><a href="javascript:avoid(0);"> <i class="fa fa-dribbble"></i> </a><a href="javascript:avoid(0);"> <i class="fa fa-linkedin"></i> </a>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-3 col-xs-12 mb-sm-30">
-                    <h4 class="mb-30">SERVICES</h4>
-                    <ul class="link blog-link">
-                        <li>
-                            <a href="javascript:avoid(0);"><i class="fa fa-angle-double-right"></i>rubbish removal </a>
-                        </li>
-                        <li>
-                            <a href="javascript:avoid(0);"><i class="fa fa-angle-double-right"></i> lawn moving </a>
-                        </li>
-                        <li>
-                            <a href="javascript:avoid(0);"><i class="fa fa-angle-double-right"></i> garden care </a>
-                        </li>
-                        <li>
-                            <a href="javascript:avoid(0);"><i class="fa fa-angle-double-right"></i> landscape design </a>
-                        </li>
-                        <li>
-                            <a href="javascript:avoid(0);"><i class="fa fa-angle-double-right"></i> excellent services </a>
-                        </li>
-                        <li>
-                            <a href="javascript:avoid(0);"><i class="fa fa-angle-double-right"></i> insect control </a>
-                        </li>
-
-                    </ul>
-                </div>
-                <div class="col-md-3 col-sm-5 col-xs-12 mb-sm-30">
-                    <h4 class="mb-30">Latest Blog</h4>
-                    <div class="widget-details link">
-                        <div class="post-type-post media">
-                            <div class="entry-thumbnail media-left">
-                                <img src="http://placehold.it/70x70" alt="Image">
-                            </div>
-                            <!-- /.entry-thumbnail -->
-                            <div class="post-content media-body">
-                                <p class="entry-title">
-                                    <a href="javascript:avoid(0);">Ut enim ad minim veniam, quis nostrud exercitation</a>
-                                </p>
-                                <div class="post-meta">
-                                    On
-                                    <time datetime="2017-02-10">
-                                        10 Feb, 2017
-                                    </time>
-                                </div>
-                                <!-- /.post-meta -->
-                            </div>
-                            <!-- /.post-content -->
-                        </div>
-                        <div class="post-type-post media">
-                            <div class="entry-thumbnail media-left">
-                                <img src="http://placehold.it/70x70" alt="Image">
-                            </div>
-                            <!-- /.entry-thumbnail -->
-                            <div class="post-content media-body">
-                                <p class="entry-title">
-                                    <a href="javascript:avoid(0);">Ut enim ad minim veniam, quis nostrud exercitation</a>
-                                </p>
-                                <div class="post-meta">
-                                    On
-                                    <time datetime="2017-02-10">
-                                        10 Feb, 2017
-                                    </time>
-                                </div>
-                                <!-- /.post-meta -->
-                            </div>
-                            <!-- /.post-content -->
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-12 col-xs-12 mt-sm-30 mt-xs-30">
-                    <div class="newsletter">
-                        <h4 class="mb-30">NEWSLETTER SIGNUP</h4>
-                        <p>
-                            Subscribe to Our Newsletter to get Important News, Amazing Offers &amp; Inside Scoops:
-                        </p>
-                        <form>
-                            <input type="email" class="newsletter-input input-md newsletter-input mb-0" placeholder="Enter Your Email">
-                            <button class="newsletter-btn btn btn-xs btn-color" type="submit" value="">
-                                <i class="fa fa-angle-right mr-0"></i>
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <!-- End Footer Info -->
-        </div>
-        <!-- Copyright Bar -->
-        <div class="copyright">
-            <div class="container">
-                <p>
-                    © 2017 <a><b>Gardener Care HTML Template</b></a>. All Rights Reserved.
-                </p>
-            </div>
-        </div>
-        <!-- End Copyright Bar -->
-    </footer>
+    <div th:replace="fragments/footer :: footer"></div>
     <!-- END FOOTER -->
 </div>
 <!-- Site Wraper End -->
 
-<script src="assets/js/jquery-1.12.4.min.js" type="text/javascript"></script>
-<!-- masonry,isotope Effect Js -->
+<!--<script src="assets/js/jquery-1.12.4.min.js" type="text/javascript"></script>
+&lt;!&ndash; masonry,isotope Effect Js &ndash;&gt;
 <script src="assets/js/imagesloaded.pkgd.min.js" type="text/javascript"></script>
 <script src="assets/js/isotope.pkgd.min.js" type="text/javascript"></script>
 <script src="assets/js/masonry.pkgd.min.js" type="text/javascript"></script>
 <script src="assets/js/jquery.appear.js" type="text/javascript"></script>
-<!-- bootstrap Js -->
+&lt;!&ndash; bootstrap Js &ndash;&gt;
 <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
-<!-- carousel Js -->
+&lt;!&ndash; carousel Js &ndash;&gt;
 <script src="assets/js/plugin/owl.carousel.js" type="text/javascript"></script>
-<!-- fancybox Js -->
+&lt;!&ndash; fancybox Js &ndash;&gt;
 <script src="assets/js/jquery.mousewheel-3.0.6.pack.js" type="text/javascript"></script>
 <script src="assets/js/jquery.fancybox.pack.js" type="text/javascript"></script>
-<!-- carousel Js -->
+&lt;!&ndash; carousel Js &ndash;&gt;
 <script src="assets/js/jquery.parallax-1.1.3.js" type="text/javascript"></script>
 
-<!-- revolution Js -->
+&lt;!&ndash; revolution Js &ndash;&gt;
 <script type="text/javascript" src="assets/rs-slider/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
 <script type="text/javascript" src="assets/rs-slider/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
 <script type="text/javascript" src="assets/js/revolution-custom.js"></script>
-<!-- custom Js -->
-<script src="assets/js/custom.js" type="text/javascript"></script>
+&lt;!&ndash; custom Js &ndash;&gt;
+<script src="assets/js/custom.js" type="text/javascript"></script>-->
 
 </body>
 </html>
