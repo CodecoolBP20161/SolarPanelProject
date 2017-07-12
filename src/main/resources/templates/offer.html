@@ -24,6 +24,7 @@
     </div>
 </div>
 <!--loader-->
+
 <!-- Site Wraper -->
 <div class="wrapper">
 
@@ -34,7 +35,7 @@
             <div class="clearfix">
                 <div class="pull-left">
                     <p>
-                        Üdvözöljük a Solár veboldalon
+                        Üdvözöljük a Solár weboldalon
                     </p>
                 </div>
                 <div class="pull-right">
@@ -106,343 +107,73 @@
     <div th:replace="fragments/navbar :: navbar"></div>
 
 
-    <!--  Main Banner Start Here-->
-    <section class="hero">
-        <!--rev slider start-->
-        <div class="fullwidthbanner">
-            <div class="tp-fullscreen-banner">
-                <ul>
-                    <!-- SLIDE -->
-                    <li data-transition="fade" data-slotamount="5" data-masterspeed="1000" data-title="Slide 1">
-                        <!-- MAIN IMAGE -->
-                        <img src="http://placehold.it/1920x850"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
-                        <!-- Transparent Background -->
-                        <div class="tp-caption dark-translucent-bg"
-                             data-x="center"
-                             data-y="bottom"
-                             data-speed="500"
-                             data-easing="easeOutQuad"
-                             data-start="0"></div>
-                        <div class="caption sfb bold text-center"
-                             data-x="center"
-                             data-y="120"
-                             data-speed="900"
-                             data-start="800"
-                             data-easing="Sine.easeOut">
-                            <h2 class="font-s">We make <span class="text-color"> Awesome </span> Website</h2>
+    <!-- Offer Form-->
+    <section class="get-qoute padding ptb-xs-40 get-qoute">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 mt-xs-30">
+                <!--Form Header-->
+                <div class="row">
+                    <div class="col-sm-12 mb-30">
+                        <div class="heading-box ">
+                            <h2 th:text=" 'Árajánlat kérése ' + ${step} + '/4'">
+                            </h2>
+                            <span class="b-line l-left line-h"></span>
                         </div>
-                        <div class="caption sfb bold  text-center "
-                             data-x="center"
-                             data-y="200"
-                             data-speed="900"
-                             data-start="1500"
-                             data-easing="Sine.easeOIn">
-                            <p class="paragraph-s">
-                                Lorem Ipsum is simply dummy text of the printing
-                                <br>
-                                and typeseatting industry. Lorem Ipsum has been the industry's
-                            </p>
-                        </div>
-                        <div class="caption sfb lowercase-caption text-center"
-                             data-x="center"
-                             data-y="280"
-                             data-speed="1000"
-                             data-start="2000"
-                             data-easing="Sine.easeOut">
-                            <a class="btn-text" href="#">Read more</a>
-                            <a class="btn-text secondary_bg" href="#">PURCHASE NOW</a>
-                        </div>
-                    </li>
-                    <!-- SLIDE -->
-                    <!-- SLIDE -->
-                    <li data-transition="fade" data-slotamount="5" data-masterspeed="1000" data-title="Slide 1">
-                        <!-- MAIN IMAGE -->
-                        <img src="http://placehold.it/1920x850"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
-                        <!-- Transparent Background -->
-                        <div class="tp-caption dark-translucent-bg"
-                             data-x="center"
-                             data-y="bottom"
-                             data-speed="500"
-                             data-easing="easeOutQuad"
-                             data-start="0"></div>
-                        <div class="caption sfb bold text-center"
-                             data-x="center"
-                             data-y="120"
-                             data-speed="900"
-                             data-start="800"
-                             data-easing="Sine.easeOut">
-                            <h2 class="font-s">We make <span class="text-color"> Awesome </span> Website</h2>
-                        </div>
-                        <div class="caption sfb bold  text-center "
-                             data-x="center"
-                             data-y="200"
-                             data-speed="900"
-                             data-start="1500"
-                             data-easing="Sine.easeOIn">
-                            <p class="paragraph-s">
-                                Lorem Ipsum is simply dummy text of the printing
-                                <br>
-                                and typeseatting industry. Lorem Ipsum has been the industry's
-                            </p>
-                        </div>
-                        <div class="caption sfb lowercase-caption text-center"
-                             data-x="center"
-                             data-y="280"
-                             data-speed="1000"
-                             data-start="2000"
-                             data-easing="Sine.easeOut">
-                            <a class="btn-text" href="#">Read more</a>
-                            <a class="btn-text secondary_bg" href="#">PURCHASE NOW</a>
-                        </div>
-                    </li>
-                    <!-- SLIDE -->
-                    <!-- SLIDE -->
-                    <li data-transition="fade" data-slotamount="5" data-masterspeed="1000" data-title="Slide 1">
-                        <!-- MAIN IMAGE -->
-                        <img src="http://placehold.it/1920x850"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
-                        <!-- Transparent Background -->
-                        <div class="tp-caption dark-translucent-bg"
-                             data-x="center"
-                             data-y="bottom"
-                             data-speed="500"
-                             data-easing="easeOutQuad"
-                             data-start="0"></div>
-                        <div class="caption sfb bold text-center"
-                             data-x="center"
-                             data-y="120"
-                             data-speed="900"
-                             data-start="800"
-                             data-easing="Sine.easeOut">
-                            <h2 class="font-s">We make <span class="text-color"> Awesome </span> Website</h2>
-                        </div>
-                        <div class="caption sfb bold  text-center "
-                             data-x="center"
-                             data-y="200"
-                             data-speed="900"
-                             data-start="1500"
-                             data-easing="Sine.easeOIn">
-                            <p class="paragraph-s">
-                                Lorem Ipsum is simply dummy text of the printing
-                                <br>
-                                and typeseatting industry. Lorem Ipsum has been the industry's
-                            </p>
-                        </div>
-                        <div class="caption sfb lowercase-caption text-center"
-                             data-x="center"
-                             data-y="280"
-                             data-speed="1000"
-                             data-start="2000"
-                             data-easing="Sine.easeOut">
-                            <a class="btn-text" href="#">Read more</a>
-                            <a class="btn-text secondary_bg" href="#">PURCHASE NOW</a>
-                        </div>
-                    </li>
-                    <!-- SLIDE -->
 
-                </ul>
+                    </div>
+                </div>
+                <!--Start of the actual form section-->
+                <!--<th:block th:switch="${step}">-->
+                    <!--<div th:case="'1'" th:replace="fragments/offer_steps :: first"></div>-->
+                    <!--<div th:case="'2'" th:replace="fragments/offer_steps  :: second"></div>-->
+                    <!--<div th:case="'3'" th:replace="fragments/offer_steps  :: third"></div>-->
+                    <!--<div th:case="'4'" th:replace="fragments/offer_steps  :: fourth"></div>-->
+                    <!--<div th:default="'1'" th:replace="fragments/offer_steps  :: firsth"></div>-->
+                <!--</th:block>-->
+                <div class="row">
+
+                    <div class="col-sm-6">
+                        <div class="form-field mb-30">
+                            <input class="input-lg form-full" id="name" type="text" name="form-name" placeholder="Your Name">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-field mb-30">
+                            <input class="input-lg form-full" id="email" type="text" name="form-email" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-field mb-30">
+                            <input class="input-lg form-full" id="number" type="text" name="form-subject" placeholder="number">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-field mb-30">
+                            <input class="input-lg form-full" id="sub" type="text" name="form-subject" placeholder="Subject">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <div class="form-field mb-30">
+                            <textarea class="form-full" id="message" rows="7" name="form-message" placeholder="Your Message"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <button class="btn-text form-button" type="button" id="submit" name="button">
+                            Send Message
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
-        <!--full width banner-->
-
-        <!--revolution end-->
+    </div>
     </section>
-    <div class="clearfix"></div>
+    <!-- End of Offer Form -->
+
+        <div class="clearfix"></div>
     <!--  Main Banner End Here-->
-
-    <!--About Us End -->
-    <section id="choose_us" class="ptb-60 ptb-xs-40 overflow_hidden gray-bg">
-        <div class="container">
-            <div class="row">
-
-                <div class="col-sm-8 col-sm-offset-4">
-                    <div class="row">
-                        <div class="col-sm-12 mb-30">
-                            <div class="heading-box ">
-                                <h2>About Us</h2>
-                                <span class="b-line l-left line-h"></span>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6 mb-30">
-                            <div class="service_box hi-icon-effect-3 hi-icon-effect-3b">
-                                <div class="service_icon">
-
-                                    <i class="hi-icon flaticon-people-2" aria-hidden="true"></i>
-                                </div>
-                                <div class="service_details">
-                                    <h5 class="font-color_base no_stripe"><a href="#">excellent services</a></h5>
-                                </div>
-                                <div class="service_content">
-                                    <p>
-                                        Company that offers design and build services for you from initial sketches to the final production.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 mb-30">
-                            <div class="service_box hi-icon-effect-3 hi-icon-effect-3b">
-                                <div class="service_icon">
-
-                                    <i class="hi-icon flaticon-people-1" aria-hidden="true"></i>
-                                </div>
-                                <div class="service_details">
-                                    <h5 class="font-color_base no_stripe"><a href="#">guaranteed work</a></h5>
-                                </div>
-                                <div class="service_content">
-                                    <p>
-                                        Company that offers design and build services for you from initial sketches to the final production.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="service_box hi-icon-effect-3 hi-icon-effect-3b">
-                                <div class="service_icon">
-
-                                    <i class="hi-icon flaticon-nature-2" aria-hidden="true"></i>
-                                </div>
-                                <div class="service_details">
-                                    <h5 class="font-color_base no_stripe"><a href="#">quality and reliability</a></h5>
-                                </div>
-                                <div class="service_content">
-                                    <p>
-                                        Company that offers design and build services for you from initial sketches to the final production.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="service_box hi-icon-effect-3 hi-icon-effect-3b">
-                                <div class="service_icon">
-
-                                    <i class="hi-icon flaticon-fence" aria-hidden="true"></i>
-                                </div>
-                                <div class="service_details">
-                                    <h5 class="font-color_base no_stripe"><a href="#">Insect Control</a></h5>
-                                </div>
-                                <div class="service_content">
-                                    <p>
-                                        Company that offers design and build services for you from initial sketches to the final production.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <div class="image_cover"></div>
-    </section>
-
-    <!--Our Services-->
-    <section id="our-services" class="padding ptb-xs-40 text-center">
-        <div class="container">
-            <div class="row pb-60">
-                <div class="col-sm-12 mb-20">
-                    <div class="heading-box ">
-                        <h2><span>Our</span> Services</h2>
-                        <span class="b-line line-h"></span>
-                    </div>
-
-                </div>
-            </div>
-            <div class="row">
-
-                <div class="col-md-4 col-sm-6">
-                    <a href="#">
-                        <div class="featured-item feature-bg-box mb-100 gray-bg">
-                            <div class="icon">
-                                <img src="assets/images/solar.png">
-
-                            </div>
-                            <div class="title text-uppercase">
-                                <h4>Rubbish Removal</h4>
-                            </div>
-                            <div class="desc">
-                                Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
-                            </div>
-                        </div></a>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <a href="#">
-                        <div class="featured-item feature-bg-box gray-bg mb-100 sub-color_hover">
-                            <div class="icon">
-                                <i class="flaticon-people sub-color"></i>
-                            </div>
-                            <div class="title text-uppercase">
-                                <h4>Lawn Moving </h4>
-                            </div>
-                            <div class="desc">
-                                Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
-                            </div>
-                        </div></a>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <a href="#">
-                        <div class="featured-item feature-bg-box gray-bg mb-100">
-                            <div class="icon">
-                                <i class="flaticon-nature-1"></i>
-                            </div>
-                            <div class="title text-uppercase">
-                                <h4>Garden Care</h4>
-                            </div>
-                            <div class="desc">
-                                Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
-                            </div>
-                        </div></a>
-                </div>
-
-                <div class="col-md-4 col-sm-6">
-                    <a href="#">
-                        <div class="featured-item feature-bg-box gray-bg sub-color_hover mb-sm-100">
-                            <div class="icon">
-                                <i class="flaticon-nature sub-color"></i>
-                            </div>
-                            <div class="title text-uppercase">
-                                <h4>Landscape Design</h4>
-                            </div>
-                            <div class="desc">
-                                Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
-                            </div>
-                        </div></a>
-                </div>
-
-                <div class="col-md-4 col-sm-6">
-                    <a href="#">
-                        <div class="featured-item feature-bg-box gray-bg ">
-                            <div class="icon">
-                                <i class="flaticon-people-2"></i>
-                            </div>
-                            <div class="title text-uppercase">
-                                <h4> Excellent Services</h4>
-                            </div>
-                            <div class="desc">
-                                Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
-                            </div>
-                        </div></a>
-                </div>
-
-                <div class="col-md-4 col-sm-6">
-                    <a href="#">
-                        <div class="featured-item feature-bg-box gray-bg sub-color_hover mb-xs-0 ">
-                            <div class="icon">
-                                <i class="flaticon-fence sub-color"></i>
-                            </div>
-                            <div class="title text-uppercase">
-                                <h4> Insect Control</h4>
-                            </div>
-                            <div class="desc">
-                                Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
-                            </div>
-                        </div></a>
-                </div>
-            </div>
-
-        </div>
-    </section>
 
     <section  class="choose-us padding light-color pb-xs-0 overflow_hidden secondary_bg">
 
@@ -498,235 +229,11 @@
     </section>
 
 
-    <!-- Counter Section -->
-    <div class="fact-counter-wrapper padding ptb-xs-40 light-color parallax overlay-dark">
-        <div class="container text-center">
-            <div class="row">
-                <div class="col-sm-3">
-                    <div class="single-fact">
-                        <div class="icon-boxed">
-                            <i class="flaticon-nature-2"></i>
-                        </div>
-                        <span class="counter" data-count="3562">0</span>
-                        <p>
-                            Trees Planted
-                        </p>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="single-fact">
-                        <div class="icon-boxed">
-                            <i class="flaticon-nature"></i>
-                        </div>
-                        <span class="counter" data-count="1054">0</span>
-                        <p>
-                            Project Done
-                        </p>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="single-fact">
-                        <div class="icon-boxed">
-                            <i class="flaticon-people-2"></i>
-                        </div>
-                        <span class="counter" data-count="400">0</span>
-                        <p>
-                            Team
-                        </p>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="single-fact">
-                        <div class="icon-boxed">
-                            <i class="flaticon-time"></i>
-                        </div>
-                        <span class="counter" data-count="5685">0</span>
-                        <p>
-                            Hours of work
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Counter Section End-->
-
-    <!-- Get a Qoute -->
-    <section class="get-qoute padding ptb-xs-40 get-qoute">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6 faq">
-                    <div class="row">
-                        <div class="col-sm-12 mb-30">
-                            <div class="heading-box ">
-                                <h2>Frequently Asked Questions</h2>
-                                <span class="b-line l-left line-h"></span>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="panel-group " id="accordion">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse-1" aria-expanded="false"> Duis aute irure dolor in reprehenderit <i class="fa fa-plus collape-plus"></i></a></h4>
-                            </div>
-                            <div id="collapse-1" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <p>
-                                        Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem, Maecenas tempus, tellus eget condimentum rhoncus.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse-2" aria-expanded="false"> Duis aute irure dolor in reprehenderit <i class="fa fa-plus collape-plus"></i></a></h4>
-                            </div>
-                            <div id="collapse-2" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <p>
-                                        Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem, Maecenas tempus, tellus eget condimentum rhoncus.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse-3" aria-expanded="false"> Duis aute irure dolor in reprehenderit <i class="fa fa-plus collape-plus"></i></a></h4>
-                            </div>
-                            <div id="collapse-3" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <p>
-                                        Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem, Maecenas tempus, tellus eget condimentum rhoncus.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse-4" aria-expanded="false">Duis aute irure dolor in reprehenderit <i class="fa fa-plus collape-plus"></i></a></h4>
-                            </div>
-                            <div id="collapse-4" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <p>
-                                        Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem, Maecenas tempus, tellus eget condimentum rhoncus.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse-5" aria-expanded="false"> Duis aute irure dolor in reprehenderit <i class="fa fa-plus collape-plus"></i></a></h4>
-                            </div>
-                            <div id="collapse-5" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <p>
-                                        Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem, Maecenas tempus, tellus eget condimentum rhoncus.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse-6" aria-expanded="false"> Duis aute irure dolor in reprehenderit <i class="fa fa-plus collape-plus"></i></a></h4>
-                            </div>
-                            <div id="collapse-6" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <p>
-                                        Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem, Maecenas tempus, tellus eget condimentum rhoncus.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-                <div class="col-sm-6 mt-xs-30">
-                    <div class="row">
-                        <div class="col-sm-12 mb-30">
-                            <div class="heading-box ">
-                                <h2>Start project with
-                                    GardenExpert</h2>
-                                <span class="b-line l-left line-h"></span>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="row">
-
-                        <div class="col-sm-6">
-                            <div class="form-field mb-30">
-                                <input class="input-lg form-full" id="name" type="text" name="form-name" placeholder="Your Name">
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6">
-                            <div class="form-field mb-30">
-                                <input class="input-lg form-full" id="email" type="text" name="form-email" placeholder="Email">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-field mb-30">
-                                <input class="input-lg form-full" id="number" type="text" name="form-subject" placeholder="number">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-field mb-30">
-                                <input class="input-lg form-full" id="sub" type="text" name="form-subject" placeholder="Subject">
-                            </div>
-                        </div>
-
-                        <div class="col-sm-12">
-                            <div class="form-field mb-30">
-                                <textarea class="form-full" id="message" rows="7" name="form-message" placeholder="Your Message"></textarea>
-
-
-
-                            </div>
-                        </div>
-                        <div class=" mt-30">
-                            <button class="btn-text" type="button" id="submit" name="button">
-                                Send Message
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Get a Qoute -->
-
-
-
     <!-- FOOTER -->
     <div th:replace="fragments/footer :: footer"></div>
     <!-- END FOOTER -->
 </div>
 <!-- Site Wraper End -->
-
-<!--<script src="assets/js/jquery-1.12.4.min.js" type="text/javascript"></script>
-&lt;!&ndash; masonry,isotope Effect Js &ndash;&gt;
-<script src="assets/js/imagesloaded.pkgd.min.js" type="text/javascript"></script>
-<script src="assets/js/isotope.pkgd.min.js" type="text/javascript"></script>
-<script src="assets/js/masonry.pkgd.min.js" type="text/javascript"></script>
-<script src="assets/js/jquery.appear.js" type="text/javascript"></script>
-&lt;!&ndash; bootstrap Js &ndash;&gt;
-<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
-&lt;!&ndash; carousel Js &ndash;&gt;
-<script src="assets/js/plugin/owl.carousel.js" type="text/javascript"></script>
-&lt;!&ndash; fancybox Js &ndash;&gt;
-<script src="assets/js/jquery.mousewheel-3.0.6.pack.js" type="text/javascript"></script>
-<script src="assets/js/jquery.fancybox.pack.js" type="text/javascript"></script>
-&lt;!&ndash; carousel Js &ndash;&gt;
-<script src="assets/js/jquery.parallax-1.1.3.js" type="text/javascript"></script>
-
-&lt;!&ndash; revolution Js &ndash;&gt;
-<script type="text/javascript" src="assets/rs-slider/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
-<script type="text/javascript" src="assets/rs-slider/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
-<script type="text/javascript" src="assets/js/revolution-custom.js"></script>
-&lt;!&ndash; custom Js &ndash;&gt;
-<script src="assets/js/custom.js" type="text/javascript"></script>-->
 
 </body>
 </html>
