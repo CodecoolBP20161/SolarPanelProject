@@ -10,52 +10,126 @@
 
 <div th:fragment="first">
     <form method="post" th:action="@{/ajanlat/1}" th:object="${consumption}">
-    <div class="container">
-        <div class="row">
-            <div class="widget_shop-title">
-                <h3 class="title">
-                    Adja meg a háztartásának egy havi villanyszámlájának összegét, vagy éves
-                    fogyasztását:</h3>
+        <div class="container">
+            <div class="row">
+                <div class="widget_shop-title">
+                    <h3 class="title">
+                        Adja meg a háztartásának egy havi villanyszámlájának összegét, vagy éves
+                        fogyasztását:</h3>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="col-sm-5">
+                    <div class="romana_check_out_form">
+                        <div class="row">
+                            <div class="check_form_left common_input">
+                                <div class="select_option_one">
+                                    <select name="userSelect" id="stepOneSelect" th:field="*{metric}">
+                                        <option value="Ft"><strong>Havi villanyszámla:</strong></option>
+                                        <option value="kWh"><strong>Éves fogyasztás:</strong></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-sm-5">
+                    <div class="form-field mb-30">
+                        <input class="input-lg form-full" id="sub" type="text" name="form-subject" placeholder="Érték"
+                               th:field="*{value}">
+
+                    </div>
+                </div>
+                <div class="col-sm-1"><h2 id="metricHeader">FT</h2></div>
+
+
             </div>
-            <div class="col-sm-1"></div>
-            <div class="col-sm-5">
-                <div class="romana_check_out_form">
-                    <div class="row">
-                        <div class="check_form_left common_input">
-                            <div class="select_option_one">
-                                <select name="userSelect" id="stepOneSelect" th:field="*{metric}">
-                                    <option value="Ft"><strong>Havi villanyszámla:</strong></option>
-                                    <option value="kWh"><strong>Éves fogyasztás:</strong></option>
-                                </select>
+            <div class="row">
+                <div class="col-sm-11">
+                    <button class="btn-text pull-right" type="submit" id="submit" name="button">
+                        Következő
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div th:fragment="second">
+    <!-- Testimonial -->
+    <section class="testimonial-section padding ptb-xs-60 light-color parallax overlay-dark ">
+        <div class="container">
+
+            <!--Inverter Carousel Header-->
+            <div class="row text-center pb-30">
+                <div class="col-sm-12">
+                    <div class="heading-box ">
+                        <h2><span>Inverterek</span></h2>
+                        <span class="b-line line-h"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <!--Inverter Carousel Body-->
+                <div class="carousel-slider nf-carousel-theme arrow_theme owl-carousel" data-pagination="false"
+                     data-items="3" data-autoplay="false" data-loop="false" data-margin="10" data-center="true"
+                     data-navigation="true" data-desktopsmall="3" data-tablet="3" data-mobile="1">
+                    <div th:each="i : ${#numbers.sequence(1,5)}">
+                        <div class="carousel-item col-sm-4 ">
+                            <div class="testimonial-block cyan-background">
+                                <h3 class="testimonial-author" th:text="'Inverter '+${i}"></h3>
+                                <hr class="small-divider">
+                                <p>
+                                    Inverter leírása néhány mondatban,
+                                    Inverter leírása néhány mondatban,
+                                    Inverter leírása néhány mondatban,
+                                    Inverter leírása néhány mondatban,
+                                    Inverter leírása néhány mondatban,
+                                </p>
+
+                                <h4 class="testimonial-price">150.000 Ft</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <!--Inverter Carousel Header-->
+                <div class="row text-center pb-30">
+                    <div class="col-sm-12">
+                        <div class="heading-box ">
+                            <h2><span>Napelemek</span></h2>
+                            <span class="b-line line-h"></span>
+                        </div>
+                    </div>
+                </div>
+                <!--Solar Panel Carousel Body-->
+                <div class="carousel-slider nf-carousel-theme arrow_theme owl-carousel" data-pagination="false"
+                     data-items="3" data-autoplay="false" data-loop="false" data-margin="10" data-center="true"
+                     data-navigation="true" data-desktopsmall="3" data-tablet="3" data-mobile="1">
+                    <div th:each="i : ${#numbers.sequence(1,5)}">
+                        <div class="carousel-item col-sm-4 ">
+                            <div class="testimonial-block cyan-background">
+                                <h3 class="testimonial-author" th:text="'Napelem '+${i}"></h3>
+                                <hr class="small-divider">
+                                <p>
+                                    Napelem leírása néhány mondatban,
+                                    Napelem leírása néhány mondatban,
+                                    Napelem leírása néhány mondatban,
+                                    Napelem leírása néhány mondatban,
+                                    Napelem leírása néhány mondatban,
+                                    Napelem leírása néhány mondatban,
+                                </p>
+
+                                <h4 class="testimonial-price">150.000 Ft</h4>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-
-            <div class="col-sm-5">
-                <div class="form-field mb-30">
-                    <input class="input-lg form-full" id="sub" type="text" name="form-subject" placeholder="Érték" th:field="*{value}">
-
-                </div>
-            </div>
-            <div class="col-sm-1"><h2 id="metricHeader" >FT</h2></div>
-
-
         </div>
-        <div class="row">
-            <div class="col-sm-11">
-                <button class="btn-text pull-right" type="submit" id="submit" name="button">
-                    Következő
-                </button>
-            </div>
-        </div>
-    </div>
-        </form>
-</div>
-<div th:fragment="second">
-    Second
+    </section>
 </div>
 <div th:fragment="third">
     Third
