@@ -9,6 +9,7 @@
 <body>
 
 <div th:fragment="first">
+    <form method="post" th:action="@{/ajanlat/1}" th:object="${consumption}">
     <div class="container">
         <div class="row">
             <div class="widget_shop-title">
@@ -22,7 +23,7 @@
                     <div class="row">
                         <div class="check_form_left common_input">
                             <div class="select_option_one">
-                                <select name="userSelect" id="stepOneSelect">
+                                <select name="userSelect" id="stepOneSelect" th:field="*{metric}">
                                     <option value="Ft"><strong>Havi villanyszámla:</strong></option>
                                     <option value="kWh"><strong>Éves fogyasztás:</strong></option>
                                 </select>
@@ -35,22 +36,23 @@
 
             <div class="col-sm-5">
                 <div class="form-field mb-30">
-                    <input class="input-lg form-full" id="sub" type="text" name="form-subject" placeholder="Érték">
+                    <input class="input-lg form-full" id="sub" type="text" name="form-subject" placeholder="Érték" th:field="*{value}">
 
                 </div>
             </div>
-            <div class="col-sm-1"><h2 id="metricHeader">FT</h2></div>
+            <div class="col-sm-1"><h2 id="metricHeader" >FT</h2></div>
 
 
         </div>
         <div class="row">
             <div class="col-sm-11">
-                <button class="btn-text pull-right" type="button" id="submit" name="button">
+                <button class="btn-text pull-right" type="submit" id="submit" name="button">
                     Következő
                 </button>
             </div>
         </div>
     </div>
+        </form>
 </div>
 <div th:fragment="second">
     Second

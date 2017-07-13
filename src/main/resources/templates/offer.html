@@ -124,19 +124,12 @@
                     </div>
                 </div>
                 <div th:switch="${step}">
-                    <div th:case="2"><div th:replace="fragments/offer_steps :: second"></div></div>
-                    <div th:case="3"><div th:replace="fragments/offer_steps :: third"></div></div>
-                    <div th:case="4"><div th:replace="fragments/offer_steps :: fourth"></div></div>
-                    <div th:case="*"><div th:replace="fragments/offer_steps :: first"></div></div>
+                    <div th:case="'1'"><div th:replace="fragments/offer_steps :: first"></div></div>
+                    <div th:case="'2'"><div th:replace="fragments/offer_steps :: second"></div></div>
+                    <div th:case="'3'"><div th:replace="fragments/offer_steps :: third"></div></div>
+                    <div th:case="'4'"><div th:replace="fragments/offer_steps :: fourth"></div></div>
+
                 </div>
-                <!--Start of the actual form section-->
-                <!--<th:block th:switch="${step}">-->
-                    <!--<div th:case="'1'" th:replace="fragments/offer_steps :: first"></div>-->
-                    <!--<div th:case="'2'" th:replace="fragments/offer_steps  :: second"></div>-->
-                    <!--<div th:case="'3'" th:replace="fragments/offer_steps  :: third"></div>-->
-                    <!--<div th:case="'4'" th:replace="fragments/offer_steps  :: fourth"></div>-->
-                    <!--<div th:default="'1'" th:replace="fragments/offer_steps  :: firsth"></div>-->
-                <!--</th:block>-->
 
             </div>
         </div>
