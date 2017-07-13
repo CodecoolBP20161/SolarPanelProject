@@ -1,4 +1,4 @@
-package com.codecool.model.forms;
+package com.codecool.models.forms;
 
 import lombok.Data;
 
