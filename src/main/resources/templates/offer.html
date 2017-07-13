@@ -123,6 +123,12 @@
 
                     </div>
                 </div>
+                <div th:switch="${step}">
+                    <div th:case="2"><div th:replace="fragments/offer_steps :: second"></div></div>
+                    <div th:case="3"><div th:replace="fragments/offer_steps :: third"></div></div>
+                    <div th:case="4"><div th:replace="fragments/offer_steps :: fourth"></div></div>
+                    <div th:case="*"><div th:replace="fragments/offer_steps :: first"></div></div>
+                </div>
                 <!--Start of the actual form section-->
                 <!--<th:block th:switch="${step}">-->
                     <!--<div th:case="'1'" th:replace="fragments/offer_steps :: first"></div>-->
@@ -131,41 +137,7 @@
                     <!--<div th:case="'4'" th:replace="fragments/offer_steps  :: fourth"></div>-->
                     <!--<div th:default="'1'" th:replace="fragments/offer_steps  :: firsth"></div>-->
                 <!--</th:block>-->
-                <div class="row">
 
-                    <div class="col-sm-6">
-                        <div class="form-field mb-30">
-                            <input class="input-lg form-full" id="name" type="text" name="form-name" placeholder="Your Name">
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6">
-                        <div class="form-field mb-30">
-                            <input class="input-lg form-full" id="email" type="text" name="form-email" placeholder="Email">
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-field mb-30">
-                            <input class="input-lg form-full" id="number" type="text" name="form-subject" placeholder="number">
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-field mb-30">
-                            <input class="input-lg form-full" id="sub" type="text" name="form-subject" placeholder="Subject">
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12">
-                        <div class="form-field mb-30">
-                            <textarea class="form-full" id="message" rows="7" name="form-message" placeholder="Your Message"></textarea>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <button class="btn-text form-button" type="button" id="submit" name="button">
-                            Send Message
-                        </button>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

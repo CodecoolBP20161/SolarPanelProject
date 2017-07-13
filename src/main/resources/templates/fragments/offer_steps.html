@@ -1,25 +1,66 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      >
+>
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
 
-    <div th:fragment="first">
-        First
+<div th:fragment="first">
+    <div class="container">
+        <div class="row">
+            <div class="widget_shop-title">
+                <h3 class="title">
+                    Adja meg a háztartásának egy havi villanyszámlájának összegét, vagy éves
+                    fogyasztását:</h3>
+            </div>
+            <div class="col-sm-1"></div>
+            <div class="col-sm-5">
+                <div class="romana_check_out_form">
+                    <div class="row">
+                        <div class="check_form_left common_input">
+                            <div class="select_option_one">
+                                <select name="userSelect" id="stepOneSelect">
+                                    <option value="Ft"><strong>Havi villanyszámla:</strong></option>
+                                    <option value="kWh"><strong>Éves fogyasztás:</strong></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-sm-5">
+                <div class="form-field mb-30">
+                    <input class="input-lg form-full" id="sub" type="text" name="form-subject" placeholder="Érték">
+
+                </div>
+            </div>
+            <div class="col-sm-1"><h2 id="metricHeader">FT</h2></div>
+
+
+        </div>
+        <div class="row">
+            <div class="col-sm-11">
+                <button class="btn-text pull-right" type="button" id="submit" name="button">
+                    Következő
+                </button>
+            </div>
+        </div>
     </div>
-    <div th:fragment="second">
-        Second
-    </div>
-    <div th:fragment="third">
-        Third
-    </div>
-    <div th:fragment="fourth">
-        Fourth
-    </div>
+</div>
+<div th:fragment="second">
+    Second
+</div>
+<div th:fragment="third">
+    Third
+</div>
+<div th:fragment="fourth">
+    Fourth
+</div>
 
 </body>
 </html>
