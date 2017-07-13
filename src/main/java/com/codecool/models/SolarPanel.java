@@ -3,13 +3,11 @@ package com.codecool.models;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
+@Table(name = "solarpanel")
 public class SolarPanel {
 
     @Id
