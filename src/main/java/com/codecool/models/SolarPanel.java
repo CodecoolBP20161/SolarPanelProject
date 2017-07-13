@@ -4,6 +4,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
@@ -14,24 +15,24 @@ public class SolarPanel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+
     @NotEmpty
     private String name;
 
-
-   //TO DO
+    @NotEmpty
     private String optimalizer;
 
-    @NotEmpty
-    private int price;
+    @NotNull
+    private Integer price;
 
-    @NotEmpty
-    private int capacity;
+    @NotNull
+    private Integer capacity;
 
-    @NotEmpty
     private String description;
 
-    public SolarPanel(String name, int price, int capacity, String description) {
+    public SolarPanel(String name, String optimalizer, Integer price, Integer capacity, String description) {
         this.setName(name);
+        this.setOptimalizer(optimalizer);
         this.setPrice(price);
         this.setCapacity(capacity);
         this.setDescription(description);
