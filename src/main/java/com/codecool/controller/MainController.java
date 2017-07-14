@@ -1,16 +1,26 @@
 package com.codecool.controller;
 
+import com.codecool.models.SolarPanel;
 import com.codecool.models.forms.ConsumptionForm;
 import com.codecool.models.forms.PanelAndInverterForm;
+import com.codecool.repositories.SolarPanelRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Slf4j
 @Controller
 public class MainController {
+
+    @Autowired
+    private SolarPanelRepository solarPanelRepository;
+
 
     @GetMapping("/")
     public String getIndex(){
@@ -38,7 +48,9 @@ public class MainController {
 
     @GetMapping("/ajanlat/2")
     public String getOfferStep2(Model model){
+        List<SolarPanel> solarPanelList = solarPanelRepository.findAll();
         model.addAttribute("deviceForm", new PanelAndInverterForm());
+        model.addAttribute("solarPanelList", solarPanelList);
         model.addAttribute("step", '2');
         return "offer";
     }
