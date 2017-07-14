@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
->
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -61,8 +61,8 @@
             </div>
             <div class="row">
                 <div class="col-sm-1"></div>
-                <div class="col-sm-6">
-                    <h3 class="title">Hány fázisú az elektromos hálózat ön lakásában?</h3>
+                <div class="col-sm-4">
+                    <h3 class="title">Hány fázisú az elektromos hálózat az ön lakásában?</h3>
                 </div>
                 <div class="col-sm-3">
                     <ul class="list-inline">
@@ -79,7 +79,21 @@
                             </div>
                         </li>
                     </ul>
-                    <div>
+                    <div class="col-sm-3">
+
+                        <!--Ezt majd ha be van configolva a security-->
+                        <!--<div th:if ="${#authorization.expression('isAuthenticated()')}">-->
+                            <!--<select name="userSelect" id="companySelect" th:field="*{company}">-->
+                                <!--<option th:each="language : ${T(com.codecool.models.CompanyEnum).values()}"-->
+                                        <!--th:value="${language}"-->
+                                        <!--th:text="${language}">-->
+                                <!--</option>-->
+                            <!--</select>-->
+                        <!--</div>-->
+                        <!--<div th:unless="${#authorization.expression('isAuthenticated()')}">-->
+                            <!--<span sec:authentication="name"></span>-->
+                        <!--</div>-->
+
                     </div>
                 </div>
 
