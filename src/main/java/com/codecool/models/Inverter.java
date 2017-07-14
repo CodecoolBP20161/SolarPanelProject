@@ -24,12 +24,12 @@ public class Inverter {
     private String name;
 
     @NotNull
-    private int price;
+    private Integer price;
 
-    @NotEmpty
+    @NotNull
     private Integer phase;
 
-    @NotEmpty
+    @NotNull
     private Double vatt;
 
     private String description;
@@ -40,7 +40,7 @@ public class Inverter {
     private int capacity;
 
 
-    public Inverter(String brand, String name, int price, Integer phase, Double vatt, String description, Integer wifiModule, int capacity) {
+    public Inverter(String brand, String name, Integer price, Integer phase, Double vatt, String description, Integer wifiModule, Integer capacity) {
         this.setBrand(brand);
         this.setName(name);
         this.setPrice(price);
