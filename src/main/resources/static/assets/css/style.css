@@ -4489,13 +4489,18 @@ a.btn.xplus-btn.pricing.active:hover {
 	text-align: center;
 	position: relative;
 	padding: 60px 30px 0 30px;
-	width: 100%;
+	width: 90%;
     height: 100%;
 }
-.testimonial-block:hover, .testimonial-block:hover  *, .testimonial-block:active{
+.testimonial-block:hover, .testimonial-block:hover  *{
     cursor: pointer;
     background-color: #6aaf08;
     color: #ffffff;
+}
+.testimonial-block.active{
+    background-color: #6aaf08;
+    color: #ffffff;
+    cursor: default;
 }
 @media (max-width: 767px) {
 	.mb-sm-80 {
