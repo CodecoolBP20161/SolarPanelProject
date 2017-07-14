@@ -24,13 +24,15 @@ public class MainController {
 
     @GetMapping("/ajanlat/1")
     public String getOfferStep1(Model model){
-        model.addAttribute("consumption", new ConsumptionForm());
+        ConsumptionForm consumptionForm = new ConsumptionForm();
+        consumptionForm.setPhase(1);
+        model.addAttribute("consumption", consumptionForm);
         model.addAttribute("step", '1');
         return "offer";
     }
     @PostMapping("/ajanlat/1")
     public String postOfferStep1(Model model, @ModelAttribute ConsumptionForm consumption){
-        log.info("Consumption: " + consumption.getValue() + " " + consumption.getMetric());
+        log.info("Consumption: " + consumption.getValue() + " " + consumption.getMetric() + "\n Number of phases: " + consumption.getPhase());
         return "redirect:/ajanlat/2";
     }
 
