@@ -1,5 +1,5 @@
 language: java
-script: mvn clean && mvn install
+script: mvn clean && mvn install -e -X
 sudo: false
 addons:
   apt:
