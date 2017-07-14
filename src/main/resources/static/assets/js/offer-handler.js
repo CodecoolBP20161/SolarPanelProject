@@ -3,6 +3,8 @@ $(document).ready(function() {
     // Event Listeners for form one( annual electric consumption or monthly electric bill selection)
 
     var metricSelect = $('#stepOneSelect');
+    var metricInput = $('#sub');
+    if (metricInput.val() == "0.0") metricInput.val("");
 
     metricSelect.on('change', function () {
         $('#metricHeader').html(metricSelect.find('option:selected').val());
@@ -12,8 +14,11 @@ $(document).ready(function() {
 
     var inverterInput = $('#inverterInput');
     var panelInput = $('#panelInput');
-    inverterInput.val('initial');
-    panelInput.val('initial');
+    if(inverterInput.val() == undefined){
+        inverterInput.val('initial');
+        panelInput.val('initial');
+    }
+
     var formSubmitbutton = $('#submitPanelAndInverter');
     var selectedInverter = null;
     var selectedPanel = null;

@@ -38,7 +38,7 @@
                 <div class="col-sm-5">
                     <div class="form-field mb-30">
                         <!--The 'onkeyress' event is to determine if the typed characters ASCII code is in our desired interval(numbers)-->
-                        <input class="input-lg form-full" id="sub" type="text" name="form-subject" placeholder="0"
+                        <input class="input-lg form-full" id="sub" type="text" name="form-subject" placeholder="0" value=""
                                th:field="*{value}" onkeypress='return  event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
 
                     </div>
@@ -78,7 +78,7 @@
                 <div class="carousel-slider nf-carousel-theme arrow_theme owl-carousel" data-pagination="false"
                      data-items="3" data-autoplay="false" data-loop="false" data-margin="-20" data-center="false"
                      data-navigation="true" data-desktopsmall="3" data-tablet="3" data-mobile="1">
-                    <div th:each="i : ${#numbers.sequence(1,5)}">
+                    <div th:each="i : ${#numbers.sequence(1,30)}">
                         <div class="carousel-item col-sm-4">
                             <div class="testimonial-block cyan-background inverter" th:data="${i}">
                                 <h3 class="testimonial-author" th:text="'Inverter '+${i}"></h3>
@@ -99,7 +99,7 @@
                 </div>
                 <br>
                 <br>
-                <!--Inverter Carousel Header-->
+                <!--Solar Panel Carousel Header-->
                 <div class="row text-center pb-30">
                     <div class="col-sm-12">
                         <div class="heading-box ">

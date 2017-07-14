@@ -55,7 +55,7 @@ public class MainController {
 
     @PostMapping("/ajanlat/2")
     public String postOfferStep2(Model model, @ModelAttribute PanelAndInverterForm device){
-        log.info("Consumption: " + device.getInverterId() + " " + device.getPanelId());
+        log.info("Devices: " + device.getInverterId() + " " + device.getPanelId());
         model.addAttribute("step", '3');
         return "offer";
     }
