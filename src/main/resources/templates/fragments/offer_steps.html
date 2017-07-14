@@ -13,43 +13,47 @@
     <form method="post" th:action="@{/ajanlat/1}" th:object="${consumption}">
         <div class="container">
             <div class="row">
-                <div class="widget_shop-title">
-                    <h3 class="title">
-                        Adja meg a háztartásának egy havi villanyszámlájának összegét, vagy éves
-                        fogyasztását:</h3>
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                    <h2 class="title">Fogyasztás</h2>
                 </div>
-                <div class="col-sm-1"></div>
-                <div class="col-sm-5">
-                    <div class="romana_check_out_form">
-                        <div class="row">
-                            <div class="check_form_left common_input">
-                                <div class="select_option_one">
-                                    <select name="userSelect" id="stepOneSelect" th:field="*{metric}" >
-                                        <option value="Ft"><strong>Havi villanyszámla:</strong></option>
-                                        <option value="kWh"><strong>Éves fogyasztás:</strong></option>
-                                    </select>
+            </div>
+            <div class="row">
+                <div class="widget_shop-title">
+
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-3">
+                        <div class="romana_check_out_form">
+                            <div class="row">
+                                <div class="check_form_left common_input">
+                                    <div class="select_option_one">
+                                        <select name="userSelect" id="stepOneSelect" th:field="*{metric}">
+                                            <option value="Ft"><strong>Havi villanyszámla:</strong></option>
+                                            <option value="kWh"><strong>Éves fogyasztás:</strong></option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
 
-                <div class="col-sm-5">
-                    <div class="form-field mb-30">
-                        <!--The 'onkeyress' event is to determine if the typed characters ASCII code is in our desired interval(numbers)-->
-                        <input class="input-lg form-full" id="sub" type="text" name="form-subject" placeholder="0" value="" required="required"
-                               th:field="*{value}" onkeypress='return  event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
+                    <div class="col-sm-3">
+                        <div class="form-field mb-30">
+                            <!--The 'onkeyress' event is to determine if the typed characters ASCII code is in our desired interval(numbers)-->
+                            <input class="input-lg form-full" id="sub" type="text" name="form-subject" placeholder="0"
+                                   value="" required="required"
+                                   th:field="*{value}"
+                                   onkeypress='return  event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
 
+                        </div>
                     </div>
+                    <div class="col-sm-1"><h2 id="metricHeader">FT</h2></div>
                 </div>
-                <div class="col-sm-1"><h2 id="metricHeader">FT</h2></div>
 
 
-            </div>
-            <div class="row">
-                <div class="col-sm-11">
-                    <button class="btn-text pull-right" type="submit" id="submit" name="button">
+                <div class="col-sm-4">
+                    <button class="btn-text" type="submit" id="submit" name="button">
                         Következő
                     </button>
                 </div>
@@ -135,15 +139,16 @@
                 <div class="row">
                     <form method="post" th:action="@{/ajanlat/2}" th:object="${deviceForm}">
                         <div class="col-sm-11">
-                            <input   type="hidden" id="inverterInput"  defaultValue="0"
-                                   th:field="*{inverterId}" >
-                            <input   type="hidden" id="panelInput" value="0"
-                                     th:field="*{panelId}" >
-                            <button disabled="disabled" class="btn-text pull-right" type="submit" id="submitPanelAndInverter" name="button">
+                            <input type="hidden" id="inverterInput" defaultValue="0"
+                                   th:field="*{inverterId}">
+                            <input type="hidden" id="panelInput" value="0"
+                                   th:field="*{panelId}">
+                            <button disabled="disabled" class="btn-text pull-right" type="submit"
+                                    id="submitPanelAndInverter" name="button">
                                 Következő
                             </button>
                         </div>
-                        </form>
+                    </form>
                 </div>
             </div>
         </div>
