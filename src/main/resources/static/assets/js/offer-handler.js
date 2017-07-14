@@ -13,7 +13,7 @@ $(document).ready(function () {
     metricSelect.on('change', function () {
         $('#metricHeader').html(metricSelect.find('option:selected').val());
     });
-    metricInput.on('change paste keyup', function () {
+    metricSelect.add(metricInput).on('change paste keyup', function () {
         // If phase is 1, and the selected metric is kWh and the inputs value is bigger than 5, then the message should show
         if (phaseOneInput.is(':checked') && metricSelect.find('option:selected').val() == 'kWh' && metricInput.val() >= 5){
             alertSpan.prop('hidden', false);
