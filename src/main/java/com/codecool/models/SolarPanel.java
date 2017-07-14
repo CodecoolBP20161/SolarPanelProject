@@ -10,10 +10,12 @@ import javax.validation.constraints.NotNull;
 @Data
 @Table(name = "solarpanel")
 public class SolarPanel {
+    public SolarPanel(){}
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
 
     @NotEmpty
