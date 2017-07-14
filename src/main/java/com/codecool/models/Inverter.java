@@ -46,7 +46,7 @@ public class Inverter {
         this.setWifiModule(wifiModule);
         this.setPhase(phase);
         this.setPrice(price);
-        this.setVatt(watt);
+        this.setWatt(watt);
         this.setCapacity(capacity);
         this.setDescription(description);
     }
