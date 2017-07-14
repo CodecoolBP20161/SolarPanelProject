@@ -8,6 +8,7 @@
 </head>
 <body>
 
+<!--The first step of the offer creation-->
 <div th:fragment="first">
     <form method="post" th:action="@{/ajanlat/1}" th:object="${consumption}">
         <div class="container">
@@ -36,8 +37,9 @@
 
                 <div class="col-sm-5">
                     <div class="form-field mb-30">
-                        <input class="input-lg form-full" id="sub" type="text" name="form-subject" placeholder="Érték"
-                               th:field="*{value}">
+                        <!--The 'onkeyress' event is to determine if the typed characters ASCII code is in our desired interval(numbers)-->
+                        <input class="input-lg form-full" id="sub" type="text" name="form-subject" placeholder="0"
+                               th:field="*{value}" onkeypress='return  event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
 
                     </div>
                 </div>
@@ -55,6 +57,7 @@
         </div>
     </form>
 </div>
+
 <div th:fragment="second">
     <!-- Testimonial -->
     <section class="testimonial-section padding ptb-xs-60 light-color parallax overlay-dark ">
@@ -76,8 +79,8 @@
                      data-items="3" data-autoplay="false" data-loop="false" data-margin="-20" data-center="false"
                      data-navigation="true" data-desktopsmall="3" data-tablet="3" data-mobile="1">
                     <div th:each="i : ${#numbers.sequence(1,5)}">
-                        <div class="carousel-item col-sm-4 ">
-                            <div class="testimonial-block cyan-background">
+                        <div class="carousel-item col-sm-4">
+                            <div class="testimonial-block cyan-background inverter" th:data="${i}">
                                 <h3 class="testimonial-author" th:text="'Inverter '+${i}"></h3>
                                 <hr class="small-divider">
                                 <p>
@@ -110,8 +113,8 @@
                      data-items="3" data-autoplay="false" data-loop="false" data-margin="-20" data-center="false"
                      data-navigation="true" data-desktopsmall="3" data-tablet="3" data-mobile="1">
                     <div th:each="i : ${#numbers.sequence(1,5)}">
-                        <div class="carousel-item col-sm-4 ">
-                            <div class="testimonial-block cyan-background">
+                        <div class="carousel-item col-sm-4">
+                            <div class="testimonial-block cyan-background panel" th:data="${i}">
                                 <h3 class="testimonial-author" th:text="'Napelem '+${i}"></h3>
                                 <hr class="small-divider">
                                 <p>
@@ -128,6 +131,19 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="row">
+                    <form method="post" th:action="@{/ajanlat/2}" th:object="${deviceForm}">
+                        <div class="col-sm-11">
+                            <input   type="hidden" id="inverterInput"  defaultValue="0"
+                                   th:field="*{inverterId}" >
+                            <input   type="hidden" id="panelInput" value="0"
+                                     th:field="*{panelId}" >
+                            <button disabled="disabled" class="btn-text pull-right" type="submit" id="submitPanelAndInverter" name="button">
+                                Következő
+                            </button>
+                        </div>
+                        </form>
                 </div>
             </div>
         </div>
