@@ -6,6 +6,7 @@ import lombok.Data;
 public class ConsumptionForm {
     private String metric;
     private float value;
+    private int phase;
 }
 
 
