@@ -24,7 +24,7 @@
                         <div class="row">
                             <div class="check_form_left common_input">
                                 <div class="select_option_one">
-                                    <select name="userSelect" id="stepOneSelect" th:field="*{metric}">
+                                    <select name="userSelect" id="stepOneSelect" th:field="*{metric}" >
                                         <option value="Ft"><strong>Havi villanyszámla:</strong></option>
                                         <option value="kWh"><strong>Éves fogyasztás:</strong></option>
                                     </select>
@@ -38,7 +38,7 @@
                 <div class="col-sm-5">
                     <div class="form-field mb-30">
                         <!--The 'onkeyress' event is to determine if the typed characters ASCII code is in our desired interval(numbers)-->
-                        <input class="input-lg form-full" id="sub" type="text" name="form-subject" placeholder="0" value=""
+                        <input class="input-lg form-full" id="sub" type="text" name="form-subject" placeholder="0" value="" required="required"
                                th:field="*{value}" onkeypress='return  event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
 
                     </div>
