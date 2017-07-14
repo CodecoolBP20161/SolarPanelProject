@@ -1,5 +1,5 @@
 language: java
-script: mvn clean && mvn install -e -X
+script: mvn clean install -DskipTests -e -X
 sudo: false
 addons:
   apt:
