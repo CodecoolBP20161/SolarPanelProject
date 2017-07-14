@@ -4497,7 +4497,7 @@ a.btn.xplus-btn.pricing.active:hover {
     background-color: #6aaf08;
     color: #ffffff;
 }
-.testimonial-block.active{
+.testimonial-block.active, .testimonial-block.active *{
     background-color: #6aaf08;
     color: #ffffff;
     cursor: default;
@@ -4544,6 +4544,9 @@ a.btn.xplus-btn.pricing.active:hover {
 	width: 41px;
 }
 .testimonial-block:hover .small-divider{
+    border-color: #ffffff;
+}
+.testimonial-block.active .small-divider{
     border-color: #ffffff;
 }
 .cyan-background p {
