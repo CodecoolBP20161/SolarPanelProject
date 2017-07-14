@@ -40,7 +40,7 @@
 
                     <div class="col-sm-3">
                         <div class="form-field mb-30">
-                            <!--The 'onkeyress' event is to determine if the typed characters ASCII code is in our desired interval(numbers)-->
+                            <!--The 'onkeypress' event is to determine if the typed characters ASCII code is in our desired interval(numbers)-->
                             <input class="input-lg form-full" id="sub" type="text" name="form-subject" placeholder="0"
                                    value="" required="required"
                                    th:field="*{value}"
@@ -56,6 +56,39 @@
                     <button class="btn-text" type="submit" id="submit" name="button">
                         Következő
                     </button>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-6">
+                    <h3 class="title">Hány fázisú az elektromos hálózat ön lakásában?</h3>
+                </div>
+                <div class="col-sm-3">
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <div class="checkbox">
+                                <input type="radio" id="phase1RadioInput" th:field="*{phase}" name="poll" value="1"  checked="checked"/>
+                                <label class="">1</label>
+                            </div>
+                        </li>
+                        <li class="list-inline-item">
+                            <div class="checkbox">
+                                <input type="radio" name="poll" id="phase2RadioInput" th:field="*{phase}" value="3"/>
+                                <label class="">3</label>
+                            </div>
+                        </li>
+                    </ul>
+                    <div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="alert alert-danger" hidden="hidden" id="alert-phase">
+                    <strong>Figyelem!</strong> Amennyiben 5kWh feletti az éves fogyasztása,
+                    és egyfázisú az elektromos hálózata, hálózatfejlesztésre lesz szüksége a rendszer telepítéséhez!
+                </div>
                 </div>
             </div>
         </div>
