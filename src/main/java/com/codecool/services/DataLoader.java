@@ -21,15 +21,14 @@ public class DataLoader {
     private SolarPanelRepository solarPanelRep;
 
     @Autowired
-    public DataLoader(InverterRepository inverterRep, SolarPanelRepository solarPanelRep) {
+    public DataLoader (InverterRepository inverterRep, SolarPanelRepository solarPanelRep){
         this.solarPanelRep = solarPanelRep;
         this.inverterRep = inverterRep;
     }
-
     @PostConstruct
-    public void loadData() {
+    public void loadData(){
         loadSolarPanels();
-        loadSolaredgeInverters();
+        loadInverters();
     }
 
     private void loadSolarPanels() {
@@ -69,5 +68,11 @@ public class DataLoader {
         solaredgeInverterList.add(new Inverter("Solaredge", "Solaredge SE17K-ER-01", 450000, 3, 1.27, "12 év garancia", 0, 17000));
 
         return solaredgeInverterList;
+    }
+
+    private void loadInverters(){
+        for (Inverter item : loadSolaredgeInverters()) {
+            inverterRep.save(item);
+        }
     }
 }
