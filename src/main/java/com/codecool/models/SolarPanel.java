@@ -41,4 +41,7 @@ public class SolarPanel {
         this.setCapacity(capacity);
         this.setDescription(description);
     }
+
+    public SolarPanel() {
+    }
 }
