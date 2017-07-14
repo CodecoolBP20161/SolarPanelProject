@@ -3,9 +3,9 @@ package com.codecool.models.forms;
 import lombok.Data;
 
 @Data
-public class ConsumptionFormObject {
+public class ConsumptionForm {
     private String metric;
-    private long value;
+    private float value;
 }
 
 
