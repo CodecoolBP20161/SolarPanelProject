@@ -18,36 +18,39 @@ public class Inverter {
     private long id;
 
     @NotEmpty
-    private String name;
-
-    @NotEmpty
     private String brand;
 
-    private Integer wifiModule;
-
     @NotEmpty
-    private Integer phase;
+    private String name;
 
     @NotNull
     private int price;
 
     @NotEmpty
+    private Integer phase;
+
+    @NotEmpty
     private Double vatt;
+
+    private String description;
+
+    private Integer wifiModule;
 
     @NotNull
     private int capacity;
 
-    private String description;
 
-
-    public Inverter(String name, String brand, Integer wifiModule, Integer phase, int price, Double vatt, int capacity, String description) {
-        this.setName(name);
+    public Inverter(String brand, String name, int price, Integer phase, Double vatt, String description, Integer wifiModule, int capacity) {
         this.setBrand(brand);
-        this.setWifiModule(wifiModule);
-        this.setPhase(phase);
+        this.setName(name);
         this.setPrice(price);
+        this.setPhase(phase);
         this.setVatt(vatt);
-        this.setCapacity(capacity);
         this.setDescription(description);
+        this.setWifiModule(wifiModule);
+        this.setCapacity(capacity);
+    }
+
+    public Inverter() {
     }
 }
