@@ -32,7 +32,7 @@ public class Inverter {
     private int price;
 
     @NotEmpty
-    private Double vatt;
+    private Double watt;
 
     @NotNull
     private int capacity;
