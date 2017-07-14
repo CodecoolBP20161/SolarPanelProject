@@ -40,13 +40,13 @@ public class Inverter {
     private String description;
 
 
-    public Inverter(String name, String brand, Integer wifiModule, Integer phase, int price, Double vatt, int capacity, String description) {
+    public Inverter(String name, String brand, Integer wifiModule, Integer phase, int price, Double watt, int capacity, String description) {
         this.setName(name);
         this.setBrand(brand);
         this.setWifiModule(wifiModule);
         this.setPhase(phase);
         this.setPrice(price);
-        this.setVatt(vatt);
+        this.setVatt(watt);
         this.setCapacity(capacity);
         this.setDescription(description);
     }
