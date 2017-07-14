@@ -29,6 +29,7 @@
 <div class="wrapper">
 
     <!-- HEADER -->
+
     <!--Start Top bar area -->
     <section class="top-bar-area">
         <div class="container">
@@ -48,6 +49,7 @@
         </div>
     </section>
     <!--End Top bar area -->
+
     <!--Start header area-->
     <header class="header-area">
         <div class="container">
@@ -103,8 +105,22 @@
         </div>
     </header>
     <!--End header area-->
+
     <!-- Navbar -->
     <div th:replace="fragments/navbar :: navbar"></div>
+
+    <!-- Intro Section -->
+    <section class="inner-intro  padding bg-img1 overlay-dark light-color">
+        <div class="container">
+            <div class="row title">
+                <h1>Ajánlat Kérése</h1>
+                <div class="page-breadcrumb">
+                    <h2 th:text="${step}+'/4'"></h2>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Intro Section -->
 
 
     <!-- Offer Form-->
@@ -112,17 +128,6 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12 mt-xs-30">
-                <!--Form Header-->
-                <div class="row">
-                    <div class="col-sm-12 mb-30">
-                        <div class="heading-box ">
-                            <h2 th:text=" 'Árajánlat kérése ' + ${step} + '/4'">
-                            </h2>
-                            <span class="b-line l-left line-h"></span>
-                        </div>
-
-                    </div>
-                </div>
                 <div th:switch="${step}">
                     <div th:case="'1'"><div th:replace="fragments/offer_steps :: first"></div></div>
                     <div th:case="'2'"><div th:replace="fragments/offer_steps :: second"></div></div>

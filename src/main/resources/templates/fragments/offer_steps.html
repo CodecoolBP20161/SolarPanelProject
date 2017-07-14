@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
->
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -10,55 +10,143 @@
 
 <!--The first step of the offer creation-->
 <div th:fragment="first">
-    <form method="post" th:action="@{/ajanlat/1}" th:object="${consumption}">
-        <div class="container">
+
+    <div class="container">
+        <form method="post" th:action="@{/ajanlat/1}" th:object="${consumption}">
+            <div class="row">
+                <div class="col-sm-5"></div>
+                <div class="col-sm-4">
+                    <div class="heading-box ">
+                        <h2 class="title">Fogyasztás</h2>
+                        <span class="b-line l-left line-h"></span>
+                        <br>
+                        <br>
+                    </div>
+
+                </div>
+            </div>
+            <!--Hidden warning for phase-->
+            <div class="row">
+                <div class="2"></div>
+                <div class="6">
+                    <div class="alert alert-danger" hidden="hidden" id="alert-phase">
+                        <strong>Figyelem!</strong> Amennyiben 5kWh feletti az éves fogyasztása,
+                        és egyfázisú az elektromos hálózata, hálózatfejlesztésre lesz szüksége a rendszer telepítéséhez!
+                    </div>
+                    </div>
+                <div class="4"></div>
+            </div>
+
             <div class="row">
                 <div class="widget_shop-title">
-                    <h3 class="title">
-                        Adja meg a háztartásának egy havi villanyszámlájának összegét, vagy éves
-                        fogyasztását:</h3>
-                </div>
-                <div class="col-sm-1"></div>
-                <div class="col-sm-5">
-                    <div class="romana_check_out_form">
-                        <div class="row">
-                            <div class="check_form_left common_input">
-                                <div class="select_option_one">
-                                    <select name="userSelect" id="stepOneSelect" th:field="*{metric}">
-                                        <option value="Ft"><strong>Havi villanyszámla:</strong></option>
-                                        <option value="kWh"><strong>Éves fogyasztás:</strong></option>
-                                    </select>
+
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-5">
+                        <div class="romana_check_out_form">
+                            <div class="row">
+                                <div class="check_form_left common_input">
+                                    <div class="select_option_one">
+                                        <select name="userSelect" id="stepOneSelect" th:field="*{metric}">
+                                            <option value="Ft"><strong>Havi villanyszámla:</strong></option>
+                                            <option value="kWh"><strong>Éves fogyasztás:</strong></option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-
-                <div class="col-sm-5">
-                    <div class="form-field mb-30">
-                        <!--The 'onkeyress' event is to determine if the typed characters ASCII code is in our desired interval(numbers)-->
-                        <input class="input-lg form-full" id="sub" type="text" name="form-subject" placeholder="0" value=""
-                               th:field="*{value}" onkeypress='return  event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
-
+                    <div class="col-sm-4">
+                        <div class="form-field mb-30">
+                            <div class="input-group">
+                                <!--The 'onkeypress' event is to determine if the typed characters ASCII code is in our desired interval(numbers)-->
+                                <input class="input-lg form-full" id="sub" type="text" name="form-subject"
+                                       placeholder="0"
+                                       value="" required="required"
+                                       th:field="*{value}"
+                                       onkeypress='return  event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
+                                <span class="input-group-addon" id="metricHeader">FT</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-1"><h2 id="metricHeader">FT</h2></div>
-
-
+                <div class="col-sm-6">
+                    <!--Ezt majd ha be van configolva a security-->
+                    <!--<div th:if ="${#authorization.expression('isAuthenticated()')}">-->
+                    <!--<select name="userSelect" id="companySelect" th:field="*{company}">-->
+                    <!--<option th:each="language : ${T(com.codecool.models.CompanyEnum).values()}"-->
+                    <!--th:value="${language}"-->
+                    <!--th:text="${language}">-->
+                    <!--</option>-->
+                    <!--</select>-->
+                    <!--</div>-->
+                    <!--<div th:unless="${#authorization.expression('isAuthenticated()')}">-->
+                    <!--<span sec:authentication="name"></span>-->
+                    <!--</div>-->
+                </div>
             </div>
+            <br>
+
             <div class="row">
-                <div class="col-sm-11">
-                    <button class="btn-text pull-right" type="submit" id="submit" name="button">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-5">
+                    <h3 class="title">Hány fázisú az elektromos hálózat az ön lakásában?</h3>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="col-sm-2">
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <div class="checkbox">
+                                <input type="radio" id="phase1RadioInput" th:field="*{phase}" name="poll" value="1"
+                                       checked="checked"/>
+                                <label class="">1</label>
+                            </div>
+                        </li>
+                        <li class="list-inline-item">
+                            <div class="checkbox">
+                                <input type="radio" name="poll" id="phase2RadioInput" th:field="*{phase}" value="3"/>
+                                <label class="">3</label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <br>
+            <br>
+
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-4">
+                    <button class="btn-text" type="submit" id="submit" name="button">
                         Következő
                     </button>
                 </div>
+                <div class="col-sm-4"></div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
+</div>
+
+
 </div>
 
 <div th:fragment="second">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-11">
+                <div class="heading-box ">
+                    <h3 class="title"> Mindjárt kész van!
+                        Kérjük válasszon egy inverter típust,
+                        majd válassza ki a napelemek típusát a kártyákra kattintva.
+                        A mező melletti nyilakkal lapozhat a termékek között.
+                    </h3>
+                    <span class="b-line l-left line-h"></span>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
     <!-- Testimonial -->
     <section class="testimonial-section padding ptb-xs-60 light-color parallax overlay-dark ">
         <div class="container">
@@ -78,17 +166,15 @@
                 <div class="carousel-slider nf-carousel-theme arrow_theme owl-carousel" data-pagination="false"
                      data-items="3" data-autoplay="false" data-loop="false" data-margin="-20" data-center="false"
                      data-navigation="true" data-desktopsmall="3" data-tablet="3" data-mobile="1">
-                    <div th:each="i : ${#numbers.sequence(1,30)}">
+
+                    <!--Ezt kell majd lecserélni __________________________________________________________-->
+                    <div th:each="i : ${#numbers.sequence(1,5)}">
                         <div class="carousel-item col-sm-4">
-                            <div class="testimonial-block cyan-background inverter" th:data="${i}">
-                                <h3 class="testimonial-author" th:text="'Inverter '+${i}"></h3>
+                            <div class="testimonial-block cyan-background panel" th:data="${i}">
+                                <h3 class="testimonial-author">Inverter</h3>
                                 <hr class="small-divider">
                                 <p>
-                                    Inverter leírása néhány mondatban,
-                                    Inverter leírása néhány mondatban,
-                                    Inverter leírása néhány mondatban,
-                                    Inverter leírása néhány mondatban,
-                                    Inverter leírása néhány mondatban.
+                                    Inverter leírása, mi lesz majd ide am?
                                 </p>
 
                                 <h4 class="testimonial-price">Egységár: 150.000 Ft</h4>
@@ -96,7 +182,26 @@
                             </div>
                         </div>
                     </div>
+                    <!--_______________________________________________________________________-->
+                    <!--Erre.-->
+                    <!--<div th:each="inverter : ${inverterList}">-->
+                    <!--<div class="carousel-item col-sm-4">-->
+                    <!--<div class="testimonial-block cyan-background panel" th:data="${inverter.id}">-->
+                    <!--<h3 class="testimonial-author" th:text="${inverter.name}"></h3>-->
+                    <!--<hr class="small-divider">-->
+                    <!--<p>-->
+                    <!--Ide majd kell infót gyűjteni valahonnan.-->
+                    <!--</p>-->
+
+                    <!--<h4 class="testimonial-price" th:text="'Egységár: '+${inverter.price}+'Ft'"></h4>-->
+                    <!--TODO: Ide kellene a quantity már kiszámolva, lehet field kellene belőle-->
+                    <!--<h4 class="testimonial-price">Szükséges mennyiség: 1 db</h4>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+
                 </div>
+
                 <br>
                 <br>
                 <!--Solar Panel Carousel Header-->
@@ -112,38 +217,36 @@
                 <div class="carousel-slider nf-carousel-theme arrow_theme owl-carousel" data-pagination="false"
                      data-items="3" data-autoplay="false" data-loop="false" data-margin="-20" data-center="false"
                      data-navigation="true" data-desktopsmall="3" data-tablet="3" data-mobile="1">
-                    <div th:each="i : ${#numbers.sequence(1,5)}">
-                        <div class="carousel-item col-sm-4">
-                            <div class="testimonial-block cyan-background panel" th:data="${i}">
-                                <h3 class="testimonial-author" th:text="'Napelem '+${i}"></h3>
-                                <hr class="small-divider">
-                                <p>
-                                    Napelem leírása néhány mondatban,
-                                    Napelem leírása néhány mondatban,
-                                    Napelem leírása néhány mondatban,
-                                    Napelem leírása néhány mondatban,
-                                    Napelem leírása néhány mondatban,
-                                    Napelem leírása néhány mondatban.
-                                </p>
 
-                                <h4 class="testimonial-price">Egységár: 150.000 Ft</h4>
-                                <h4 class="testimonial-price">Szükséges mennyiség: 10db</h4>
+                    <div th:each="panel:${solarPanelList}">
+                        <div class="carousel-item col-sm-4">
+                            <div class="testimonial-block cyan-background inverter" th:data="${panel.id}">
+                                <h3 class="testimonial-author" th:text="${panel.name}"></h3>
+                                <hr class="small-divider">
+                                <!--TODO: th:text="${panel.marketingText}" valami ilyesmit kellene iderakni-->
+                                <p>Ide mit akarunk írni?</p>
+                                <h4 class="testimonial-price" th:text="'Egységár: '+${panel.price}+'Ft'"></h4>
+                                <!--TODO: Ide kellene a quantity már kiszámolva, lehet field kellene belőle-->
+                                <!--<h4 class="testimonial-price" th:text="${panel.quantityNeeded}"></h4>-->
                             </div>
                         </div>
                     </div>
                 </div>
+                <br>
+                <br>
                 <div class="row">
                     <form method="post" th:action="@{/ajanlat/2}" th:object="${deviceForm}">
                         <div class="col-sm-11">
-                            <input   type="hidden" id="inverterInput"  defaultValue="0"
-                                   th:field="*{inverterId}" >
-                            <input   type="hidden" id="panelInput" value="0"
-                                     th:field="*{panelId}" >
-                            <button disabled="disabled" class="btn-text pull-right" type="submit" id="submitPanelAndInverter" name="button">
+                            <input type="hidden" id="inverterInput" defaultValue="0"
+                                   th:field="*{inverterId}">
+                            <input type="hidden" id="panelInput" value="0"
+                                   th:field="*{panelId}">
+                            <button disabled="disabled" class="btn-text pull-right" type="submit"
+                                    id="submitPanelAndInverter" name="button">
                                 Következő
                             </button>
                         </div>
-                        </form>
+                    </form>
                 </div>
             </div>
         </div>
