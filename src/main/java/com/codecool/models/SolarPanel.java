@@ -26,14 +26,18 @@ public class SolarPanel {
     private Integer price;
 
     @NotNull
+    private Double vat;
+
+    @NotNull
     private Integer capacity;
 
     private String description;
 
-    public SolarPanel(String name, String optimalizer, Integer price, Integer capacity, String description) {
+    public SolarPanel(String name, String optimalizer, Integer price, Double vat, Integer capacity, String description) {
         this.setName(name);
         this.setOptimalizer(optimalizer);
         this.setPrice(price);
+        this.setVat(vat);
         this.setCapacity(capacity);
         this.setDescription(description);
     }
