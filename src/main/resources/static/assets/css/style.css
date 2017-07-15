@@ -7167,3 +7167,13 @@ ul.tags li {
 	font-famiyl: 'FontAwesome';
 }
 
+.col-sm-5.no-pad{
+    padding-left: 0;
+}
+.col-sm-2.pad-left{
+    padding-left: 1%;
+}
+.center{
+    text-align: center;
+}
+
