@@ -22,7 +22,38 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
+        <openhtml.version>0.0.1-RC11</openhtml.version>
     </properties>
+
+    <!--OPENHTMLTOPDF-->
+    <dependency>
+        <!-- ALWAYS required. -->
+        <groupId>com.openhtmltopdf</groupId>
+        <artifactId>openhtmltopdf-core</artifactId>
+        <version>${openhtml.version}</version>
+    </dependency>
+
+    <dependency>
+        <!-- Required for PDF output. -->
+        <groupId>com.openhtmltopdf</groupId>
+        <artifactId>openhtmltopdf-pdfbox</artifactId>
+        <version>${openhtml.version}</version>
+    </dependency>
+
+    <dependency>
+        <!-- Optional, leave out if you do not need HTML5 parsing support. -->
+        <groupId>com.openhtmltopdf</groupId>
+        <artifactId>openhtmltopdf-jsoup-dom-converter</artifactId>
+        <version>${openhtml.version}</version>
+    </dependency>
+
+    <dependency>
+        <!-- Optional, leave out if you do not need logging via slf4j. -->
+        <groupId>com.openhtmltopdf</groupId>
+        <artifactId>openhtmltopdf-slf4j</artifactId>
+        <version>${openhtml.version}</version>
+    </dependency>
+    <!--End OPENHTMLTOPDF-->
 
     <dependencies>
         <!-- DataBase -->
