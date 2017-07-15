@@ -1,8 +1,10 @@
 package com.codecool.controller;
 
+import com.codecool.models.Inverter;
 import com.codecool.models.SolarPanel;
 import com.codecool.models.forms.ConsumptionForm;
 import com.codecool.models.forms.PanelAndInverterForm;
+import com.codecool.repositories.InverterRepository;
 import com.codecool.repositories.SolarPanelRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +20,15 @@ import java.util.List;
 @Controller
 public class MainController {
 
-    @Autowired
     private SolarPanelRepository solarPanelRepository;
+    private InverterRepository inverterRepository;
+
+    @Autowired
+    public MainController(InverterRepository inverterRepository, SolarPanelRepository solarPanelRepository){
+        this.solarPanelRepository = solarPanelRepository;
+        this.inverterRepository = inverterRepository;
+    }
+
 
 
     @GetMapping("/")
@@ -49,8 +58,10 @@ public class MainController {
     @GetMapping("/ajanlat/2")
     public String getOfferStep2(Model model){
         List<SolarPanel> solarPanelList = solarPanelRepository.findAll();
+        List<Inverter> inverterList = inverterRepository.findAll();
         model.addAttribute("deviceForm", new PanelAndInverterForm());
         model.addAttribute("solarPanelList", solarPanelList);
+        model.addAttribute("inverterList", inverterList);
         model.addAttribute("step", '2');
         return "offer";
     }

@@ -33,7 +33,7 @@
                         <strong>Figyelem!</strong> Amennyiben 5kWh feletti az éves fogyasztása,
                         és egyfázisú az elektromos hálózata, hálózatfejlesztésre lesz szüksége a rendszer telepítéséhez!
                     </div>
-                    </div>
+                </div>
                 <div class="4"></div>
             </div>
 
@@ -167,39 +167,22 @@
                      data-items="3" data-autoplay="false" data-loop="false" data-margin="-20" data-center="false"
                      data-navigation="true" data-desktopsmall="3" data-tablet="3" data-mobile="1">
 
-                    <!--Ezt kell majd lecserélni __________________________________________________________-->
-                    <div th:each="i : ${#numbers.sequence(1,5)}">
+                    <!--Listing given Inverters-->
+                    <div th:each="inverter : ${inverterList}">
                         <div class="carousel-item col-sm-4">
-                            <div class="testimonial-block cyan-background panel" th:data="${i}">
-                                <h3 class="testimonial-author">Inverter</h3>
+                            <div class="testimonial-block cyan-background panel" th:data="${inverter.id}">
+                                <h3 class="testimonial-author" th:text="${inverter.name}"></h3>
                                 <hr class="small-divider">
                                 <p>
-                                    Inverter leírása, mi lesz majd ide am?
+                                    Ide nem tudom mi kell majd.
                                 </p>
 
-                                <h4 class="testimonial-price">Egységár: 150.000 Ft</h4>
-                                <h4 class="testimonial-price">Szükséges mennyiség: 10db</h4>
+                                <h4 class="testimonial-price" th:text="'Egységár: '+${inverter.price}+'Ft'"></h4>
+                                <!--TODO: Ide kellene a quantity már kiszámolva, lehet field kellene belőle-->
+                                <h4 class="testimonial-price">Szükséges mennyiség: 1 db</h4>
                             </div>
                         </div>
                     </div>
-                    <!--_______________________________________________________________________-->
-                    <!--Erre.-->
-                    <!--<div th:each="inverter : ${inverterList}">-->
-                    <!--<div class="carousel-item col-sm-4">-->
-                    <!--<div class="testimonial-block cyan-background panel" th:data="${inverter.id}">-->
-                    <!--<h3 class="testimonial-author" th:text="${inverter.name}"></h3>-->
-                    <!--<hr class="small-divider">-->
-                    <!--<p>-->
-                    <!--Ide majd kell infót gyűjteni valahonnan.-->
-                    <!--</p>-->
-
-                    <!--<h4 class="testimonial-price" th:text="'Egységár: '+${inverter.price}+'Ft'"></h4>-->
-                    <!--TODO: Ide kellene a quantity már kiszámolva, lehet field kellene belőle-->
-                    <!--<h4 class="testimonial-price">Szükséges mennyiség: 1 db</h4>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--</div>-->
-
                 </div>
 
                 <br>
@@ -218,6 +201,7 @@
                      data-items="3" data-autoplay="false" data-loop="false" data-margin="-20" data-center="false"
                      data-navigation="true" data-desktopsmall="3" data-tablet="3" data-mobile="1">
 
+                    <!--Listing given Solar Panels-->
                     <div th:each="panel:${solarPanelList}">
                         <div class="carousel-item col-sm-4">
                             <div class="testimonial-block cyan-background inverter" th:data="${panel.id}">
