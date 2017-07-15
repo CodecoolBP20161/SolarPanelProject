@@ -21,12 +21,13 @@ public class DataLoader {
     private SolarPanelRepository solarPanelRep;
 
     @Autowired
-    public DataLoader (InverterRepository inverterRep, SolarPanelRepository solarPanelRep){
+    public DataLoader(InverterRepository inverterRep, SolarPanelRepository solarPanelRep) {
         this.solarPanelRep = solarPanelRep;
         this.inverterRep = inverterRep;
     }
+
     @PostConstruct
-    public void loadData(){
+    public void loadData() {
         loadSolarPanels();
         loadInverters();
     }
@@ -45,7 +46,6 @@ public class DataLoader {
         solarPanelList.add(new SolarPanel("AXIworldplus SE 270W", "nincs", 55000, 1.20, 270, ""));
         solarPanelList.add(new SolarPanel("265W-os polikristályos napelem", "nincs", 40000, 1.20, 265, ""));
 
-
         for (SolarPanel item : solarPanelList) {
             solarPanelRep.save(item);
         }
@@ -54,7 +54,7 @@ public class DataLoader {
     private List<Inverter> loadSolaredgeInverters() {
         List<Inverter> solaredgeInverterList = new ArrayList<>();
 
-        solaredgeInverterList.add(new Inverter("Solaredge", "Solaredge SE2200-ER-01+wifi", 230000, 1, 1.27, "	12 év garancia", 0, 2200));
+        solaredgeInverterList.add(new Inverter("Solaredge", "Solaredge SE2200-ER-01+wifi", 230000, 1, 1.27, "12 év garancia", 0, 2200));
         solaredgeInverterList.add(new Inverter("Solaredge", "Solaredge SE3000-ER-01", 255000, 1, 1.27, "12 év garancia", 0, 3000));
         solaredgeInverterList.add(new Inverter("Solaredge", "Solaredge SE4000-ER-01", 300000, 1, 1.27, "12 év garancia", 0, 4000));
         solaredgeInverterList.add(new Inverter("Solaredge", "Solaredge SE5000-ER-01", 320000, 1, 1.27, "12 év garancia", 0, 5000));
@@ -70,8 +70,58 @@ public class DataLoader {
         return solaredgeInverterList;
     }
 
-    private void loadInverters(){
+
+    private List<Inverter> loadGrowattInverters() {
+        List<Inverter> growattInverterList = new ArrayList<>();
+
+        growattInverterList.add(new Inverter("Growatt", "Growatt 2000S inverter", 150000, 1, 1.27, "a", 15000, 2000));
+        growattInverterList.add(new Inverter("Growatt", "Growatt 3000S inverter", 185000, 1, 1.27, "a", 15000, 3000));
+        growattInverterList.add(new Inverter("Growatt", "Growatt 4200MTL-S inverter", 245000, 1, 1.27, "a", 15000, 4200));
+        growattInverterList.add(new Inverter("Growatt", "Growatt 5000MTL-S inverter", 255000, 1, 1.27, "a", 15000, 5000));
+        growattInverterList.add(new Inverter("Growatt", "Growatt 4000UE inverter", 300000, 3, 1.27, "a", 15000, 4000));
+        growattInverterList.add(new Inverter("Growatt", "Growatt 5000UE inverter", 320000, 3, 1.27, "a", 15000, 5000));
+        growattInverterList.add(new Inverter("Growatt", "Growatt 6000UE inverter", 340000, 3, 1.27, "a", 15000, 6000));
+        growattInverterList.add(new Inverter("Growatt", "Growatt 7000UE inverter", 390000, 3, 1.27, "a", 15000, 7000));
+        growattInverterList.add(new Inverter("Growatt", "Growatt 8000UE inverter", 420000, 3, 1.27, "a", 15000, 8000));
+        growattInverterList.add(new Inverter("Growatt", "Growatt 9000UE inverter", 440000, 3, 1.27, "a", 15000, 9000));
+        growattInverterList.add(new Inverter("Growatt", "Growatt 10000UE inverter", 450000, 3, 1.27, "a", 15000, 10000));
+        growattInverterList.add(new Inverter("Growatt", "Growatt 12000UE inverter", 470000, 3, 1.27, "a", 15000, 12000));
+        growattInverterList.add(new Inverter("Growatt", "Growatt 18000UE inverter", 620000, 3, 1.27, "a", 15000, 18000));
+        growattInverterList.add(new Inverter("Growatt", "Growatt 20000UE inverter", 650000, 3, 1.27, "a", 15000, 20000));
+
+        return growattInverterList;
+    }
+
+    private List<Inverter> loadFroniusInverters() {
+        List<Inverter> froniusInverterList = new ArrayList<>();
+        froniusInverterList.add(new Inverter("Fronius", "GALVO-2.0-1",253000, 1, 1.2, "a", 0, 2000));
+        froniusInverterList.add(new Inverter("Fronius", "GALVO-3.0-1", 265000, 1, 1.2, "a", 0, 3000));
+        froniusInverterList.add(new Inverter("Fronius", "PRIMO-4.0-1", 291000, 1, 1.2, "a", 0, 4000));
+        froniusInverterList.add(new Inverter("Fronius", "PRIMO-4.6-1", 300000, 1, 1.2, "a", 0, 4600));
+        froniusInverterList.add(new Inverter("Fronius", "Symo 4.5-3M WEB", 340000, 3, 1.2, "a", 0, 4500));
+        froniusInverterList.add(new Inverter("Fronius", "SYMO-5.0-3-M", 350000, 3, 1.2, "a", 0, 5000));
+        froniusInverterList.add(new Inverter("Fronius", "SYMO-6.0-3-M", 370000, 3, 1.2, "a", 0, 6000));
+        froniusInverterList.add(new Inverter("Fronius", "SYMO-7.0-3-M", 450000, 3, 1.2, "a",0, 7000));
+        froniusInverterList.add(new Inverter("Fronius", "SYMO-8.2-3-M", 484000, 3, 1.2, "a", 0, 8200));
+        froniusInverterList.add(new Inverter("Fronius", "SYMO-10.0-3-M", 540000, 3, 1.2, "a", 0, 10000));
+        froniusInverterList.add(new Inverter("Fronius", "SYMO-12.5-3-M", 600000, 3, 1.2, "a", 0, 12500));
+        froniusInverterList.add(new Inverter("Fronius", "SYMO-15.0-3-M", 680000, 3, 1.2, "a", 0, 15000));
+        froniusInverterList.add(new Inverter("Fronius", "SYMO-17.5-3-M", 750000, 3, 1.2, "a", 0, 17500));
+        froniusInverterList.add(new Inverter("Fronius", "SYMO-20.0-3-M", 750000, 3, 1.2, "a", 0, 20000));
+
+        return froniusInverterList;
+    }
+
+    private void loadInverters() {
         for (Inverter item : loadSolaredgeInverters()) {
+            inverterRep.save(item);
+        }
+
+        for (Inverter item : loadGrowattInverters()) {
+            inverterRep.save(item);
+        }
+
+        for (Inverter item : loadFroniusInverters()) {
             inverterRep.save(item);
         }
     }
