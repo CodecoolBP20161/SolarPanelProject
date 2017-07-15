@@ -26,21 +26,22 @@
                 </div>
             </div>
             <!--Hidden warning for phase-->
+            <div class="container">
             <div class="row">
-                <div class="2"></div>
-                <div class="6">
+                <div class="col-sm-12 center">
                     <div class="alert alert-danger" hidden="hidden" id="alert-phase">
                         <strong>Figyelem!</strong> Amennyiben 5kWh feletti az éves fogyasztása,
                         és egyfázisú az elektromos hálózata, hálózatfejlesztésre lesz szüksége a rendszer telepítéséhez!
                     </div>
                 </div>
-                <div class="4"></div>
+
+            </div>
             </div>
 
             <div class="row">
                 <div class="widget_shop-title">
 
-                    <div class="col-sm-1"></div>
+                    <div class="col-sm-2"></div>
                     <div class="col-sm-5">
                         <div class="romana_check_out_form">
                             <div class="row">
@@ -69,30 +70,29 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6">
-                    <!--Ezt majd ha be van configolva a security-->
-                    <!--<div th:if ="${#authorization.expression('isAuthenticated()')}">-->
-                    <!--<select name="userSelect" id="companySelect" th:field="*{company}">-->
-                    <!--<option th:each="language : ${T(com.codecool.models.CompanyEnum).values()}"-->
-                    <!--th:value="${language}"-->
-                    <!--th:text="${language}">-->
-                    <!--</option>-->
-                    <!--</select>-->
-                    <!--</div>-->
-                    <!--<div th:unless="${#authorization.expression('isAuthenticated()')}">-->
-                    <!--<span sec:authentication="name"></span>-->
-                    <!--</div>-->
-                </div>
+                <!--<div class="col-sm-6">-->
+                    <!--&lt;!&ndash;Ezt majd ha be van configolva a security&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div th:if ="${#authorization.expression('isAuthenticated()')}">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<select name="userSelect" id="companySelect" th:field="*{company}">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<option th:each="language : ${T(com.codecool.models.CompanyEnum).values()}"&ndash;&gt;-->
+                    <!--&lt;!&ndash;th:value="${language}"&ndash;&gt;-->
+                    <!--&lt;!&ndash;th:text="${language}">&ndash;&gt;-->
+                    <!--&lt;!&ndash;</option>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</select>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div th:unless="${#authorization.expression('isAuthenticated()')}">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<span sec:authentication="name"></span>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--</div>-->
             </div>
-            <br>
 
             <div class="row">
-                <div class="col-sm-1"></div>
-                <div class="col-sm-5">
-                    <h3 class="title">Hány fázisú az elektromos hálózat az ön lakásában?</h3>
+                <div class="col-sm-2"></div>
+                <div class="col-sm-5 no-pad">
+                    <h4 class="title">Hány fázisú az elektromos hálózat az ön lakásában?</h4>
                 </div>
                 <div class="col-sm-1"></div>
-                <div class="col-sm-2">
+                <div class="col-sm-2 pad-left">
                     <ul class="list-inline">
                         <li class="list-inline-item">
                             <div class="checkbox">
@@ -114,13 +114,13 @@
             <br>
 
             <div class="row">
-                <div class="col-sm-1"></div>
-                <div class="col-sm-4">
+                <!--<div class="col-sm-1"></div>-->
+                <div class="col-sm-12 center">
                     <button class="btn-text" type="submit" id="submit" name="button">
                         Következő
                     </button>
                 </div>
-                <div class="col-sm-4"></div>
+                <!--<div class="col-sm-4"></div>-->
             </div>
         </form>
     </div>
@@ -130,31 +130,37 @@
 </div>
 
 <div th:fragment="second">
+
     <div class="container">
         <div class="row">
-            <div class="col-sm-1"></div>
-            <div class="col-sm-11">
+            <div class="col-sm-12 center">
                 <div class="heading-box ">
-                    <h3 class="title"> Mindjárt kész van!
+                    <h2 class="title">Inverter és Napelem</h2>
+                    <span class="b-line l-center line-h"></span>
+                    <br>
+                    <br>
+                </div>
+                <div class="heading-box ">
+                    <h4 class="title"> Mindjárt kész van!
                         Kérjük válasszon egy inverter típust,
                         majd válassza ki a napelemek típusát a kártyákra kattintva.
                         A mező melletti nyilakkal lapozhat a termékek között.
-                    </h3>
-                    <span class="b-line l-left line-h"></span>
+                    </h4>
+                    <br>
                 </div>
-
             </div>
-
         </div>
     </div>
-    <!-- Testimonial -->
-    <section class="testimonial-section padding ptb-xs-60 light-color parallax overlay-dark ">
+
+    <!-- Inverter és Panel választó -->
+    <section class="testimonial-section ptb-xs-60 light-color parallax overlay-dark ">
         <div class="container">
 
             <!--Inverter Carousel Header-->
             <div class="row text-center pb-30">
                 <div class="col-sm-12">
-                    <div class="heading-box ">
+                    <div class="heading-box">
+                        <br>
                         <h2><span>Inverterek</span></h2>
                         <span class="b-line line-h"></span>
                     </div>
@@ -218,26 +224,76 @@
                 </div>
                 <br>
                 <br>
-                <div class="row">
-                    <form method="post" th:action="@{/ajanlat/2}" th:object="${deviceForm}">
-                        <div class="col-sm-11">
-                            <input type="hidden" id="inverterInput" defaultValue="0"
-                                   th:field="*{inverterId}">
-                            <input type="hidden" id="panelInput" value="0"
-                                   th:field="*{panelId}">
-                            <button disabled="disabled" class="btn-text pull-right" type="submit"
-                                    id="submitPanelAndInverter" name="button">
-                                Következő
-                            </button>
-                        </div>
-                    </form>
-                </div>
+
             </div>
         </div>
     </section>
+    <br>
+    <div class="container">
+        <div class="row">
+            <form method="post" th:action="@{/ajanlat/2}" th:object="${deviceForm}">
+                <input type="hidden" id="inverterInput" defaultValue="0"
+                       th:field="*{inverterId}">
+                <input type="hidden" id="panelInput" value="0"
+                       th:field="*{panelId}">
+                <div class="col-sm-12 center">
+                    <button disabled="disabled" class="btn-text" type="submit"
+                            id="submitPanelAndInverter" name="button">
+                        Következő
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
 </div>
 <div th:fragment="third">
-    Third
+    <div class="container">
+        <form method="post" th:action="@{/ajanlat/3}" th:object="${email}">
+
+            <div class="row">
+                <div class="col-sm-12 center">
+                    <div class="heading-box ">
+                        <h2 class="title">Mindjárt kész!</h2>
+                        <span class="b-line l-center line-h"></span>
+                        <br>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 center">
+                    <h4 >Ha szeretné,hogy felvegyük önnel a kapcsolatot,
+                        kérjük adja meg E-mail címét!</h4>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="widget_shop-title">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-3 center">
+                        <h2 >Email cím:</h2>
+                    </div>
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-4">
+                        <div class="form-field mb-30">
+                                    <input class="input-lg form-full" id="email" type="text" name="form-email" placeholder="Email" th:field="*{email}" >
+                            </div>
+                        </div>
+                </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-12 center">
+                    <button class="btn-text" type="submit" id="submitEmail" name="button">
+                       Árajánlat kérése!
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 </div>
 <div th:fragment="fourth">
     Fourth
