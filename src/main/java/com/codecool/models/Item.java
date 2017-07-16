@@ -10,10 +10,17 @@ import java.math.BigDecimal;
 public abstract class Item {
 
     @NotEmpty
-    protected String name;
+    String name;
 
-    protected String description;
+    String description;
 
     @NotNull
-    protected BigDecimal price;
+    BigDecimal price;
+
+    public Item(String name, String description, BigDecimal price){
+        this.setName(name);
+        this.setDescription(description);
+        this.setPrice(price);
+    }
+    public Item(){}
 }
