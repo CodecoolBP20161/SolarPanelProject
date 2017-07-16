@@ -15,7 +15,14 @@ public class Offer {
     private ArrayList<LineItem> lineItems;
     private boolean isNetworkUpgradeNeeded;
 
-    public Offer( double taxRate){
+    public Offer(){
+        id = idCount++;
+        lineItems = new ArrayList<>();
+        isNetworkUpgradeNeeded = false;
+    }
+
+    public Offer(double taxRate){
+        this.taxRate = taxRate;
         id = idCount++;
         lineItems = new ArrayList<>();
         isNetworkUpgradeNeeded = false;
