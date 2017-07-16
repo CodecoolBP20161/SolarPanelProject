@@ -35,12 +35,10 @@ public class Inverter extends Item {
 
 
     public Inverter(String brand, String name, Integer price, Integer phase, Double vatt, String description, Integer wifiModule, Integer capacity) {
+        super(name, description, BigDecimal.valueOf(price));
         this.setBrand(brand);
-        this.setName(name);
-        this.setPrice(BigDecimal.valueOf(price));
         this.setPhase(phase);
         this.setVatt(vatt);
-        this.setDescription(description);
         this.setWifiModule(wifiModule);
         this.setCapacity(capacity);
     }

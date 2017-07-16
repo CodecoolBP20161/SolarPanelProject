@@ -26,14 +26,11 @@ public class SolarPanel extends Item{
     private Integer capacity;
 
     public SolarPanel(String name, String optimalizer, Integer price, Double vat, Integer capacity, String description) {
-        this.setName(name);
+        super(name, description, BigDecimal.valueOf(price));
         this.setOptimalizer(optimalizer);
-        this.setPrice(BigDecimal.valueOf(price));
         this.setVat(vat);
         this.setCapacity(capacity);
-        this.setDescription(description);
     }
 
-    public SolarPanel() {
-    }
+    public SolarPanel() {}
 }
