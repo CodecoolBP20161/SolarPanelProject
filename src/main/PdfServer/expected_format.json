@@ -1,0 +1,78 @@
+{
+  "id": 123321,
+
+  "items" : [
+    {
+      "name": "Termék1",
+      "price": 10000,
+      "quantity": 10,
+      "subtotal": 100000,
+      "description": "Legjobb termék"
+    },
+    {
+      "name": "Termék3",
+      "price": 10000,
+      "quantity": 10,
+      "subtotal": 100000,
+      "description": "Legjobb termék"
+    },
+    {
+      "name": "Termék4",
+      "price": 10000,
+      "quantity": 10,
+      "subtotal": 100000,
+      "description": "Legjobb termék"
+    },
+    {
+      "name": "Termék5",
+      "price": 10000,
+      "quantity": 10,
+      "subtotal": 100000,
+      "description": "Legjobb termék"
+    }
+  ],
+
+  "services" : [
+    {
+      "name": "Service1",
+      "price": 10000,
+      "quantity": 10,
+      "subtotal": 100000,
+      "description": "Legjobb termék"
+    },
+    {
+      "name": "Service2",
+      "price": 10000,
+      "quantity": 10,
+      "subtotal": 100000,
+      "description": "Legjobb termék"
+    },
+    {
+      "name": "Service3",
+      "price": 10000,
+      "quantity": 10,
+      "subtotal": 100000,
+      "description": "Legjobb termék"
+    },
+    {
+      "name": "Service4",
+      "price": 10000,
+      "quantity": 10,
+      "subtotal": 100000,
+      "description": "Legjobb termék"
+    },
+    {
+      "name": "Service5",
+      "price": 10000,
+      "quantity": 10,
+      "subtotal": 100000,
+      "description": "Legjobb termék"
+    }
+
+  ],
+
+  "tax_rate": 1.27,
+
+  "total": 9999999
+
+}
