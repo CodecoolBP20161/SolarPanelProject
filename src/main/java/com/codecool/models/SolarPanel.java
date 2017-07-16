@@ -24,6 +24,8 @@ public class SolarPanel extends Item{
     @NotNull
     private Integer capacity;
 
+    public SolarPanel(){}
+
     public SolarPanel(String name, String optimalizer, Integer price, Double vat, Integer capacity, String description) {
         super(name, description, BigDecimal.valueOf(price));
         this.setOptimalizer(optimalizer);
