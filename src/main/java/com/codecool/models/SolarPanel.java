@@ -2,7 +2,6 @@ package com.codecool.models;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -31,6 +30,4 @@ public class SolarPanel extends Item{
         this.setVat(vat);
         this.setCapacity(capacity);
     }
-
-    public SolarPanel() {}
 }
