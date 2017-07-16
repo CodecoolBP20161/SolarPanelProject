@@ -31,7 +31,7 @@ public class MainController {
     private final String DEVICE = "deviceForm";
     private final String EMAIL = "email";
     private final String STEP = "step";
-    private final String offer = "offer";
+    private final String OFFER = "offer";
 
     @Autowired
     public MainController(InverterRepository inverterRepository, SolarPanelRepository solarPanelRepository){
