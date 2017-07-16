@@ -8,10 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 @Entity
 @Data
-public class Inverter {
+public class Inverter extends Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,19 +21,12 @@ public class Inverter {
     @NotEmpty
     private String brand;
 
-    @NotEmpty
-    private String name;
-
-    @NotNull
-    private Integer price;
 
     @NotNull
     private Integer phase;
 
     @NotNull
     private Double vatt;
-
-    private String description;
 
     private Integer wifiModule;
 
@@ -43,7 +37,7 @@ public class Inverter {
     public Inverter(String brand, String name, Integer price, Integer phase, Double vatt, String description, Integer wifiModule, Integer capacity) {
         this.setBrand(brand);
         this.setName(name);
-        this.setPrice(price);
+        this.setPrice(BigDecimal.valueOf(price));
         this.setPhase(phase);
         this.setVatt(vatt);
         this.setDescription(description);
