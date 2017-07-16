@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link type="text/css" href="./assets/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-9">
+            <h2 class="text-center">Cég név árajánlata</h2>
+        </div>
+
+        <div class="col-sm-1"></div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+    </div>
+
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-9">
+            <div class="row">
+                <p>Ajánlatszám: 0213423</p>
+                <table class="table table-sm">
+                    <thead>
+                    <td colspan="5" class="text-center"><strong>Termékek</strong></td>
+                    </thead>
+                    <thead>
+                    <tr>
+                        <th>Név</th>
+                        <th>Egységár</th>
+                        <th>Mennyiség</th>
+                        <th>Összesen (Ft)</th>
+                        <th>Megjegyzés</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in offer.items %}
+                    <tr>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.price }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.subtotal }}</td>
+                        <td>{{ item.description }}</td>
+                    </tr>
+                    {% endfor %}
+
+                    </tbody>
+                    <thead>
+                    <td colspan="5" class="text-center"><strong>Egyéb költségek</strong></td>
+                    </thead>
+                    <tbody>
+                    {% for service in offer.services %}
+                    <tr>
+                        <td>{{ service.name }}</td>
+                        <td>{{ service.price }}</td>
+                        <td>{{ service.quantity }}</td>
+                        <td>{{ service.subtotal }}</td>
+                        <td>{{ service.description }}</td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan="3" class="text-right"><strong>Nettó részösszeg:</strong></td>
+                        <td colspan="2">{{ offer.itemTotal }} Ft</td>
+
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="text-right"><strong>Bruttó részösszeg:</strong></td>
+                        <td>{{ offer.itemTotal * offer.taxRate }} Ft</td>
+                        <td>{{ offer.taxRate}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-1"></div>
+
+
+</div>
+</div>
+</body>
+</html>
