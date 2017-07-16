@@ -3,9 +3,11 @@ package com.codecool.models;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
+@MappedSuperclass
 @Data
 public abstract class Item {
 
@@ -22,5 +24,6 @@ public abstract class Item {
         this.setDescription(description);
         this.setPrice(price);
     }
+
     public Item(){}
 }
