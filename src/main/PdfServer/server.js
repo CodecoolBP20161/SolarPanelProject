@@ -13,7 +13,7 @@ var routes = require('./routes');
 var app = express();
 
 //Nunjucks is a product from Mozilla and we are using it as a template engine.
-exports.env = nunjucks.configure('public', {
+exports.env = nunjucks.configure('templates', {
     autoescape: true,
     express: app
 });
@@ -22,6 +22,8 @@ var port = process.env.port || 1350;
 app.use(express.static(__dirname));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use('/static', express.static('static'));
+
 
 
 // Add headers for CORS
@@ -44,17 +46,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.get('/api/printpdf1', routes.printpdf1);
-
-app.get('/api/printpdf2', function (req, res) {
-
-    console.log('request made.... print 2 ');
-    pdf.create().toBuffer(function(err, buffer){
-        console.log('This is a buffer:', Buffer.isBuffer(buffer));
-        res.download(buffer);
-    });
-
-});
+app.post('/api/printpdf1', routes.printpdf1);
 
 app.listen(port);
 console.log('node server for html-pdf is running on port ' + port);

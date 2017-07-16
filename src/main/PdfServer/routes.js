@@ -1,34 +1,35 @@
 var pdf = require('html-pdf');
 var appmodule = require('./server');
-var report_options =
-{
-    "format": "Letter",
-    "border": {
-        "top": "0.5in",
-        "right": "1in",
-        "bottom": "0in",
-        "left": "1in"
-    },
-    "footer": {
-        "contents": '<span style="color: #444;">Page {{page}}</span>/<span>{{pages}}</span>'
-    }
-};
+var nunjucks = require("nunjucks");
+var path = require("path");
+var templateRoute = path.resolve(__dirname, 'templates/offer_template.html');
 
-exports.printpdf1 = function (req, res) {
-    var today = new Date();
-    var obj = {
-        date: today,
-        data:{
-            ticketnum : 12121212,
-            dateissued: '2014-04-02',
-            officername: 'john doe',
-            notes:'lorem epsum'
-        }
+config = {
+    // Rendering options
+    "base": "localhost:1350/static" // Base path that's used to load files (images, css, js) when they aren't referenced using a host
     };
 
-    var renderedHtml =  appmodule.env.render('nunjucks.tmpl.html',obj);
-    pdf.create(renderedHtml,report_options).toStream(function(err, stream){
-        console.log(stream);
-        stream.pipe(res);
+exports.printpdf1 = function (req, res) {
+    var offer = req.body;
+    console.log(offer.items);
+
+    var renderedHtml =  appmodule.env.render(templateRoute, offer);
+    // This one automatically downloads the pdf
+    // pdf.create(renderedHtml).toBuffer(function(err, buffer){
+    //     console.log('This is a buffer:', Buffer.isBuffer(buffer));
+    //     res.download(buffer);
+    //
+    // });
+
+    // This one returns the pdf in your browser
+    // pdf.create(renderedHtml).toStream(function(err, stream){
+    //     console.log(stream);
+    //     stream.pipe(res);
+    // });
+
+    // This one saves it into a file
+    pdf.create(renderedHtml, config).toFile('./offer_' + offer.id + '.pdf', function(err, res) {
+        if (err) return console.log(err);
+        console.log(res);
     });
 };
