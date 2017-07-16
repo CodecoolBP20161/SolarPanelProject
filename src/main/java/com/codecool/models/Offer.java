@@ -19,7 +19,7 @@ public class Offer {
 
     public void addLineItem(LineItem lineItem) {
         lineItems.add(lineItem);
-        nettoTotalPrice.add(lineItem.getTotal());
+        nettoTotalPrice = nettoTotalPrice.add(lineItem.getTotal());
     }
 }
 
