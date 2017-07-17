@@ -14,9 +14,7 @@ import java.math.BigDecimal;
 @Data
 public class Inverter extends Item {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+
 
     @NotEmpty
     private String brand;

@@ -11,10 +11,6 @@ import java.math.BigDecimal;
 @Table(name = "solarpanel")
 public class SolarPanel extends Item{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @NotEmpty
     private String optimalizer;
 
