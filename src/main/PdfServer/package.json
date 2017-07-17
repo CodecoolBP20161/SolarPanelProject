@@ -4,7 +4,7 @@
   "description": "server which generates pdf offer for the main application",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"All tests passed\""
+    "test": "./test/hello.js"
   },
   "author": "",
   "license": "ISC",
