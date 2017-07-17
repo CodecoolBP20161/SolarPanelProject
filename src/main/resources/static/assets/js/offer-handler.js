@@ -21,7 +21,7 @@ $(document).ready(function () {
         if (phaseOneInput.is(':checked') && metricSelect.find('option:selected').val() == 'kWh' && metricInput.val() >= 5){
             alertSpan.prop('hidden', false);
         }
-
+        //TODO: write condition for (havi villanyszámla alapján)
         // } else if (write your fukin shit here, and uncomment){
         //     alertSpan.prop('hidden', false);
         // }
