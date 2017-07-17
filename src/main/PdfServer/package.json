@@ -4,6 +4,7 @@
   "description": "server which generates pdf offer for the main application",
   "main": "server.js",
   "scripts": {
+
     "test": "jshint ./test/hello.js"
   },
   "author": "",
