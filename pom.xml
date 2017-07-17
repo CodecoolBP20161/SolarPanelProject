@@ -25,37 +25,39 @@
         <openhtml.version>0.0.1-RC11</openhtml.version>
     </properties>
 
-    <!--OPENHTMLTOPDF-->
-    <dependency>
-        <!-- ALWAYS required. -->
-        <groupId>com.openhtmltopdf</groupId>
-        <artifactId>openhtmltopdf-core</artifactId>
-        <version>${openhtml.version}</version>
-    </dependency>
-
-    <dependency>
-        <!-- Required for PDF output. -->
-        <groupId>com.openhtmltopdf</groupId>
-        <artifactId>openhtmltopdf-pdfbox</artifactId>
-        <version>${openhtml.version}</version>
-    </dependency>
-
-    <dependency>
-        <!-- Optional, leave out if you do not need HTML5 parsing support. -->
-        <groupId>com.openhtmltopdf</groupId>
-        <artifactId>openhtmltopdf-jsoup-dom-converter</artifactId>
-        <version>${openhtml.version}</version>
-    </dependency>
-
-    <dependency>
-        <!-- Optional, leave out if you do not need logging via slf4j. -->
-        <groupId>com.openhtmltopdf</groupId>
-        <artifactId>openhtmltopdf-slf4j</artifactId>
-        <version>${openhtml.version}</version>
-    </dependency>
-    <!--End OPENHTMLTOPDF-->
 
     <dependencies>
+        <!--OPENHTMLTOPDF-->
+        <dependency>
+            <!-- ALWAYS required. -->
+            <groupId>com.openhtmltopdf</groupId>
+            <artifactId>openhtmltopdf-core</artifactId>
+            <version>${openhtml.version}</version>
+        </dependency>
+
+        <dependency>
+            <!-- Required for PDF output. -->
+            <groupId>com.openhtmltopdf</groupId>
+            <artifactId>openhtmltopdf-pdfbox</artifactId>
+            <version>${openhtml.version}</version>
+        </dependency>
+
+        <dependency>
+            <!-- Optional, leave out if you do not need HTML5 parsing support. -->
+            <groupId>com.openhtmltopdf</groupId>
+            <artifactId>openhtmltopdf-jsoup-dom-converter</artifactId>
+            <version>${openhtml.version}</version>
+        </dependency>
+
+        <dependency>
+            <!-- Optional, leave out if you do not need logging via slf4j. -->
+            <groupId>com.openhtmltopdf</groupId>
+            <artifactId>openhtmltopdf-slf4j</artifactId>
+            <version>${openhtml.version}</version>
+        </dependency>
+        <!--End OPENHTMLTOPDF-->
+
+
         <!-- DataBase -->
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -91,6 +93,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -120,6 +123,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
         </dependency>
+
     </dependencies>
 
 
