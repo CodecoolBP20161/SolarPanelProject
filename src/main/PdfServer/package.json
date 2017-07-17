@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
 
-    "test": "jshint ./test/hello.js"
+    "test": "./node_modules/jshint/bin/jshint ./test/hello.js"
   },
   "author": "",
   "license": "ISC",
