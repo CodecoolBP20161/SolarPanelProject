@@ -4,7 +4,7 @@
   "description": "server which generates pdf offer for the main application",
   "main": "server.js",
   "scripts": {
-    "test": "require('assert'); assert(2 + 3, 5)"
+    "test": "jshint ./test/hello.js"
   },
   "author": "",
   "license": "ISC",
