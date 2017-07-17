@@ -3,89 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+        .tables {
+            zoom: 0.6;
+        }
+        .description{
+            zoom: 0.6;
+        }
+        .header-section{
+            height: 30%;
+            vertical-align: middle;
+        }
+        }
+        .nowrap{
+            white-space:nowrap;
+        }
+    </style>
 </head>
 <body>
+
+
+<section class="header-section">
+
+    <div class="row text-center">
+        <h2 class="text-center">Cég név árajánlata</h2>
+    </div>
+
+</section>
 <div class="container">
-    <br>
-    <br>
-    <br>
-    <div class="row">
-        <div class="col-xs-1"></div>
-        <div class="col-xs-9">
-            <h2 class="text-center">Cég név árajánlata</h2>
-        </div>
 
-        <div class="col-xs-1"></div>
-        <br>
-        <br>
-        <br>
-        <br>
 
-    </div>
-
-    <div class="row">
-        <div class="col-xs-1"></div>
-        <div class="col-xs-9">
+    <section>
+        <div class="container">
             <div class="row">
-                <p>Ajánlatszám: {{id}}</p>
-                <table class="table table-sm">
-                    <thead>
-                    <td colspan="5" class="text-center"><strong>Termékek</strong></td>
-                    </thead>
-                    <thead>
-                    <tr>
-                        <th>Név</th>
-                        <th>Egységár</th>
-                        <th>Mennyiség</th>
-                        <th>Összesen (Ft)</th>
-                        <th>Megjegyzés</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for item in items %}
-                    <tr>
-                        <td>{{ item.name }}</td>
-                        <td>{{ item.price }} Ft</td>
-                        <td>{{ item.quantity }}</td>
-                        <td>{{ item.subtotal }} Ft</td>
-                        <td>{{ item.description }}</td>
-                    </tr>
-                    {% endfor %}
+                <div class="col-xs-2"></div>
+                <div class="col-xs-9">
+                    <div class="tables">
+                        <p>Ajánlatszám: {{offer.id}}</p>
+                        <table class="table table-condensed">
+                            <thead>
+                            <td colspan="5" class="text-center"><strong>Termékek</strong></td>
+                            </thead>
+                            <thead>
+                            <tr>
+                                <th>Név</th>
+                                <th>Egységár</th>
+                                <th>Mennyiség</th>
+                                <th>Összesen (Ft)</th>
+                                <th>Megjegyzés</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for item in offer.items %}
+                            <tr>
+                                <td>{{ item.name }}</td>
+                                <td>{{ item.price }} Ft</td>
+                                <td>{{ item.quantity }}</td>
+                                <td> {{ item.subtotal }} Ft</td>
+                                <td><div class="description">{{ item.description }}</div></td>
+                            </tr>
+                            {% endfor %}
 
-                    </tbody>
-                    <thead>
-                    <td colspan="5" class="text-center"><strong>Egyéb költségek</strong></td>
-                    </thead>
-                    <tbody>
-                    {% for service in services %}
-                    <tr>
-                        <td>{{ service.name }}</td>
-                        <td>{{ service.price }}</td>
-                        <td>{{ service.quantity }}</td>
-                        <td>{{ service.subtotal }}</td>
-                        <td>{{ service.description }}</td>
-                    </tr>
-                    {% endfor %}
-                    <tr>
-                        <td colspan="3" class="text-right"><strong>Nettó részösszeg:</strong></td>
-                        <td colspan="2">{{ total }} Ft</td>
+                            </tbody>
+                            <thead>
+                            <td colspan="5" class="text-center"><strong>Egyéb költségek</strong></td>
+                            </thead>
+                            <tbody>
+                            {% for service in offer.services %}
+                            <tr>
+                                <td>{{ service.name }}</td>
+                                <td class="thousands">{{ service.price }} Ft</td>
+                                <td>{{ service.quantity }}</td>
+                                <td>{{ service.subtotal }} Ft</td>
+                                <td><div class="description">{{ service.description }}</div></td>
+                            </tr>
+                            {% endfor %}
+                            <tr>
+                                <td colspan="4" class="text-right"><strong>Nettó részösszeg:</strong></td>
+                                <td class="nowrap">{{ numberWithCommas(offer.total) }} Ft &nbsp &nbsp Áfa : {{ (offer.tax_rate - 1) * 100 }} %</td>
 
-                    </tr>
-                    <tr>
-                        <td colspan="3" class="text-right"><strong>Bruttó részösszeg:</strong></td>
-                        <td>{{ total * tax_rate }} Ft</td>
-                        <td>Áfa : {{ tax_rate}}</td>
-                    </tr>
-                    </tbody>
-                </table>
+                            </tr>
+                            <tr>
+                                <td colspan="4" class="text-right"><strong>Bruttó részösszeg:</strong></td>
+                                <td class="nowrap">{{ numberWithCommas((offer.total * offer.tax_rate) | round)}} Ft</td>
+                                <td ></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
+            <div class="col-xs-1"></div>
         </div>
-    </div>
-    <div class="col-xs-1"></div>
+
+    </section>
 
 
 </div>
 </div>
+    <!--<script>-->
+    <!--function numberWithCommas(x) {-->
+        <!--return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");-->
+    <!--}-->
+
+    <!--var convertables = document.getElementsByClassName("thousands");-->
+<!--for(var i = 0; i< convertables.length; i++){-->
+    <!--convertables[i].innerHTML = numberWithCommas(convertables[i].innerHTML);-->
+<!--}-->
+<!--//    convertables.forEach(function(div) {-->
+<!--////        console.log(div);-->
+<!--//    });-->
+
+<!--//    console.log(div.text());-->
+<!--////        div.innerHTML = numberWithCommas(div.text());-->
+<!--//    })-->
+<!--</script>-->
 </body>
 </html>
