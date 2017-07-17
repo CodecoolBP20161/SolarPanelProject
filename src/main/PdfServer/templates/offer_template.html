@@ -58,9 +58,9 @@
                             {% for item in offer.items %}
                             <tr>
                                 <td>{{ item.name }}</td>
-                                <td>{{ item.price }} Ft</td>
+                                <td>{{ numberWithCommas(item.price) }} Ft</td>
                                 <td>{{ item.quantity }}</td>
-                                <td> {{ item.subtotal }} Ft</td>
+                                <td> {{ numberWithCommas(item.subtotal) }} Ft</td>
                                 <td><div class="description">{{ item.description }}</div></td>
                             </tr>
                             {% endfor %}
@@ -73,9 +73,9 @@
                             {% for service in offer.services %}
                             <tr>
                                 <td>{{ service.name }}</td>
-                                <td class="thousands">{{ service.price }} Ft</td>
+                                <td class="thousands">{{ numberWithCommas(service.price) }} Ft</td>
                                 <td>{{ service.quantity }}</td>
-                                <td>{{ service.subtotal }} Ft</td>
+                                <td>{{ numberWithCommas(service.subtotal) }} Ft</td>
                                 <td><div class="description">{{ service.description }}</div></td>
                             </tr>
                             {% endfor %}
