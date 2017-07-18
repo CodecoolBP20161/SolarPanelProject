@@ -7,107 +7,16 @@
 
 <body class="full-intro background--dark">
 <!--loader-->
-<div id="preloader">
-    <div class="sk-circle">
-        <div class="sk-circle1 sk-child"></div>
-        <div class="sk-circle2 sk-child"></div>
-        <div class="sk-circle3 sk-child"></div>
-        <div class="sk-circle4 sk-child"></div>
-        <div class="sk-circle5 sk-child"></div>
-        <div class="sk-circle6 sk-child"></div>
-        <div class="sk-circle7 sk-child"></div>
-        <div class="sk-circle8 sk-child"></div>
-        <div class="sk-circle9 sk-child"></div>
-        <div class="sk-circle10 sk-child"></div>
-        <div class="sk-circle11 sk-child"></div>
-        <div class="sk-circle12 sk-child"></div>
-    </div>
-</div>
+<div th:replace="fragments/preloader :: preloader"></div>
+
 <!--loader-->
 
 <!-- Site Wraper -->
 <div class="wrapper">
 
-    <!-- HEADER -->
-
-    <!--Start Top bar area -->
-    <section class="top-bar-area">
-        <div class="container">
-            <div class="clearfix">
-                <div class="pull-left">
-                    <p>
-                        Üdvözöljük a Solár weboldalon
-                    </p>
-                </div>
-                <div class="pull-right">
-                    <p>
-                        <i class="fa fa-clock-o"></i>Hétfő - Péntek : 8:00 - 17:00
-                    </p>
-                </div>
-            </div>
-
-        </div>
-    </section>
-    <!--End Top bar area -->
-
-    <!--Start header area-->
-    <header class="header-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3 col-sm-12 col-xs-12">
-                    <div class="logo">
-                        <img src="assets/images/logo-black.png" alt="Awesome Logo">
-                    </div>
-                </div>
-                <div class="col-md-9 col-sm-12 col-xs-12">
-                    <div class="header-contact-info">
-                        <ul>
-                            <li>
-                                <div class="iocn-holder">
-                                    <span class="fa fa-home"></span>
-                                </div>
-                                <div class="text-holder">
-
-                                    <h6>Dóczy József utca 30 C ép. 2.</h6>
-                                    <p>
-                                        Miskolc, Magyarország
-                                    </p>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="iocn-holder">
-                                    <span class="fa fa-phone-square"></span>
-                                </div>
-                                <div class="text-holder">
-                                    <h6>Telefon</h6>
-                                    <p>
-                                        06-12-123-45-67
-                                    </p>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="iocn-holder">
-                                    <span class="fa fa-envelope"></span>
-                                </div>
-                                <div class="text-holder">
-                                    <h6>Email</h6>
-                                    <a href="#">
-                                        <p>
-                                            email@email.hu
-                                        </p></a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </header>
-    <!--End header area-->
-
-    <!-- Navbar -->
+    <div th:replace="fragments/header :: header"></div>
     <div th:replace="fragments/navbar :: navbar"></div>
+
 
     <!-- Intro Section -->
     <section class="inner-intro  padding bg-img1 overlay-dark light-color">
