@@ -16,4 +16,11 @@ public interface InverterRepository extends JpaRepository<Inverter, Integer> {
             "WHERE inv.capacity >= :capacity AND inv.capacity <= (:capacity + 999) " +
             "ORDER BY inv.price ASC")
     List<Inverter> findByCustomerValue(@Param("capacity") Integer capacity);
+
+
+    @Query(value =
+            "SELECT inv FROM Inverter inv " +
+            "WHERE inv.capacity >= 11000 " +
+            "ORDER BY inv.capacity ASC")
+    List<Inverter> findAllOvertTenThousand();
 }
