@@ -70,20 +70,21 @@
                         </div>
                     </div>
                 </div>
-                <!--<div class="col-sm-6">-->
-                    <!--&lt;!&ndash;Ezt majd ha be van configolva a security&ndash;&gt;-->
-                    <!--&lt;!&ndash;<div th:if ="${#authorization.expression('isAuthenticated()')}">&ndash;&gt;-->
-                    <!--&lt;!&ndash;<select name="userSelect" id="companySelect" th:field="*{company}">&ndash;&gt;-->
-                    <!--&lt;!&ndash;<option th:each="language : ${T(com.codecool.models.CompanyEnum).values()}"&ndash;&gt;-->
-                    <!--&lt;!&ndash;th:value="${language}"&ndash;&gt;-->
-                    <!--&lt;!&ndash;th:text="${language}">&ndash;&gt;-->
-                    <!--&lt;!&ndash;</option>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</select>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<div th:unless="${#authorization.expression('isAuthenticated()')}">&ndash;&gt;-->
-                    <!--&lt;!&ndash;<span sec:authentication="name"></span>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                <!--</div>-->
+                <div class="col-sm-6">
+                    <div th:if ="${#authorization.expression('isAuthenticated()')}">
+                    <select name="userSelect" id="companySelect" th:field="*{company}">
+                    <option th:each="language : ${T(com.codecool.models.CompanyEnum).values()}"
+                    th:value="${language}"
+                    th:text="${language}">
+                    </option>
+                    </select>
+                    </div>
+                    <div th:unless="${#authorization.expression('isAuthenticated()')}">
+<!--
+                    <span sec:authentication="name"></span>
+-->
+                    </div>
+                </div>
             </div>
 
             <div class="row">
