@@ -1,21 +1,17 @@
 package com.codecool.controller;
 
 import com.codecool.models.Inverter;
-import com.codecool.models.Offer;
 import com.codecool.models.SolarPanel;
 import com.codecool.models.forms.ConsumptionForm;
-import com.codecool.models.forms.EmailForm;
 import com.codecool.models.forms.DeviceForm;
+import com.codecool.models.forms.EmailForm;
 import com.codecool.repositories.InverterRepository;
 import com.codecool.repositories.SolarPanelRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -107,6 +103,11 @@ public class MainController {
     public String getOfferStep4(Model model){
         model.addAttribute(STEP, '4');
         return "offer";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login() {
+        return "login";
     }
 
 }
