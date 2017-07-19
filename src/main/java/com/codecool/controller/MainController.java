@@ -18,7 +18,7 @@ import java.util.List;
 
 @Slf4j
 @Controller
-@SessionAttributes({"consumption", "deviceForm", "email", "offer"})
+@SessionAttributes({ "email", "offer"}) //"consumption" and "deviceForm" are removed
 public class MainController {
 
     private SolarPanelRepository solarPanelRepository;
@@ -62,9 +62,15 @@ public class MainController {
 
     @GetMapping("/ajanlat/2")
     public String getOfferStep2(Model model, HttpSession session){
-        List<SolarPanel> solarPanelList = solarPanelRepository.findAll();
-        List<Inverter> inverterList = inverterRepository.findAll();
+        if(session.getAttribute(CONSUMPTION) == null){
+            log.info("Step1 is not done, redirecting to ajanlat 1.");
+            return "redirect:/ajanlat/1";
+        }
 
+        ConsumptionForm consumption = (ConsumptionForm) session.getAttribute(CONSUMPTION);
+
+        List<SolarPanel> solarPanelList = solarPanelRepository.findAllByOrderByCapacityAscPriceAsc();
+        List<Inverter> inverterList = inverterRepository.findByCustomerValue(((int) consumption.getValue()) *1000);
         DeviceForm pAndIForm = session.getAttribute(DEVICE) == null ?
                 new DeviceForm() : (DeviceForm) session.getAttribute(DEVICE);
 
@@ -85,6 +91,18 @@ public class MainController {
 
     @GetMapping("/ajanlat/3")
     public String getOfferStep3(Model model, HttpSession session){
+        if (session.getAttribute(DEVICE) == null) {
+            return "redirect:/ajanlat/2";
+        }
+        else {
+            DeviceForm deviceForm = (DeviceForm) session.getAttribute(DEVICE);
+            if (deviceForm.getInverterId() == null || deviceForm.getPanelId() == null) {
+                log.info("Step2 is not done, redirecting to ajanlat 2." + deviceForm.getInverterId() + deviceForm.getPanelId());
+                return "redirect:/ajanlat/2";
+            }
+
+        }
+
         EmailForm email = session.getAttribute(EMAIL) == null ?
                 new EmailForm() : (EmailForm) session.getAttribute(EMAIL);
 
