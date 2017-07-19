@@ -68,9 +68,13 @@ public class MainController {
         }
 
         ConsumptionForm consumption = (ConsumptionForm) session.getAttribute(CONSUMPTION);
+        List<Inverter> inverterList = (consumption.getValue() >= 11 &
+                inverterRepository.findByCustomerValue(((int) consumption.getValue()) *1000).size() == 0) ?
+                inverterRepository.findAllOvertTenThousand():
+                inverterRepository.findByCustomerValue(((int) consumption.getValue()) *1000);
 
         List<SolarPanel> solarPanelList = solarPanelRepository.findAllByOrderByCapacityAscPriceAsc();
-        List<Inverter> inverterList = inverterRepository.findByCustomerValue(((int) consumption.getValue()) *1000);
+
         DeviceForm pAndIForm = session.getAttribute(DEVICE) == null ?
                 new DeviceForm() : (DeviceForm) session.getAttribute(DEVICE);
 
