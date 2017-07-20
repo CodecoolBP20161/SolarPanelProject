@@ -10,7 +10,6 @@
 
 <!--The first step of the offer creation-->
 <div th:fragment="first">
-
     <div class="container">
         <form method="post" th:action="@{/ajanlat/1}" th:object="${consumption}">
             <div class="row">
@@ -27,15 +26,16 @@
             </div>
             <!--Hidden warning for phase-->
             <div class="container">
-            <div class="row">
-                <div class="col-sm-12 center">
-                    <div class="alert alert-danger" hidden="hidden" id="alert-phase">
-                        <strong>Figyelem!</strong> Amennyiben 5kWh feletti az éves fogyasztása,
-                        és egyfázisú az elektromos hálózata, hálózatfejlesztésre lesz szüksége a rendszer telepítéséhez!
+                <div class="row">
+                    <div class="col-sm-12 center">
+                        <div class="alert alert-danger" hidden="hidden" id="alert-phase">
+                            <strong>Figyelem!</strong> Amennyiben 5kWh feletti az éves fogyasztása,
+                            és egyfázisú az elektromos hálózata, hálózatfejlesztésre lesz szüksége a rendszer
+                            telepítéséhez!
+                        </div>
                     </div>
-                </div>
 
-            </div>
+                </div>
             </div>
 
             <div class="row">
@@ -71,18 +71,18 @@
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    <div th:if ="${#authorization.expression('isAuthenticated()')}">
-                    <select name="userSelect" id="companySelect" th:field="*{company}">
-                    <option th:each="language : ${T(com.codecool.models.CompanyEnum).values()}"
-                    th:value="${language}"
-                    th:text="${language}">
-                    </option>
-                    </select>
+                    <div th:if="${#authorization.expression('isAuthenticated()')}">
+                        <select name="userSelect" id="companySelect" th:field="*{company}">
+                            <option th:each="language : ${T(com.codecool.models.CompanyEnum).values()}"
+                                    th:value="${language}"
+                                    th:text="${language}">
+                            </option>
+                        </select>
                     </div>
                     <div th:unless="${#authorization.expression('isAuthenticated()')}">
-<!--
-                    <span sec:authentication="name"></span>
--->
+                        <!--
+                                            <span sec:authentication="name"></span>
+                        -->
                     </div>
                 </div>
             </div>
@@ -249,51 +249,128 @@
 
 </div>
 <div th:fragment="third">
-    <div class="container">
-        <form method="post" th:action="@{/ajanlat/3}" th:object="${email}">
 
-            <div class="row">
-                <div class="col-sm-12 center">
-                    <div class="heading-box ">
-                        <h2 class="title">Mindjárt kész!</h2>
-                        <span class="b-line l-center line-h"></span>
-                        <br>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12 center">
-                    <h4 >Ha szeretné,hogy felvegyük önnel a kapcsolatot,
-                        kérjük adja meg E-mail címét!</h4>
-                </div>
+    <h2 class="title">Amennyiben szeretné, hogy felvegyük önnel a kapcsolatot, adja meg adatait.</h2>
 
-            </div>
+    <section class="padding ptb-xs-60">
+        <div class="romana_chect_out_form_area sp">
+            <div class="container">
+                <div class="romana_check_out_form">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <div class="check_form_left common_input">
+                                <div class="heading-box pb-30">
+                                    <h2><span>Kapcsolat</span></h2>
+                                    <span class="b-line l-left line-h"></span>
+                                </div>
+                                <form method="post" th:action="@{/ajanlat/3}" th:object="${email}">
+                                    <div class="row">
 
-            <div class="row">
-                <div class="widget_shop-title">
-                    <div class="col-sm-2"></div>
-                    <div class="col-sm-3 center">
-                        <h2 >Email cím:</h2>
-                    </div>
-                    <div class="col-sm-1"></div>
-                    <div class="col-sm-4">
-                        <div class="form-field mb-30">
-                                    <input class="input-lg form-full" id="email" type="text" name="form-email" placeholder="Email" th:field="*{email}" >
+                                        <div class="col-sm-6">
+                                            <input type="text" name="check_first_name" placeholder="Vezetéknév"
+                                                   th:field="*{firstName}">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="text" name="check_last_name" placeholder="Keresztnév"
+                                                   th:field="*{lastName}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <input type="email" name="check_email" placeholder="Email"
+                                                   th:field="*{emailAddress}">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="text" name="check_Number" placeholder="Telefonszám"
+                                                   th:field="*{phoneNumber}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <input type="text" name="check_email" placeholder="Irányítószám"
+                                                   th:field="*{zipCode}">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="text" name="check_Number" placeholder="Város"
+                                                   th:field="*{city}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <input type="text" name="check_address" placeholder="Cím"
+                                                   th:field="*{address}">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 center">
+                                        <button class="btn-text" type="submit" id="submitEmail" name="button">
+                                            Árajánlat kérése!
+                                        </button>
+                                    </div>
+
+                                </form>
+
+
                             </div>
                         </div>
-                </div>
+                        <div class="col-sm-4">
+                            <div class="check_form_right bg-color light-color">
+                                <div class="heading-box pb-15 ">
+                                    <h2>Árajánlat</h2>
+                                    <span class="b-line l-left secondary_bg"></span>
+
+                                </div>
+
+                                <div class="product_order">
+                                    <ul>
+                                        <li>
+                                            product<span>total</span>
+                                        </li>
+                                        <li>
+                                            Glass Cleaner<span>$29.99</span>
+                                        </li>
+                                        <li>
+                                            subtotal:<span>$29.99</span>
+                                        </li>
+                                        <li>
+                                            total:<span>$29.99</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="romana_select_method ">
+                                    <ul class="mb-40">
+                                        <li>
+                                            <input type="radio" id="option1" name="selector">
+                                            <label for="option1">Check Payment</label>
+                                            <div class="check_text">
+                                                <p>
+                                                    Please send a check to Store Name, Store Street, Store Town, Store
+                                                    State / County, Store Postcode.
+                                                </p>
+                                            </div>
+                                            <div class="check"></div>
+                                        </li>
+                                        <li>
+                                            <input type="radio" id="option2" name="selector" checked="">
+                                            <label for="option2">paypal</label>
+                                            <div class="paypal_img">
+                                                <img src="assets/images/paypal-card.png" alt="">
+                                            </div>
+                                            <div class="check"></div>
+                                        </li>
+                                    </ul>
+                                    <a href="#" class="btn-text white-btn">place order</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <br>
-            <div class="row">
-                <div class="col-sm-12 center">
-                    <button class="btn-text" type="submit" id="submitEmail" name="button">
-                       Árajánlat kérése!
-                    </button>
-                </div>
-            </div>
-        </form>
-    </div>
+        </div>
+    </section>
+
+    <!--End Contact-->
+
+
 </div>
 </div>
 <div th:fragment="fourth">
