@@ -18,7 +18,7 @@ import java.util.List;
 
 @Slf4j
 @Controller
-@SessionAttributes({ "email", "offer"}) //"consumption" and "deviceForm" are removed
+//@SessionAttributes({"offer"}) "consumption" and "deviceForm" "email" are removed
 public class MainController {
 
     private SolarPanelRepository solarPanelRepository;
@@ -95,18 +95,18 @@ public class MainController {
 
     @GetMapping("/ajanlat/3")
     public String getOfferStep3(Model model, HttpSession session){
+        DeviceForm deviceForm = (DeviceForm) session.getAttribute(DEVICE);
+
         if (session.getAttribute(DEVICE) == null) {
             return "redirect:/ajanlat/2";
         }
         else {
-            DeviceForm deviceForm = (DeviceForm) session.getAttribute(DEVICE);
             if (deviceForm.getInverterId() == null || deviceForm.getPanelId() == null) {
                 log.info("Step2 is not done, redirecting to ajanlat 2." + deviceForm.getInverterId() + deviceForm.getPanelId());
                 return "redirect:/ajanlat/2";
             }
 
         }
-
         EmailForm email = session.getAttribute(EMAIL) == null ?
                 new EmailForm() : (EmailForm) session.getAttribute(EMAIL);
 
@@ -114,15 +114,16 @@ public class MainController {
         model.addAttribute(STEP, '3');
         return "offer";
     }
+
     @PostMapping("/ajanlat/3")
-    public String getOfferStep3(Model model, @ModelAttribute EmailForm email, HttpSession session){
+    public String getOfferStep3(@ModelAttribute EmailForm email, HttpSession session){
         session.setAttribute(EMAIL, email);
-        log.info("Entered email: ", email.getEmail());
-        return "offer";
+        log.info("Entered email: " + email.getEmailAddress());
+        return "redirect:/ajanlat/4";
     }
 
     @GetMapping("/ajanlat/4")
-    public String getOfferStep4(Model model){
+    public String getOfferStep4(Model model, HttpSession session){
         model.addAttribute(STEP, '4');
         return "offer";
     }
