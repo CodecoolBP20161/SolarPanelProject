@@ -1,28 +1,24 @@
 package com.codecool.controller;
 
 import com.codecool.models.Inverter;
-import com.codecool.models.Offer;
 import com.codecool.models.SolarPanel;
 import com.codecool.models.forms.ConsumptionForm;
-import com.codecool.models.forms.EmailForm;
 import com.codecool.models.forms.DeviceForm;
+import com.codecool.models.forms.EmailForm;
 import com.codecool.repositories.InverterRepository;
 import com.codecool.repositories.SolarPanelRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Slf4j
 @Controller
-@SessionAttributes({"consumption", "deviceForm", "email", "offer"})
+//@SessionAttributes({"offer"}) "consumption" and "deviceForm" "email" are removed
 public class MainController {
 
     private SolarPanelRepository solarPanelRepository;
@@ -66,8 +62,18 @@ public class MainController {
 
     @GetMapping("/ajanlat/2")
     public String getOfferStep2(Model model, HttpSession session){
-        List<SolarPanel> solarPanelList = solarPanelRepository.findAll();
-        List<Inverter> inverterList = inverterRepository.findAll();
+        if(session.getAttribute(CONSUMPTION) == null){
+            log.info("Step1 is not done, redirecting to ajanlat 1.");
+            return "redirect:/ajanlat/1";
+        }
+
+        ConsumptionForm consumption = (ConsumptionForm) session.getAttribute(CONSUMPTION);
+        List<Inverter> inverterList = (consumption.getValue() >= 11 &
+                inverterRepository.findByCustomerValue(((int) consumption.getValue()) *1000).size() == 0) ?
+                inverterRepository.findAllOvertTenThousand():
+                inverterRepository.findByCustomerValue(((int) consumption.getValue()) *1000);
+
+        List<SolarPanel> solarPanelList = solarPanelRepository.findAllByOrderByCapacityAscPriceAsc();
 
         DeviceForm pAndIForm = session.getAttribute(DEVICE) == null ?
                 new DeviceForm() : (DeviceForm) session.getAttribute(DEVICE);
@@ -89,6 +95,18 @@ public class MainController {
 
     @GetMapping("/ajanlat/3")
     public String getOfferStep3(Model model, HttpSession session){
+        DeviceForm deviceForm = (DeviceForm) session.getAttribute(DEVICE);
+
+        if (session.getAttribute(DEVICE) == null) {
+            return "redirect:/ajanlat/2";
+        }
+        else {
+            if (deviceForm.getInverterId() == null || deviceForm.getPanelId() == null) {
+                log.info("Step2 is not done, redirecting to ajanlat 2." + deviceForm.getInverterId() + deviceForm.getPanelId());
+                return "redirect:/ajanlat/2";
+            }
+
+        }
         EmailForm email = session.getAttribute(EMAIL) == null ?
                 new EmailForm() : (EmailForm) session.getAttribute(EMAIL);
 
@@ -96,17 +114,23 @@ public class MainController {
         model.addAttribute(STEP, '3');
         return "offer";
     }
+
     @PostMapping("/ajanlat/3")
-    public String getOfferStep3(Model model, @ModelAttribute EmailForm email, HttpSession session){
+    public String getOfferStep3(@ModelAttribute EmailForm email, HttpSession session){
         session.setAttribute(EMAIL, email);
-        log.info("Entered email: ", email.getEmail());
-        return "offer";
+        log.info("Entered email: " + email.getEmailAddress());
+        return "redirect:/ajanlat/4";
     }
 
     @GetMapping("/ajanlat/4")
-    public String getOfferStep4(Model model){
+    public String getOfferStep4(Model model, HttpSession session){
         model.addAttribute(STEP, '4');
         return "offer";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login() {
+        return "login";
     }
 
 }

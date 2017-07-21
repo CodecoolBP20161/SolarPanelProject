@@ -7,7 +7,7 @@ import lombok.Setter;
 import java.math.BigDecimal;
 
 @Data
-class LineItem extends Item {
+public class LineItem extends Item {
 
     private  int quantity;
 
@@ -25,4 +25,5 @@ class LineItem extends Item {
         this.quantity = quantity;
         this.total = price.multiply(BigDecimal.valueOf(quantity));
     }
+
 }
