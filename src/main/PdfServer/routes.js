@@ -25,11 +25,17 @@ exports.printpdf1 = function (req, res) {
         offer: offer
     });
     // This one automatically downloads the pdf
-    // pdf.create(renderedHtml).toBuffer(function(err, buffer){
-    //     console.log('This is a buffer:', Buffer.isBuffer(buffer));
-    //     res.download(buffer);
-    //
-    // });
+    pdf.create(renderedHtml).toBuffer(function(err, buffer){
+        console.log('This is a buffer:', Buffer.isBuffer(buffer));
+        var pdfBuffer = new Buffer(buffer);
+        res.writeHead(200, {
+            'Content-Type': 'application/pdf',
+            'Content-Disposition': 'attachment; filename=offer.pdf',
+            'Content-Length': buffer.length
+        });
+        res.end(pdfBuffer);
+
+    });
 
     // This one returns the pdf in your browser
     // pdf.create(renderedHtml).toStream(function(err, stream){
@@ -38,9 +44,9 @@ exports.printpdf1 = function (req, res) {
     // });
 
     // This one saves it into a file
-    pdf.create(renderedHtml, config).toFile('./offer_' + offer.id + '.pdf', function(err, res) {
-        if (err) return console.log(err);
-        else console.log("Your PDF has been generated!");
-    });
-    res.json("ok");
+    // pdf.create(renderedHtml, config).toFile('./offer_' + offer.id + '.pdf', function(err, res) {
+    //     if (err) return console.log(err);
+    //     else console.log("Your PDF has been generated!");
+    // });
+    // res.json("ok");
 };
