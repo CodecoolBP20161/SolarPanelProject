@@ -11,9 +11,7 @@ function numberWithCommas(x) {
 
 config = {
     "format": "Letter",        // allowed units: A3, A4, A5, Legal, Letter, Tabloid
-    "orientation": "portrait",
-    // Rendering options
-    "base": "file://localhost:1350/static" // Base path that's used to load files (images, css, js) when they aren't referenced using a host
+    "orientation": "portrait"
     };
 
 exports.printpdf1 = function (req, res) {
