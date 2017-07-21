@@ -82,106 +82,106 @@ $(document).ready(function () {
     // FORM 3
     $('#submitEmail').on('click', function (event) {
         event.preventDefault();
-        {
-            $.ajax({
-                url: "http://52.15.84.238:1350/api/printpdf1",
-                type: 'POST',
-                async: true,
-                contentType: "application/json",
-                data: JSON.stringify(
+
+        var req = new XMLHttpRequest();
+        req.open("POST", "http://52.15.84.238:1350/api/printpdf1", true);
+        req.responseType = 'arraybuffer';
+        var data = JSON.stringify({
+            "id": 123321,
+
+            "items" :
+                [
                     {
-                        "id": 123321,
-
-                        "items" :
-                            [
-                                {
-                                    "name": "Termék1",
-                                    "price": 10000,
-                                    "quantity": 10,
-                                    "subtotal": 100000,
-                                    "description": "Legjobb termék"
-                                },
-                                {
-                                    "name": "Fasza3",
-                                    "price": 10000,
-                                    "quantity": 10,
-                                    "subtotal": 100000,
-                                    "description": "Legjobb termék"
-                                },
-                                {
-                                    "name": "Termék4",
-                                    "price": 10000,
-                                    "quantity": 10,
-                                    "subtotal": 100000,
-                                    "description": "Legjobb termék"
-                                },
-                                {
-                                    "name": "Termék5",
-                                    "price": 10000,
-                                    "quantity": 10,
-                                    "subtotal": 100000,
-                                    "description": "Legjobb termék"
-                                }
-                            ],
-
-                        "services" :
-                            [
-                                {
-                                    "name": "Service1",
-                                    "price": 10000,
-                                    "quantity": 10,
-                                    "subtotal": 100000,
-                                    "description": "Legjobb termék"
-                                },
-                                {
-                                    "name": "Service2",
-                                    "price": 10000,
-                                    "quantity": 10,
-                                    "subtotal": 100000,
-                                    "description": "Legjobb termék"
-                                },
-                                {
-                                    "name": "Service3",
-                                    "price": 10000,
-                                    "quantity": 10,
-                                    "subtotal": 100000,
-                                    "description": "Legjobb termék"
-                                },
-                                {
-                                    "name": "Service4",
-                                    "price": 10000,
-                                    "quantity": 10,
-                                    "subtotal": 100000,
-                                    "description": "Legjobb termék"
-                                },
-                                {
-                                    "name": "Service5",
-                                    "price": 10000,
-                                    "quantity": 10,
-                                    "subtotal": 100000,
-                                    "description": "Legjobb termék"
-                                }
-
-                            ],
-
-                        "tax_rate": 1.27,
-
-                        "total": 9999999
-
+                        "name": "Termék1",
+                        "price": 10000,
+                        "quantity": 10,
+                        "subtotal": 100000,
+                        "description": "Legjobb termék"
+                    },
+                    {
+                        "name": "Fasza3",
+                        "price": 10000,
+                        "quantity": 10,
+                        "subtotal": 100000,
+                        "description": "Legjobb termék"
+                    },
+                    {
+                        "name": "Termék4",
+                        "price": 10000,
+                        "quantity": 10,
+                        "subtotal": 100000,
+                        "description": "Legjobb termék"
+                    },
+                    {
+                        "name": "Termék5",
+                        "price": 10000,
+                        "quantity": 10,
+                        "subtotal": 100000,
+                        "description": "Legjobb termék"
                     }
-                ),
-                success: function (pdf) {
-                    var w = window.open('about:blank', 'Offer');
-                    w.document.write(pdf);
-                    w.document.close();
-                    var w2 = window.open("data:application/pdf," + encodeURI(pdf));
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    alert(xhr.status);
-                    alert(thrownError);
-                }
-            });
-        }
+                ],
+
+            "services" :
+                [
+                    {
+                        "name": "Service1",
+                        "price": 10000,
+                        "quantity": 10,
+                        "subtotal": 100000,
+                        "description": "Legjobb termék"
+                    },
+                    {
+                        "name": "Service2",
+                        "price": 10000,
+                        "quantity": 10,
+                        "subtotal": 100000,
+                        "description": "Legjobb termék"
+                    },
+                    {
+                        "name": "Service3",
+                        "price": 10000,
+                        "quantity": 10,
+                        "subtotal": 100000,
+                        "description": "Legjobb termék"
+                    },
+                    {
+                        "name": "Service4",
+                        "price": 10000,
+                        "quantity": 10,
+                        "subtotal": 100000,
+                        "description": "Legjobb termék"
+                    },
+                    {
+                        "name": "Service5",
+                        "price": 10000,
+                        "quantity": 10,
+                        "subtotal": 100000,
+                        "description": "Legjobb termék"
+                    }
+
+                ],
+
+            "tax_rate": 1.27,
+
+            "total": 9999999
+
+        });
+        req.setRequestHeader("Content-type", "application/json");
+
+        req.onload = function () {
+            var blob = new Blob([req.response], {type: "application/pdf"});
+            console.log(blob);
+            var fileURL = window.URL.createObjectURL(blob);
+            window.open(fileURL, 'SunnyHome_ajanlat_id123123');
+
+            // If you want to download that shit, uncomment this
+            // var link = document.createElement('a');
+            // link.href = fileURL;
+            // link.download="SunnyHome_ajanlat_id123123" + new Date() + ".pdf";
+            // link.click();
+        };
+
+        req.send(data);
     });
 });
 
