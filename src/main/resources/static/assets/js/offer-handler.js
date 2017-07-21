@@ -172,13 +172,13 @@ $(document).ready(function () {
             var blob = new Blob([req.response], {type: "application/pdf"});
             console.log(blob);
             var fileURL = window.URL.createObjectURL(blob);
-            window.open(fileURL, 'SunnyHome_ajanlat_id123123');
+            // window.open(fileURL, 'SunnyHome_ajanlat_id123123');
 
             // If you want to download that shit, uncomment this
-            // var link = document.createElement('a');
-            // link.href = fileURL;
-            // link.download="SunnyHome_ajanlat_id123123" + new Date() + ".pdf";
-            // link.click();
+            var link = document.createElement('a');
+            link.href = fileURL;
+            link.download="SunnyHome_ajanlat_id123123" + new Date() + ".pdf";
+            link.click();
         };
 
         req.send(data);
