@@ -13,7 +13,6 @@
     "cluster": "^0.7.7",
     "express": "^4.15.3",
     "html-pdf": "^2.1.0",
-    "jquery-ajax-native": "^1.0.0",
     "node-wkhtmltopdf": "^2.0.0",
     "nunjucks": "^3.0.1",
     "wkhtmltopdf": "^0.1.5"
