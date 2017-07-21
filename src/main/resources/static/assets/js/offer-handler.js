@@ -84,7 +84,7 @@ $(document).ready(function () {
         event.preventDefault();
 
         var req = new XMLHttpRequest();
-        req.open("POST", "http://52.15.84.238:1350/api/printpdf1", true);
+        req.open("POST", "https://52.15.84.238:1350/api/printpdf1", true);
         req.responseType = 'arraybuffer';
         var data = JSON.stringify({
             "id": 123321,
