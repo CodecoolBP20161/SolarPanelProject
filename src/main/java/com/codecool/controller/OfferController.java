@@ -60,8 +60,22 @@ public class OfferController {
             return "redirect:/ajanlat/1";
         }
 
+        //findAllByOrderByCapacity
+
         ConsumptionForm consumption = (ConsumptionForm) session.getAttribute(CONSUMPTION);
-        List<Inverter> inverterList = offerService.callculateInverterList((int) consumption.getValue());
+
+        int calculatedConsumption = offerService.callculateConsumption(consumption.getValue(), consumption.getMetric());
+
+        List<Inverter> inverterList = offerService.callculateInverterList(calculatedConsumption, consumption.getPhase());
+
+/*        if (inverterList.isEmpty() && calculatedConsumption < 20000) {
+            for (int i = 0; i < inverterRepository.findAllByOrderByCapacity().size() -1; i++) {
+                if (inverterRepository.findAllByOrderByCapacity().get(i).getCapacity() > calculatedConsumption) {
+
+                }
+            }
+        }*/
+
         List<SolarPanel> solarPanelList = offerService.getSolarPanelList();
 
         DeviceForm pAndIForm = session.getAttribute(DEVICE) == null ?
