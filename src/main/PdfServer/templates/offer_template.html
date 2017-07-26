@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    {% for style in styles %}
+    <style>{% style %}</style>
+    {% endfor %}
     <style>
         .tables {
             zoom: 0.6;
@@ -102,22 +103,5 @@
 
 </div>
 </div>
-    <!--<script>-->
-    <!--function numberWithCommas(x) {-->
-        <!--return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");-->
-    <!--}-->
-
-    <!--var convertables = document.getElementsByClassName("thousands");-->
-<!--for(var i = 0; i< convertables.length; i++){-->
-    <!--convertables[i].innerHTML = numberWithCommas(convertables[i].innerHTML);-->
-<!--}-->
-<!--//    convertables.forEach(function(div) {-->
-<!--////        console.log(div);-->
-<!--//    });-->
-
-<!--//    console.log(div.text());-->
-<!--////        div.innerHTML = numberWithCommas(div.text());-->
-<!--//    })-->
-<!--</script>-->
 </body>
 </html>
