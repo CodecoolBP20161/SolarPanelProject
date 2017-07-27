@@ -56,15 +56,15 @@ public class OfferService {
         Map<String, Integer> nearestValue = calculateNearestValue(value, metric);
 
         if (!metric.equals(Ft)) {
-            if (value < 12000) {
+            if (value < 12000 ) {
                 returnValue = Math.round(value / 1100) * 1000;
-            } else {
+            } else if(value >= 12000 && value <= 21999){
                 returnValue = calculateValueToInverterFilter(roundedValue, nearestValue.get(higherValue), nearestValue.get(lowerValue));
             }
         } else {
             if (value < 37500) {
                 returnValue = Math.round(((value * 12) / 37.5) / 1100) * 1000;
-            } else {
+            } else if(value >= 37500 && value <= 68746){
                 returnValue = calculateValueToInverterFilter(roundedValue, nearestValue.get(higherValue), nearestValue.get(lowerValue));
             }
         }
