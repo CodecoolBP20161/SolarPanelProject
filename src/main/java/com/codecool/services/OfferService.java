@@ -9,7 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Service
@@ -18,74 +20,70 @@ public class OfferService {
     private InverterRepository inverterRepository;
     private SolarPanelRepository solarPanelRepository;
 
+    private final String kWh = "kWh";
+    private final String lowerValue = "lowerValue";
+    private final String higherValue = "higherValue";
+
+
+
     @Autowired
     public OfferService(InverterRepository inverterRepository, SolarPanelRepository solarPanelRepository) {
         this.inverterRepository = inverterRepository;
         this.solarPanelRepository = solarPanelRepository;
     }
 
-/*    public List<Inverter> callculateInverterList(Integer value) {
-        List<Inverter> inverterList = (value >= 11 &
-                inverterRepository.findByCustomerValue(((int) value) *1000).size() == 0) ?
-                inverterRepository.findAllOvertTenThousand():
-                inverterRepository.findByCustomerValue(((int) value) *1000);
-        return inverterList;
-    }*/
+    private Map<String, Integer> callculateNearestValue(float value, String metric) {
+        float kWhRoundedValue = (value / 1100) * 1000;
+        float FtRoundedValue = (float) ((((value * 12) / 37.5) / 1100) * 1000);
+        Map<String, Integer> returnValue = new HashMap<>();
+
+        value = metric.equals(kWh) ? kWhRoundedValue  : FtRoundedValue;
+
+        for (int i = 0; i < inverterRepository.findAllByOrderByCapacity().size(); i++) {
+            if (inverterRepository.findAllByOrderByCapacity().get(i).getCapacity() > value) {
+                returnValue.put(higherValue, inverterRepository.findAllByOrderByCapacity().get(i).getCapacity());
+                returnValue.put(lowerValue, inverterRepository.findAllByOrderByCapacity().get(i - 1).getCapacity());
+                break;
+            }
+        }
+        return returnValue;
+    }
+
 
     public int callculateConsumption(float value, String metric) {
 
         long returnValue = 0;
-        int higherValue = 0;
-        int lowerValue = 0;
         float kWhRoundedValue = (value / 1100) * 1000;
         float FtRoundedValue = (float) ((((value * 12) / 37.5) / 1100) * 1000);
-
-        if (metric.equals("kWh")) {
-            for (int i = 0; i < inverterRepository.findAllByOrderByCapacity().size(); i++) {
-                if (inverterRepository.findAllByOrderByCapacity().get(i).getCapacity() > Math.round(value / 1100) * 1000) {
-                    higherValue = inverterRepository.findAllByOrderByCapacity().get(i).getCapacity();
-                    lowerValue = inverterRepository.findAllByOrderByCapacity().get(i - 1).getCapacity();
-                    break;
-                }
-            }
-        } else {
-            for (int i = 0; i < inverterRepository.findAllByOrderByCapacity().size(); i++) {
-                if (inverterRepository.findAllByOrderByCapacity().get(i).getCapacity() > Math.round(((value * 12) / 37.5) / 1100) * 1000) {
-                    higherValue = inverterRepository.findAllByOrderByCapacity().get(i).getCapacity();
-                    lowerValue = inverterRepository.findAllByOrderByCapacity().get(i - 1).getCapacity();
-                    break;
-                }
-            }
-        }
+        Map<String, Integer> nearestValue = callculateNearestValue(value, metric);
 
 
-        if (metric.equals("kWh")) {
+        if (metric.equals(kWh)) {
             if (value < 12000) {
                 returnValue = Math.round(value / 1100) * 1000;
             } else {
-                if (kWhRoundedValue - lowerValue < higherValue - kWhRoundedValue) {
-                    returnValue = lowerValue;
-                } else if(kWhRoundedValue - lowerValue > higherValue - kWhRoundedValue){
-                    returnValue = higherValue;
+                if (kWhRoundedValue - nearestValue.get(lowerValue) < nearestValue.get(higherValue) - kWhRoundedValue) {
+                    returnValue = nearestValue.get(lowerValue);
+                } else if (kWhRoundedValue - nearestValue.get(lowerValue) > nearestValue.get(higherValue) - kWhRoundedValue) {
+                    returnValue = nearestValue.get(higherValue);
                 }
             }
         } else {
             if (value < 37500) {
                 returnValue = Math.round(((value * 12) / 37.5) / 1100) * 1000;
             } else {
-                if (FtRoundedValue - lowerValue < higherValue - FtRoundedValue) {
-                    returnValue = lowerValue;
-                } else if(FtRoundedValue - lowerValue > higherValue - FtRoundedValue){
-                    returnValue = higherValue;
+                if (FtRoundedValue - nearestValue.get(lowerValue) < nearestValue.get(higherValue) - FtRoundedValue) {
+                    returnValue = nearestValue.get(lowerValue);
+                } else if (FtRoundedValue - nearestValue.get(lowerValue) > nearestValue.get(higherValue) - FtRoundedValue) {
+                    returnValue = nearestValue.get(higherValue);
                 }
             }
+
+            log.info("callculated value for inverter type: " + returnValue);
         }
-
-
-        log.info("callculated value for inverter type: " + returnValue);
         return (int) returnValue;
-    }
 
+    }
 
     public List<Inverter> callculateInverterList(int value, int phase) {
 /*
