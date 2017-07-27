@@ -35,12 +35,52 @@ public class OfferService {
     public int callculateConsumption(float value, String metric) {
 
         long returnValue = 0;
+        int higherValue = 0;
+        int lowerValue = 0;
+        float kWhRoundedValue = (value / 1100) * 1000;
+        float FtRoundedValue = (float) ((((value * 12) / 37.5) / 1100) * 1000);
 
-        if (metric.equals("Ft")){
-            returnValue =  Math.round(((value * 12) / 37.5) / 1100) * 1000;
+        if (metric.equals("kWh")) {
+            for (int i = 0; i < inverterRepository.findAllByOrderByCapacity().size(); i++) {
+                if (inverterRepository.findAllByOrderByCapacity().get(i).getCapacity() > Math.round(value / 1100) * 1000) {
+                    higherValue = inverterRepository.findAllByOrderByCapacity().get(i).getCapacity();
+                    lowerValue = inverterRepository.findAllByOrderByCapacity().get(i - 1).getCapacity();
+                    break;
+                }
+            }
         } else {
-            returnValue = Math.round(value / 1100) * 1000;
+            for (int i = 0; i < inverterRepository.findAllByOrderByCapacity().size(); i++) {
+                if (inverterRepository.findAllByOrderByCapacity().get(i).getCapacity() > Math.round(((value * 12) / 37.5) / 1100) * 1000) {
+                    higherValue = inverterRepository.findAllByOrderByCapacity().get(i).getCapacity();
+                    lowerValue = inverterRepository.findAllByOrderByCapacity().get(i - 1).getCapacity();
+                    break;
+                }
+            }
         }
+
+
+        if (metric.equals("kWh")) {
+            if (value < 12000) {
+                returnValue = Math.round(value / 1100) * 1000;
+            } else {
+                if (kWhRoundedValue - lowerValue < higherValue - kWhRoundedValue) {
+                    returnValue = lowerValue;
+                } else if(kWhRoundedValue - lowerValue > higherValue - kWhRoundedValue){
+                    returnValue = higherValue;
+                }
+            }
+        } else {
+            if (value < 37500) {
+                returnValue = Math.round(((value * 12) / 37.5) / 1100) * 1000;
+            } else {
+                if (FtRoundedValue - lowerValue < higherValue - FtRoundedValue) {
+                    returnValue = lowerValue;
+                } else if(FtRoundedValue - lowerValue > higherValue - FtRoundedValue){
+                    returnValue = higherValue;
+                }
+            }
+        }
+
 
         log.info("callculated value for inverter type: " + returnValue);
         return (int) returnValue;
