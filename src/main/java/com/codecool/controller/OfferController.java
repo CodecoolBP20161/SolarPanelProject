@@ -64,9 +64,9 @@ public class OfferController {
 
         ConsumptionForm consumption = (ConsumptionForm) session.getAttribute(CONSUMPTION);
 
-        int calculatedConsumption = offerService.callculateConsumption(consumption.getValue(), consumption.getMetric());
+        int calculatedConsumption = offerService.calculateConsumption(consumption.getValue(), consumption.getMetric());
 
-        List<Inverter> inverterList = offerService.callculateInverterList(calculatedConsumption, consumption.getPhase());
+        List<Inverter> inverterList = offerService.calculateInverterList(calculatedConsumption, consumption.getPhase());
 
         List<SolarPanel> solarPanelList = offerService.getSolarPanelList();
 
