@@ -3,25 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-    <!--<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,700,800%7CLato:300,400,700" rel="stylesheet"-->
-          <!--type="text/css">-->
-    <!--<link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css">-->
-    <!--<link href="assets/css/font-awesome.css" rel="stylesheet" type="text/css">-->
-    <!--&lt;!&ndash; Revolution Style-sheet &ndash;&gt;-->
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/rev-style.css">-->
-    <!--<link href="assets/css/style.css" rel="stylesheet" type="text/css">-->
-    <!--&lt;!&ndash;Theme Color&ndash;&gt;-->
-    <!--<link href="assets/css/theme-color/default.css" rel="stylesheet" id="theme-color" type="text/css">-->
-    {% for style in styles %}
-    <style>{
-    %
-    style
-    %
-    }</style>
-    {% endfor %}
+    <base href="http://52.15.84.238:1350/templates/assets/">
+    <!--<link href="css/theme-color/bootstrap.css" rel="stylesheet" type="text/css">-->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,700,800%7CLato:300,400,700" rel="stylesheet"
+          type="text/css">
+    <link href="css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="css/rev-style.css" rel="stylesheet" type="text/css">
+    <link href="css/navigation.css" rel="stylesheet" type="text/css">
+    <link href="css/theme.scss" rel="stylesheet" type="text/css">
+
+    <!--Theme Color-->
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="css/theme-color/default.css" rel="stylesheet" id="theme-color" type="text/css">
     <style>
+        .contact {
+            zoom: 1.5;
+        }
+
         .tables {
-            zoom: 0.8;
+            margin-left: 0;
+            zoom: 0.7;
+        }
+
+        .zoom7 {
+            zoom: 0.7;
         }
 
         .description {
@@ -33,99 +38,260 @@
             vertical-align: middle;
         }
 
+        .header-area {
+            zoom: 0.6;
+        }
+
         .nowrap {
             white-space: nowrap;
+        }
+       .middle{
+           margin-left: 13%;
+       }
+        .infobox{
+            margin-left: 15%;
+            margin-right: 15%;
+            zoom: 0.8;
+        }
+    </style>
+
+    <!--/*Bootstrap necessary style*/-->
+    <style>
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        ul,
+        ol {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        ul ul,
+        ol ul,
+        ul ol,
+        ol ol {
+            margin-bottom: 0;
+        }
+
+        li {
+            list-style-type: none;
+        }
+
+        .list-inline {
+            padding-left: 0;
+            margin-left: -5px;
+            list-style: none;
+        }
+
+        .list-inline > li {
+            display: inline-block;
+            padding-right: 5px;
+            padding-left: 5px;
+        }
+
+        .table-condensed > thead > tr > th,
+        .table-condensed > tbody > tr > th,
+        .table-condensed > tfoot > tr > th,
+        .table-condensed > thead > tr > td,
+        .table-condensed > tbody > tr > td,
+        .table-condensed > tfoot > tr > td {
+            padding: 3px;
+        }
+
+        .table > thead > tr > th,
+        .table > tbody > tr > th,
+        .table > tfoot > tr > th,
+        .table > thead > tr > td,
+        .table > tbody > tr > td,
+        .table > tfoot > tr > td {
+            padding: 8px;
+            line-height: 1.42857143;
+            vertical-align: top;
+        }
+
+        .table > thead > tr > th {
+            vertical-align: bottom;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .table > caption + thead > tr:first-child > th,
+        .table > colgroup + thead > tr:first-child > th,
+        .table > thead:first-child > tr:first-child > th,
+        .table > caption + thead > tr:first-child > td,
+        .table > colgroup + thead > tr:first-child > td,
+        .table > thead:first-child > tr:first-child > td {
+            border-top: 0;
+        }
+
+        table col[class*="col-"] {
+            position: static;
+            display: table-column;
+            float: none;
+        }
+
+        table td[class*="col-"],
+        table th[class*="col-"] {
+            position: static;
+            display: table-cell;
+            float: none;
+        }
+
+        .container {
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                width: 750px;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .container {
+                width: 970px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .container {
+                width: 1170px;
+            }
+        }
+        .row {
+            margin-right: -15px;
+            margin-left: -15px;
         }
     </style>
 
 </head>
-
-<body>
+<body class="full-intro background--dark">
+<br>
+<!--End Top bar area -->
 <section class="header-section">
-
-    <div class="row text-center">
-        <h2 class="text-center">Cég név</h2>
-    </div>
-
 </section>
-<div class="container">
-    <div class="check_form_right bg-color light-color">
-        <div class="heading-box pb-15 ">
-            <h2 class="text-center">Árajánlat</h2>
-            <span class="b-line l-left secondary_bg"></span>
+<div class="wrapper">
+    <div class="container">
+            <h2 class="text-center"><span>A Napos Oldal</span></h2>
+            <span class="b-line l-center line-h"></span>
 
-        </div>
         <p>Ajánlatszám: {{offer.id}}</p>
+        <div class="check_form_right bg-color light-color">
+            <div class="container-fluid">
+                <div class="product_order">
+                    <div class="row">
+                        <div class="col-xs-1"></div>
+                        <div class="col-xs-10">
+                            <div class="tables">
+                                <table class="table table-condensed">
+                                    <thead>
+                                    <td colspan="5" class="text-center"><strong>Termékek</strong></td>
+                                    </thead>
+                                    <thead>
+                                    <tr>
+                                        <th>Név</th>
+                                        <th>Egységár</th>
+                                        <th>Mennyiség</th>
+                                        <th class="nowrap">Összesen (Ft)</th>
+                                        <th>Megjegyzés</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for item in offer.items %}
+                                    <tr>
+                                        <td class="zoom7">{{ item.name }}</td>
+                                        <td class="nowrap">{{ numberWithCommas(item.price) }} Ft</td>
+                                        <td>{{ item.quantity }}</td>
+                                        <td class="nowrap"> {{ numberWithCommas(item.subtotal) }} Ft</td>
+                                        <td>
+                                            <div class="description">{{ item.description }}</div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
 
-        <div class="container">
-            <div class="product_order">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="tables">
-                            <table class="table table-condensed">
-                                <thead>
-                                <td colspan="5" class="text-center"><strong>Termékek</strong></td>
-                                </thead>
-                                <thead>
-                                <tr>
-                                    <th>Név</th>
-                                    <th>Egységár</th>
-                                    <th>Mennyiség</th>
-                                    <th>Összesen (Ft)</th>
-                                    <th>Megjegyzés</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for item in offer.items %}
-                                <tr>
-                                    <td>{{ item.name }}</td>
-                                    <td>{{ numberWithCommas(item.price) }} Ft</td>
-                                    <td>{{ item.quantity }}</td>
-                                    <td> {{ numberWithCommas(item.subtotal) }} Ft</td>
-                                    <td>
-                                        <div class="description">{{ item.description }}</div>
-                                    </td>
-                                </tr>
-                                {% endfor %}
+                                    </tbody>
+                                    <thead>
+                                    <td colspan="5" class="text-center"><strong>Egyéb költségek</strong></td>
+                                    </thead>
+                                    <tbody>
+                                    {% for service in offer.services %}
+                                    <tr>
+                                        <td class="zoom7">{{ service.name }}</td>
+                                        <td class="thousands nowrap">{{ numberWithCommas(service.price) }} Ft</td>
+                                        <td>{{ service.quantity }}</td>
+                                        <td class="nowrap">{{ numberWithCommas(service.subtotal) }} Ft</td>
+                                        <td>
+                                            <div class="description">{{ service.description }}</div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    <tr>
+                                        <td colspan="4" class="text-right"><strong>Nettó részösszeg:</strong></td>
+                                        <td class="nowrap">{{ numberWithCommas(offer.netTotal) }} Ft &nbsp &nbsp Áfa : {{
+                                            offer.taxRate }} %
+                                        </td>
 
-                                </tbody>
-                                <thead>
-                                <td colspan="5" class="text-center"><strong>Egyéb költségek</strong></td>
-                                </thead>
-                                <tbody>
-                                {% for service in offer.services %}
-                                <tr>
-                                    <td>{{ service.name }}</td>
-                                    <td class="thousands">{{ numberWithCommas(service.price) }} Ft</td>
-                                    <td>{{ service.quantity }}</td>
-                                    <td>{{ numberWithCommas(service.subtotal) }} Ft</td>
-                                    <td>
-                                        <div class="description">{{ service.description }}</div>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                                <tr>
-                                    <td colspan="4" class="text-right"><strong>Nettó részösszeg:</strong></td>
-                                    <td class="nowrap">{{ numberWithCommas(offer.total) }} Ft &nbsp &nbsp Áfa : {{
-                                        (offer.tax_rate - 1) * 100 }} %
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td colspan="4" class="text-right"><strong>Bruttó részösszeg:</strong></td>
-                                    <td class="nowrap">{{ numberWithCommas((offer.total * offer.tax_rate) | round)}}
-                                        Ft
-                                    </td>
-                                    <td></td>
-                                </tr>
-                                </tbody>
-                            </table>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4" class="text-right"><strong>Bruttó részösszeg:</strong></td>
+                                        <td class="nowrap">{{ numberWithCommas((offer.grossTotal) | round)}}Ft</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
+                        <div class="col-xs-1"></div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
 </div>
+<div class="infobox text-center">
+    <p>  Az ajánlat tájékoztató jellegű, a rendelés során további költségek is felmerülhetnek, amelyeket a kapcsolatfelvételt követően tudunk felmérni.</p>
+    {% if offer.isNetworkUpgradeNeeded %}
+     Figyelem! Ennek a rendszernek a telepítéséhez hálózatfejlesztésre lesz szüksége!
+    {% endif %}
+    <h4>Amennyiben felkeltettük érdeklődését, kérjük vegye fel velünk a kapcsolatot:</h4>
+</div>
+<!--Start header area-->
+<header class="header-area">
+            <div class="header-contact-info text-center contact">
+                <ul class="middle">
+                    <li>
+                        <div class="iocn-holder">
+                            <span class="fa fa-phone-square fa-3x"></span>
+                        </div>
+                        <div class="text-holder">
+                            <h6>Telefon:</h6>
+                            <p>
+                                06-12-123-45-67
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="iocn-holder">
+                            <span class="fa fa-envelope fa-3x"></span>
+                        </div>
+                        <div class="text-holder">
+                            <h6>Email:</h6>
+                            <p>
+                                email@email.hu
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+</header>
+<!--End header area-->
 </body>
 </html>

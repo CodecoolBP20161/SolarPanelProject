@@ -5,7 +5,7 @@ var fs = require('fs');
 var bodyParser = require('body-parser');
 var pdf = require('html-pdf');
 var nunjucks = require('nunjucks');
-var html = fs.readFileSync('./templates/offer_template_v1.html', 'utf8');
+var html = fs.readFileSync('./templates/offer_template_v2.html', 'utf8');
 
 
 

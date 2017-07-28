@@ -34,28 +34,28 @@
 
   "services" : [
     {
-      "name": "Service1",
+      "name": "Beszerelési költség",
       "price": 10000,
       "quantity": 10,
       "subtotal": 100000,
       "description": "Legjobb termék"
     },
     {
-      "name": "Service2",
+      "name": "Termékdíj",
       "price": 10000,
       "quantity": 10,
       "subtotal": 100000,
       "description": "Legjobb termék"
     },
     {
-      "name": "Service3",
+      "name": "Engedélyeztetés",
       "price": 10000,
       "quantity": 10,
       "subtotal": 100000,
       "description": "Legjobb termék"
     },
     {
-      "name": "Service4",
+      "name": "Előzetes felmérés díja",
       "price": 10000,
       "quantity": 10,
       "subtotal": 100000,
@@ -71,8 +71,12 @@
 
   ],
 
-  "tax_rate": 1.27,
+  "isNetworkUpgradeNeeded": true,
 
-  "total": 9999999
+  "taxRate": 27,
+
+  "netTotal": 9999999,
+
+  "grossTotal": 9999999
 
 }
