@@ -21,7 +21,6 @@ public class OfferService {
     private SolarPanelRepository solarPanelRepository;
 
     private final String kWh = "kWh";
-    private final String Ft = "Ft";
     private final String lowerValue = "lowerValue";
     private final String higherValue = "higherValue";
 
@@ -55,7 +54,7 @@ public class OfferService {
         float roundedValue = metric.equals(kWh) ? kWhRoundedValue : FtRoundedValue;
         Map<String, Integer> nearestValue;
 
-        if (!metric.equals(Ft)) {
+        if (metric.equals(kWh)) {
             if (value < 12000 ) {
                 returnValue = Math.round(value / 1100) * 1000;
             } else if(value >= 12000 && value <= 21999){
@@ -85,9 +84,6 @@ public class OfferService {
     }
 
     public List<Inverter> calculateInverterList(int value, int phase) {
-/*
-        List<Inverter> inverterList = inverterRepository.findByCustomerValue(value, phase);
-*/
 
         return inverterRepository.findByCustomerValue(value, phase);
     }
