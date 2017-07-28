@@ -60,8 +60,14 @@ public class OfferController {
             return "redirect:/ajanlat/1";
         }
 
+        //findAllByOrderByCapacity
+
         ConsumptionForm consumption = (ConsumptionForm) session.getAttribute(CONSUMPTION);
-        List<Inverter> inverterList = offerService.callculateInverterList((int) consumption.getValue());
+
+        int calculatedConsumption = offerService.calculateConsumption(consumption.getValue(), consumption.getMetric());
+
+        List<Inverter> inverterList = offerService.calculateInverterList(calculatedConsumption, consumption.getPhase());
+
         List<SolarPanel> solarPanelList = offerService.getSolarPanelList();
 
         DeviceForm pAndIForm = session.getAttribute(DEVICE) == null ?

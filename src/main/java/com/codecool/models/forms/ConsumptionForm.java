@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class ConsumptionForm {
     private String metric;
-    private double value;
+    private Integer value;
     private int phase = 1;
     private CompanyEnum company = CompanyEnum.Cég1;
 }

@@ -34,17 +34,13 @@ public class DataLoader {
 
     private void loadSolarPanels() {
         List<SolarPanel> solarPanelList = new ArrayList<>();
+
         solarPanelList.add(new SolarPanel("270W-os Amerisolar polikristályos napelem", "van", 39110, 1.27, 270, "12év teljeskörű garancia, 12 évre 91%-os telj.gar., 30 évre 80%-os telj.gar."));
-        solarPanelList.add(new SolarPanel("260W-os Amerisolar polikristályos napelem", "van", 39110, 1.27, 260, "12év teljeskörű garancia, 12 évre 91%-os telj.gar., 30 évre 80%-os telj.gar."));
-        solarPanelList.add(new SolarPanel("265W-os Amerisolar polikristályos napelem", "nincs", 37000, 1.27, 265, ""));
         solarPanelList.add(new SolarPanel("270W-os Heckert Solar polikristályos napelem", "nincs", 50000, 1.20, 270, ""));
-        solarPanelList.add(new SolarPanel("260W-os polikristályos napelem", "nincs", 40000, 1.20, 260, ""));
         solarPanelList.add(new SolarPanel("270W-os Heckert Solar polikristályos napelem", "nincs", 50000, 1.20, 270, ""));
         solarPanelList.add(new SolarPanel("ALEO Solar HE Tech 305W napelem", "nincs", 60000, 1.20, 305, ""));
         solarPanelList.add(new SolarPanel("270W-os polikristályos napelem", "van", 40000, 1.20, 270, ""));
-        solarPanelList.add(new SolarPanel("265W-os polikristályos napelem", "nincs", 40000, 1.20, 265, ""));
         solarPanelList.add(new SolarPanel("AXIworldplus SE 270W", "nincs", 55000, 1.20, 270, ""));
-        solarPanelList.add(new SolarPanel("265W-os polikristályos napelem", "nincs", 40000, 1.20, 265, ""));
 
         for (SolarPanel item : solarPanelList) {
             solarPanelRep.save(item);
