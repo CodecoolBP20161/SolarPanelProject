@@ -1,6 +1,7 @@
 package com.codecool.controller;
 
 import com.codecool.models.Inverter;
+import com.codecool.models.LineItem;
 import com.codecool.models.SolarPanel;
 import com.codecool.models.forms.ConsumptionForm;
 import com.codecool.models.forms.DeviceForm;
@@ -8,13 +9,17 @@ import com.codecool.models.forms.EmailForm;
 import com.codecool.repositories.InverterRepository;
 import com.codecool.repositories.SolarPanelRepository;
 import com.codecool.services.OfferService;
+import com.codecool.services.SolarPanelService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -25,6 +30,7 @@ public class OfferController {
     private SolarPanelRepository solarPanelRepository;
     private InverterRepository inverterRepository;
     private OfferService offerService;
+    private SolarPanelService solarPanelService;
     private final String CONSUMPTION = "consumption";
     private final String DEVICE = "deviceForm";
     private final String EMAIL = "email";
@@ -32,10 +38,11 @@ public class OfferController {
     private final String OFFER = "offer";
 
     @Autowired
-    public OfferController(SolarPanelRepository solarPanelRepository, InverterRepository inverterRepository, OfferService offerService) {
+    public OfferController(SolarPanelRepository solarPanelRepository, InverterRepository inverterRepository, OfferService offerService, SolarPanelService solarPanelService) {
         this.solarPanelRepository = solarPanelRepository;
         this.inverterRepository = inverterRepository;
         this.offerService = offerService;
+        this.solarPanelService = solarPanelService;
     }
 
     @GetMapping("/ajanlat/1")
@@ -70,11 +77,22 @@ public class OfferController {
 
         List<SolarPanel> solarPanelList = offerService.getSolarPanelList();
 
+        List<LineItem> solarPanelLineItems = new ArrayList<>();
+
         DeviceForm pAndIForm = session.getAttribute(DEVICE) == null ?
                 new DeviceForm() : (DeviceForm) session.getAttribute(DEVICE);
 
+        LineItem solarPanelItem;
+
+        for (SolarPanel solarPanel : solarPanelList) {
+            solarPanelItem = new LineItem(solarPanel);
+            solarPanelItem.setQuantity(solarPanelService.callculateSolarPanelPiece(consumption.getValue(), consumption.getMetric(), solarPanel.getCapacity()));
+            solarPanelLineItems.add(solarPanelItem);
+        }
+
         model.addAttribute(DEVICE, pAndIForm);
         model.addAttribute("solarPanelList", solarPanelList);
+        model.addAttribute("solarPanelLineItems",solarPanelLineItems);
         model.addAttribute("inverterList", inverterList);
         model.addAttribute(STEP, '2');
         return "offer";
