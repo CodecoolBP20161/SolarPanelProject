@@ -29,9 +29,8 @@
                 <div class="row">
                     <div class="col-sm-12 center">
                         <div class="alert alert-danger" hidden="hidden" id="alert-phase">
-                            <strong>Figyelem!</strong> Amennyiben 5kWh feletti az éves fogyasztása,
-                            és egyfázisú az elektromos hálózata, hálózatfejlesztésre lesz szüksége a rendszer
-                            telepítéséhez!
+                            <strong>Figyelem!</strong> Amennyiben 5 kw feletti napelemes kiserőművet szeretne és
+                            1 fázisu az elektromos hálózata, hálózat felylesztésre van szükség a rendszer telepítéséhez!
                         </div>
                     </div>
 
@@ -211,6 +210,8 @@
                     <div th:each="inverter : ${inverterList}">
                         <div class="carousel-item col-sm-4">
                             <div class="testimonial-block cyan-background panel" th:data="${inverter.id}">
+                                <h3 class="testimonial-author" th:text="${inverter.brand}"></h3>
+                                <br>
                                 <h3 class="testimonial-author" th:text="${inverter.name}"></h3>
                                 <hr class="small-divider">
                                 <p>
@@ -242,14 +243,18 @@
                      data-navigation="true" data-desktopsmall="3" data-tablet="3" data-mobile="1">
 
                     <!--Listing given Solar Panels-->
-                    <div th:each="panel:${solarPanelList}">
+                    <div th:each="panel:${solarPanelLineItems}">
                         <div class="carousel-item col-sm-4">
                             <div class="testimonial-block cyan-background inverter" th:data="${panel.id}">
                                 <h3 class="testimonial-author" th:text="${panel.name}"></h3>
+
                                 <hr class="small-divider">
                                 <!--TODO: th:text="${panel.marketingText}" valami ilyesmit kellene iderakni-->
                                 <p>Ide mit akarunk írni?</p>
-                                <h4 class="testimonial-price" th:text="'Egységár: '+${panel.price}+'Ft'"></h4>
+                                <h5 class="testimonial-price" th:text="'Szükséges mennyiség: '+${panel.quantity}+'db'"></h5>
+                                <h5 class="testimonial-price" th:text="'Egységár: '+${panel.price}+'Ft'"></h5>
+                                <h4 class="testimonial-price" th:text="'Összesen: '+${panel.total}+'Ft'"></h4>
+
                                 <!--TODO: Ide kellene a quantity már kiszámolva, lehet field kellene belőle-->
                                 <!--<h4 class="testimonial-price" th:text="${panel.quantityNeeded}"></h4>-->
                             </div>
