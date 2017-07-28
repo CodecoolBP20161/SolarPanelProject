@@ -53,18 +53,20 @@ public class OfferService {
         float kWhRoundedValue = (value / 1100) * 1000;
         float FtRoundedValue = (float) ((((value * 12) / 37.5) / 1100) * 1000);
         float roundedValue = metric.equals(kWh) ? kWhRoundedValue : FtRoundedValue;
-        Map<String, Integer> nearestValue = calculateNearestValue(value, metric);
+        Map<String, Integer> nearestValue;
 
         if (!metric.equals(Ft)) {
             if (value < 12000 ) {
                 returnValue = Math.round(value / 1100) * 1000;
             } else if(value >= 12000 && value <= 21999){
+                nearestValue = calculateNearestValue(value, metric);
                 returnValue = calculateValueToInverterFilter(roundedValue, nearestValue.get(higherValue), nearestValue.get(lowerValue));
             }
         } else {
             if (value < 37500) {
                 returnValue = Math.round(((value * 12) / 37.5) / 1100) * 1000;
             } else if(value >= 37500 && value <= 68746){
+                nearestValue = calculateNearestValue(value, metric);
                 returnValue = calculateValueToInverterFilter(roundedValue, nearestValue.get(higherValue), nearestValue.get(lowerValue));
             }
         }
