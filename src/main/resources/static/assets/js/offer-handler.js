@@ -84,6 +84,7 @@ $(document).ready(function () {
         event.preventDefault();
 
         var req = new XMLHttpRequest();
+        // "http://52.15.84.238:1350/api/printpdf1"
         req.open("POST", "http://52.15.84.238:1350/api/printpdf1", true);
         req.responseType = 'arraybuffer';
         var data = JSON.stringify({
@@ -92,28 +93,28 @@ $(document).ready(function () {
             "items" :
                 [
                     {
-                        "name": "Termék1",
+                        "name": "270W-os Amerisolar polikristályos napelem",
                         "price": 10000,
                         "quantity": 10,
                         "subtotal": 100000,
                         "description": "Legjobb termék"
                     },
                     {
-                        "name": "Fasza3",
+                        "name": "270W-os Heckert Solar polikristályos napelem",
                         "price": 10000,
                         "quantity": 10,
                         "subtotal": 100000,
                         "description": "Legjobb termék"
                     },
                     {
-                        "name": "Termék4",
+                        "name": "Solaredge SE2200-ER-01+wifi",
                         "price": 10000,
                         "quantity": 10,
                         "subtotal": 100000,
                         "description": "Legjobb termék"
                     },
                     {
-                        "name": "Termék5",
+                        "name": "Growatt 5000MTL-S inverter",
                         "price": 10000,
                         "quantity": 10,
                         "subtotal": 100000,
@@ -161,9 +162,12 @@ $(document).ready(function () {
 
                 ],
 
-            "tax_rate": 1.27,
+            "isNetworkUpgradeNeeded": true,
 
-            "total": 9999999
+            "taxRate": 27,
+
+            "netTotal": 9999999,
+            "grossTotal": 124343
 
         });
         req.setRequestHeader("Content-type", "application/json");
@@ -177,7 +181,7 @@ $(document).ready(function () {
             // If you want to download that shit, uncomment this
             var link = document.createElement('a');
             link.href = fileURL;
-            link.download="SunnyHome_ajanlat_id123123" + new Date() + ".pdf";
+            link.download="NaposOlda._ajanlat_id" + ".pdf";
             link.click();
         };
 
