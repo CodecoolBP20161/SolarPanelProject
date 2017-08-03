@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--Production imports-->
+
+    <base href="http://52.15.84.238:1350/templates/assets/">
+    <link href="css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="css/bootstrap_real.css" rel="stylesheet" type="text/css">
+
+    <!--end production imports-->
+
+</head>
+<body>
+<!--Header section-->
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="header-panel"><img src="http://via.placeholder.com/1000x30/6aaf08/6aaf08"></div>
+        </div>
+        <br>
+        <div class="row imag">
+            <div class="col-xs-5">
+                <div class="row home">
+                    <div class="h4 text-center">Stabil-Invest Kft.</div>
+                </div>
+                <div class="col-xs-12 text-center">
+                    <h6>3500 Miskolc, <br> Dóczy József utca 30.</h6>
+                    <h6>+36 20 323-4567</h6>
+                    <h6>info@email.com</h6>
+                </div>
+            </div>
+            <div class="col-xs-3">
+
+            </div>
+            <div class="col-xs-4">
+                <img class="pull-right small-marg" src="http://via.placeholder.com/100x100">
+            </div>
+        </div>
+    </div>
+</section>
+<!--Table section-->
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h6 class="offer-id">Ajánlatszám: {{offer.id}}</h6>
+                <table class="table table-hover tables">
+                    <thead>
+                    <td colspan="5" class="text-center"><strong>Termékek</strong></td>
+                    </thead>
+                    <thead>
+                    <tr>
+                        <th class="description">Név</th>
+                        <th class="description">Egységár</th>
+                        <th class="description">Mennyiség</th>
+                        <th class="nowrap description">Összesen (Ft)</th>
+                        <th class="description">Megjegyzés</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in offer.items %}
+                    <tr>
+                        <td class="zoom7">{{ item.name }}</td>
+                        <td class="thousands nowrap description">{{ numberWithCommas(item.price) }} Ft</td>
+                        <td class="description">{{ item.quantity }} db</td>
+                        <td class="nowrap description"> {{ numberWithCommas(item.subtotal) }} Ft</td>
+                        <td>
+                            <div class="nowrap description">{{ item.description }}</div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                    </tbody>
+                    <thead>
+                    <td colspan="5" class="text-center"><strong>Egyéb költségek</strong></td>
+                    </thead>
+                    <tbody>
+                    {% for service in offer.services %}
+                    <tr>
+                        <td class="zoom7">{{ service.name }}</td>
+                        <td class="thousands nowrap description">{{ numberWithCommas(service.price) }} Ft</td>
+                        <td class="description">{{ service.quantity }} db</td>
+                        <td class="thousands nowrap description">{{ numberWithCommas(service.subtotal) }} Ft</td>
+                        <td>
+                            <div class="nowrap description">{{ service.description }}</div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan="3" ></td>
+                        <td><strong>Nettó ár:</strong></td>
+                        <td class="thousands nowrap description">{{ numberWithCommas(offer.netTotal) }} Ft &nbsp Áfa : {{
+                            offer.taxRate }} %
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td colspan="3" ></td>
+                        <td><strong>Bruttó ár:</strong></td>
+                        <td class="nowrap">{{ numberWithCommas((offer.grossTotal) | round)}}Ft</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <p class="zoom7 offer-id">
+                    Az ajánlat tájékoztató jellegű, a rendelés során további költségek is felmerülhetnek, amelyeket a kapcsolatfelvételtkövetően tudunk felmérni.
+                </p>
+                {% if offer.isNetworkUpgradeNeeded %}
+                <p class="zoom7 offer-id">Figyelem! Ennek a rendszernek a telepítéséhez hálózatfejlesztésre lesz szüksége!</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!--Footer section-->
+<section>
+            <div class="footer"><img  src="http://via.placeholder.com/1000x30/6aaf08/6aaf08"></div>
+</section>
+
+</body>
+</html>
