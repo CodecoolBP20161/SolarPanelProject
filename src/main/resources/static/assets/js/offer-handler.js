@@ -107,6 +107,27 @@ $(document).ready(function () {
                         "description": "Legjobb termék"
                     },
                     {
+                        "name": "270W-os Heckert Solar polikristályos napelem",
+                        "price": 10000,
+                        "quantity": 10,
+                        "subtotal": 100000,
+                        "description": "Legjobb termék"
+                    },
+                    {
+                        "name": "270W-os Heckert Solar polikristályos napelem",
+                        "price": 10000,
+                        "quantity": 10,
+                        "subtotal": 100000,
+                        "description": "Legjobb termék"
+                    },
+                    {
+                        "name": "270W-os Heckert Solar polikristályos napelem",
+                        "price": 10000,
+                        "quantity": 10,
+                        "subtotal": 100000,
+                        "description": "Legjobb termék"
+                    },
+                    {
                         "name": "Solaredge SE2200-ER-01+wifi",
                         "price": 10000,
                         "quantity": 10,
@@ -181,7 +202,7 @@ $(document).ready(function () {
             // If you want to download that shit, uncomment this
             var link = document.createElement('a');
             link.href = fileURL;
-            link.download="NaposOlda._ajanlat_id" + ".pdf";
+            link.download="NaposOldal._ajanlat_id" + ".pdf";
             link.click();
         };
 
