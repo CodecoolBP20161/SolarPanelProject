@@ -5,9 +5,7 @@ var path = require("path");
 var fs = require('fs');
 var templateRoute = path.resolve(__dirname, 'templates/');
 var cssRoute = path.resolve(__dirname, 'templates/assets/css/');
-// var offer_template = '/offer_template.html';
-var offer_template_v1 = '/offer_template_v1.html';
-var offer_template_v2 = '/offer_template_v2.html';
+var offer_template_v1 = '/real_template.html';
 
 var loadStyles = function() {
 
@@ -44,8 +42,9 @@ function numberWithCommas(x) {
 config = {
     "format": "A4",        // allowed units: A3, A4, A5, Legal, Letter, Tabloid
     "orientation": "portrait",
+    "border": "0",
     // Rendering options
-    "base": "file://http://52.15.84.238:1350/templates/assets/"// Base path that's used to load files (images, css, js) when they aren't referenced using a host
+    "base": "file://http://52.15.84.238:1350/templates/assets/" // Base path that's used to load files (images, css, js) when they aren't referenced using a host
 };
 
 exports.printpdf1 = function (req, res) {
