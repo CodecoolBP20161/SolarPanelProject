@@ -5,9 +5,6 @@ var fs = require('fs');
 var bodyParser = require('body-parser');
 var pdf = require('html-pdf');
 var nunjucks = require('nunjucks');
-
-
-
 var routes = require('./routes');
 var app = express();
 
@@ -21,8 +18,6 @@ var port = process.env.port || 1350;
 app.use(express.static(__dirname));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-
 
 // Add headers for CORS
 app.use(function (req, res, next) {
