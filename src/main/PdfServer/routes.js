@@ -5,33 +5,9 @@ var path = require("path");
 var fs = require('fs');
 var templateRoute = path.resolve(__dirname, 'templates/');
 var cssRoute = path.resolve(__dirname, 'templates/assets/css/');
-var offer_template_v1 = '/real_template.html';
+var templateNaposOldal = '/napos-oldal_template.html';
 
 var loadStyles = function() {
-
-
-// Style files loaded
-// var bootstrap = fs.readFileSync(cssRoute + '/bootstrap.min.css', 'utf-8');
-// var flatIcon = fs.readFileSync(cssRoute + '/flaticon.css', 'utf-8');
-// var fontAwesome = fs.readFileSync(cssRoute + '/font-awesome.css', 'utf-8');
-// var style = fs.readFileSync(cssRoute + '/style.css', 'utf-8');
-// var revStyle = fs.readFileSync(cssRoute + '/rev-style.css', 'utf-8');
-// var themeColor = fs.readFileSync(cssRoute + '/theme-color/bootstrap.css', 'utf-8');
-//
-// var styles = {
-//     list: [
-//
-//          bootstrap,
-//         flatIcon,
-//         fontAwesome,
-//         style,
-//         themeColor,
-//         revStyle,
-//         example
-//     ]
-// };
-// return styles;
-// };
 };
 
 function numberWithCommas(x) {
@@ -50,7 +26,7 @@ config = {
 exports.printpdf1 = function (req, res) {
     var offer = req.body;
     var styles = loadStyles();
-    var renderedHtml = appmodule.env.render(templateRoute + offer_template_v1, {
+    var renderedHtml = appmodule.env.render(templateRoute + templateNaposOldal, {
         numberWithCommas: numberWithCommas,
         offer: offer,
         css: styles

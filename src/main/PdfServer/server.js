@@ -5,7 +5,6 @@ var fs = require('fs');
 var bodyParser = require('body-parser');
 var pdf = require('html-pdf');
 var nunjucks = require('nunjucks');
-var html = fs.readFileSync('./templates/offer_template_v2.html', 'utf8');
 
 
 
@@ -22,7 +21,6 @@ var port = process.env.port || 1350;
 app.use(express.static(__dirname));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use('/static', express.static('static'));
 
 
 
@@ -46,7 +44,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.post('/api/printpdf1', routes.printpdf1);
+app.post('/api/getofferpdf', routes.printpdf1);
 
 app.listen(port);
 console.log('node server for html-pdf is running on port ' + port);
