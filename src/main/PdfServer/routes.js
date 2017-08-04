@@ -10,7 +10,6 @@ function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-
 config = {
     "format": "A4",        // allowed units: A3, A4, A5, Legal, Letter, Tabloid
     "orientation": "portrait",
