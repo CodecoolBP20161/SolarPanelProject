@@ -34,7 +34,7 @@
 
             </div>
             <div class="col-xs-4">
-                <img class="pull-right small-marg" src="http://via.placeholder.com/100x100">
+                <img class="pull-right small-marg" src="http://via.placeholder.com/130x130">
             </div>
         </div>
     </div>
@@ -62,7 +62,7 @@
                     {% for item in offer.items %}
                     <tr>
                         <td class="zoom7">{{ item.name }}</td>
-                        <td class="thousands nowrap description">{{ numberWithCommas(item.price) }} Ft</td>
+                        <td class="nowrap description">{{ numberWithCommas(item.price) }} Ft</td>
                         <td class="description">{{ item.quantity }} db</td>
                         <td class="nowrap description"> {{ numberWithCommas(item.subtotal) }} Ft</td>
                         <td>
@@ -79,36 +79,35 @@
                     {% for service in offer.services %}
                     <tr>
                         <td class="zoom7">{{ service.name }}</td>
-                        <td class="thousands nowrap description">{{ numberWithCommas(service.price) }} Ft</td>
+                        <td class="nowrap description">{{ numberWithCommas(service.price) }} Ft</td>
                         <td class="description">{{ service.quantity }} db</td>
-                        <td class="thousands nowrap description">{{ numberWithCommas(service.subtotal) }} Ft</td>
+                        <td class="nowrap description">{{ numberWithCommas(service.subtotal) }} Ft</td>
                         <td>
                             <div class="nowrap description">{{ service.description }}</div>
                         </td>
                     </tr>
                     {% endfor %}
                     <tr>
-                        <td colspan="3" ></td>
-                        <td><strong>Nettó ár:</strong></td>
-                        <td class="thousands nowrap description">{{ numberWithCommas(offer.netTotal) }} Ft &nbsp Áfa : {{
-                            offer.taxRate }} %
+                        <td></td>
+                        <td colspan="2" class="nowrap description"><strong>Áfa</strong> : {{ offer.taxRate }} %</td>
+                        <td class="nowrap description"><strong>Nettó ár:</strong></td>
+                        <td class="nowrap description">{{ numberWithCommas(offer.netTotal) }} Ft
                         </td>
-
                     </tr>
                     <tr>
                         <td colspan="3" ></td>
-                        <td><strong>Bruttó ár:</strong></td>
-                        <td class="nowrap">{{ numberWithCommas((offer.grossTotal) | round)}}Ft</td>
+                        <td class="nowrap description"><strong>Bruttó ár:</strong></td>
+                        <td class="nowrap description">{{ numberWithCommas((offer.grossTotal) | round)}}Ft</td>
                     </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-
+    <br>
         <div class="row">
             <div class="col-xs-12">
                 <p class="zoom7 offer-id">
-                    Az ajánlat tájékoztató jellegű, a rendelés során további költségek is felmerülhetnek, amelyeket a kapcsolatfelvételtkövetően tudunk felmérni.
+                    Az ajánlat tájékoztató jellegű, a rendelés során további költségek is felmerülhetnek, amelyeket a kapcsolatfelvételt követően tudunk felmérni.
                 </p>
                 {% if offer.isNetworkUpgradeNeeded %}
                 <p class="zoom7 offer-id">Figyelem! Ennek a rendszernek a telepítéséhez hálózatfejlesztésre lesz szüksége!</p>
@@ -120,9 +119,7 @@
 
 
 <!--Footer section-->
-<section>
-            <div class="footer"><img  src="http://via.placeholder.com/1000x30/6aaf08/6aaf08"></div>
-</section>
+<div class="footer"><img  src="http://via.placeholder.com/1000x30/6aaf08/6aaf08"></div>
 
 </body>
 </html>
