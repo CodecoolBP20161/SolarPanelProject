@@ -4,11 +4,7 @@ var nunjucks = require("nunjucks");
 var path = require("path");
 var fs = require('fs');
 var templateRoute = path.resolve(__dirname, 'templates/');
-var cssRoute = path.resolve(__dirname, 'templates/assets/css/');
 var templateNaposOldal = '/napos-oldal_template.html';
-
-var loadStyles = function() {
-};
 
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -25,12 +21,11 @@ config = {
 
 exports.printpdf1 = function (req, res) {
     var offer = req.body;
-    var styles = loadStyles();
     var renderedHtml = appmodule.env.render(templateRoute + templateNaposOldal, {
         numberWithCommas: numberWithCommas,
-        offer: offer,
-        css: styles
+        offer: offer
     });
+
     pdf.create(renderedHtml, config).toBuffer(function (err, buffer) {
         if (err) console.log(err);
         else {
