@@ -1,8 +1,10 @@
 package com.codecool.services;
 
 
+import com.codecool.models.AdditionalStuff;
 import com.codecool.models.Inverter;
 import com.codecool.models.SolarPanel;
+import com.codecool.repositories.AdditionalStuffRepository;
 import com.codecool.repositories.InverterRepository;
 import com.codecool.repositories.SolarPanelRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -19,22 +21,27 @@ public class DataLoader {
 
     private InverterRepository inverterRep;
     private SolarPanelRepository solarPanelRep;
+    private AdditionalStuffRepository additionalStuffRep;
 
     private final String SOLAREDGE = "Solaredge";
     private final String GROWATT = "Growatt";
     private final String FRONIUS = "Fronius";
+    private final String SERVICEFEE = "service";
+    private final String ITEMFEE = "item";
 
 
     @Autowired
-    public DataLoader(InverterRepository inverterRep, SolarPanelRepository solarPanelRep) {
+    public DataLoader(InverterRepository inverterRep, SolarPanelRepository solarPanelRep, AdditionalStuffRepository additionalStuffRep) {
         this.solarPanelRep = solarPanelRep;
         this.inverterRep = inverterRep;
+        this.additionalStuffRep = additionalStuffRep;
     }
 
     @PostConstruct
     public void loadData() {
         loadSolarPanels();
         loadInverters();
+        loadAdditionalStuff();
     }
 
     private void loadSolarPanels() {
@@ -125,4 +132,45 @@ public class DataLoader {
             inverterRep.save(item);
         }
     }
+
+    private void loadAdditionalStuff() {
+        List<AdditionalStuff> stuffs = new ArrayList<>();
+        stuffs.add(new AdditionalStuff("Tartószerkezet szett (4panel/szett)", "", 30000, 0, ITEMFEE ));
+        stuffs.add(new AdditionalStuff("AC/DC túlfesz és túláram védelem", "", 65000, 1, ITEMFEE ));
+        stuffs.add(new AdditionalStuff("AC/DC túlfesz és túláram védelem", "", 85000, 3, ITEMFEE ));
+        stuffs.add(new AdditionalStuff("Szolár kábel /méter/", "Tervezett mennyiség", 220, 0, ITEMFEE ));
+        stuffs.add(new AdditionalStuff("MC4 Csatlakozó (pár)", "", 600, 0, ITEMFEE ));
+        stuffs.add(new AdditionalStuff("AC vezeték 3x4mm2", "Tervezett mennyiség", 600, 1, ITEMFEE ));
+        stuffs.add(new AdditionalStuff("AC vezeték 5x4mm2", "Tervezett mennyiség", 900, 3, ITEMFEE ));
+        stuffs.add(new AdditionalStuff("16mm2-es MKH vezeték", "Tervezett mennyiség", 440, 0, ITEMFEE ));
+        stuffs.add(new AdditionalStuff("Termék díj", "", 2110, 0, SERVICEFEE));
+        stuffs.add(new AdditionalStuff("Tervezés, engedélyeztetés", "", 45000, 0, SERVICEFEE));
+
+        for (AdditionalStuff item : stuffs) {
+            additionalStuffRep.save(item);
+        }
+    }
+
+/*    public Map<Integer, MandatoryFee> getMandatoryFee(int consumption) {
+        Map<Integer, MandatoryFee> expense = new HashMap<>();
+        expense.put(1, new MandatoryFee("Termék díj", 2110));
+        expense.put(2, new MandatoryFee("Tervezés, engedélyeztetés", 45000));
+        int installationFee = 0;
+
+        if (consumption < 4000) {
+            installationFee = 100000;
+        } else if (consumption >= 4000 && consumption < 6000) {
+            installationFee = 110000;
+        } else if (consumption >= 6000 && consumption < 8000) {
+            installationFee = 120000;
+        } else if (consumption >= 8000 && consumption < 10000) {
+            installationFee = 130000;
+        } else {
+            installationFee = 150000;
+        }
+        expense.put(3, new MandatoryFee("Kivitelezés", installationFee));
+        return expense;
+    }*/
+
+
 }

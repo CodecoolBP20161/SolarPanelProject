@@ -113,10 +113,21 @@ public class OfferController {
         EmailForm email = session.getAttribute(EMAIL) == null ?
                 new EmailForm() : (EmailForm) session.getAttribute(EMAIL);
 
+        ConsumptionForm consumption = (ConsumptionForm) session.getAttribute(CONSUMPTION);
+
+
         if (session.getAttribute(DEVICE) == null || deviceForm.getInverterId() == null
                 || deviceForm.getPanelId() == null) {
             log.info("Step2 is not done, redirecting to ajanlat/2" + deviceForm.getInverterId() + deviceForm.getPanelId());
             return "redirect:/ajanlat/2";
+        }
+
+
+        List<LineItem> offerItem =  offerService.getOffer(consumption.getValue(), consumption.getMetric(), consumption.getPhase(),
+                Integer.parseInt(deviceForm.getPanelId()), Integer.parseInt(deviceForm.getInverterId()));
+
+        for (LineItem offer1 : offerItem) {
+            System.out.println(offer1.getName()+ " " + offer1.getPrice() + " " + offer1.getQuantity());
         }
 
         model.addAttribute("email", email);
