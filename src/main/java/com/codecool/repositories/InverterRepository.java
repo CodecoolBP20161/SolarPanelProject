@@ -18,7 +18,7 @@ public interface InverterRepository extends JpaRepository<Inverter, Integer> {
 
     @Query(value = "SELECT inv FROM Inverter inv " +
             "WHERE inv.phase = :phase  AND inv.capacity >= :capacity AND inv.capacity <= (:capacity + 999) " +
-            "ORDER BY inv.price ASC")
+            "ORDER BY inv.price ASC, inv.brand ASC")
     List<Inverter> findByCustomerValue(@Param("capacity") int capacity, @Param("phase") int phase);
 
 

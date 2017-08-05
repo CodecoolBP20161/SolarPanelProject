@@ -1,6 +1,7 @@
 package com.codecool.controller;
 
 import com.codecool.models.Inverter;
+import com.codecool.models.LineItem;
 import com.codecool.models.Offer;
 import com.codecool.models.SolarPanel;
 import com.codecool.models.forms.ConsumptionForm;
@@ -9,6 +10,7 @@ import com.codecool.models.forms.EmailForm;
 import com.codecool.repositories.InverterRepository;
 import com.codecool.repositories.SolarPanelRepository;
 import com.codecool.services.OfferService;
+import com.codecool.services.SolarPanelService;
 import com.codecool.services.PdfService;
 import com.codecool.models.PdfServerException;
 import com.codecool.services.email.EmailService;
@@ -17,10 +19,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -33,6 +38,7 @@ public class OfferController {
     private InverterRepository inverterRepository;
     private EmailService emailService;
     private OfferService offerService;
+    private SolarPanelService solarPanelService;
     private PdfService pdfService;
 
     private final String CONSUMPTION = "consumption";
@@ -45,10 +51,11 @@ public class OfferController {
 
     @Autowired
     public OfferController(SolarPanelRepository solarPanelRepository, InverterRepository inverterRepository,
-                           OfferService offerService, EmailService emailService, PdfService pdfService) {
+                           OfferService offerService, SolarPanelService solarPanelService, PdfService pdfService, EmailService emailService) {
         this.solarPanelRepository = solarPanelRepository;
         this.inverterRepository = inverterRepository;
         this.offerService = offerService;
+        this.solarPanelService = solarPanelService;
         this.emailService = emailService;
         this.pdfService = pdfService;
     }
@@ -88,11 +95,22 @@ public class OfferController {
 
         List<SolarPanel> solarPanelList = offerService.getSolarPanelList();
 
+        List<LineItem> solarPanelLineItems = new ArrayList<>();
+
         DeviceForm pAndIForm = session.getAttribute(DEVICE) == null ?
                 new DeviceForm() : (DeviceForm) session.getAttribute(DEVICE);
 
+        LineItem solarPanelItem;
+
+        for (SolarPanel solarPanel : solarPanelList) {
+            solarPanelItem = new LineItem(solarPanel);
+            solarPanelItem.setQuantity(solarPanelService.callculateSolarPanelPiece(consumption.getValue(), consumption.getMetric(), solarPanel.getCapacity()));
+            solarPanelLineItems.add(solarPanelItem);
+        }
+
         model.addAttribute(DEVICE, pAndIForm);
         model.addAttribute("solarPanelList", solarPanelList);
+        model.addAttribute("solarPanelLineItems",solarPanelLineItems);
         model.addAttribute("inverterList", inverterList);
         model.addAttribute(STEP, '2');
         return "offer";
@@ -113,9 +131,19 @@ public class OfferController {
         EmailForm email = session.getAttribute(EMAIL) == null ?
                 new EmailForm() : (EmailForm) session.getAttribute(EMAIL);
 
+        ConsumptionForm consumption = (ConsumptionForm) session.getAttribute(CONSUMPTION);
+
         if (session.getAttribute(DEVICE) == null || !deviceForm.isvalid()) {
             log.info("Step2 is not done, redirecting to ajanlat/2, InvID: " + deviceForm.getInverterId() + " PanelID: " + deviceForm.getPanelId());
             return "redirect:/ajanlat/2";
+        }
+
+
+        List<LineItem> offerItem =  offerService.getOffer(consumption.getValue(), consumption.getMetric(), consumption.getPhase(),
+                Integer.parseInt(deviceForm.getPanelId()), Integer.parseInt(deviceForm.getInverterId()));
+
+        for (LineItem offer1 : offerItem) {
+            System.out.println(offer1.getName()+ " " + offer1.getPrice() + " " + offer1.getQuantity());
         }
 
         model.addAttribute("email", email);
