@@ -4,6 +4,7 @@ package com.codecool.services;
 import com.codecool.models.AdditionalStuff;
 import com.codecool.models.Inverter;
 import com.codecool.models.SolarPanel;
+import com.codecool.models.enums.ItemTypeEnum;
 import com.codecool.repositories.AdditionalStuffRepository;
 import com.codecool.repositories.InverterRepository;
 import com.codecool.repositories.SolarPanelRepository;
@@ -26,8 +27,6 @@ public class DataLoader {
     private final String SOLAREDGE = "Solaredge";
     private final String GROWATT = "Growatt";
     private final String FRONIUS = "Fronius";
-    private final String SERVICEFEE = "service";
-    private final String ITEMFEE = "item";
 
 
     @Autowired
@@ -135,16 +134,16 @@ public class DataLoader {
 
     private void loadAdditionalStuff() {
         List<AdditionalStuff> stuffs = new ArrayList<>();
-        stuffs.add(new AdditionalStuff("Tartószerkezet szett (4panel/szett)", "", 30000, 0, ITEMFEE ));
-        stuffs.add(new AdditionalStuff("AC/DC túlfesz és túláram védelem", "", 65000, 1, ITEMFEE ));
-        stuffs.add(new AdditionalStuff("AC/DC túlfesz és túláram védelem", "", 85000, 3, ITEMFEE ));
-        stuffs.add(new AdditionalStuff("Szolár kábel /méter/", "Tervezett mennyiség", 220, 0, ITEMFEE ));
-        stuffs.add(new AdditionalStuff("MC4 Csatlakozó (pár)", "", 600, 0, ITEMFEE ));
-        stuffs.add(new AdditionalStuff("AC vezeték 3x4mm2", "Tervezett mennyiség", 600, 1, ITEMFEE ));
-        stuffs.add(new AdditionalStuff("AC vezeték 5x4mm2", "Tervezett mennyiség", 900, 3, ITEMFEE ));
-        stuffs.add(new AdditionalStuff("16mm2-es MKH vezeték", "Tervezett mennyiség", 440, 0, ITEMFEE ));
-        stuffs.add(new AdditionalStuff("Termék díj", "", 2110, 0, SERVICEFEE));
-        stuffs.add(new AdditionalStuff("Tervezés, engedélyeztetés", "", 45000, 0, SERVICEFEE));
+        stuffs.add(new AdditionalStuff("Tartószerkezet szett (4panel/szett)", "", 30000, 0, ItemTypeEnum.Item ));
+        stuffs.add(new AdditionalStuff("AC/DC túlfesz és túláram védelem", "", 65000, 1, ItemTypeEnum.Item ));
+        stuffs.add(new AdditionalStuff("AC/DC túlfesz és túláram védelem", "", 85000, 3, ItemTypeEnum.Item ));
+        stuffs.add(new AdditionalStuff("Szolár kábel /méter/", "Tervezett mennyiség", 220, 0, ItemTypeEnum.Item ));
+        stuffs.add(new AdditionalStuff("MC4 Csatlakozó (pár)", "", 600, 0, ItemTypeEnum.Item ));
+        stuffs.add(new AdditionalStuff("AC vezeték 3x4mm2", "Tervezett mennyiség", 600, 1, ItemTypeEnum.Item ));
+        stuffs.add(new AdditionalStuff("AC vezeték 5x4mm2", "Tervezett mennyiség", 900, 3, ItemTypeEnum.Item ));
+        stuffs.add(new AdditionalStuff("16mm2-es MKH vezeték", "Tervezett mennyiség", 440, 0, ItemTypeEnum.Item ));
+        stuffs.add(new AdditionalStuff("Termék díj", "", 2110, 0, ItemTypeEnum.Item));
+        stuffs.add(new AdditionalStuff("Tervezés, engedélyeztetés", "", 45000, 0, ItemTypeEnum.Item));
 
         for (AdditionalStuff item : stuffs) {
             additionalStuffRep.save(item);

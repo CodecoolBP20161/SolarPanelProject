@@ -1,6 +1,7 @@
 package com.codecool.models;
 
 
+import com.codecool.models.enums.ItemTypeEnum;
 import lombok.Data;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
@@ -19,14 +20,14 @@ public class AdditionalStuff extends Item{
     private int phase;
     private String type;
 
-    public AdditionalStuff(String name, String description, Integer price, int phase, String type) {
-        super(name, description, BigDecimal.valueOf(price));
+    public AdditionalStuff(String name, String description, Integer price, int phase, ItemTypeEnum type) {
+        super(name, description, BigDecimal.valueOf(price), type);
         this.setPhase(phase);
         this.setType(type);
     }
 
-    public AdditionalStuff(String name, String description, BigDecimal price) {
-        super(name, description, price);
+    public AdditionalStuff(String name, String description, BigDecimal price, ItemTypeEnum item) {
+        super(name, description, price, item);
     }
 
     public AdditionalStuff() {

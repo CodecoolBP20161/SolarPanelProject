@@ -2,6 +2,7 @@ package com.codecool.services;
 
 
 import com.codecool.models.*;
+import com.codecool.models.enums.ItemTypeEnum;
 import com.codecool.repositories.AdditionalStuffRepository;
 import com.codecool.repositories.InverterRepository;
 import com.codecool.repositories.SolarPanelRepository;
@@ -113,7 +114,7 @@ public class OfferService {
         offer.addLineItem(inverterLineItem);
 
         AdditionalStuff installationFee = new AdditionalStuff("Kivitelezés", "", getInstallationFee(consumption),
-                0, "service");
+                0, ItemTypeEnum.Service);
         additionalStuffs.add(installationFee);
 
         for (AdditionalStuff item : additionalStuffs) {

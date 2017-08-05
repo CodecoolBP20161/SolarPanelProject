@@ -47,11 +47,12 @@ public class OfferController {
     private final String STEP = "step";
     private final String OFFER = "offer";
     private final String PDF = "pdf";
-    private final String CONSUMPTIONTYPE = "consumptionType";
+    private final String METRIC = "metric";
 
     @Autowired
     public OfferController(SolarPanelRepository solarPanelRepository, InverterRepository inverterRepository,
-                           OfferService offerService, SolarPanelService solarPanelService, PdfService pdfService, EmailService emailService) {
+                           OfferService offerService, SolarPanelService solarPanelService,
+                           PdfService pdfService, EmailService emailService) {
         this.solarPanelRepository = solarPanelRepository;
         this.inverterRepository = inverterRepository;
         this.offerService = offerService;
@@ -67,7 +68,7 @@ public class OfferController {
 
 
         model.addAttribute(CONSUMPTION, consumptionForm);
-        if(session.getAttribute(CONSUMPTION) != null) model.addAttribute()
+        if(session.getAttribute(CONSUMPTION) != null) model.addAttribute(METRIC, consumptionForm.getMetric());
         model.addAttribute(STEP, '1');
         return "offer";
     }
