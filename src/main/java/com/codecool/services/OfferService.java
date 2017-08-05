@@ -1,6 +1,5 @@
 package com.codecool.services;
 
-
 import com.codecool.models.*;
 import com.codecool.models.enums.ItemTypeEnum;
 import com.codecool.repositories.AdditionalStuffRepository;
@@ -29,9 +28,10 @@ public class OfferService {
     private final String lowerValue = "lowerValue";
     private final String higherValue = "higherValue";
 
+
     @Autowired
-    public OfferService(InverterRepository inverterRepository, SolarPanelRepository solarPanelRepository, SolarPanelService solarPanelService,
-                        AdditionalStuffRepository additionalStuffRepository) {
+    public OfferService(InverterRepository inverterRepository, SolarPanelRepository solarPanelRepository,
+                        SolarPanelService solarPanelService, AdditionalStuffRepository additionalStuffRepository) {
         this.inverterRepository = inverterRepository;
         this.solarPanelRepository = solarPanelRepository;
         this.solarPanelService = solarPanelService;
@@ -129,7 +129,7 @@ public class OfferService {
 
 
     private int getInstallationFee(int consumption) {
-        int installationFee = 0;
+        int installationFee;
 
         if (consumption < 3000) {
             installationFee = 100000;
