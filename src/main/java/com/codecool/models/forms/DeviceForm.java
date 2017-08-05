@@ -8,5 +8,5 @@ public class DeviceForm {
     private String panelId;
 
 
-    public boolean isvalid(){return this.getInverterId() == null || this.getPanelId() == null; }
+    public boolean isValid(){return this.getInverterId() != null || this.getPanelId() != null; }
 }
