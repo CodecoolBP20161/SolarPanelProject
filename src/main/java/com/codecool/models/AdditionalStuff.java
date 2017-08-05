@@ -18,7 +18,6 @@ public class AdditionalStuff extends Item{
     private long id;*/
 
     private int phase;
-    private String type;
 
     public AdditionalStuff(String name, String description, Integer price, int phase, ItemTypeEnum type) {
         super(name, description, BigDecimal.valueOf(price), type);
