@@ -1,6 +1,6 @@
 package com.codecool.models.enums;
 
-public enum LineItemTypeEnum {
+public enum ItemTypeEnum {
     Item,
     Service,
 }
