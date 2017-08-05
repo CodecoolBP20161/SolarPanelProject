@@ -1,5 +1,6 @@
 package com.codecool.models;
 
+import com.codecool.models.enums.ItemTypeEnum;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -26,10 +27,14 @@ public abstract class Item {
     @NotNull
     BigDecimal price;
 
-    public Item(String name, String description, BigDecimal price){
+    @NotNull
+    ItemTypeEnum type;
+
+    public Item(String name, String description, BigDecimal price, ItemTypeEnum type){
         this.setName(name);
         this.setDescription(description);
         this.setPrice(price);
+        this.setType(type);
     }
 
     public Item(){}
