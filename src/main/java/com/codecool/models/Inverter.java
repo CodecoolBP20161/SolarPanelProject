@@ -1,5 +1,6 @@
 package com.codecool.models;
 
+import com.codecool.models.enums.ItemTypeEnum;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -33,7 +34,7 @@ public class Inverter extends Item {
 
 
     public Inverter(String brand, String name, Integer price, Integer phase, Double vatt, String description, Integer wifiModule, Integer capacity) {
-        super(name, description, BigDecimal.valueOf(price));
+        super(name, description, BigDecimal.valueOf(price), ItemTypeEnum.Item);
         this.setBrand(brand);
         this.setPhase(phase);
         this.setVatt(vatt);
