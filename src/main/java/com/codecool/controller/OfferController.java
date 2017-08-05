@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -58,9 +57,9 @@ public class OfferController {
         ConsumptionForm consumptionForm = session.getAttribute(CONSUMPTION) == null ?
             new ConsumptionForm() : (ConsumptionForm) session.getAttribute(CONSUMPTION);
 
-        model.addAttribute(CONSUMPTION, consumptionForm);
-        if(session.getAttribute(CONSUMPTION) != null) model.addAttribute(METRIC, consumptionForm.getMetric());
 
+        if(session.getAttribute(CONSUMPTION) != null) model.addAttribute(METRIC, consumptionForm.getMetric());
+        model.addAttribute(CONSUMPTION, consumptionForm);
         model.addAttribute(STEP, '1');
         return "offer";
     }
