@@ -1,6 +1,6 @@
 package com.codecool.models.forms;
 
-import com.codecool.models.CompanyEnum;
+import com.codecool.models.enums.CompanyEnum;
 import lombok.Data;
 
 @Data
