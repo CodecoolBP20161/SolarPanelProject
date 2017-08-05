@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!--The second step of the offer creation-->
+<div th:fragment="page_2">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 center">
+                <div class="heading-box ">
+                    <h2 class="title">Inverter és Napelem</h2>
+                    <span class="b-line l-center line-h"></span>
+                    <br>
+                    <br>
+                </div>
+                <div class="heading-box ">
+                    <h4 class="title"> Mindjárt kész van!
+                        Kérjük válasszon egy inverter típust,
+                        majd válassza ki a napelemek típusát a kártyákra kattintva.
+                        A mező melletti nyilakkal lapozhat a termékek között.
+                    </h4>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Inverter és Panel választó -->
+    <section class="testimonial-section ptb-xs-60 light-color parallax overlay-dark ">
+        <div class="container">
+
+            <!--Inverter Carousel Header-->
+            <div class="row text-center pb-30">
+                <div class="col-sm-12">
+                    <div class="heading-box">
+                        <br>
+                        <h2><span>Inverterek</span></h2>
+                        <span class="b-line line-h"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <!--Inverter Carousel Body-->
+                <div class="carousel-slider nf-carousel-theme arrow_theme owl-carousel" data-pagination="false"
+                     data-items="3" data-autoplay="false" data-loop="false" data-margin="-20" data-center="false"
+                     data-navigation="true" data-desktopsmall="3" data-tablet="3" data-mobile="1">
+
+                    <!--Listing given Inverters-->
+                    <div th:each="inverter : ${inverterList}">
+                        <div class="carousel-item col-sm-4">
+                            <div class="testimonial-block cyan-background inverter" th:data="${inverter.id}">
+                                <h3 class="testimonial-author" th:text="${inverter.brand}"></h3>
+                                <br>
+                                <h3 class="testimonial-author" th:text="${inverter.name}"></h3>
+                                <hr class="small-divider">
+                                <p>
+                                    Ide nem tudom mi kell majd írni.
+                                </p>
+
+                                <h4 class="testimonial-price" th:text="'Egységár: '+${inverter.price}+'Ft'"></h4>
+                                <!--TODO: Ide kellene a quantity már kiszámolva, lehet field kellene belőle-->
+                                <h4 class="testimonial-price">Szükséges mennyiség: 1 db</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                <br>
+                <!--Solar Panel Carousel Header-->
+                <div class="row text-center pb-30">
+                    <div class="col-sm-12">
+                        <div class="heading-box ">
+                            <h2><span>Napelemek</span></h2>
+                            <span class="b-line line-h"></span>
+                        </div>
+                    </div>
+                </div>
+                <!--Solar Panel Carousel Body-->
+                <div class="carousel-slider nf-carousel-theme arrow_theme owl-carousel" data-pagination="false"
+                     data-items="3" data-autoplay="false" data-loop="false" data-margin="-20" data-center="false"
+                     data-navigation="true" data-desktopsmall="3" data-tablet="3" data-mobile="1">
+
+                    <!--Listing given Solar Panels-->
+                    <div th:each="panel:${solarPanelLineItems}">
+                        <div class="carousel-item col-sm-4">
+                            <div class="testimonial-block cyan-background panel" th:data="${panel.itemId}">
+                                <h3 class="testimonial-author" th:text="${panel.name}"></h3>
+
+                                <hr class="small-divider">
+                                <!--TODO: th:text="${panel.marketingText}" valami ilyesmit kellene iderakni-->
+                                <p>Ide mit akarunk írni?</p>
+                                <h5 class="testimonial-price"
+                                    th:text="'Szükséges mennyiség: '+${panel.quantity}+'db'"></h5>
+                                <h5 class="testimonial-price" th:text="'Egységár: '+${panel.price}+'Ft'"></h5>
+                                <h4 class="testimonial-price" th:text="'Összesen: '+${panel.total}+'Ft'"></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+
+            </div>
+        </div>
+    </section>
+    <br>
+    <div class="container">
+        <div class="row">
+            <form method="post" th:action="@{/ajanlat/2}" th:object="${deviceForm}">
+                <input type="hidden" id="inverterInput" value="0"
+                       th:field="*{inverterId}">
+                <input type="hidden" id="panelInput" value="0"
+                       th:field="*{panelId}">
+                <div class="col-sm-12 center">
+                    <button disabled="disabled" class="btn-text" type="submit"
+                            id="submitPanelAndInverter" name="button">
+                        Következő
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
