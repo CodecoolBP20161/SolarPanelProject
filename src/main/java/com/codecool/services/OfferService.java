@@ -2,6 +2,7 @@ package com.codecool.services;
 
 import com.codecool.models.*;
 import com.codecool.models.enums.ItemTypeEnum;
+import com.codecool.models.forms.ConsumptionForm;
 import com.codecool.repositories.AdditionalStuffRepository;
 import com.codecool.repositories.InverterRepository;
 import com.codecool.repositories.SolarPanelRepository;
@@ -9,10 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -55,8 +53,10 @@ public class OfferService {
     }
 
 
-    public int calculateConsumption(float value, String metric) {
+    public int calculateConsumption(ConsumptionForm consumption) {
         long returnValue = 0;
+        float value = consumption.getValue();
+        String metric = consumption.getMetric();
         float kWhRoundedValue = (value / 1100) * 1000;
         float FtRoundedValue = (float) ((((value * 12) / 37.5) / 1100) * 1000);
         float roundedValue = metric.equals(kWh) ? kWhRoundedValue : FtRoundedValue;
@@ -98,28 +98,28 @@ public class OfferService {
         return inverterRepository.findByCustomerValue(value, phase);
     }
 
-    public List<LineItem> getOffer(int consumption, String metric, int phase, int panelId, int inverterId) {
+    public List<LineItem> getOffer(ConsumptionForm consumptionForm, int panelId, int inverterId) {
 
         SolarPanel solarPanel = solarPanelRepository.findOne(panelId);
         Inverter inverter = inverterRepository.findOne(inverterId);
         LineItem inverterLineItem = new LineItem(inverter);
         LineItem solarPanelLineItem = new LineItem(solarPanel);
-        solarPanelLineItem.setQuantity(solarPanelService.callculateSolarPanelPiece(consumption, metric, solarPanel.getCapacity()));
+        solarPanelLineItem.setQuantity(solarPanelService.calculateSolarPanelQuantity(consumptionForm, solarPanel.getCapacity()));
 
         LineItem additionalStuffLineItem;
-        List<AdditionalStuff> additionalStuffs = additionalStuffRepository.findByPhaseIn(Arrays.asList(0, phase));
+        List<AdditionalStuff> additionalStuffs = additionalStuffRepository.findByPhaseIn(Arrays.asList(0, consumptionForm.getPhase()));
 
         Offer offer = new Offer();
         offer.addLineItem(solarPanelLineItem);
         offer.addLineItem(inverterLineItem);
 
-        AdditionalStuff installationFee = new AdditionalStuff("Kivitelezés", "", getInstallationFee(consumption),
+        AdditionalStuff installationFee = new AdditionalStuff("Kivitelezés", "", getInstallationFee(consumptionForm.getValue()),
                 0, ItemTypeEnum.Service);
         additionalStuffs.add(installationFee);
 
         for (AdditionalStuff item : additionalStuffs) {
             additionalStuffLineItem = new LineItem(item);
-            if (consumption < 12000){
+            if (consumptionForm.getValue() < 12000){
                 if (additionalStuffLineItem.getName().equals("16mm2-es MKH vezeték")) additionalStuffLineItem.setQuantity(15);
             } else if (additionalStuffLineItem.getName().equals("Szolár kábel /méter/")) additionalStuffLineItem.setQuantity(50);
             offer.addLineItem(additionalStuffLineItem);
@@ -144,8 +144,18 @@ public class OfferService {
         return installationFee;
     }
 
-    public List<SolarPanel> getSolarPanelList() {
-        return solarPanelRepository.findAllByOrderByCapacityAscPriceAsc();
+    public List<LineItem> getSolarPanelListAsLineItems( ConsumptionForm consumptionForm) {
+        LineItem solarPanelItem;
+        List<LineItem> solarPanelLineItems = new ArrayList<>();
+
+        for (SolarPanel solarPanel : solarPanelRepository.findAllByOrderByCapacityAscPriceAsc()) {
+            int quantity = solarPanelService.calculateSolarPanelQuantity(consumptionForm, solarPanel.getCapacity());
+
+            solarPanelItem = new LineItem(solarPanel);
+            solarPanelItem.setQuantity(quantity);
+            solarPanelLineItems.add(solarPanelItem);
+        }
+        return solarPanelLineItems;
     }
 
 
