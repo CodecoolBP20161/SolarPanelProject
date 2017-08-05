@@ -1,6 +1,14 @@
 {
   "id": 123321,
 
+  "isNetworkUpgradeNeeded": true,
+
+  "taxRate": 27,
+
+  "netTotal": 9999999,
+
+  "grossTotal": 9999999,
+
   "items" : [
     {
       "name": "Termék1",
@@ -69,14 +77,5 @@
       "description": "Legjobb termék"
     }
 
-  ],
-
-  "isNetworkUpgradeNeeded": true,
-
-  "taxRate": 27,
-
-  "netTotal": 9999999,
-
-  "grossTotal": 9999999
-
+  ]
 }
