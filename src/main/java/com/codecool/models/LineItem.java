@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 public class LineItem extends Item {
 
     private  int quantity;
+    private Integer itemId;
 
     @NotNull
     ItemTypeEnum type;
@@ -21,6 +22,7 @@ public class LineItem extends Item {
     private BigDecimal total;
 
     public LineItem(Item item){
+        this.setItemId(item.getId());
         this.setName(item.getName());
         this.setDescription(item.description);
         this.setPrice(item.getPrice());
