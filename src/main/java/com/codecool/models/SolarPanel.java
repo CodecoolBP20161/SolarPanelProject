@@ -19,7 +19,7 @@ public class SolarPanel extends Item{
     private String optimalizer;
 
     @NotNull
-    private Double vat;
+    private Double watt;
 
     @NotNull
     private Integer capacity;
@@ -29,7 +29,7 @@ public class SolarPanel extends Item{
     public SolarPanel(String name, String optimalizer, Integer price, Double vat, Integer capacity, String description) {
         super(name, description, BigDecimal.valueOf(price), ItemTypeEnum.Item);
         this.setOptimalizer(optimalizer);
-        this.setVat(vat);
+        this.setWatt(vat);
         this.setCapacity(capacity);
     }
 }

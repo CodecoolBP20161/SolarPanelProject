@@ -25,7 +25,7 @@ public class Inverter extends Item {
     private Integer phase;
 
     @NotNull
-    private Double vatt;
+    private Double watt;
 
     private Integer wifiModule;
 
@@ -37,7 +37,7 @@ public class Inverter extends Item {
         super(name, description, BigDecimal.valueOf(price), ItemTypeEnum.Item);
         this.setBrand(brand);
         this.setPhase(phase);
-        this.setVatt(vatt);
+        this.setWatt(vatt);
         this.setWifiModule(wifiModule);
         this.setCapacity(capacity);
     }
