@@ -5,9 +5,6 @@ import com.codecool.models.Inverter;
 import com.codecool.models.Offer;
 import com.codecool.models.SolarPanel;
 
-/**
- * Created by Mate on 2017. 07. 28..
- */
 public class LineItemService {
 
 
