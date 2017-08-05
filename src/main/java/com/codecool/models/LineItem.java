@@ -1,16 +1,21 @@
 package com.codecool.models;
 
+import com.codecool.models.enums.ItemTypeEnum;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
 import org.json.JSONObject;
 
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Data
 public class LineItem extends Item {
 
     private  int quantity;
+
+    @NotNull
+    ItemTypeEnum type;
 
     @Setter(AccessLevel.NONE)
     private BigDecimal total;
