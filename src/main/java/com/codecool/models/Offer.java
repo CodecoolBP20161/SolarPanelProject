@@ -18,10 +18,14 @@ public class Offer {
     private ArrayList<LineItem> lineItems;
     private boolean isNetworkUpgradeNeeded;
 
+    @Setter(AccessLevel.NONE)
+    private BigDecimal nettoTotalPrice;
+
     public Offer(){
         id = idCount++;
         lineItems = new ArrayList<>();
         isNetworkUpgradeNeeded = false;
+        nettoTotalPrice = new BigDecimal(0);
     }
 
     public Offer(double taxRate){
@@ -29,10 +33,9 @@ public class Offer {
         id = idCount++;
         lineItems = new ArrayList<>();
         isNetworkUpgradeNeeded = false;
+        nettoTotalPrice = new BigDecimal(0);
     }
 
-    @Setter(AccessLevel.NONE)
-    private BigDecimal nettoTotalPrice;
 
     public void addLineItem(LineItem lineItem) {
         lineItems.add(lineItem);
