@@ -15,6 +15,7 @@ import com.codecool.services.PdfService;
 import com.codecool.services.email.EmailService;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +28,8 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+
+import static org.springframework.data.repository.init.ResourceReader.Type.JSON;
 
 @Slf4j
 @Controller
@@ -145,7 +148,7 @@ public class OfferController {
         }
         if(pdf != null) {
             try {
-                emailService.sendEmailWithPDf(email.getEmailAddress(), String.valueOf(offer.getId()), pdf);
+                emailService.sendEmailWithPDf(email.getEmailAddress(), "123456", pdf);
                 model.addAttribute("success", true);
             } catch (MessagingException e) {
                 log.warn("Failed to Send the emails.");
