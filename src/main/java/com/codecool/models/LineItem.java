@@ -27,6 +27,7 @@ public class LineItem extends Item {
         this.setDescription(item.description);
         this.setPrice(item.getPrice());
         this.setQuantity(1);
+        this.setType(item.getType());
     }
 
     public void setQuantity(int quantity){
@@ -43,6 +44,7 @@ public class LineItem extends Item {
         convertedItem.put("quantity", this.getQuantity());
         convertedItem.put("subtotal", this.getPrice().multiply(quantityBigDecimal));
         convertedItem.put("description", this.getDescription());
+        convertedItem.put("type", this.getType());
 
         return  convertedItem;
     }
