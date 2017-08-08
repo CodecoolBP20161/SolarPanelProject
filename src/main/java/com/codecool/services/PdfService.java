@@ -1,14 +1,21 @@
 package com.codecool.services;
 
+import com.codecool.models.LineItem;
 import com.codecool.models.Offer;
+import com.codecool.models.enums.ItemTypeEnum;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import org.apache.pdfbox.io.IOUtils;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.math.BigDecimal;
 
 
 @Service
@@ -32,8 +39,24 @@ public class PdfService {
     }
 
     private HttpResponse<InputStream> doPost(Offer offer) throws UnirestException {
-        String offerJson ="{\"id\": 123321, \"items\" : [ {\"name\": \"270W-os Amerisolar polikristályos napelem\",\"price\": 10000,\"quantity\": 10,\"subtotal\": 100000,\"description\": \"Legjobb termék\"}, {\"name\": \"270W-os Amerisolar polikristályos napelem\",\"price\": 10000,\"quantity\": 10,\"subtotal\": 100000,\"description\": \"Legjobb termék\"}, {\"name\": \"270W-os Amerisolar polikristályos napelem\",\"price\": 10000,\"quantity\": 10,\"subtotal\": 100000,\"description\": \"Legjobb termék\"}, {\"name\": \"270W-os Amerisolar polikristályos napelem\",\"price\": 10000,\"quantity\": 10,\"subtotal\": 100000,\"description\": \"Legjobb termék\"}], \"services\" : [ {\"name\": \"Service1\", \"price\": 10000, \"quantity\": 10, \"subtotal\": 100000, \"description\": \"Legjobb termék\"}, {\"name\": \"Service1\", \"price\": 10000, \"quantity\": 10, \"subtotal\": 100000, \"description\": \"Legjobb termék\"}, {\"name\": \"Service1\", \"price\": 10000, \"quantity\": 10, \"subtotal\": 100000, \"description\": \"Legjobb termék\"}, {\"name\": \"Service1\", \"price\": 10000, \"quantity\": 10, \"subtotal\": 100000, \"description\": \"Legjobb termék\"}, {\"name\": \"Service1\", \"price\": 10000, \"quantity\": 10, \"subtotal\": 100000, \"description\": \"Legjobb termék\"},],\"isNetworkUpgradeNeeded\": true,\"taxRate\": 27,\"netTotal\": 9999999,\"grossTotal\": 124343}";
-        JSONObject offerJsonObject = new JSONObject(offerJson);
+        JSONObject offerJsonObject = new JSONObject();
+        JSONArray lineItemItems = new JSONArray();
+        JSONArray lineItemsService = new JSONArray();
+        for (LineItem item : offer.getLineItems()) {
+            if (item.getType() == ItemTypeEnum.Item) {
+                lineItemItems.put(item.toJson());
+            } else {
+                lineItemsService.put(item.toJson());
+            }
+        }
+        offerJsonObject.put("items", lineItemItems);
+        offerJsonObject.put("services", lineItemsService);
+        offerJsonObject.put("id", 100);
+        offerJsonObject.put("taxRate", offer.getTaxRate());
+        offerJsonObject.put("netTotal", offer.getNettoTotalPrice());
+        offerJsonObject.put("grossTotal", (offer.getNettoTotalPrice().multiply(BigDecimal.valueOf(offer.getTaxRate()))));
+        offerJsonObject.put("isNetworkUpgradeNeeded", offer.isNetworkUpgradeNeeded());
+
         return Unirest.post(PDF_URL)
                       .header("accept", "application/pdf")
                       .header("Content-type", "application/json")
