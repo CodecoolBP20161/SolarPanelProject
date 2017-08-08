@@ -6,6 +6,7 @@ import com.codecool.models.enums.ItemTypeEnum;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.pdfbox.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -17,7 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
 
-
+@Slf4j
 @Service
 public class PdfService {
     private final String PDF_URL = "http://52.15.84.238:1350/api/getofferpdf";

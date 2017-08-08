@@ -13,10 +13,6 @@ import java.math.BigDecimal;
 @EntityScan
 public class OtherItem extends Item{
 
-/*    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;*/
-
     private int phase;
 
     public OtherItem(String name, String description, Integer price, int phase, ItemTypeEnum type) {

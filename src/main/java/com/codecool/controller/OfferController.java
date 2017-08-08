@@ -9,31 +9,31 @@ import com.codecool.models.forms.DeviceForm;
 import com.codecool.models.forms.EmailForm;
 import com.codecool.services.OfferService;
 import com.codecool.services.PdfService;
+import com.codecool.services.ValidationService;
 import com.codecool.services.email.EmailService;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.security.InvalidParameterException;
+import java.util.HashMap;
 import java.util.List;
 
 @Slf4j
 @Controller
 public class OfferController {
 
-
     private EmailService emailService;
     private OfferService offerService;
     private PdfService pdfService;
+    private ValidationService validationService;
 
     private final String CONSUMPTION = "consumption";
     private final String DEVICE = "deviceForm";
@@ -44,10 +44,12 @@ public class OfferController {
     private final String METRIC = "metric";
 
     @Autowired
-    public OfferController(OfferService offerService, PdfService pdfService, EmailService emailService) {
+    public OfferController(OfferService offerService, PdfService pdfService,
+                           EmailService emailService, ValidationService validationService) {
         this.offerService = offerService;
         this.emailService = emailService;
         this.pdfService = pdfService;
+        this.validationService = validationService;
     }
 
     @GetMapping("/ajanlat/1")
@@ -60,6 +62,7 @@ public class OfferController {
         model.addAttribute(STEP, '1');
         return "offer";
     }
+
     @PostMapping("/ajanlat/1")
     public String postOfferStep1(@ModelAttribute ConsumptionForm consumption, HttpSession session){
         session.setAttribute(CONSUMPTION, consumption);
@@ -94,7 +97,6 @@ public class OfferController {
         log.info("Devices: InvID: " + device.getInverterId() + "  PanelId: " + device.getPanelId());
         return "redirect:/ajanlat/3";
     }
-
 
     @GetMapping("/ajanlat/3")
     public String getOfferStep3(Model model, HttpSession session){
@@ -161,5 +163,12 @@ public class OfferController {
     public String getOfferStep4(Model model, HttpSession session){
         model.addAttribute(STEP, '4');
         return "offer";
+    }
+
+    @PostMapping( value = "/ajanlat/network-upgrade")
+    @ResponseBody
+    public String isNetworkUpgradeNeededCheck(@RequestBody HashMap<String, String> payload){
+        log.info("Request arrived to validate, payload: " + payload.toString());
+        return String.valueOf(validationService.validateNetworkUpgrade(payload));
     }
 }
