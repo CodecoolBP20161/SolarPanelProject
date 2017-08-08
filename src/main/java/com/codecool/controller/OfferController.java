@@ -142,7 +142,8 @@ public class OfferController {
         }
         if(pdf != null) {
             try {
-                emailService.sendEmailWithPDf(email.getEmailAddress(), "123456", pdf);
+                emailService.sendEmailWithPDf(email.getEmailAddress(), "", pdf);
+                model.addAttribute(PDF, pdf.toURI());
                 model.addAttribute("success", true);
             } catch (MessagingException e){
                 e.printStackTrace();
@@ -152,8 +153,6 @@ public class OfferController {
                 model.addAttribute("success", false);
             }
         }
-
-        model.addAttribute(PDF, pdf.toURI());
         model.addAttribute(STEP, "4");
         return "offer";
     }
