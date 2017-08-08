@@ -3,6 +3,7 @@ package com.codecool.controller;
 import com.codecool.models.Inverter;
 import com.codecool.models.LineItem;
 import com.codecool.models.Offer;
+import com.codecool.models.SolarPanel;
 import com.codecool.models.forms.ConsumptionForm;
 import com.codecool.models.forms.DeviceForm;
 import com.codecool.models.forms.EmailForm;
@@ -115,9 +116,9 @@ public class OfferController {
                                                           Integer.parseInt(deviceForm.getPanelId()),
                                                           Integer.parseInt(deviceForm.getInverterId()));
 
-        for (LineItem lineItem : offerItem) {
+      /*  for (LineItem lineItem : offerItem) {
             System.out.println(lineItem.getName()+ " " + lineItem.getPrice() + " " + lineItem.getQuantity());
-        }
+        }*/
 
         model.addAttribute("email", email);
         model.addAttribute(STEP, '3');
@@ -127,8 +128,28 @@ public class OfferController {
     @PostMapping("/ajanlat/3")
     public String postOfferStep3(@ModelAttribute EmailForm email, HttpSession session, Model model){
         session.setAttribute(EMAIL, email);
+        ConsumptionForm consumption = (ConsumptionForm) session.getAttribute(CONSUMPTION);
+        DeviceForm deviceForm = (DeviceForm) session.getAttribute(DEVICE);
 
-        Offer offer = (Offer) session.getAttribute("offer");
+        double companyTaxRate = 0;
+        switch (consumption.getCompany()) {
+            case Cég1: companyTaxRate = CompanyEnum.Cég1.getTaxRate();
+            break;
+            case SolarProvider: companyTaxRate = CompanyEnum.SolarProvider.getTaxRate();
+            break;
+            case StabilInvest: companyTaxRate = CompanyEnum.StabilInvest.getTaxRate();
+            break;
+        }
+
+        Offer offer = new Offer(companyTaxRate);
+        List<LineItem> offerItem =  offerService.getOffer(consumption,
+                Integer.parseInt(deviceForm.getPanelId()),
+                Integer.parseInt(deviceForm.getInverterId()));
+
+        for (LineItem lineItem : offerItem) {
+            offer.addLineItem(lineItem);
+        }
+
         File pdf = null;
 
         try {

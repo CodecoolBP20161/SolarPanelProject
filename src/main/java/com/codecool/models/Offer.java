@@ -9,13 +9,14 @@ import org.json.JSONObject;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
 @Data
 public class Offer {
     private static long idCount = 1;
     private long id;
     private double taxRate;
-    private ArrayList<LineItem> lineItems;
+    private List<LineItem> lineItems;
     private boolean isNetworkUpgradeNeeded;
 
     @Setter(AccessLevel.NONE)

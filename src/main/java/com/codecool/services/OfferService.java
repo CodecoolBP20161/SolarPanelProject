@@ -115,14 +115,23 @@ public class OfferService {
 
         OtherItem installationFee = new OtherItem("Kivitelezés", "", getInstallationFee(consumptionForm.getValue()),
                 0, ItemTypeEnum.Service);
+        installationFee.setId(11);
         otherItems.add(installationFee);
 
         for (OtherItem item : otherItems) {
             additionalStuffLineItem = new LineItem(item);
-            if (consumptionForm.getValue() < 12000){
-                if (additionalStuffLineItem.getName().equals("16mm2-es MKH vezeték")) additionalStuffLineItem.setQuantity(15);
-            } else if (additionalStuffLineItem.getName().equals("Szolár kábel /méter/")) additionalStuffLineItem.setQuantity(50);
-            offer.addLineItem(additionalStuffLineItem);
+            if (consumptionForm.getValue() < 12000) {
+                if (additionalStuffLineItem.getName().equals("16mm2-es MKH vezeték")) {
+                    additionalStuffLineItem.setQuantity(15);
+                } else if (additionalStuffLineItem.getName().equals("Szolár kábel /méter/")) {
+                    additionalStuffLineItem.setQuantity(50);
+                } else if (additionalStuffLineItem.getName().equals("MC4 Csatlakozó (pár)")){
+                    additionalStuffLineItem.setQuantity(4);
+                } else if (additionalStuffLineItem.getName().contains("AC vezeték")) {
+                    additionalStuffLineItem.setQuantity(10);
+                }
+                offer.addLineItem(additionalStuffLineItem);
+            }
         }
         return offer.getLineItems();
     }
