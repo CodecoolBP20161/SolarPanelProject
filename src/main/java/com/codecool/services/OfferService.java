@@ -3,7 +3,7 @@ package com.codecool.services;
 import com.codecool.models.*;
 import com.codecool.models.enums.ItemTypeEnum;
 import com.codecool.models.forms.ConsumptionForm;
-import com.codecool.repositories.AdditionalStuffRepository;
+import com.codecool.repositories.OtherItemRepository;
 import com.codecool.repositories.InverterRepository;
 import com.codecool.repositories.SolarPanelRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +19,7 @@ public class OfferService {
     private InverterRepository inverterRepository;
     private SolarPanelRepository solarPanelRepository;
     private SolarPanelService solarPanelService;
-    private AdditionalStuffRepository  additionalStuffRepository;
+    private OtherItemRepository otherItemRepository;
 
 
     private final String kWh = "kWh";
@@ -29,11 +29,11 @@ public class OfferService {
 
     @Autowired
     public OfferService(InverterRepository inverterRepository, SolarPanelRepository solarPanelRepository,
-                        SolarPanelService solarPanelService, AdditionalStuffRepository additionalStuffRepository) {
+                        SolarPanelService solarPanelService, OtherItemRepository otherItemRepository) {
         this.inverterRepository = inverterRepository;
         this.solarPanelRepository = solarPanelRepository;
         this.solarPanelService = solarPanelService;
-        this.additionalStuffRepository = additionalStuffRepository;
+        this.otherItemRepository = otherItemRepository;
     }
 
     private Map<String, Integer> calculateNearestValue(float value, String metric) {
@@ -107,17 +107,17 @@ public class OfferService {
         solarPanelLineItem.setQuantity(solarPanelService.calculateSolarPanelQuantity(consumptionForm, solarPanel.getCapacity()));
 
         LineItem additionalStuffLineItem;
-        List<AdditionalStuff> additionalStuffs = additionalStuffRepository.findByPhaseIn(Arrays.asList(0, consumptionForm.getPhase()));
+        List<OtherItem> otherItems = otherItemRepository.findByPhaseIn(Arrays.asList(0, consumptionForm.getPhase()));
 
         Offer offer = new Offer();
         offer.addLineItem(solarPanelLineItem);
         offer.addLineItem(inverterLineItem);
 
-        AdditionalStuff installationFee = new AdditionalStuff("Kivitelezés", "", getInstallationFee(consumptionForm.getValue()),
+        OtherItem installationFee = new OtherItem("Kivitelezés", "", getInstallationFee(consumptionForm.getValue()),
                 0, ItemTypeEnum.Service);
-        additionalStuffs.add(installationFee);
+        otherItems.add(installationFee);
 
-        for (AdditionalStuff item : additionalStuffs) {
+        for (OtherItem item : otherItems) {
             additionalStuffLineItem = new LineItem(item);
             if (consumptionForm.getValue() < 12000){
                 if (additionalStuffLineItem.getName().equals("16mm2-es MKH vezeték")) additionalStuffLineItem.setQuantity(15);
