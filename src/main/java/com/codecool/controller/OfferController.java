@@ -3,19 +3,15 @@ package com.codecool.controller;
 import com.codecool.models.Inverter;
 import com.codecool.models.LineItem;
 import com.codecool.models.Offer;
-import com.codecool.models.SolarPanel;
+import com.codecool.models.enums.CompanyEnum;
 import com.codecool.models.forms.ConsumptionForm;
 import com.codecool.models.forms.DeviceForm;
 import com.codecool.models.forms.EmailForm;
-import com.codecool.repositories.InverterRepository;
-import com.codecool.repositories.SolarPanelRepository;
 import com.codecool.services.OfferService;
-import com.codecool.services.SolarPanelService;
 import com.codecool.services.PdfService;
 import com.codecool.services.email.EmailService;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import lombok.extern.slf4j.Slf4j;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,8 +24,6 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-
-import static org.springframework.data.repository.init.ResourceReader.Type.JSON;
 
 @Slf4j
 @Controller
@@ -121,9 +115,9 @@ public class OfferController {
                                                           Integer.parseInt(deviceForm.getPanelId()),
                                                           Integer.parseInt(deviceForm.getInverterId()));
 
-        for (LineItem lineItem : offerItem) {
+      /*  for (LineItem lineItem : offerItem) {
             System.out.println(lineItem.getName()+ " " + lineItem.getPrice() + " " + lineItem.getQuantity());
-        }
+        }*/
 
         model.addAttribute("email", email);
         model.addAttribute(STEP, '3');
@@ -133,8 +127,28 @@ public class OfferController {
     @PostMapping("/ajanlat/3")
     public String postOfferStep3(@ModelAttribute EmailForm email, HttpSession session, Model model){
         session.setAttribute(EMAIL, email);
+        ConsumptionForm consumption = (ConsumptionForm) session.getAttribute(CONSUMPTION);
+        DeviceForm deviceForm = (DeviceForm) session.getAttribute(DEVICE);
 
-        Offer offer = (Offer) session.getAttribute("offer");
+        double companyTaxRate = 0;
+        switch (consumption.getCompany()) {
+            case Cég1: companyTaxRate = CompanyEnum.Cég1.getTaxRate();
+            break;
+            case SolarProvider: companyTaxRate = CompanyEnum.SolarProvider.getTaxRate();
+            break;
+            case StabilInvest: companyTaxRate = CompanyEnum.StabilInvest.getTaxRate();
+            break;
+        }
+
+        Offer offer = new Offer(companyTaxRate);
+        List<LineItem> offerItem =  offerService.getOffer(consumption,
+                Integer.parseInt(deviceForm.getPanelId()),
+                Integer.parseInt(deviceForm.getInverterId()));
+
+        for (LineItem lineItem : offerItem) {
+            offer.addLineItem(lineItem);
+        }
+
         File pdf = null;
 
         try {
