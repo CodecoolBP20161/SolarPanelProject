@@ -4,6 +4,7 @@ import com.codecool.models.Inverter;
 import com.codecool.models.LineItem;
 import com.codecool.models.Offer;
 import com.codecool.models.SolarPanel;
+import com.codecool.models.enums.CompanyEnum;
 import com.codecool.models.forms.ConsumptionForm;
 import com.codecool.models.forms.DeviceForm;
 import com.codecool.models.forms.EmailForm;
