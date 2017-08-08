@@ -131,25 +131,13 @@ public class OfferController {
         ConsumptionForm consumption = (ConsumptionForm) session.getAttribute(CONSUMPTION);
         DeviceForm deviceForm = (DeviceForm) session.getAttribute(DEVICE);
 
-        double companyTaxRate = 0;
-        switch (consumption.getCompany()) {
-            case Cég1: companyTaxRate = CompanyEnum.Cég1.getTaxRate();
-            break;
-            case SolarProvider: companyTaxRate = CompanyEnum.SolarProvider.getTaxRate();
-            break;
-            case StabilInvest: companyTaxRate = CompanyEnum.StabilInvest.getTaxRate();
-            break;
-        }
-
         Offer offer = new Offer();
         offer.setCompany(consumption.getCompany());
         List<LineItem> offerItem =  offerService.getOffer(consumption,
                 Integer.parseInt(deviceForm.getPanelId()),
                 Integer.parseInt(deviceForm.getInverterId()));
 
-        for (LineItem lineItem : offerItem) {
-            offer.addLineItem(lineItem);
-        }
+        offerItem.forEach(offer::addLineItem);
 
         File pdf = null;
 
