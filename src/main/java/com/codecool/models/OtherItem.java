@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @Data
 @Entity
 @EntityScan
-public class AdditionalStuff extends Item{
+public class OtherItem extends Item{
 
 /*    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,16 +19,16 @@ public class AdditionalStuff extends Item{
 
     private int phase;
 
-    public AdditionalStuff(String name, String description, Integer price, int phase, ItemTypeEnum type) {
+    public OtherItem(String name, String description, Integer price, int phase, ItemTypeEnum type) {
         super(name, description, BigDecimal.valueOf(price), type);
         this.setPhase(phase);
         this.setType(type);
     }
 
-    public AdditionalStuff(String name, String description, BigDecimal price, ItemTypeEnum item) {
+    public OtherItem(String name, String description, BigDecimal price, ItemTypeEnum item) {
         super(name, description, price, item);
     }
 
-    public AdditionalStuff() {
+    public OtherItem() {
     }
 }
