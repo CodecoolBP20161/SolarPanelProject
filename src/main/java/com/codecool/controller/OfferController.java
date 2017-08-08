@@ -55,7 +55,6 @@ public class OfferController {
         ConsumptionForm consumptionForm = session.getAttribute(CONSUMPTION) == null ?
             new ConsumptionForm() : (ConsumptionForm) session.getAttribute(CONSUMPTION);
 
-
         if(session.getAttribute(CONSUMPTION) != null) model.addAttribute(METRIC, consumptionForm.getMetric());
         model.addAttribute(CONSUMPTION, consumptionForm);
         model.addAttribute(STEP, '1');
@@ -111,15 +110,6 @@ public class OfferController {
 
         ConsumptionForm consumption = (ConsumptionForm) session.getAttribute(CONSUMPTION);
 
-
-        List<LineItem> offerItem =  offerService.getOffer(consumption,
-                                                          Integer.parseInt(deviceForm.getPanelId()),
-                                                          Integer.parseInt(deviceForm.getInverterId()));
-
-      /*  for (LineItem lineItem : offerItem) {
-            System.out.println(lineItem.getName()+ " " + lineItem.getPrice() + " " + lineItem.getQuantity());
-        }*/
-
         model.addAttribute("email", email);
         model.addAttribute(STEP, '3');
         return "offer";
@@ -133,9 +123,7 @@ public class OfferController {
 
         Offer offer = new Offer();
         offer.setCompany(consumption.getCompany());
-        List<LineItem> offerItem =  offerService.getOffer(consumption,
-                Integer.parseInt(deviceForm.getPanelId()),
-                Integer.parseInt(deviceForm.getInverterId()));
+        List<LineItem> offerItem =  offerService.getLineItems(consumption, deviceForm);
 
         offerItem.forEach(offer::addLineItem);
 
