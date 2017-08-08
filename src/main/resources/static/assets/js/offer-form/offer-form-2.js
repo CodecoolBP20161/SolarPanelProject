@@ -18,9 +18,11 @@ $(document).on('ready', function(){
         var inverterID = inverterInput.val();
         var panelID = panelInput.val();
 
-        selectedInverter = $('div[class^="testimonial-block cyan-background inverter"][data^="' + inverterID + '"]');
-        selectedPanel =  $('div[class^="testimonial-block cyan-background panel"][data^="' + panelID + '"]');
 
+
+        selectedInverter = $('div[class^="testimonial-block cyan-background inverter"][data="' + inverterID + '"]');
+        selectedPanel =  $('div[class^="testimonial-block cyan-background panel"][data="' + panelID + '"]');
+        console.log("Selected inverter: " + selectedInverter);
         selectedInverter.toggleClass('active');
         selectedPanel.toggleClass('active');
     }
@@ -62,5 +64,4 @@ $(document).on('ready', function(){
         if (inverterInput.val() !== 'initial' && panelInput.val() !== 'initial')
             formSubmitbutton.prop('disabled', false);
     });
-
 });
