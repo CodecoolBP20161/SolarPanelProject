@@ -3,7 +3,6 @@ package com.codecool.services.email;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
@@ -13,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.File;
-
 
 @Slf4j
 @Service
@@ -38,8 +36,8 @@ public class EmailService {
 
             helper.setFrom(fromAddress);
             helper.setTo(address);
-            helper.setSubject(offerId);
-            helper.setText("Email works!");
+            helper.setSubject("Árajánlat-A Napos oldal_" + offerId);
+            helper.setText("<html><body>Tisztelt Érdeklődő!<br><br> Azért kapta ezt az e-mailt, mert árajánlatot kért a <a href='http://localhost:8080/'>www.naposoldal.hu</a> oldalon. Az ajánlatot a csatolmányban találja meg.<br> Amennyiben felkeltettük az érdeklődését,felveheti velünk a kapcsolatot az ajánlatban megadott elérhetőségeken. <br><br> Üdvözlettel, <br><br> A Napos Oldal csapat</body></html>", true);
             helper.addAttachment(pdf.getName(), pdf);
             javaMailSender.send(message);
             log.debug("Email sent...");
