@@ -3,19 +3,14 @@ package com.codecool.controller;
 import com.codecool.models.Inverter;
 import com.codecool.models.LineItem;
 import com.codecool.models.Offer;
-import com.codecool.models.SolarPanel;
 import com.codecool.models.forms.ConsumptionForm;
 import com.codecool.models.forms.DeviceForm;
 import com.codecool.models.forms.EmailForm;
-import com.codecool.repositories.InverterRepository;
-import com.codecool.repositories.SolarPanelRepository;
 import com.codecool.services.OfferService;
-import com.codecool.services.SolarPanelService;
 import com.codecool.services.PdfService;
 import com.codecool.services.email.EmailService;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import lombok.extern.slf4j.Slf4j;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,9 +22,8 @@ import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.security.InvalidParameterException;
 import java.util.List;
-
-import static org.springframework.data.repository.init.ResourceReader.Type.JSON;
 
 @Slf4j
 @Controller
@@ -140,8 +134,8 @@ public class OfferController {
         try {
             pdf = pdfService.getPdf(offer);
         } catch (UnirestException e) {
-            e.printStackTrace();
             log.warn("Pdf Server is unavailable. UnirestException is thrown.");
+            e.printStackTrace();
         } catch (IOException e) {
             log.warn("Failed to convert PDF server's response to File.");
             e.printStackTrace();
@@ -150,13 +144,16 @@ public class OfferController {
             try {
                 emailService.sendEmailWithPDf(email.getEmailAddress(), "123456", pdf);
                 model.addAttribute("success", true);
-            } catch (MessagingException e) {
-                log.warn("Failed to Send the emails.");
+            } catch (MessagingException e){
                 e.printStackTrace();
+                model.addAttribute("success", false);
+            } catch (InvalidParameterException e) {
+                log.warn("Failed to Send the email.");
                 model.addAttribute("success", false);
             }
         }
-        model.addAttribute(PDF, "pdf");
+
+        model.addAttribute(PDF, pdf.toURI());
         model.addAttribute(STEP, "4");
         return "offer";
     }
@@ -166,14 +163,4 @@ public class OfferController {
         model.addAttribute(STEP, '4');
         return "offer";
     }
-
-    @PostMapping("/ajanlat/4")
-    public String postOfferStep4(Model model, HttpSession session){
-
-
-
-        model.addAttribute(STEP, '4');
-        return "offer";
-    }
-
 }

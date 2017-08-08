@@ -8,10 +8,34 @@
 </head>
 <body>
 
-<!--The first step of the offer creation-->
+<!--The fourth step of the offer creation-->
 <div th:fragment="page_4">
-
-</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="heading-box ">
+                    <h2 class="title center">Árajánlat</h2>
+                    <span class="b-line l-center line-h"></span>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12" th:if="${success}">
+                <h4 class="center">Az ajánlatot sikeresen elküldtük az e-mail címére.</h4>
+            </div>
+            <div class="col-xs-12" th:if="${!success}">
+                <h4 class="center">Az ajánlatot letöltheti az alábbi linken:</h4>
+                <div class="center">
+                <br>
+                <a th:href="${pdf}"  class="btn-text" type="submit" id="download" name="button">
+                    Letöltés
+                </a>
+                    </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>
