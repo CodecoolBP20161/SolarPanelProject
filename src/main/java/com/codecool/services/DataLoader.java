@@ -142,34 +142,12 @@ public class DataLoader {
         stuffs.add(new AdditionalStuff("AC vezeték 3x4mm2", "Tervezett mennyiség", 600, 1, ItemTypeEnum.Item ));
         stuffs.add(new AdditionalStuff("AC vezeték 5x4mm2", "Tervezett mennyiség", 900, 3, ItemTypeEnum.Item ));
         stuffs.add(new AdditionalStuff("16mm2-es MKH vezeték", "Tervezett mennyiség", 440, 0, ItemTypeEnum.Item ));
-        stuffs.add(new AdditionalStuff("Termék díj", "", 2110, 0, ItemTypeEnum.Item));
-        stuffs.add(new AdditionalStuff("Tervezés, engedélyeztetés", "", 45000, 0, ItemTypeEnum.Item));
+        stuffs.add(new AdditionalStuff("Termék díj", "", 2110, 0, ItemTypeEnum.Service));
+        stuffs.add(new AdditionalStuff("Tervezés, engedélyeztetés", "", 45000, 0, ItemTypeEnum.Service));
 
         for (AdditionalStuff item : stuffs) {
             additionalStuffRep.save(item);
         }
     }
-
-/*    public Map<Integer, MandatoryFee> getMandatoryFee(int consumption) {
-        Map<Integer, MandatoryFee> expense = new HashMap<>();
-        expense.put(1, new MandatoryFee("Termék díj", 2110));
-        expense.put(2, new MandatoryFee("Tervezés, engedélyeztetés", 45000));
-        int installationFee = 0;
-
-        if (consumption < 4000) {
-            installationFee = 100000;
-        } else if (consumption >= 4000 && consumption < 6000) {
-            installationFee = 110000;
-        } else if (consumption >= 6000 && consumption < 8000) {
-            installationFee = 120000;
-        } else if (consumption >= 8000 && consumption < 10000) {
-            installationFee = 130000;
-        } else {
-            installationFee = 150000;
-        }
-        expense.put(3, new MandatoryFee("Kivitelezés", installationFee));
-        return expense;
-    }*/
-
 
 }
