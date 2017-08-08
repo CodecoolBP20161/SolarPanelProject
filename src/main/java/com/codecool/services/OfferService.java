@@ -3,11 +3,13 @@ package com.codecool.services;
 import com.codecool.models.*;
 import com.codecool.models.enums.ItemTypeEnum;
 import com.codecool.models.forms.ConsumptionForm;
+import com.codecool.models.forms.DeviceForm;
 import com.codecool.repositories.OtherItemRepository;
 import com.codecool.repositories.InverterRepository;
 import com.codecool.repositories.SolarPanelRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.integration.IntegrationAutoConfiguration;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -98,9 +100,15 @@ public class OfferService {
         return inverterRepository.findByCustomerValue(value, phase);
     }
 
-    public List<LineItem> getOffer(ConsumptionForm consumptionForm, int panelId, int inverterId) {
+    public List<LineItem> getLineItems(ConsumptionForm consumptionForm, DeviceForm deviceForm) {
+        int consumptionValue = calculateConsumption(consumptionForm);
 
-        SolarPanel solarPanel = solarPanelRepository.findOne(panelId);
+        int inverterId = Integer.parseInt(deviceForm.getInverterId());
+        int panelID = Integer.parseInt(deviceForm.getPanelId());
+
+        List<LineItem> lineItems = new ArrayList<>();
+
+        SolarPanel solarPanel = solarPanelRepository.findOne(panelID);
         Inverter inverter = inverterRepository.findOne(inverterId);
         LineItem inverterLineItem = new LineItem(inverter);
         LineItem solarPanelLineItem = new LineItem(solarPanel);
@@ -109,9 +117,8 @@ public class OfferService {
         LineItem additionalStuffLineItem;
         List<OtherItem> otherItems = otherItemRepository.findByPhaseIn(Arrays.asList(0, consumptionForm.getPhase()));
 
-        Offer offer = new Offer();
-        offer.addLineItem(solarPanelLineItem);
-        offer.addLineItem(inverterLineItem);
+        lineItems.add(solarPanelLineItem);
+        lineItems.add(inverterLineItem);
 
         OtherItem installationFee = new OtherItem("Kivitelezés", "", getInstallationFee(consumptionForm.getValue()),
                 0, ItemTypeEnum.Service);
@@ -120,7 +127,7 @@ public class OfferService {
 
         for (OtherItem item : otherItems) {
             additionalStuffLineItem = new LineItem(item);
-            if (consumptionForm.getValue() < 12000) {
+            if (consumptionValue < 12000) {
                 if (additionalStuffLineItem.getName().equals("16mm2-es MKH vezeték")) {
                     additionalStuffLineItem.setQuantity(15);
                 } else if (additionalStuffLineItem.getName().equals("Szolár kábel /méter/")) {
@@ -130,10 +137,10 @@ public class OfferService {
                 } else if (additionalStuffLineItem.getName().contains("AC vezeték")) {
                     additionalStuffLineItem.setQuantity(10);
                 }
-                offer.addLineItem(additionalStuffLineItem);
+                lineItems.add(additionalStuffLineItem);
             }
         }
-        return offer.getLineItems();
+        return lineItems;
     }
 
 
