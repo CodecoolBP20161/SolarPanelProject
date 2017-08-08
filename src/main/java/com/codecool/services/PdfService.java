@@ -52,9 +52,9 @@ public class PdfService {
         offerJsonObject.put("items", lineItemItems);
         offerJsonObject.put("services", lineItemsService);
         offerJsonObject.put("id", 100);
-        offerJsonObject.put("taxRate", offer.getTaxRate());
+        offerJsonObject.put("taxRate", offer.getCompany().getTaxRate());
         offerJsonObject.put("netTotal", offer.getNettoTotalPrice());
-        offerJsonObject.put("grossTotal", (offer.getNettoTotalPrice().multiply(BigDecimal.valueOf(offer.getTaxRate()))));
+        offerJsonObject.put("grossTotal", (offer.getNettoTotalPrice().multiply(BigDecimal.valueOf(offer.getCompany().getTaxRate()))));
         offerJsonObject.put("isNetworkUpgradeNeeded", offer.isNetworkUpgradeNeeded());
 
         return Unirest.post(PDF_URL)

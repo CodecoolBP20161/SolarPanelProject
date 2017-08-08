@@ -3,7 +3,6 @@ package com.codecool.controller;
 import com.codecool.models.Inverter;
 import com.codecool.models.LineItem;
 import com.codecool.models.Offer;
-import com.codecool.models.SolarPanel;
 import com.codecool.models.enums.CompanyEnum;
 import com.codecool.models.forms.ConsumptionForm;
 import com.codecool.models.forms.DeviceForm;
@@ -142,7 +141,8 @@ public class OfferController {
             break;
         }
 
-        Offer offer = new Offer(companyTaxRate);
+        Offer offer = new Offer();
+        offer.setCompany(consumption.getCompany());
         List<LineItem> offerItem =  offerService.getOffer(consumption,
                 Integer.parseInt(deviceForm.getPanelId()),
                 Integer.parseInt(deviceForm.getInverterId()));
