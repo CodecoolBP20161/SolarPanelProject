@@ -164,14 +164,16 @@ public class OfferController {
         }
         if(pdf != null) {
             try {
-                emailService.sendEmailWithPDf(email.getEmailAddress(), "", pdf);
-                model.addAttribute(PDF, pdf.toURI());
+                emailService.sendEmailWithPDf(email.getEmailAddress(), String.valueOf(offer.getId()), pdf);
+
                 model.addAttribute("success", true);
             } catch (MessagingException e){
                 e.printStackTrace();
+                model.addAttribute(PDF, pdf.toURI());
                 model.addAttribute("success", false);
             } catch (InvalidParameterException e) {
                 log.warn("Failed to Send the email.");
+                model.addAttribute(PDF, pdf.toURI());
                 model.addAttribute("success", false);
             }
         }
