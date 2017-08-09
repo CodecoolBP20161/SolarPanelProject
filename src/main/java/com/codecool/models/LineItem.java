@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @Data
 public class LineItem extends Item {
 
-    private  int quantity;
+    private  double quantity;
     private Integer itemId;
 
     @NotNull
@@ -30,7 +30,7 @@ public class LineItem extends Item {
         this.setType(item.getType());
     }
 
-    public void setQuantity(int quantity){
+    public void setQuantity(double quantity){
         this.quantity = quantity;
         this.total = price.multiply(BigDecimal.valueOf(quantity));
     }
