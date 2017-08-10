@@ -25,40 +25,9 @@
                                 </div>
                                 <form method="post" th:action="@{/ajanlat/3}" th:object="${email}">
                                     <div class="row">
-
-                                        <div class="col-sm-6">
-                                            <input type="text" name="check_first_name" placeholder="Vezetéknév"
-                                                   th:field="*{firstName}">
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <input type="text" name="check_last_name" placeholder="Keresztnév"
-                                                   th:field="*{lastName}">
-                                        </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="col-sm-6">
                                             <input type="email" name="check_email" placeholder="Email"
                                                    th:field="*{emailAddress}">
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <input type="text" name="check_Number" placeholder="Telefonszám"
-                                                   th:field="*{phoneNumber}">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <input type="text" name="check_email" placeholder="Irányítószám"
-                                                   th:field="*{zipCode}">
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <input type="text" name="check_Number" placeholder="Város"
-                                                   th:field="*{city}">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <input type="text" name="check_address" placeholder="Cím"
-                                                   th:field="*{address}">
                                         </div>
                                     </div>
                                     <div class="col-sm-12 center">
@@ -72,56 +41,7 @@
 
                             </div>
                         </div>
-                        <div class="col-sm-4">
-                            <div class="check_form_right bg-color light-color">
-                                <div class="heading-box pb-15 ">
-                                    <h2>Árajánlat</h2>
-                                    <span class="b-line l-left secondary_bg"></span>
 
-                                </div>
-
-                                <div class="product_order">
-                                    <ul>
-                                        <li>
-                                            product<span>total</span>
-                                        </li>
-                                        <li>
-                                            Glass Cleaner<span>$29.99</span>
-                                        </li>
-                                        <li>
-                                            subtotal:<span>$29.99</span>
-                                        </li>
-                                        <li>
-                                            total:<span>$29.99</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="romana_select_method ">
-                                    <ul class="mb-40">
-                                        <li>
-                                            <input type="radio" id="option1" name="selector">
-                                            <label for="option1">Check Payment</label>
-                                            <div class="check_text">
-                                                <p>
-                                                    Please send a check to Store Name, Store Street, Store Town, Store
-                                                    State / County, Store Postcode.
-                                                </p>
-                                            </div>
-                                            <div class="check"></div>
-                                        </li>
-                                        <li>
-                                            <input type="radio" id="option2" name="selector" checked="">
-                                            <label for="option2">paypal</label>
-                                            <div class="paypal_img">
-                                                <img src="assets/images/paypal-card.png" alt="">
-                                            </div>
-                                            <div class="check"></div>
-                                        </li>
-                                    </ul>
-                                    <a href="#" class="btn-text white-btn">place order</a>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
