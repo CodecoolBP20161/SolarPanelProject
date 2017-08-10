@@ -6,9 +6,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
@@ -20,6 +17,11 @@ public class Inverter extends Item {
     @NotEmpty
     private String brand;
 
+    @NotNull
+    private String optimalizerName;
+
+    @NotNull
+    private int optimalierPrice;
 
     @NotNull
     private Integer phase;
@@ -33,13 +35,16 @@ public class Inverter extends Item {
     private int capacity;
 
 
-    public Inverter(String brand, String name, Integer price, Integer phase, Double vatt, String description, Integer wifiModule, Integer capacity) {
+    public Inverter(String brand, String name, Integer price, Integer phase, Double vatt, String description,
+                    Integer wifiModule, Integer capacity, String optimalizerName, int optimalierPrice) {
         super(name, description, BigDecimal.valueOf(price), ItemTypeEnum.Item);
         this.setBrand(brand);
         this.setPhase(phase);
         this.setWatt(vatt);
         this.setWifiModule(wifiModule);
         this.setCapacity(capacity);
+        this.setOptimalizerName(optimalizerName);
+        this.setOptimalierPrice(optimalierPrice);
     }
 
     public Inverter() {

@@ -3,7 +3,6 @@ package com.codecool.controller;
 import com.codecool.models.Inverter;
 import com.codecool.models.LineItem;
 import com.codecool.models.Offer;
-import com.codecool.models.enums.CompanyEnum;
 import com.codecool.models.forms.ConsumptionForm;
 import com.codecool.models.forms.DeviceForm;
 import com.codecool.models.forms.EmailForm;
@@ -101,11 +100,15 @@ public class OfferController {
     @GetMapping("/ajanlat/3")
     public String getOfferStep3(Model model, HttpSession session){
         DeviceForm deviceForm = (DeviceForm) session.getAttribute(DEVICE);
-
-        if (!deviceForm.isValid()) {
-            log.info("Step2 is not done, redirecting to ajanlat/2, InvID: " + deviceForm.getInverterId() + " PanelID: " + deviceForm.getPanelId());
+        if(deviceForm == null){
+            log.info("Step2 is not done, redirecting to /ajanlat/2.");
             return "redirect:/ajanlat/2";
         }
+
+        /*if (!deviceForm.isValid()) {
+            log.info("Step2 is not done, redirecting to ajanlat/2, InvID: " + deviceForm.getInverterId() + " PanelID: " + deviceForm.getPanelId());
+            return "redirect:/ajanlat/2";
+        }*/
 
         EmailForm email = session.getAttribute(EMAIL) == null ?
                 new EmailForm() : (EmailForm) session.getAttribute(EMAIL);

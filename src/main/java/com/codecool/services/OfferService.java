@@ -1,15 +1,17 @@
 package com.codecool.services;
 
-import com.codecool.models.*;
-import com.codecool.models.enums.ItemTypeEnum;
+import com.codecool.models.Inverter;
+import com.codecool.models.LineItem;
+import com.codecool.models.OtherItem;
+import com.codecool.models.SolarPanel;
+import com.codecool.models.enums.*;
 import com.codecool.models.forms.ConsumptionForm;
 import com.codecool.models.forms.DeviceForm;
-import com.codecool.repositories.OtherItemRepository;
 import com.codecool.repositories.InverterRepository;
+import com.codecool.repositories.OtherItemRepository;
 import com.codecool.repositories.SolarPanelRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.integration.IntegrationAutoConfiguration;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -41,7 +43,7 @@ public class OfferService {
     private Map<String, Integer> calculateNearestValue(float value, String metric) {
         float kWhRoundedValue = (value / 1100) * 1000;
         float FtRoundedValue = (float) ((((value * 12) / 37.5) / 1100) * 1000);
-        value = metric.equals(kWh) ? kWhRoundedValue  : FtRoundedValue;
+        value = metric.equals(kWh) ? kWhRoundedValue : FtRoundedValue;
         Map<String, Integer> returnValue = new HashMap<>();
 
         for (int i = 0; i < inverterRepository.findAllByOrderByCapacity().size(); i++) {
@@ -67,16 +69,16 @@ public class OfferService {
         // TODO: 12100 az ultimate szám ahol kiakad az inverterre, 12101 re 12 re kerekít, 12099 lefele
 
         if (metric.equals(kWh)) {
-            if (value < 12000 ) {
+            if (value < 12000) {
                 returnValue = Math.round(value / 1100) * 1000;
-            } else if(value >= 12000 && value <= 21999){
+            } else if (value >= 12000 && value <= 21999) {
                 nearestValue = calculateNearestValue(value, metric);
                 returnValue = calculateValueToInverterFilter(roundedValue, nearestValue.get(higherValue), nearestValue.get(lowerValue));
             }
         } else {
             if (value < 37500) {
                 returnValue = Math.round(((value * 12) / 37.5) / 1100) * 1000;
-            } else if(value >= 37500 && value <= 68746){
+            } else if (value >= 37500 && value <= 68746) {
                 nearestValue = calculateNearestValue(value, metric);
                 returnValue = calculateValueToInverterFilter(roundedValue, nearestValue.get(higherValue), nearestValue.get(lowerValue));
             }
@@ -110,17 +112,33 @@ public class OfferService {
 
         SolarPanel solarPanel = solarPanelRepository.findOne(panelID);
         Inverter inverter = inverterRepository.findOne(inverterId);
-        LineItem inverterLineItem = new LineItem(inverter);
-        LineItem solarPanelLineItem = new LineItem(solarPanel);
-        solarPanelLineItem.setQuantity(solarPanelService.calculateSolarPanelQuantity(consumptionForm, solarPanel.getCapacity()));
-
-        LineItem additionalStuffLineItem;
         List<OtherItem> otherItems = otherItemRepository.findByPhaseIn(Arrays.asList(0, consumptionForm.getPhase()));
+        LineItem inverterLineItem = new LineItem(inverter);
+        inverterLineItem.setName(inverter.getBrand() + " " + inverter.getName());
+        LineItem solarPanelLineItem = new LineItem(solarPanel);
+        int neededSolarpanelQuantity = solarPanelService.calculateSolarPanelQuantity(consumptionForm, solarPanel.getCapacity());
+
+        solarPanelLineItem.setQuantity(neededSolarpanelQuantity);
+        LineItem additionalStuffLineItem;
 
         lineItems.add(solarPanelLineItem);
         lineItems.add(inverterLineItem);
 
-        OtherItem installationFee = new OtherItem("Kivitelezés", "", getInstallationFee(consumptionForm.getValue()),
+
+        if (inverter.getBrand().equals("Solaredge")) {
+            int quantityOfOptimlizer = (inverter.getOptimalizerName().contains("300")) ? neededSolarpanelQuantity : neededSolarpanelQuantity / 2;
+            OtherItem optimalizerItsNeeded = new OtherItem(inverter.getOptimalizerName(), "", inverter.getOptimalierPrice(), 0, ItemTypeEnum.Item);
+            LineItem optimalizerLineItem = new LineItem(optimalizerItsNeeded);
+            optimalizerLineItem.setQuantity(quantityOfOptimlizer);
+            lineItems.add(optimalizerLineItem);
+        }
+
+        OtherItem wifiModule = new OtherItem("Wifi modul", "", inverter.getWifiModule(), 0, ItemTypeEnum.Item);
+        LineItem wifiLineItem = new LineItem(wifiModule);
+        lineItems.add(wifiLineItem);
+
+
+        OtherItem installationFee = new OtherItem("Kivitelezés", "", getInstallationFee(consumptionValue),
                 0, ItemTypeEnum.Service);
         installationFee.setId(11);
         otherItems.add(installationFee);
@@ -132,10 +150,16 @@ public class OfferService {
                     additionalStuffLineItem.setQuantity(15);
                 } else if (additionalStuffLineItem.getName().equals("Szolár kábel /méter/")) {
                     additionalStuffLineItem.setQuantity(50);
-                } else if (additionalStuffLineItem.getName().equals("MC4 Csatlakozó (pár)")){
+                } else if (additionalStuffLineItem.getName().equals("MC4 Csatlakozó (pár)")) {
                     additionalStuffLineItem.setQuantity(4);
                 } else if (additionalStuffLineItem.getName().contains("AC vezeték")) {
                     additionalStuffLineItem.setQuantity(10);
+                } else if (additionalStuffLineItem.getName().equals("Termék díj")) {
+                    additionalStuffLineItem.setQuantity(neededSolarpanelQuantity);
+                } else if (additionalStuffLineItem.getName().contains("Solaredge")) {
+                    additionalStuffLineItem.setQuantity(neededSolarpanelQuantity);
+                } else if (additionalStuffLineItem.getName().equals("Tartószerkezet szett (4panel/szett)")) {
+                    additionalStuffLineItem.setQuantity(solarPanelService.callculateSolarPanelSupportStructure(neededSolarpanelQuantity));
                 }
                 lineItems.add(additionalStuffLineItem);
             }
@@ -149,7 +173,7 @@ public class OfferService {
 
         if (consumption < 3000) {
             installationFee = 100000;
-        } else if (consumption >= 3000 && consumption < 6000){
+        } else if (consumption >= 3000 && consumption < 6000) {
             installationFee = 120000;
         } else if (consumption >= 6000 && consumption < 12000) {
             installationFee = 140000;
@@ -160,7 +184,7 @@ public class OfferService {
         return installationFee;
     }
 
-    public List<LineItem> getSolarPanelListAsLineItems( ConsumptionForm consumptionForm) {
+    public List<LineItem> getSolarPanelListAsLineItems(ConsumptionForm consumptionForm) {
         LineItem solarPanelItem;
         List<LineItem> solarPanelLineItems = new ArrayList<>();
 
