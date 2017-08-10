@@ -1,639 +1,669 @@
 ﻿<!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org"
-	  xmlns:sec="http://www.w3.org/1999/xhtml">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head th:replace="fragments/head :: head"></head>
 
-	<body class="full-intro background--dark">
-		<!--loader-->
+<body class="full-intro background--dark">
+<!--loader-->
 
 <!--
 		<div th:replace="fragments/preloader :: preloader"></div>
 -->
 
-        <div id="preloader">
-            <div class="sk-circle">
-                <div class="sk-circle1 sk-child"></div>
-                <div class="sk-circle2 sk-child"></div>
-                <div class="sk-circle3 sk-child"></div>
-                <div class="sk-circle4 sk-child"></div>
-                <div class="sk-circle5 sk-child"></div>
-                <div class="sk-circle6 sk-child"></div>
-                <div class="sk-circle7 sk-child"></div>
-                <div class="sk-circle8 sk-child"></div>
-                <div class="sk-circle9 sk-child"></div>
-                <div class="sk-circle10 sk-child"></div>
-                <div class="sk-circle11 sk-child"></div>
-                <div class="sk-circle12 sk-child"></div>
+<div id="preloader">
+    <div class="sk-circle">
+        <div class="sk-circle1 sk-child"></div>
+        <div class="sk-circle2 sk-child"></div>
+        <div class="sk-circle3 sk-child"></div>
+        <div class="sk-circle4 sk-child"></div>
+        <div class="sk-circle5 sk-child"></div>
+        <div class="sk-circle6 sk-child"></div>
+        <div class="sk-circle7 sk-child"></div>
+        <div class="sk-circle8 sk-child"></div>
+        <div class="sk-circle9 sk-child"></div>
+        <div class="sk-circle10 sk-child"></div>
+        <div class="sk-circle11 sk-child"></div>
+        <div class="sk-circle12 sk-child"></div>
+    </div>
+</div>
+<!--loader-->
+<!-- Site Wraper -->
+<div class="wrapper">
+
+    <div th:replace="fragments/header :: header"></div>
+    <div th:replace="fragments/navbar :: navbar"></div>
+
+    <!--  Main Banner Start Here-->
+    <section class="hero">
+        <!--rev slider start-->
+        <div class="fullwidthbanner">
+            <div class="tp-fullscreen-banner">
+                <ul>
+                    <!-- SLIDE -->
+                    <li data-transition="fade" data-slotamount="5" data-masterspeed="1000" data-title="Slide 1">
+                        <!-- MAIN IMAGE -->
+                        <img src="assets/images/custom/solar1.jpeg" alt="solar1" data-bgfit="cover"
+                             data-bgposition="left top" data-bgrepeat="no-repeat">
+                        <!-- Transparent Background -->
+                        <div class="tp-caption dark-translucent-bg"
+                             data-x="center"
+                             data-y="bottom"
+                             data-speed="500"
+                             data-easing="easeOutQuad"
+                             data-start="0"></div>
+                        <div class="caption sfb bold text-center"
+                             data-x="center"
+                             data-y="120"
+                             data-speed="900"
+                             data-start="800"
+                             data-easing="Sine.easeOut">
+                            <h2 class="font-s">Váltson <span class="text-color"> Zöld </span> Energiára!</h2>
+                        </div>
+                        <div class="caption sfb bold  text-center "
+                             data-x="center"
+                             data-y="200"
+                             data-speed="900"
+                             data-start="1500"
+                             data-easing="Sine.easeOIn">
+                            <p class="paragraph-s">
+                                Lorem Ipsum is simply dummy text of the printing
+                                <br>
+                                and typeseatting industry. Lorem Ipsum has been the industry's
+                            </p>
+                        </div>
+                        <div class="caption sfb lowercase-caption text-center"
+                             data-x="center"
+                             data-y="280"
+                             data-speed="1000"
+                             data-start="2000"
+                             data-easing="Sine.easeOut">
+                            <a class="btn-text" href="#">Read more</a>
+                            <a class="btn-text secondary_bg" href="#">PURCHASE NOW</a>
+                        </div>
+                    </li>
+                    <!-- SLIDE -->
+                    <!-- SLIDE -->
+                    <li data-transition="fade" data-slotamount="5" data-masterspeed="1000" data-title="Slide 1">
+                        <!-- MAIN IMAGE -->
+                        <img src="assets/images/custom/solar2.jpeg" alt="solar2" data-bgfit="cover"
+                             data-bgposition="left top" data-bgrepeat="no-repeat">
+                        <!-- Transparent Background -->
+                        <div class="tp-caption dark-translucent-bg"
+                             data-x="center"
+                             data-y="bottom"
+                             data-speed="500"
+                             data-easing="easeOutQuad"
+                             data-start="0"></div>
+                        <div class="caption sfb bold text-center"
+                             data-x="center"
+                             data-y="120"
+                             data-speed="900"
+                             data-start="800"
+                             data-easing="Sine.easeOut">
+                            <h2 class="font-s">Váltson <span class="text-color"> Zöld </span> Energiára!</h2>
+                        </div>
+                        <div class="caption sfb bold  text-center "
+                             data-x="center"
+                             data-y="200"
+                             data-speed="900"
+                             data-start="1500"
+                             data-easing="Sine.easeOIn">
+                            <p class="paragraph-s">
+                                Lorem Ipsum is simply dummy text of the printing
+                                <br>
+                                and typeseatting industry. Lorem Ipsum has been the industry's
+                            </p>
+                        </div>
+                        <div class="caption sfb lowercase-caption text-center"
+                             data-x="center"
+                             data-y="280"
+                             data-speed="1000"
+                             data-start="2000"
+                             data-easing="Sine.easeOut">
+                            <a class="btn-text" href="#">Read more</a>
+                            <a class="btn-text secondary_bg" href="#">PURCHASE NOW</a>
+                        </div>
+                    </li>
+                    <!-- SLIDE -->
+                    <!-- SLIDE -->
+                    <li data-transition="fade" data-slotamount="5" data-masterspeed="1000" data-title="Slide 1">
+                        <!-- MAIN IMAGE -->
+                        <img src="http://placehold.it/1920x850" alt="darkblurbg" data-bgfit="cover"
+                             data-bgposition="left top" data-bgrepeat="no-repeat">
+                        <!-- Transparent Background -->
+                        <div class="tp-caption dark-translucent-bg"
+                             data-x="center"
+                             data-y="bottom"
+                             data-speed="500"
+                             data-easing="easeOutQuad"
+                             data-start="0"></div>
+                        <div class="caption sfb bold text-center"
+                             data-x="center"
+                             data-y="120"
+                             data-speed="900"
+                             data-start="800"
+                             data-easing="Sine.easeOut">
+                            <h2 class="font-s">Váltson <span class="text-color"> Zöld </span> Energiára!</h2>
+                        </div>
+                        <div class="caption sfb bold  text-center "
+                             data-x="center"
+                             data-y="200"
+                             data-speed="900"
+                             data-start="1500"
+                             data-easing="Sine.easeOIn">
+                            <p class="paragraph-s">
+                                Lorem Ipsum is simply dummy text of the printing
+                                <br>
+                                and typeseatting industry. Lorem Ipsum has been the industry's
+                            </p>
+                        </div>
+                        <div class="caption sfb lowercase-caption text-center"
+                             data-x="center"
+                             data-y="280"
+                             data-speed="1000"
+                             data-start="2000"
+                             data-easing="Sine.easeOut">
+                            <a class="btn-text" href="#">Read more</a>
+                            <a class="btn-text secondary_bg" href="#">PURCHASE NOW</a>
+                        </div>
+                    </li>
+                    <!-- SLIDE -->
+
+                </ul>
             </div>
         </div>
-		<!--loader-->
-		<!-- Site Wraper -->
-		<div class="wrapper">
+        <!--full width banner-->
 
-			<div th:replace="fragments/header :: header"></div>
-			<div th:replace="fragments/navbar :: navbar"></div>
+        <!--revolution end-->
+    </section>
+    <!--			<div class="clearfix"></div>
+                &lt;!&ndash;  Main Banner End Here&ndash;&gt;
 
-			<!--  Main Banner Start Here-->
-			<section class="hero">
-				<!--rev slider start-->
-				<div class="fullwidthbanner">
-					<div class="tp-fullscreen-banner">
-						<ul>
-							<!-- SLIDE -->
-							<li data-transition="fade" data-slotamount="5" data-masterspeed="1000" data-title="Slide 1">
-								<!-- MAIN IMAGE -->
-								<img src="assets/images/custom/solar1.jpeg"  alt="solar1"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
-								<!-- Transparent Background -->
-								<div class="tp-caption dark-translucent-bg"
-								data-x="center"
-								data-y="bottom"
-								data-speed="500"
-								data-easing="easeOutQuad"
-								data-start="0"></div>
-								<div class="caption sfb bold text-center"
-								data-x="center"
-								data-y="120"
-								data-speed="900"
-								data-start="800"
-								data-easing="Sine.easeOut">
-									<h2 class="font-s">Váltson <span class="text-color"> Zöld </span> Energiára!</h2>
-								</div>
-								<div class="caption sfb bold  text-center "
-								data-x="center"
-								data-y="200"
-								data-speed="900"
-								data-start="1500"
-								data-easing="Sine.easeOIn">
-									<p class="paragraph-s">
-										Lorem Ipsum is simply dummy text of the printing
-										<br>
-										and typeseatting industry. Lorem Ipsum has been the industry's
-									</p>
-								</div>
-								<div class="caption sfb lowercase-caption text-center"
-								data-x="center"
-								data-y="280"
-								data-speed="1000"
-								data-start="2000"
-								data-easing="Sine.easeOut">
-									<a class="btn-text" href="#">Read more</a>
-									<a class="btn-text secondary_bg" href="#">PURCHASE NOW</a>
-								</div>
-							</li>
-							<!-- SLIDE -->
-							<!-- SLIDE -->
-							<li data-transition="fade" data-slotamount="5" data-masterspeed="1000" data-title="Slide 1">
-								<!-- MAIN IMAGE -->
-								<img src="assets/images/custom/solar2.jpeg"  alt="solar2"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
-								<!-- Transparent Background -->
-								<div class="tp-caption dark-translucent-bg"
-								data-x="center"
-								data-y="bottom"
-								data-speed="500"
-								data-easing="easeOutQuad"
-								data-start="0"></div>
-								<div class="caption sfb bold text-center"
-								data-x="center"
-								data-y="120"
-								data-speed="900"
-								data-start="800"
-								data-easing="Sine.easeOut">
-									<h2 class="font-s">Váltson <span class="text-color"> Zöld </span> Energiára!</h2>
-								</div>
-								<div class="caption sfb bold  text-center "
-								data-x="center"
-								data-y="200"
-								data-speed="900"
-								data-start="1500"
-								data-easing="Sine.easeOIn">
-									<p class="paragraph-s">
-										Lorem Ipsum is simply dummy text of the printing
-										<br>
-										and typeseatting industry. Lorem Ipsum has been the industry's
-									</p>
-								</div>
-								<div class="caption sfb lowercase-caption text-center"
-								data-x="center"
-								data-y="280"
-								data-speed="1000"
-								data-start="2000"
-								data-easing="Sine.easeOut">
-									<a class="btn-text" href="#">Read more</a>
-									<a class="btn-text secondary_bg" href="#">PURCHASE NOW</a>
-								</div>
-							</li>
-							<!-- SLIDE -->
-							<!-- SLIDE -->
-							<li data-transition="fade" data-slotamount="5" data-masterspeed="1000" data-title="Slide 1">
-								<!-- MAIN IMAGE -->
-								<img src="http://placehold.it/1920x850"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
-								<!-- Transparent Background -->
-								<div class="tp-caption dark-translucent-bg"
-								data-x="center"
-								data-y="bottom"
-								data-speed="500"
-								data-easing="easeOutQuad"
-								data-start="0"></div>
-								<div class="caption sfb bold text-center"
-								data-x="center"
-								data-y="120"
-								data-speed="900"
-								data-start="800"
-								data-easing="Sine.easeOut">
-									<h2 class="font-s">Váltson <span class="text-color"> Zöld </span> Energiára!</h2>
-								</div>
-								<div class="caption sfb bold  text-center "
-								data-x="center"
-								data-y="200"
-								data-speed="900"
-								data-start="1500"
-								data-easing="Sine.easeOIn">
-									<p class="paragraph-s">
-										Lorem Ipsum is simply dummy text of the printing
-										<br>
-										and typeseatting industry. Lorem Ipsum has been the industry's
-									</p>
-								</div>
-								<div class="caption sfb lowercase-caption text-center"
-								data-x="center"
-								data-y="280"
-								data-speed="1000"
-								data-start="2000"
-								data-easing="Sine.easeOut">
-									<a class="btn-text" href="#">Read more</a>
-									<a class="btn-text secondary_bg" href="#">PURCHASE NOW</a>
-								</div>
-							</li>
-							<!-- SLIDE -->
+                &lt;!&ndash;About Us End &ndash;&gt;
+                <section id="choose_us" class="ptb-60 ptb-xs-40 overflow_hidden gray-bg">
+                    <div class="container">
+                        <div class="row">
 
-						</ul>
-					</div>
-				</div>
-				<!--full width banner-->
+                            <div class="col-sm-8 col-sm-offset-4">
+                                <div class="row">
+                                    <div class="col-sm-12 mb-30">
+                                        <div class="heading-box ">
+                                            <h2>About Us</h2>
+                                            <span class="b-line l-left line-h"></span>
+                                        </div>
 
-				<!--revolution end-->
-			</section>
-<!--			<div class="clearfix"></div>
-			&lt;!&ndash;  Main Banner End Here&ndash;&gt;
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6 mb-30">
+                                        <div class="service_box hi-icon-effect-3 hi-icon-effect-3b">
+                                            <div class="service_icon">
 
-			&lt;!&ndash;About Us End &ndash;&gt;
-			<section id="choose_us" class="ptb-60 ptb-xs-40 overflow_hidden gray-bg">
-				<div class="container">
-					<div class="row">
+                                                <i class="hi-icon flaticon-people-2" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="service_details">
+                                                <h5 class="font-color_base no_stripe"><a href="#">excellent services</a></h5>
+                                            </div>
+                                            <div class="service_content">
+                                                <p>
+                                                    Company that offers design and build services for you from initial sketches to the final production.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 mb-30">
+                                        <div class="service_box hi-icon-effect-3 hi-icon-effect-3b">
+                                            <div class="service_icon">
 
-						<div class="col-sm-8 col-sm-offset-4">
-							<div class="row">
-								<div class="col-sm-12 mb-30">
-									<div class="heading-box ">
-										<h2>About Us</h2>
-										<span class="b-line l-left line-h"></span>
-									</div>
+                                                <i class="hi-icon flaticon-people-1" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="service_details">
+                                                <h5 class="font-color_base no_stripe"><a href="#">guaranteed work</a></h5>
+                                            </div>
+                                            <div class="service_content">
+                                                <p>
+                                                    Company that offers design and build services for you from initial sketches to the final production.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="service_box hi-icon-effect-3 hi-icon-effect-3b">
+                                            <div class="service_icon">
 
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-6 mb-30">
-									<div class="service_box hi-icon-effect-3 hi-icon-effect-3b">
-										<div class="service_icon">
+                                                <i class="hi-icon flaticon-nature-2" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="service_details">
+                                                <h5 class="font-color_base no_stripe"><a href="#">quality and reliability</a></h5>
+                                            </div>
+                                            <div class="service_content">
+                                                <p>
+                                                    Company that offers design and build services for you from initial sketches to the final production.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="service_box hi-icon-effect-3 hi-icon-effect-3b">
+                                            <div class="service_icon">
 
-											<i class="hi-icon flaticon-people-2" aria-hidden="true"></i>
-										</div>
-										<div class="service_details">
-											<h5 class="font-color_base no_stripe"><a href="#">excellent services</a></h5>
-										</div>
-										<div class="service_content">
-											<p>
-												Company that offers design and build services for you from initial sketches to the final production.
-											</p>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-6 mb-30">
-									<div class="service_box hi-icon-effect-3 hi-icon-effect-3b">
-										<div class="service_icon">
+                                                <i class="hi-icon flaticon-fence" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="service_details">
+                                                <h5 class="font-color_base no_stripe"><a href="#">Insect Control</a></h5>
+                                            </div>
+                                            <div class="service_content">
+                                                <p>
+                                                    Company that offers design and build services for you from initial sketches to the final production.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-											<i class="hi-icon flaticon-people-1" aria-hidden="true"></i>
-										</div>
-										<div class="service_details">
-											<h5 class="font-color_base no_stripe"><a href="#">guaranteed work</a></h5>
-										</div>
-										<div class="service_content">
-											<p>
-												Company that offers design and build services for you from initial sketches to the final production.
-											</p>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-6">
-									<div class="service_box hi-icon-effect-3 hi-icon-effect-3b">
-										<div class="service_icon">
+                        </div>
+                    </div>
+                        <div class="image_cover"></div>
+                </section>-->
 
-											<i class="hi-icon flaticon-nature-2" aria-hidden="true"></i>
-										</div>
-										<div class="service_details">
-											<h5 class="font-color_base no_stripe"><a href="#">quality and reliability</a></h5>
-										</div>
-										<div class="service_content">
-											<p>
-												Company that offers design and build services for you from initial sketches to the final production.
-											</p>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-6">
-									<div class="service_box hi-icon-effect-3 hi-icon-effect-3b">
-										<div class="service_icon">
+    <!--Our Services-->
+    <section id="our-services" class="padding ptb-xs-40 text-center">
+        <div class="container">
+            <div class="row pb-60">
+                <div class="col-sm-12 mb-20">
+                    <div class="heading-box ">
+                        <h2><span>Amit</span> garantálunk</h2>
+                        <span class="b-line line-h"></span>
+                    </div>
 
-											<i class="hi-icon flaticon-fence" aria-hidden="true"></i>
-										</div>
-										<div class="service_details">
-											<h5 class="font-color_base no_stripe"><a href="#">Insect Control</a></h5>
-										</div>
-										<div class="service_content">
-											<p>
-												Company that offers design and build services for you from initial sketches to the final production.
-											</p>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+                </div>
+            </div>
+            <div class="row">
 
-					</div>
-				</div>
-					<div class="image_cover"></div>
-			</section>-->
+                <div class="col-md-4 col-sm-6">
+                    <a href="#">
+                        <div class="featured-item feature-bg-box mb-100 gray-bg">
+                            <div class="icon">
+                                <img src="assets/images/custom/solar.png">
 
-			<!--Our Services-->
-			<section id="our-services" class="padding ptb-xs-40 text-center">
-				<div class="container">
-					<div class="row pb-60">
-						<div class="col-sm-12 mb-20">
-							<div class="heading-box ">
-								<h2><span>Our</span> Services</h2>
-								<span class="b-line line-h"></span>
-							</div>
+                            </div>
+                            <div class="title text-uppercase">
+                                <h4>Rubbish Removal</h4>
+                            </div>
+                            <div class="desc">
+                                Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <a href="#">
+                        <div class="featured-item feature-bg-box gray-bg mb-100 sub-color_hover">
+                            <div class="icon">
+                                <i class="flaticon-people sub-color"></i>
+                            </div>
+                            <div class="title text-uppercase">
+                                <h4>Lawn Moving </h4>
+                            </div>
+                            <div class="desc">
+                                Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <a href="#">
+                        <div class="featured-item feature-bg-box gray-bg mb-100">
+                            <div class="icon">
+                                <i class="flaticon-nature-1"></i>
+                            </div>
+                            <div class="title text-uppercase">
+                                <h4>Garden Care</h4>
+                            </div>
+                            <div class="desc">
+                                Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
+                            </div>
+                        </div>
+                    </a>
+                </div>
 
-						</div>
-					</div>
-					<div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <a href="#">
+                        <div class="featured-item feature-bg-box gray-bg sub-color_hover mb-sm-100">
+                            <div class="icon">
+                                <i class="flaticon-nature sub-color"></i>
+                            </div>
+                            <div class="title text-uppercase">
+                                <h4>Landscape Design</h4>
+                            </div>
+                            <div class="desc">
+                                Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
+                            </div>
+                        </div>
+                    </a>
+                </div>
 
-						<div class="col-md-4 col-sm-6">
-							<a href="#">
-							<div class="featured-item feature-bg-box mb-100 gray-bg">
-								<div class="icon">
-									<img src="assets/images/custom/solar.png">
+                <div class="col-md-4 col-sm-6">
+                    <a href="#">
+                        <div class="featured-item feature-bg-box gray-bg ">
+                            <div class="icon">
+                                <i class="flaticon-people-2"></i>
+                            </div>
+                            <div class="title text-uppercase">
+                                <h4> Excellent Services</h4>
+                            </div>
+                            <div class="desc">
+                                Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
+                            </div>
+                        </div>
+                    </a>
+                </div>
 
-								</div>
-								<div class="title text-uppercase">
-									<h4>Rubbish Removal</h4>
-								</div>
-								<div class="desc">
-									Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
-								</div>
-							</div></a>
-						</div>
-						<div class="col-md-4 col-sm-6">
-							<a href="#">
-							<div class="featured-item feature-bg-box gray-bg mb-100 sub-color_hover">
-								<div class="icon">
-									<i class="flaticon-people sub-color"></i>
-								</div>
-								<div class="title text-uppercase">
-									<h4>Lawn Moving </h4>
-								</div>
-								<div class="desc">
-									Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
-								</div>
-							</div></a>
-						</div>
-						<div class="col-md-4 col-sm-6">
-							<a href="#">
-							<div class="featured-item feature-bg-box gray-bg mb-100">
-								<div class="icon">
-									<i class="flaticon-nature-1"></i>
-								</div>
-								<div class="title text-uppercase">
-									<h4>Garden Care</h4>
-								</div>
-								<div class="desc">
-									Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
-								</div>
-							</div></a>
-						</div>
+                <div class="col-md-4 col-sm-6">
+                    <a href="#">
+                        <div class="featured-item feature-bg-box gray-bg sub-color_hover mb-xs-0 ">
+                            <div class="icon">
+                                <i class="flaticon-fence sub-color"></i>
+                            </div>
+                            <div class="title text-uppercase">
+                                <h4> Insect Control</h4>
+                            </div>
+                            <div class="desc">
+                                Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
 
-						<div class="col-md-4 col-sm-6">
-							<a href="#">
-							<div class="featured-item feature-bg-box gray-bg sub-color_hover mb-sm-100">
-								<div class="icon">
-									<i class="flaticon-nature sub-color"></i>
-								</div>
-								<div class="title text-uppercase">
-									<h4>Landscape Design</h4>
-								</div>
-								<div class="desc">
-									Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
-								</div>
-							</div></a>
-						</div>
+        </div>
+    </section>
 
-						<div class="col-md-4 col-sm-6">
-							<a href="#">
-							<div class="featured-item feature-bg-box gray-bg ">
-								<div class="icon">
-									<i class="flaticon-people-2"></i>
-								</div>
-								<div class="title text-uppercase">
-									<h4> Excellent Services</h4>
-								</div>
-								<div class="desc">
-									Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
-								</div>
-							</div></a>
-						</div>
+    <section class="choose-us padding light-color pb-xs-0 overflow_hidden secondary_bg">
 
-						<div class="col-md-4 col-sm-6">
-							<a href="#">
-							<div class="featured-item feature-bg-box gray-bg sub-color_hover mb-xs-0 ">
-								<div class="icon">
-									<i class="flaticon-fence sub-color"></i>
-								</div>
-								<div class="title text-uppercase">
-									<h4> Insect Control</h4>
-								</div>
-								<div class="desc">
-									Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
-								</div>
-							</div></a>
-						</div>
-					</div>
+        <!-- half image background element -->
+        <div class="container">
+            <div class="row">
 
-				</div>
-			</section>
+                <div class="col-sm-6">
+                    <div class="creative_heading light-color pb-30">
+                        <h2>Miért mi?</h2>
+                    </div>
 
-			<section  class="choose-us padding light-color pb-xs-0 overflow_hidden secondary_bg">
-				
-				<!-- half image background element -->
-				<div class="container">
-					<div class="row">
+                    <div class="media ">
+                        <div class="media-left">
+                            <i class="flaticon-nature fontsize_28"></i>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="text-uppercase"><a href="offer.html">Kedvező finanszírozási feltételek</a></h4>
+                            <p>
+                                clita kasd guberren no sea takimata sanctus est
+                            </p>
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="media-left">
+                            <i class="flaticon-people-2 fontsize_28"></i>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="text-uppercase"><a href="#!">Megbízható szakemberek</a></h4>
 
-						<div class="col-sm-6">
-							<div class="creative_heading light-color pb-30">
-								<h2>Miért mi?</h2>
-							</div>
+                            <p>
+                                at vero eos et accusam justo duo dolores
+                            </p>
+                        </div>
+                    </div>
+                    <div class="media ">
+                        <div class="media-left">
+                            <i class="flaticon-people-1 fontsize_28"></i>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="text-uppercase"><a href="#!">Tiszta munka</a></h4>
+                            <p>
+                                lorem ipsum dolor sit amet, consetetur
+                            </p>
+                        </div>
+                    </div>
 
-							<div class="media ">
-								<div class="media-left">
-									<i class="flaticon-nature fontsize_28"></i>
-								</div>
-								<div class="media-body">
-									<h4 class="text-uppercase"><a href="offer.html">Kedvező finanszírozási feltételek</a></h4>
-									<p>
-										clita kasd guberren no sea takimata sanctus est
-									</p>
-								</div>
-							</div>
-							<div class="media">
-								<div class="media-left">
-									<i class="flaticon-people-2 fontsize_28"></i>
-								</div>
-								<div class="media-body">
-									<h4 class="text-uppercase"><a href="#!">Megbízható szakemberek</a></h4>
+                </div>
 
-									<p>
-										at vero eos et accusam justo duo dolores
-									</p>
-								</div>
-							</div>
-							<div class="media ">
-								<div class="media-left">
-									<i class="flaticon-people-1 fontsize_28"></i>
-								</div>
-								<div class="media-body">
-									<h4 class="text-uppercase"><a href="#!">Tiszta munka</a></h4>
-									<p>
-										lorem ipsum dolor sit amet, consetetur
-									</p>
-								</div>
-							</div>
+            </div>
+        </div>
+        <div class="image_cover image_cover_right"></div>
+    </section>
 
-						</div>
+    <!--
 
-					</div>
-				</div>
-					<div class="image_cover image_cover_right"></div>
-			</section>
+                 Counter Section
+                <div class="fact-counter-wrapper padding ptb-xs-40 light-color parallax overlay-dark">
+                    <div class="container text-center">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="single-fact">
+                                    <div class="icon-boxed">
+                                        <i class="flaticon-nature-2"></i>
+                                    </div>
+                                    <span class="counter" data-count="3562">0</span>
+                                    <p>
+                                        Trees Planted
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="single-fact">
+                                    <div class="icon-boxed">
+                                        <i class="flaticon-nature"></i>
+                                    </div>
+                                    <span class="counter" data-count="1054">0</span>
+                                    <p>
+                                        Project Done
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="single-fact">
+                                    <div class="icon-boxed">
+                                        <i class="flaticon-people-2"></i>
+                                    </div>
+                                    <span class="counter" data-count="400">0</span>
+                                    <p>
+                                        Team
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="single-fact">
+                                    <div class="icon-boxed">
+                                        <i class="flaticon-time"></i>
+                                    </div>
+                                    <span class="counter" data-count="5685">0</span>
+                                    <p>
+                                        Hours of work
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 Counter Section End
+    -->
 
-<!--
+    <!-- Get a Qoute -->
+    <section class="get-qoute padding ptb-xs-40 get-qoute">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 faq">
+                    <div class="row">
+                        <div class="col-sm-12 mb-30">
+                            <div class="heading-box ">
+                                <h2>Gyakran felmerülő kérdések</h2>
+                                <span class="b-line l-left line-h"></span>
+                            </div>
 
-			 Counter Section
-			<div class="fact-counter-wrapper padding ptb-xs-40 light-color parallax overlay-dark">
-				<div class="container text-center">
-					<div class="row">
-						<div class="col-sm-3">
-							<div class="single-fact">
-								<div class="icon-boxed">
-									<i class="flaticon-nature-2"></i>
-								</div>
-								<span class="counter" data-count="3562">0</span>
-								<p>
-									Trees Planted
-								</p>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="single-fact">
-								<div class="icon-boxed">
-									<i class="flaticon-nature"></i>
-								</div>
-								<span class="counter" data-count="1054">0</span>
-								<p>
-									Project Done
-								</p>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="single-fact">
-								<div class="icon-boxed">
-									<i class="flaticon-people-2"></i>
-								</div>
-								<span class="counter" data-count="400">0</span>
-								<p>
-									Team
-								</p>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="single-fact">
-								<div class="icon-boxed">
-									<i class="flaticon-time"></i>
-								</div>
-								<span class="counter" data-count="5685">0</span>
-								<p>
-									Hours of work
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			 Counter Section End
--->
+                        </div>
+                    </div>
+                    <div class="panel-group " id="accordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a class="collapsed" data-toggle="collapse"
+                                                           data-parent="#accordion" href="#collapse-1"
+                                                           aria-expanded="false"> Duis aute irure dolor in reprehenderit
+                                    <i class="fa fa-plus collape-plus"></i></a></h4>
+                            </div>
+                            <div id="collapse-1" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <p>
+                                        Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit
+                                        amet adipiscing sem, Maecenas tempus, tellus eget condimentum rhoncus.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a class="collapsed" data-toggle="collapse"
+                                                           data-parent="#accordion" href="#collapse-2"
+                                                           aria-expanded="false"> Duis aute irure dolor in reprehenderit
+                                    <i class="fa fa-plus collape-plus"></i></a></h4>
+                            </div>
+                            <div id="collapse-2" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <p>
+                                        Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit
+                                        amet adipiscing sem, Maecenas tempus, tellus eget condimentum rhoncus.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a class="collapsed" data-toggle="collapse"
+                                                           data-parent="#accordion" href="#collapse-3"
+                                                           aria-expanded="false"> Duis aute irure dolor in reprehenderit
+                                    <i class="fa fa-plus collape-plus"></i></a></h4>
+                            </div>
+                            <div id="collapse-3" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <p>
+                                        Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit
+                                        amet adipiscing sem, Maecenas tempus, tellus eget condimentum rhoncus.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
+                                                           href="#collapse-4" aria-expanded="false">Duis aute irure
+                                    dolor in reprehenderit <i class="fa fa-plus collape-plus"></i></a></h4>
+                            </div>
+                            <div id="collapse-4" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <p>
+                                        Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit
+                                        amet adipiscing sem, Maecenas tempus, tellus eget condimentum rhoncus.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a class="collapsed" data-toggle="collapse"
+                                                           data-parent="#accordion" href="#collapse-5"
+                                                           aria-expanded="false"> Duis aute irure dolor in reprehenderit
+                                    <i class="fa fa-plus collape-plus"></i></a></h4>
+                            </div>
+                            <div id="collapse-5" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <p>
+                                        Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit
+                                        amet adipiscing sem, Maecenas tempus, tellus eget condimentum rhoncus.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a class="collapsed" data-toggle="collapse"
+                                                           data-parent="#accordion" href="#collapse-6"
+                                                           aria-expanded="false"> Duis aute irure dolor in reprehenderit
+                                    <i class="fa fa-plus collape-plus"></i></a></h4>
+                            </div>
+                            <div id="collapse-6" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <p>
+                                        Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit
+                                        amet adipiscing sem, Maecenas tempus, tellus eget condimentum rhoncus.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
 
-			<!-- Get a Qoute -->
-			<section class="get-qoute padding ptb-xs-40 get-qoute">
-				<div class="container">
-					<div class="row">
-						<div class="col-sm-6 faq">
-							<div class="row">
-								<div class="col-sm-12 mb-30">
-									<div class="heading-box ">
-										<h2>Frequently Asked Questions</h2>
-										<span class="b-line l-left line-h"></span>
-									</div>
+                    </div>
 
-								</div>
-							</div>
-							<div class="panel-group " id="accordion">
-								<div class="panel panel-default">
-									<div class="panel-heading">
-										<h4 class="panel-title"><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse-1" aria-expanded="false"> Duis aute irure dolor in reprehenderit <i class="fa fa-plus collape-plus"></i></a></h4>
-									</div>
-									<div id="collapse-1" class="panel-collapse collapse">
-										<div class="panel-body">
-											<p>
-												Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem, Maecenas tempus, tellus eget condimentum rhoncus.
-											</p>
-										</div>
-									</div>
-								</div>
-								<div class="panel panel-default">
-									<div class="panel-heading">
-										<h4 class="panel-title"><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse-2" aria-expanded="false"> Duis aute irure dolor in reprehenderit <i class="fa fa-plus collape-plus"></i></a></h4>
-									</div>
-									<div id="collapse-2" class="panel-collapse collapse">
-										<div class="panel-body">
-											<p>
-												Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem, Maecenas tempus, tellus eget condimentum rhoncus.
-											</p>
-										</div>
-									</div>
-								</div>
-								<div class="panel panel-default">
-									<div class="panel-heading">
-										<h4 class="panel-title"><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse-3" aria-expanded="false"> Duis aute irure dolor in reprehenderit <i class="fa fa-plus collape-plus"></i></a></h4>
-									</div>
-									<div id="collapse-3" class="panel-collapse collapse">
-										<div class="panel-body">
-											<p>
-												Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem, Maecenas tempus, tellus eget condimentum rhoncus.
-											</p>
-										</div>
-									</div>
-								</div>
-								<div class="panel panel-default">
-									<div class="panel-heading">
-										<h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse-4" aria-expanded="false">Duis aute irure dolor in reprehenderit <i class="fa fa-plus collape-plus"></i></a></h4>
-									</div>
-									<div id="collapse-4" class="panel-collapse collapse">
-										<div class="panel-body">
-											<p>
-												Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem, Maecenas tempus, tellus eget condimentum rhoncus.
-											</p>
-										</div>
-									</div>
-								</div>
-								<div class="panel panel-default">
-									<div class="panel-heading">
-										<h4 class="panel-title"><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse-5" aria-expanded="false"> Duis aute irure dolor in reprehenderit <i class="fa fa-plus collape-plus"></i></a></h4>
-									</div>
-									<div id="collapse-5" class="panel-collapse collapse">
-										<div class="panel-body">
-											<p>
-												Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem, Maecenas tempus, tellus eget condimentum rhoncus.
-											</p>
-										</div>
-									</div>
-								</div>
-								<div class="panel panel-default">
-									<div class="panel-heading">
-										<h4 class="panel-title"><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse-6" aria-expanded="false"> Duis aute irure dolor in reprehenderit <i class="fa fa-plus collape-plus"></i></a></h4>
-									</div>
-									<div id="collapse-6" class="panel-collapse collapse">
-										<div class="panel-body">
-											<p>
-												Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem, Maecenas tempus, tellus eget condimentum rhoncus.
-											</p>
-										</div>
-									</div>
-								</div>
+                </div>
+                <div class="col-sm-6 mt-xs-30">
+                    <div class="row">
+                        <div class="col-sm-12 mb-30">
+                            <div class="heading-box ">
+                                <h2>Továbbra is kérdése van?</h2>
+                                <span class="b-line l-left line-h"></span>
+                            </div>
 
-							</div>
+                        </div>
+                    </div>
+                    <form class="contact-form " th:action="@{/}" method="post" th:object="${emailForm}"
+                          id="contact">
 
-						</div>
-						<div class="col-sm-6 mt-xs-30">
-							<div class="row">
-								<div class="col-sm-12 mb-30">
-									<div class="heading-box ">
-										<h2>Start project with
-										GardenExpert</h2>
-										<span class="b-line l-left line-h"></span>
-									</div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-field mb-30">
+                                    <input th:field="*{name}" class="input-lg form-full" id="name" type="text" name="form-name"
+                                           placeholder="Név">
+                                </div>
+                            </div>
 
-								</div>
-							</div>
-							<div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-field mb-30">
+                                    <input th:field="*{emailAddress}" class="input-lg form-full" id="email" type="text" name="form-email"
+                                           placeholder="Email" required maxlength="256">
+                                </div>
+                            </div>
 
-								<div class="col-sm-6">
-									<div class="form-field mb-30">
-										<input class="input-lg form-full" id="name" type="text" name="form-name" placeholder="Your Name">
-									</div>
-								</div>
+                            <div class="col-sm-12">
+                                <div class="form-field mb-30">
+                                    <input th:field="*{subject}" class="input-lg form-full" id="sub" type="text" name="form-subject"
+                                           placeholder="Tárgy" required maxlength="256">
+                                </div>
+                            </div>
 
-								<div class="col-sm-6">
-									<div class="form-field mb-30">
-										<input class="input-lg form-full" id="email" type="text" name="form-email" placeholder="Email">
-									</div>
-								</div>
-								<div class="col-sm-6">
-									<div class="form-field mb-30">
-										<input class="input-lg form-full" id="number" type="text" name="form-subject" placeholder="number">
-									</div>
-								</div>
-								<div class="col-sm-6">
-									<div class="form-field mb-30">
-										<input class="input-lg form-full" id="sub" type="text" name="form-subject" placeholder="Subject">
-									</div>
-								</div>
-
-								<div class="col-sm-12">
-									<div class="form-field mb-30">
-										<textarea class="form-full" id="message" rows="7" name="form-message" placeholder="Your Message"></textarea>																				
-								
+                            <div class="col-sm-12">
+                                <div class="form-field mb-30">
+                                    <textarea th:field="*{emailMessage}" class="form-full" id="message" rows="7" name="form-message"
+                                              placeholder="Üzenet (Max 2000 karakter)" required maxlength="2000"></textarea>
+                                </div>
+                            </div>
+                            <div class=" mt-30 center">
+                                <button class="btn-text" type="submit" id="submit" name="button">
+                                    Üzenet küldése
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Get a Qoute -->
 
 
-									</div>
-								</div>
-								<div class=" mt-30">
-									<button class="btn-text" type="button" id="submit" name="button">
-										Send Message
-									</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-			<!-- Get a Qoute -->
+    <!-- FOOTER -->
+    <div th:replace="fragments/footer :: footer"></div>
+    <!-- END FOOTER -->
+</div>
 
-
-
-			<!-- FOOTER -->
-			<div th:replace="fragments/footer :: footer"></div>
-			<!-- END FOOTER -->
-		</div>
-
-	</body>
+</body>
 </html>
