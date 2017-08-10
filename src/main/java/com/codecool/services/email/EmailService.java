@@ -1,5 +1,6 @@
 package com.codecool.services.email;
 
+import com.codecool.models.forms.EmailForm;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -23,6 +24,8 @@ import java.util.regex.Pattern;
 public class EmailService {
     private final String fromAddress = "fromaddress@mukodik.com";
     private JavaMailSender javaMailSender;
+    private MimeMessageHelper helper;
+    private MimeMessage message;
 
     @Autowired
     public EmailService(JavaMailSender javaMailSender) {
@@ -34,9 +37,9 @@ public class EmailService {
         log.info("Sending email...");
         if (!isValid(address)) throw new InvalidParameterException("Email is not valid");
 
-        MimeMessage message = javaMailSender.createMimeMessage();
+         message = javaMailSender.createMimeMessage();
             try {
-                MimeMessageHelper helper = new MimeMessageHelper(message, true);
+                helper = new MimeMessageHelper(message, true);
 
                 helper.setFrom(fromAddress);
                 helper.setTo(address);
@@ -56,5 +59,26 @@ public class EmailService {
     public static boolean isValid(String emailStr) {
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
         return matcher.find();
+    }
+
+    @Async
+    public void sendQuestionEmail(EmailForm emailForm) throws MessagingException, InvalidParameterException {
+
+        log.info("Sending email...");
+        if (!isValid(emailForm.getEmailAddress())) throw new InvalidParameterException("Email is not valid");
+
+        message = javaMailSender.createMimeMessage();
+        try {
+            helper = new MimeMessageHelper(message, true);
+            helper.setFrom(emailForm.getEmailAddress());
+            helper.setTo("solarpowertest@gmail.com");
+            helper.setSubject(emailForm.getSubject());
+            helper.setText("<html><body>Tisztelt Tradition Solution munkatárs!<br><br>Kérdés:<br><br>" + emailForm.getEmailMessage() + "<br><br> Tisztelettel,<br>" + emailForm.getName(), true);
+            javaMailSender.send(message);
+            log.debug("Email sent...");
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+
     }
 }
