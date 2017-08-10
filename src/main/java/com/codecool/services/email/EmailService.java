@@ -70,10 +70,10 @@ public class EmailService {
         message = javaMailSender.createMimeMessage();
         try {
             helper = new MimeMessageHelper(message, true);
-            helper.setFrom(emailForm.getEmailAddress());
+           // helper.setFrom(emailForm.getEmailAddress());
             helper.setTo("solarpowertest@gmail.com");
             helper.setSubject(emailForm.getSubject());
-            helper.setText("<html><body>Tisztelt Tradition Solution munkatárs!<br><br>Kérdés:<br><br>" + emailForm.getEmailMessage() + "<br><br> Tisztelettel,<br>" + emailForm.getName(), true);
+            helper.setText("<html><body>Tisztelt Tradition Solution munkatárs!<br><br>Kérdés:<br><br>" + emailForm.getEmailMessage() + "<br><br> Tisztelettel,<br>" + emailForm.getName() +"<br>Feladó: " + emailForm.getEmailAddress(), true);
             javaMailSender.send(message);
             log.debug("Email sent...");
         } catch (MessagingException e) {
