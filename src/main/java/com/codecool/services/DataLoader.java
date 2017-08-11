@@ -4,6 +4,7 @@ package com.codecool.services;
 import com.codecool.models.OtherItem;
 import com.codecool.models.Inverter;
 import com.codecool.models.SolarPanel;
+import com.codecool.models.enums.InverterBrandEnum;
 import com.codecool.models.enums.ItemTypeEnum;
 import com.codecool.repositories.OtherItemRepository;
 import com.codecool.repositories.InverterRepository;
@@ -24,9 +25,9 @@ public class DataLoader {
     private SolarPanelRepository solarPanelRep;
     private OtherItemRepository otherItemRep;
 
-    private final String SOLAREDGE = "Solaredge";
-    private final String GROWATT = "Growatt";
-    private final String FRONIUS = "Fronius";
+    private final InverterBrandEnum SOLAREDGE = InverterBrandEnum.SOLAREDGE;
+    private final InverterBrandEnum GROWATT = InverterBrandEnum.GROWATT;
+    private final InverterBrandEnum FRONIUS = InverterBrandEnum.FRONIUS;
 
 
     @Autowired
