@@ -109,7 +109,7 @@
                             <div class="check_form_left common_input">
                                 <div>
                                     <select name="userSelect" id="companySelect" th:field="*{company}">
-                                        <option th:each="company : ${T(com.codecool.models.CompanyEnum).values()}"
+                                        <option th:each="company : ${T(com.codecool.models.enums.CompanyEnum).values()}"
                                                 th:value="${company}"
                                                 th:text="${company}">
                                         </option>
