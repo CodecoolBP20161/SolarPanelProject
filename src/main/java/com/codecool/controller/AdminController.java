@@ -59,7 +59,14 @@ public class AdminController {
         ConsumptionForm consumptionForm = session.getAttribute(CONSUMPTION) == null ?
                 new ConsumptionForm() : (ConsumptionForm) session.getAttribute(CONSUMPTION);
 
-        if(session.getAttribute(CONSUMPTION) != null) model.addAttribute(METRIC, consumptionForm.getMetric());
+        session.setAttribute(DEVICE, null);
+        session.setAttribute(OFFER, null);
+
+        if(session.getAttribute(CONSUMPTION) != null) {
+            model.addAttribute(METRIC, consumptionForm.getMetric());
+        } else {
+            model.addAttribute(METRIC, "Ft");
+        }
 
         model.addAttribute(CONSUMPTION, consumptionForm);
         model.addAttribute(STEP, "admin1");
