@@ -1,53 +1,58 @@
 package com.codecool.controller;
-    import com.codecool.models.Inverter;
-    import com.codecool.models.LineItem;
-    import com.codecool.models.Offer;
+    import com.codecool.models.*;
+    import com.codecool.models.enums.InverterBrandEnum;
     import com.codecool.models.forms.ConsumptionForm;
     import com.codecool.models.forms.DeviceForm;
-    import com.codecool.models.forms.EmailForm;
+    import com.codecool.repositories.InverterRepository;
+    import com.codecool.repositories.OtherItemRepository;
+    import com.codecool.repositories.SolarPanelRepository;
     import com.codecool.services.OfferService;
     import com.codecool.services.PdfService;
     import com.codecool.services.ValidationService;
     import com.codecool.services.email.EmailService;
-    import com.mashape.unirest.http.exceptions.UnirestException;
     import lombok.extern.slf4j.Slf4j;
     import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.http.HttpStatus;
+    import org.springframework.http.ResponseEntity;
     import org.springframework.stereotype.Controller;
     import org.springframework.ui.Model;
     import org.springframework.web.bind.annotation.*;
 
-    import javax.mail.MessagingException;
     import javax.servlet.http.HttpSession;
-    import java.io.File;
-    import java.io.IOException;
-    import java.security.InvalidParameterException;
     import java.util.HashMap;
+    import java.util.HashSet;
     import java.util.List;
 
 @Slf4j
 @Controller
 public class AdminController {
-    private EmailService emailService;
     private OfferService offerService;
-    private PdfService pdfService;
-    private ValidationService validationService;
+    private InverterRepository inverterRepository;
+    private SolarPanelRepository solarPanelRepository;
+    private OtherItemRepository otherItemRepository;
 
     private final String CONSUMPTION = "consumption";
     private final String DEVICE = "deviceForm";
-    private final String EMAIL = "email";
     private final String STEP = "step";
     private final String OFFER = "offer";
-    private final String PDF = "pdf";
     private final String METRIC = "metric";
+    private final String BRAND = "brand";
+    private final String PHASE = "phase";
 
     @Autowired
-    public AdminController(OfferService offerService, PdfService pdfService,
-                           EmailService emailService, ValidationService validationService) {
+    public AdminController(OfferService offerService,  SolarPanelRepository solarPanelRepository,
+                           InverterRepository inverterRepository, OtherItemRepository otherItemRepository) {
+        this. solarPanelRepository = solarPanelRepository;
+        this.otherItemRepository = otherItemRepository;
+        this.inverterRepository = inverterRepository;
         this.offerService = offerService;
-        this.emailService = emailService;
-        this.pdfService = pdfService;
-        this.validationService = validationService;
     }
+
+    @GetMapping("/admin")
+    public String getAdmin1(){return "redirect:/admin/fogyasztas";}
+
+    @GetMapping("/admin/")
+    public String getAdmin2(){return "redirect:/admin/fogyasztas";}
 
     @GetMapping("/admin/fogyasztas")
     public String getConsumptionData(Model model, HttpSession session){
@@ -55,16 +60,17 @@ public class AdminController {
                 new ConsumptionForm() : (ConsumptionForm) session.getAttribute(CONSUMPTION);
 
         if(session.getAttribute(CONSUMPTION) != null) model.addAttribute(METRIC, consumptionForm.getMetric());
+
         model.addAttribute(CONSUMPTION, consumptionForm);
         model.addAttribute(STEP, "admin1");
-        return "offer";
+        return "admin";
     }
 
     @PostMapping("/admin/fogyasztas")
     public String postConsumptionData(@ModelAttribute ConsumptionForm consumption, HttpSession session){
         session.setAttribute(CONSUMPTION, consumption);
         log.info("Consumption: " + consumption.getValue() + consumption.getMetric() + " No.Phase: " + consumption.getPhase());
-        return "redirect:/admin/fogyasztas";
+        return "redirect:/admin/eszkozok";
     }
 
     @GetMapping("/admin/eszkozok")
@@ -85,14 +91,14 @@ public class AdminController {
         model.addAttribute("solarPanelLineItems",solarPanelLineItems);
         model.addAttribute("inverterList", inverterList);
         model.addAttribute(STEP, "admin2");
-        return "offer";
+        return "admin";
     }
 
     @PostMapping("/admin/eszkozok")
     public String postOfferStep2(@ModelAttribute DeviceForm device, HttpSession session){
         session.setAttribute(DEVICE, device);
         log.info("Devices: InvID: " + device.getInverterId() + "  PanelId: " + device.getPanelId());
-        return "redirect:/ajanlat/3";
+        return "redirect:/admin/szerkeszto";
     }
 
     @GetMapping("admin/szerkeszto")
@@ -104,17 +110,61 @@ public class AdminController {
             return "redirect:/admin/eszkozok";
         }
         ConsumptionForm consumption = (ConsumptionForm) session.getAttribute(CONSUMPTION);
-        Offer offer = new Offer();
+        Offer offer = session.getAttribute(OFFER) != null?
+                (Offer) session.getAttribute(OFFER) : offerService.createFromFormData(consumption, deviceForm);
 
-        offer.setCompany(consumption.getCompany());
-        List<LineItem> offerItem =  offerService.getLineItems(consumption, deviceForm);
+        session.setAttribute(OFFER, offer);
 
-        offerItem.forEach(offer::addLineItem);
         model.addAttribute(OFFER, offer);
         model.addAttribute(STEP, "admin3");
-        return "offer";
+        return "admin";
     }
 
+    /*   {
+        brand: String, (Uppercase letters)
+        phase: String, (1 or 3)
+    } */
+    @PostMapping("admin/tetel/inverterek")
+    @ResponseBody
+    public ResponseEntity<List<Inverter>> filterItemType(@RequestBody HashMap<String, String> data){
+        InverterBrandEnum brand = InverterBrandEnum.valueOf(data.get(BRAND));
+        int phase = Integer.valueOf(data.get(PHASE));
+
+        List<Inverter> filteredInverters = inverterRepository.findByBrandAndPhase(brand, phase);
+
+        return new ResponseEntity<>(filteredInverters, HttpStatus.OK);
+    }
+
+    @PostMapping("admin/tetel/panelek")
+    @ResponseBody
+    public ResponseEntity<List<SolarPanel>> getPanels(){
+        List<SolarPanel> solarPanels = solarPanelRepository.findAll();
+
+        return new ResponseEntity<>(solarPanels, HttpStatus.OK);
+    }
+
+
+    /*{
+        quantity: String, (the updated quantity)
+        id: String,
+    } */
+    @PostMapping("admin/tetel/mennyisegvaltoztatas")
+    @ResponseBody
+    public ResponseEntity<Offer> updateQuantity(@RequestBody HashMap<String, String> data, HttpSession session){
+
+        Integer lineItemId = Integer.valueOf(data.get("id"));
+        double quantity = Double.valueOf(data.get("quantity"));
+        Offer offer = (Offer) session.getAttribute(OFFER);
+
+        log.info(String.format("lineItemId: %s quantity: %s", lineItemId, quantity));
+
+        LineItem lineItem = offer.getLineItem(lineItemId);
+        lineItem.setQuantity(quantity);
+
+        offer.updateLineItem(lineItem);
+
+        return new ResponseEntity<>(offer, HttpStatus.OK);
+    }
 
 
 
