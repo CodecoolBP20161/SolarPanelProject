@@ -203,4 +203,28 @@ public class OfferService {
         offerItem.forEach(offer::addLineItem);
         return offer;
     }
+
+    public boolean containsItem(Offer offer, Integer itemId, String type){
+        for (LineItem lineItem : offer.getLineItems()){
+            if(lineItem.getItemId().equals(itemId)){
+                String inputName = lineItem.getName();
+                String nameFromDataBase = null;
+
+                switch (type){
+                    case "other":
+                        nameFromDataBase = otherItemRepository.findOne(itemId).getName();
+                        break;
+                    case "inverter":
+                        nameFromDataBase = inverterRepository.findOne(itemId).getName();
+                        break;
+                    case "panel":
+                        nameFromDataBase = solarPanelRepository.findOne(itemId).getName();
+                        break;
+                }
+                return inputName.equals(nameFromDataBase);
+            }
+        }
+        return false;
+    }
+
 }
