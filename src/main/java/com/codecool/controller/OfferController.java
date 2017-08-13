@@ -52,27 +52,27 @@ public class OfferController {
     }
 
     @GetMapping("/ajanlat/1")
-    public String getOfferStep1(Model model, HttpSession session){
+    public String getOfferStep1(Model model, HttpSession session) {
         ConsumptionForm consumptionForm = session.getAttribute(CONSUMPTION) == null ?
-            new ConsumptionForm() : (ConsumptionForm) session.getAttribute(CONSUMPTION);
+                new ConsumptionForm() : (ConsumptionForm) session.getAttribute(CONSUMPTION);
 
-        if(session.getAttribute(CONSUMPTION) != null) model.addAttribute(METRIC, consumptionForm.getMetric());
+        if (session.getAttribute(CONSUMPTION) != null) model.addAttribute(METRIC, consumptionForm.getMetric());
         model.addAttribute(CONSUMPTION, consumptionForm);
         model.addAttribute(STEP, '1');
         return "offer";
     }
 
     @PostMapping("/ajanlat/1")
-    public String postOfferStep1(@ModelAttribute ConsumptionForm consumption, HttpSession session){
+    public String postOfferStep1(@ModelAttribute ConsumptionForm consumption, HttpSession session) {
         session.setAttribute(CONSUMPTION, consumption);
         log.info("Consumption: " + consumption.getValue() + consumption.getMetric() + " No.Phase: " + consumption.getPhase());
         return "redirect:/ajanlat/2";
     }
 
     @GetMapping("/ajanlat/2")
-    public String getOfferStep2(Model model, HttpSession session){
+    public String getOfferStep2(Model model, HttpSession session) {
         ConsumptionForm consumption = (ConsumptionForm) session.getAttribute(CONSUMPTION);
-        if(consumption == null){
+        if (consumption == null) {
             log.info("Step1 is not done, redirecting to /ajanlat/1.");
             return "redirect:/ajanlat/1";
         }
@@ -84,32 +84,26 @@ public class OfferController {
         List<LineItem> solarPanelLineItems = offerService.getSolarPanelListAsLineItems(consumption);
 
         model.addAttribute(DEVICE, pAndIForm);
-        model.addAttribute("solarPanelLineItems",solarPanelLineItems);
+        model.addAttribute("solarPanelLineItems", solarPanelLineItems);
         model.addAttribute("inverterList", inverterList);
         model.addAttribute(STEP, '2');
         return "offer";
     }
 
     @PostMapping("/ajanlat/2")
-    public String postOfferStep2(@ModelAttribute DeviceForm device, HttpSession session){
+    public String postOfferStep2(@ModelAttribute DeviceForm device, HttpSession session) {
         session.setAttribute(DEVICE, device);
         log.info("Devices: InvID: " + device.getInverterId() + "  PanelId: " + device.getPanelId());
         return "redirect:/ajanlat/3";
     }
 
     @GetMapping("/ajanlat/3")
-    public String getOfferStep3(Model model, HttpSession session){
+    public String getOfferStep3(Model model, HttpSession session) {
         DeviceForm deviceForm = (DeviceForm) session.getAttribute(DEVICE);
-        if(deviceForm == null){
+        if (deviceForm == null) {
             log.info("Step2 is not done, redirecting to /ajanlat/2.");
             return "redirect:/ajanlat/2";
         }
-
-        /*if (!deviceForm.isValid()) {
-            log.info("Step2 is not done, redirecting to ajanlat/2, InvID: " + deviceForm.getInverterId() + " PanelID: " + deviceForm.getPanelId());
-            return "redirect:/ajanlat/2";
-        }*/
-
         EmailForm email = session.getAttribute(EMAIL) == null ?
                 new EmailForm() : (EmailForm) session.getAttribute(EMAIL);
 
@@ -121,57 +115,56 @@ public class OfferController {
     }
 
     @PostMapping("/ajanlat/3")
-    public String postOfferStep3(@ModelAttribute EmailForm email, HttpSession session, Model model){
+    public String postOfferStep3(@ModelAttribute EmailForm email, HttpSession session, Model model) {
         session.setAttribute(EMAIL, email);
         ConsumptionForm consumption = (ConsumptionForm) session.getAttribute(CONSUMPTION);
         DeviceForm deviceForm = (DeviceForm) session.getAttribute(DEVICE);
 
-        Offer offer = new Offer();
-        offer.setCompany(consumption.getCompany());
-        List<LineItem> offerItem =  offerService.getLineItems(consumption, deviceForm);
-
-        offerItem.forEach(offer::addLineItem);
-
+        Offer offer = offerService.createFromFormData(consumption, deviceForm);
         File pdf = null;
 
         try {
             pdf = pdfService.getPdf(offer);
+            emailService.sendEmailWithPDf(email.getEmailAddress(), String.valueOf(offer.getId()), pdf);
+            model.addAttribute("success", true);
+
         } catch (UnirestException e) {
+
             log.warn("Pdf Server is unavailable. UnirestException is thrown.");
             e.printStackTrace();
+
         } catch (IOException e) {
+
             log.warn("Failed to convert PDF server's response to File.");
             e.printStackTrace();
-        }
-        if(pdf != null) {
-            try {
-                emailService.sendEmailWithPDf(email.getEmailAddress(), String.valueOf(offer.getId()), pdf);
 
-                model.addAttribute("success", true);
-            } catch (MessagingException e){
-                e.printStackTrace();
-                model.addAttribute(PDF, pdf.toURI());
-                model.addAttribute("success", false);
-            } catch (InvalidParameterException e) {
-                log.warn("Failed to Send the email.");
-                model.addAttribute(PDF, pdf.toURI());
-                model.addAttribute("success", false);
-            }
+        } catch (MessagingException e) {
+
+            e.printStackTrace();
+            model.addAttribute(PDF, pdf.toURI());
+            model.addAttribute("success", false);
+
+        } catch (InvalidParameterException e) {
+
+            log.warn("Failed to Send the email.");
+            model.addAttribute(PDF, pdf.toURI());
+            model.addAttribute("success", false);
         }
-        model.addAttribute(STEP, "4");
-        return "offer";
-    }
+            model.addAttribute(STEP, "4");
+            return "offer";
+        }
 
     @GetMapping("/ajanlat/4")
-    public String getOfferStep4(Model model, HttpSession session){
+    public String getOfferStep4 (Model model, HttpSession session){
         model.addAttribute(STEP, '4');
         return "offer";
     }
 
-    @PostMapping( value = "/ajanlat/network-upgrade")
+
+    @PostMapping(value = "/ajanlat/network-upgrade")
     @ResponseBody
-    public String isNetworkUpgradeNeededCheck(@RequestBody HashMap<String, String> payload){
+    public String isNetworkUpgradeNeededCheck (@RequestBody HashMap < String, String > payload){
         log.info("Request arrived to validate, payload: " + payload.toString());
         return String.valueOf(validationService.validateNetworkUpgrade(payload));
     }
-}
+    }
