@@ -42,6 +42,21 @@ public class Offer {
         lineItems.remove(lineItem);
         nettoTotalPrice = nettoTotalPrice.subtract(lineItem.getTotal());
     }
+    public void removeLineItem(Integer lineItemId){
+        LineItem itemToRemove = null;
+        for (LineItem lineItem : lineItems){
+            if(lineItem.getId().equals(lineItemId)) {
+                itemToRemove = lineItem;
+                nettoTotalPrice = nettoTotalPrice.subtract(lineItem.getTotal());
+                break;
+            }
+        }
+        if(itemToRemove != null){
+            lineItems.remove(itemToRemove);
+        }
+
+    }
+
     private void recalculateNettoTotalPrice(){
         nettoTotalPrice = new BigDecimal(0);
         for (LineItem lineitem : lineItems){
