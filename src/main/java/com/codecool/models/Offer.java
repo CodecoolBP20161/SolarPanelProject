@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Data
 public class Offer {
@@ -41,6 +42,29 @@ public class Offer {
         lineItems.remove(lineItem);
         nettoTotalPrice = nettoTotalPrice.subtract(lineItem.getTotal());
     }
+    private void recalculateNettoTotalPrice(){
+        nettoTotalPrice = new BigDecimal(0);
+        for (LineItem lineitem : lineItems){
+            nettoTotalPrice = nettoTotalPrice.add(lineitem.getTotal());
+        }
+    }
+
+    public LineItem getLineItem(Integer lineItemId){
+        for (LineItem lineItem : lineItems){
+            if(lineItem.getId().equals(lineItemId)) return lineItem;
+        }
+        return null;
+    }
+
+    public void updateLineItem(LineItem lineItem){
+        for (int i = 0; i < lineItems.size(); i++){
+            if(lineItems.get(i).getId().equals(lineItem.getId())) {
+                lineItems.set(i, lineItem);
+                break;
+                }
+            }
+        recalculateNettoTotalPrice();
+        }
 
     public JSONObject toJson(){
 

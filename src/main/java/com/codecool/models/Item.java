@@ -17,7 +17,7 @@ public abstract class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    public Integer id;
 
     @NotEmpty
     String name;
