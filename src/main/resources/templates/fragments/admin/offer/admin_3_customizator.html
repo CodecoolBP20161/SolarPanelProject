@@ -109,7 +109,7 @@
                                             </td>
                                             <td class="padding_all">
                                                 <p style="white-space: nowrap"
-                                                   th:text="${#numbers.formatInteger(item.price, 0, 'DEFAULT')}  + ' Ft'"></p>
+                                                   th:text="${#numbers.formatInteger(item.price,0,'DEFAULT')}+' Ft'"></p>
                                             </td>
                                             <td class="padding_all quantity">
 
@@ -120,7 +120,7 @@
                                                                 <i class="fa fa-minus"></i>
                                                             </button>
                                                             <input class="output" th:id="quantity+${item.id}" type="text"
-                                                                   th:value="${#numbers.formatInteger(item.quantity, 0,'DEFAULT')}"
+                                                                   th:value="${#numbers.formatInteger(item.quantity,0,'DEFAULT')}"
                                                                    onkeypress='return  event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
                                                             <button class="plus" th:data="${item.id}" type="button">
                                                                 <i class="fa fa-plus"></i>
@@ -131,12 +131,35 @@
                                             </td>
                                             <td class="padding_all" >
                                                 <p style="white-space: nowrap" class="total"
-                                                   th:text="${#numbers.formatInteger(item.total, 0, 'DEFAULT')}  + ' Ft'"></p>
+                                                   th:text="${#numbers.formatInteger(item.total,0,'DEFAULT')}+' Ft'"></p>
                                             </td>
-                                            <td class="padding_all"><a href="#"><i class="fa fa-times"></i></a></td>
+                                            <td class="padding_all"><i th:data="${item.id}" class="fa fa-times delete"></i></td>
                                         </tr>
 
                                         </tbody>
+                                        <thead class="dark-bg dynamic-header">
+                                        <tr>
+                                            <th colspan="3"><span></span></th>
+                                            <th class="text-right"><span >Nettó összeg:</span></th>
+                                            <th>
+                                                <span th:text="${#numbers.formatInteger(offer.nettoTotalPrice,0,'DEFAULT')+' Ft'}"
+                                                      style="white-space: nowrap">
+                                                </span>
+                                            </th>
+                                            <th><span></span></th>
+                                        </tr>
+                                        <tr>
+
+                                            <th colspan="3"><span></span></th>
+                                            <th class="text-right"><span>Bruttó összeg:</span></th>
+                                            <th>
+                                                <span th:text="${#numbers.formatInteger(offer.nettoTotalPrice,0,'DEFAULT')+' Ft'}"
+                                                      style="white-space: nowrap">
+                                                </span>
+                                            </th>
+                                            <th><span></span></th>
+                                        </tr>
+                                        </thead>
                                     </table>
                                     <!-- table End -->
                                 </div>
