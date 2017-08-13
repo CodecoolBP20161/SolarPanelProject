@@ -1,8 +1,9 @@
 
-$(document).on('ready', function () {
+$(document).on('ready', function () {attachEventListeners()});
 
+var attachEventListeners = function () {
 
-    $('.plus').on('click', function(event){
+    $('.plus').on('click', function(){
         var lineItemId = $(this).attr('data');
         var thisInput = $('#quantity' + lineItemId);
         var newQuantity = Number(thisInput.val()) + 1;
@@ -16,11 +17,11 @@ $(document).on('ready', function () {
             "quantity" : newQuantity
         });
         console.log('Data: ' + data);
-        var callback = function (response) {changeQuantity(event, response);};
+        var callback = function(response) {reRenderTable(response);};
         doAJAX(URL, data, callback)
     });
 
-    $('.minus').on('click', function(event){
+    $('.minus').on('click', function(){
         var lineItemId = $(this).attr('data');
         var thisInput = $('#quantity' + lineItemId);
         var newQuantity = Number(thisInput.val()) - 1;
@@ -34,15 +35,28 @@ $(document).on('ready', function () {
             "quantity" : newQuantity
         });
         console.log('Data: ' + data);
-        var callback = function (response) {changeQuantity(event, response);};
+        var callback = function (response) {reRenderTable(response);};
         doAJAX(URL, data, callback)
     });
 
+    $('.fa.fa-times.delete').on('click', function(){
+        var URL = 'tetel/torles';
+        var id = $(this).attr('data');
+        var data = JSON.stringify({
+            id: id
+        });
+        var callback = function (response) {
+            reRenderTable(response)
+        };
 
+        doAJAX(URL, data, callback);
+    })
 
-});
+};
+
 var reRenderTable = function(responseOffer){
     var root = $('.root');
+    var header = $('.dynamic-header');
     console.log("root: ");
     console.log(root);
     console.log('responseOffer: ');
@@ -52,20 +66,12 @@ var reRenderTable = function(responseOffer){
     var lineItems = responseOffer.lineItems;
     for (var i = 0; i < lineItems.length; i++){
         root.append(createRow(lineItems[i]));
-
     }
-
-
-
-
-
-
-};
-
-var changeQuantity = function(event, response){
-    reRenderTable(response);
+    header.html("");
+    header.append(createTotal(responseOffer));
     attachEventListeners();
 };
+
 var createRow =function (item) {
 
     // Don't mind this, just formatting shit
@@ -89,47 +95,23 @@ var createRow =function (item) {
                                 '<button class ="plus" data="' + item.id + '" type="button"><i class="fa fa-plus"></i></button>' +
                 '</div></div></div></td>' +
                 '<td class="padding_all"><p style="white-space: nowrap" class="total">' + total + ' Ft</p></td>' +
-                '<td class="padding_all"><a href = "#"><i class="fa fa-times"></i></a></td>' +
+                '<td class="padding_all"><i class="fa fa-times delete" data="' + item.id + '"></i></td>' +
             '</tr>'
 };
 
-var attachEventListeners = function () {
-
-    $('.plus').on('click', function(event){
-        var lineItemId = $(this).attr('data');
-        var thisInput = $('#quantity' + lineItemId);
-        var newQuantity = Number(thisInput.val()) + 1;
-        console.log('thisInput: ');
-        console.log(thisInput);
-        var URL = 'tetel/mennyisegvaltoztatas';
-
-        console.log('thisInputVal: ' + newQuantity);
-        var data = JSON.stringify({
-            "id": lineItemId,
-            "quantity" : newQuantity
-        });
-        console.log('Data: ' + data);
-        var callback = function (response) {changeQuantity(event, response);};
-        doAJAX(URL, data, callback)
-    });
-
-    $('.minus').on('click', function(event){
-        var lineItemId = $(this).attr('data');
-        var thisInput = $('#quantity' + lineItemId);
-        var newQuantity = Number(thisInput.val()) - 1;
-        console.log('thisInput: ');
-        console.log(thisInput);
-        var URL = 'tetel/mennyisegvaltoztatas';
-
-        console.log('thisInputVal: ' + newQuantity);
-        var data = JSON.stringify({
-            "id": lineItemId,
-            "quantity" : newQuantity
-        });
-        console.log('Data: ' + data);
-        var callback = function (response) {changeQuantity(event, response);};
-        doAJAX(URL, data, callback)
-    });
-    
+var createTotal = function (offer) {
+    var nettoTotal = accounting.formatNumber(offer.nettoTotalPrice, {precision : 0, thousand : " "});
+    return '<tr>' +
+        '<th colspan="3"><span></span></th>' +
+        '<th class="text-right"><span >Nettó összeg:</span></th>' +
+        '<th>' +
+        '<span style="white-space: nowrap">' + nettoTotal +' Ft' + '</span>'+
+        '</th><th><span></span></th></tr>'+
+        '<tr>'+
+        '<th colspan="3"><span></span></th>'+
+        '<th class="text-right"><span>Bruttó összeg:</span></th>'+
+        '<th>'+
+            //TODO:Change this to grossTotal
+        '<span style="white-space: nowrap">' + nettoTotal +' Ft' + '</span>'+
+        '</th> <th><span></span></th> </tr>'
 };
-
