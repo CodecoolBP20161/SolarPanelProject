@@ -64,7 +64,7 @@
                                     Ide nem tudom mi kell majd írni.
                                 </p>
 
-                                <h4 class="testimonial-price" th:text="'Egységár: '+${inverter.price}+'Ft'"></h4>
+                                <h4 class="testimonial-price" th:text="'Egységár: '+${#numbers.formatInteger(inverter.price, 0,'DEFAULT')}+' Ft'"></h4>
                                 <!--TODO: Ide kellene a quantity már kiszámolva, lehet field kellene belőle-->
                                 <h4 class="testimonial-price">Szükséges mennyiség: 1 db</h4>
                             </div>
@@ -98,9 +98,9 @@
                                 <!--TODO: th:text="${panel.marketingText}" valami ilyesmit kellene iderakni-->
                                 <p>Ide mit akarunk írni?</p>
                                 <h5 class="testimonial-price"
-                                    th:text="'Szükséges mennyiség: '+${panel.quantity}+'db'"></h5>
-                                <h5 class="testimonial-price" th:text="'Egységár: '+${panel.price}+'Ft'"></h5>
-                                <h4 class="testimonial-price" th:text="'Összesen: '+${panel.total}+'Ft'"></h4>
+                                    th:text="'Szükséges mennyiség: '+${#numbers.formatInteger(panel.quantity, 0,'DEFAULT')}+' db'"></h5>
+                                <h5 class="testimonial-price" th:text="'Egységár: '+${#numbers.formatInteger(panel.price, 0,'DEFAULT')}+' Ft'"></h5>
+                                <h4 class="testimonial-price" th:text="'Összesen: '+${#numbers.formatInteger(panel.total, 0,'DEFAULT')}+' Ft'"></h4>
                             </div>
                         </div>
                     </div>
