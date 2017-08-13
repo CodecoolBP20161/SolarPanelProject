@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.sound.sampled.Line;
 import java.util.*;
 
 @Slf4j
@@ -208,23 +209,27 @@ public class OfferService {
         for (LineItem lineItem : offer.getLineItems()){
             if(lineItem.getItemId().equals(itemId)){
                 String inputName = lineItem.getName();
-                String nameFromDataBase = null;
-
-                switch (type){
-                    case "other":
-                        nameFromDataBase = otherItemRepository.findOne(itemId).getName();
-                        break;
-                    case "inverter":
-                        nameFromDataBase = inverterRepository.findOne(itemId).getName();
-                        break;
-                    case "panel":
-                        nameFromDataBase = solarPanelRepository.findOne(itemId).getName();
-                        break;
-                }
-                return inputName.equals(nameFromDataBase);
+                LineItem newItem = getLineItemFromItemIdAndType(itemId, type);
+                return inputName.equals(newItem.getName());
             }
         }
         return false;
+    }
+    public LineItem getLineItemFromItemIdAndType(Integer itemId, String type){
+        Item newItem = null;
+
+        switch (type){
+            case "other":
+                newItem = otherItemRepository.findOne(itemId);
+                break;
+            case "inverter":
+                newItem = inverterRepository.findOne(itemId);
+                break;
+            case "panel":
+                newItem = solarPanelRepository.findOne(itemId);
+                break;
+        }
+        return new LineItem(newItem);
     }
 
 }
