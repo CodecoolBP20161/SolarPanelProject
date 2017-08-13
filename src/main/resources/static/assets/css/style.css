@@ -7189,3 +7189,7 @@ select{
 	-webkit-appearance:none; !important;
 }
 
+.delete:hover{
+	cursor: pointer;
+}
+
