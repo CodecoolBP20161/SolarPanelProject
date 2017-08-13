@@ -26,4 +26,5 @@ public interface InverterRepository extends JpaRepository<Inverter, Integer> {
     List<Inverter> findAllByOrderByCapacity();
 
     List<Inverter> findByBrandAndPhase(InverterBrandEnum brandEnum, int phase);
+    List<Inverter> findByBrand(InverterBrandEnum brandEnum);
 }
