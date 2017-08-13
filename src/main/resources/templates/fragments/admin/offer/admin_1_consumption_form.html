@@ -62,7 +62,8 @@
                                            value="" required="required"
                                            th:field="*{value}"
                                            onkeypress='return  event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
-                                    <span class="input-group-addon" id="metricHeader">FT</span>
+                                    <div ></div>
+                                    <span th:text="${metric}" class="input-group-addon" id="metricHeader">FT</span>
                                 </div>
                             </div>
                         </div>
@@ -96,29 +97,6 @@
                         </ul>
                     </div>
                 </div>
-                <!--<div class="row" th:if="${#authorization.expression('isAuthenticated()')}">-->
-                    <!--<div class="col-sm-2"></div>-->
-                    <!--<div class="col-sm-5 no-pad">-->
-                        <!--<h4 class="title">Válassza ki hogy melyik cég nevében szeretné az árajánlatot generálni!</h4>-->
-                    <!--</div>-->
-                    <!--<div class="col-sm-4 pad-left">-->
-                        <!--<div class="romana_check_out_form">-->
-                            <!--<div class="row">-->
-                                <!--<div class="check_form_left common_input">-->
-                                    <!--<div>-->
-                                        <!--<select name="userSelect" id="companySelect" th:field="*{company}">-->
-                                            <!--<option th:each="company : ${T(com.codecool.models.enums.CompanyEnum).values()}"-->
-                                                    <!--th:value="${company}"-->
-                                                    <!--th:text="${company}">-->
-                                            <!--</option>-->
-                                        <!--</select>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-
-                    <!--</div>-->
-                <!--</div>-->
                 <div class="row" hidden="hidden" th:if="${#authorization.expression('!isAuthenticated()')}">
                     <div class="col-sm-2"></div>
                     <div class="col-sm-5 no-pad">
