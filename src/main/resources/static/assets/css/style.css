@@ -7185,4 +7185,7 @@ ul.tags li {
 .romana_check_out_form .common_input input:disabled, .romana_check_out_form .common_input select:disabled {
 	background-color: #e3e3e3;
 }
+select{
+	-webkit-appearance:none; !important;
+}
 
