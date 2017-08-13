@@ -172,6 +172,18 @@ public class AdminController {
 
         return new ResponseEntity<>(offer, HttpStatus.OK);
     }
+    @PostMapping("admin/tetel/torles")
+    @ResponseBody
+    public ResponseEntity<Offer> deleteLineItem(@RequestBody HashMap<String, String> data, HttpSession session){
+
+        Integer lineItemId = Integer.valueOf(data.get("id"));
+        Offer offer = (Offer) session.getAttribute(OFFER);
+
+        log.info(String.format("lineItemId: %s", lineItemId));
+
+        offer.removeLineItem(lineItemId);
+        return new ResponseEntity<>(offer, HttpStatus.OK);
+    }
 
 
 
