@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div th:fragment="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="heading-box ">
+                <h2 class="title">Új tétel hozzáadása</h2>
+                <span class="b-line l-left line-h"></span>
+                <br>
+                <br>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="romana_check_out_form">
+                    <div class="check_form_left common_input">
+                        <label for="categorySelect">Kategória:</label>
+                        <select name="categorySelect" id="categorySelect">
+                            <option selected="selected" hidden="hidden"><strong>Nincs kiválasztva</strong></option>
+                            <option value="panel"><strong>Napelem</strong></option>
+                            <option value="inverter"><strong>Inverter</strong></option>
+                            <option value="other"><strong>Egyéb</strong></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="romana_check_out_form">
+                    <div class="check_form_left common_input">
+                        <label for="brandSelect">Márka:</label>
+                        <select disabled="disabled" name="brandSelect" id="brandSelect">
+                            <option selected="selected" hidden="hidden"><strong>Nincs kiválasztva</strong></option>
+                            <option value="" hidden="hidden"><strong>Ennél a kategóriánál nem választhat márkát</strong>
+                            </option>
+                            <option th:each="brand : ${T(com.codecool.models.enums.InverterBrandEnum).values()}"
+                                    th:value="${brand}"
+                            ><strong th:text="${brand}"></strong>
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="romana_check_out_form">
+                    <div class="check_form_left common_input">
+                        <label for="brandSelect">Név:</label>
+                        <select disabled="disabled" name="brandSelect" id="">
+                            <option selected="selected" hidden="hidden"><strong>Nincs kiválasztva</strong></option>
+                            <option value="" hidden="hidden"><strong>Ennél a kategóriánál nem választhat nevet</strong>
+                            </option>
+                            <option th:each="brand : ${T(com.codecool.models.enums.InverterBrandEnum).values()}"
+                                    th:value="${brand}"
+                            ><strong th:text="${brand}"></strong>
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-sm-12 center">
+                <button class="btn-text" type="submit" id="submit" name="button">
+                    Hozzáadás
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <section class="padding ptb-xs-60">
+        <div class="cart_page_area sp100">
+            <div class="container">
+                <div class="cart_table_wraper">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="cart_wrpaer">
+                                <div class="table_scroll table-responsive">
+                                    <table class=" table table-striped">
+                                        <thead class="dark-bg">
+                                        <tr>
+                                            <th><span>Tétel</span></th>
+                                            <th><span>Leírás</span></th>
+                                            <th><span>Egységár</span></th>
+                                            <th><span>Mennyiség</span></th>
+                                            <th><span>Összesen</span></th>
+                                            <th><span></span></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="root">
+                                        <tr th:each="item : ${offer.lineItems}">
+                                            <td class="padding_all">
+                                                <p th:text="${item.name}"></p>
+                                            </td>
+                                            <td class="padding_all">
+                                                <p th:text="${item.description}"></p>
+                                            </td>
+                                            <td class="padding_all">
+                                                <p style="white-space: nowrap"
+                                                   th:text="${#numbers.formatInteger(item.price, 0, 'DEFAULT')}  + ' Ft'"></p>
+                                            </td>
+                                            <td class="padding_all quantity">
+
+                                                <div class="cart_amount_wrap">
+                                                    <div class="product-regulator">
+                                                        <div class="input-group" style="white-space: nowrap">
+                                                            <button class="minus" type="button" th:data="${item.id}">
+                                                                <i class="fa fa-minus"></i>
+                                                            </button>
+                                                            <input class="output" th:id="quantity+${item.id}" type="text"
+                                                                   th:value="${#numbers.formatInteger(item.quantity, 0,'DEFAULT')}"
+                                                                   onkeypress='return  event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
+                                                            <button class="plus" th:data="${item.id}" type="button">
+                                                                <i class="fa fa-plus"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="padding_all" >
+                                                <p style="white-space: nowrap" class="total"
+                                                   th:text="${#numbers.formatInteger(item.total, 0, 'DEFAULT')}  + ' Ft'"></p>
+                                            </td>
+                                            <td class="padding_all"><a href="#"><i class="fa fa-times"></i></a></td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                    <!-- table End -->
+                                </div>
+                                <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="single-sidebar-widget">
+                                        <ul class="brochure-btns">
+                                            <li>
+                                                <a href="#" class="clearfix"><i class="fa fa-file-pdf-o"></i> <span>Traditional Solutions PDF</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="single-sidebar-widget">
+                                        <ul class="brochure-btns">
+                                            <li>
+                                                <a href="#" class="clearfix"><i class="fa fa-file-pdf-o"></i> <span> Stabil Invest PDF</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="single-sidebar-widget">
+                                        <ul class="brochure-btns">
+                                            <li>
+                                                <a href="#" class="clearfix"><i class="fa fa-file-pdf-o"></i> <span>Solar Provider PDF</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                            </div>
+                            <!-- cart_btns End -->
+                        </div>
+                    </div>
+                    <!-- column End -->
+                </div>
+                <!-- row End -->
+            </div>
+        </div>
+        <!-- container End -->
+</section>
+</div>
+</body>
+</html>
