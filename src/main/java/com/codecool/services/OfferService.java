@@ -1,9 +1,6 @@
 package com.codecool.services;
 
-import com.codecool.models.Inverter;
-import com.codecool.models.LineItem;
-import com.codecool.models.OtherItem;
-import com.codecool.models.SolarPanel;
+import com.codecool.models.*;
 import com.codecool.models.enums.*;
 import com.codecool.models.forms.ConsumptionForm;
 import com.codecool.models.forms.DeviceForm;
@@ -125,7 +122,7 @@ public class OfferService {
         lineItems.add(inverterLineItem);
 
 
-        if (inverter.getBrand().equals("Solaredge")) {
+        if (inverter.getBrand().equals(InverterBrandEnum.SOLAREDGE)) {
             int quantityOfOptimlizer = (inverter.getOptimalizerName().contains("300")) ? neededSolarpanelQuantity : neededSolarpanelQuantity / 2;
             OtherItem optimalizerItsNeeded = new OtherItem(inverter.getOptimalizerName(), "", inverter.getOptimalierPrice(), 0, ItemTypeEnum.Item);
             LineItem optimalizerLineItem = new LineItem(optimalizerItsNeeded);
@@ -197,6 +194,13 @@ public class OfferService {
         }
         return solarPanelLineItems;
     }
+    public Offer createFromFormData(ConsumptionForm consumption, DeviceForm deviceForm){
+        Offer offer = new Offer();
 
+        offer.setCompany(consumption.getCompany());
+        List<LineItem> offerItem =  getLineItems(consumption, deviceForm);
 
+        offerItem.forEach(offer::addLineItem);
+        return offer;
+    }
 }
