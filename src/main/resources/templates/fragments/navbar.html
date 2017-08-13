@@ -57,11 +57,12 @@
                                     </li>
 
                                     <li>
-                                        <a href="contact2.html">Üzenet</a>
+                                        <a th:href="@{/üzenet}">Üzenet</a>
                                     </li>
 
                                     <li>
-                                        <a th:href="@{/login}">Bejelentkezés</a>
+                                        <a sec:authorize="!isAuthenticated()" th:href="@{/login}">Bejelentkezés</a>
+                                        <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Kijelentkezés</a>
                                     </li>
 
                                 </ul>
@@ -100,12 +101,17 @@
                                     </li>
 
                                     <li>
-                                        <a href="contact2.html">Üzenet</a><span class="submenu-button"></span>
+                                        <a th:href="@{/üzenet}">Üzenet</a><span class="submenu-button"></span>
                                     </li>
 
                                     <li>
-                                        <a th:href="@{/login}">Bejelentkezés</a>
+                                    <li >
+                                        <a sec:authorize="!isAuthenticated()" th:href="@{/login}">Bejelentkezés</a>
+                                        <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Kijelentkezés</a>
                                     </li>
+                                    </li>
+
+
 
                                 </ul>
 
@@ -118,20 +124,7 @@
                 </div>
                 <div class="right-column">
                     <div class="right-area">
-                        <div class="nav_side_content">
-                            <div class="search_option">
-                                <button class="search tran3s dropdown-toggle color1_bg" id="searchDropdown">
-                                    <i class="fa fa-search" aria-hidden="true"></i>
-                                </button>
-                                <form action="#" class="dropdown-menu dropdown-input" >
-                                    <input type="text" placeholder="Search...">
-                                    <button class="close-input">
-                                        <i class="fa fa-close" aria-hidden="true"></i>
-                                    </button>
-                                </form>
-                            </div>
 
-                        </div>
                         <div class="link_btn float_right">
 
                             <a th:href="@{/ajanlat/1}" class="thm-btn bg-clr1">Árajánlat</a>

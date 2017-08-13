@@ -17,12 +17,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                .authorizeRequests().antMatchers("/", "/admin/**", "/rolunk", "/ajanlat/**", "/static/**", "/assets/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin().loginPage("/login").permitAll()
-                .and()
-                .logout().permitAll();
+            .authorizeRequests().antMatchers("/", "/admin/**",  "/üzenet", "/rolunk", "/ajanlat/**", "/static/**", "/assets/**").permitAll()
+            .anyRequest().authenticated()
+            .and()
+            .formLogin().loginPage("/login").permitAll()
+            .and()
+            .logout().permitAll();
 
         httpSecurity.csrf().disable();
         httpSecurity.headers().frameOptions().disable();
