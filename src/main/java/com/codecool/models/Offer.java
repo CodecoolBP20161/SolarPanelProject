@@ -27,7 +27,7 @@ public class Offer {
     private BigDecimal nettoTotalPrice;
 
 
-    public Offer(){
+    public Offer() {
         id = idCount++;
         lineItems = new ArrayList<>();
         isNetworkUpgradeNeeded = false;
@@ -38,66 +38,49 @@ public class Offer {
         lineItems.add(lineItem);
         nettoTotalPrice = nettoTotalPrice.add(lineItem.getTotal());
     }
-    public void removeLineItem(LineItem lineItem){
+
+    public void removeLineItem(LineItem lineItem) {
         lineItems.remove(lineItem);
         nettoTotalPrice = nettoTotalPrice.subtract(lineItem.getTotal());
     }
-    public void removeLineItem(Integer lineItemId){
+
+    public void removeLineItem(Integer lineItemId) {
         LineItem itemToRemove = null;
-        for (LineItem lineItem : lineItems){
-            if(lineItem.getId().equals(lineItemId)) {
+        for (LineItem lineItem : lineItems) {
+            if (lineItem.getId().equals(lineItemId)) {
                 itemToRemove = lineItem;
                 nettoTotalPrice = nettoTotalPrice.subtract(lineItem.getTotal());
                 break;
             }
         }
-        if(itemToRemove != null){
+        if (itemToRemove != null) {
             lineItems.remove(itemToRemove);
         }
 
     }
 
-    private void recalculateNettoTotalPrice(){
+    private void recalculateNettoTotalPrice() {
         nettoTotalPrice = new BigDecimal(0);
-        for (LineItem lineitem : lineItems){
+        for (LineItem lineitem : lineItems) {
             nettoTotalPrice = nettoTotalPrice.add(lineitem.getTotal());
         }
     }
 
-    public LineItem getLineItem(Integer lineItemId){
-        for (LineItem lineItem : lineItems){
-            if(lineItem.getId().equals(lineItemId)) return lineItem;
+    public LineItem getLineItem(Integer lineItemId) {
+        for (LineItem lineItem : lineItems) {
+            if (lineItem.getId().equals(lineItemId)) return lineItem;
         }
         return null;
     }
 
-    public void updateLineItem(LineItem lineItem){
-        for (int i = 0; i < lineItems.size(); i++){
-            if(lineItems.get(i).getId().equals(lineItem.getId())) {
+    public void updateLineItem(LineItem lineItem) {
+        for (int i = 0; i < lineItems.size(); i++) {
+            if (lineItems.get(i).getId().equals(lineItem.getId())) {
                 lineItems.set(i, lineItem);
                 break;
-                }
             }
+        }
         recalculateNettoTotalPrice();
-        }
-
-    public JSONObject toJson(){
-
-        JSONObject offerJson = new JSONObject();
-        JSONArray items = new JSONArray();
-        JSONArray services = new JSONArray();
-
-        offerJson.put("id", this.getId());
-        offerJson.put("isNetworkUpgradeNeeded", this.isNetworkUpgradeNeeded);
-        offerJson.put("taxRate", this.company.getTaxRate());
-        offerJson.put("netTotal", this.getNettoTotalPrice());
-        offerJson.put("grossTotal", this.getNettoTotalPrice().multiply(new BigDecimal(this.company.getTaxRate())));
-
-        for(LineItem item : lineItems){
-            if(item.getType() == ItemTypeEnum.Item) items.put(item.toJson());
-            else services.put(item.toJson());
-        }
-        return offerJson;
     }
 }
 
