@@ -112,6 +112,8 @@ public class OfferService {
         Inverter inverter = inverterRepository.findOne(inverterId);
         List<OtherItem> otherItems = otherItemRepository.findByPhaseIn(Arrays.asList(0, consumptionForm.getPhase()));
         LineItem inverterLineItem = new LineItem(inverter);
+        log.info(inverterLineItem.toJson().toString());
+
         inverterLineItem.setName(inverter.getBrand() + " " + inverter.getName());
         LineItem solarPanelLineItem = new LineItem(solarPanel);
         int neededSolarpanelQuantity = solarPanelService.calculateSolarPanelQuantity(consumptionForm, solarPanel.getCapacity());

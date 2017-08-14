@@ -50,6 +50,7 @@ public class LineItem extends Item {
 
         convertedItem.put("name", this.getName());
         convertedItem.put("price", this.getPrice());
+        convertedItem.put("itemId:", this.getItemId());
         convertedItem.put("quantity", this.getQuantity());
         convertedItem.put("subtotal", this.getPrice().multiply(quantityBigDecimal));
         convertedItem.put("description", this.getDescription());
