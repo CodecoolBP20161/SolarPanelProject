@@ -19,7 +19,7 @@ public abstract class Item implements Comparable<Item> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer id;
 
-    public Integer priority;
+    public int priority;
 
     @NotEmpty
     String name;
@@ -46,7 +46,6 @@ public abstract class Item implements Comparable<Item> {
         final int EQUAL = 0;
         final int AFTER = 1;
         if (this == item) return EQUAL;
-        if (item.priority == null) return AFTER;
         if(priority > item.priority) return AFTER;
         else if(priority < item.priority) return BEFORE;
         else return EQUAL;
