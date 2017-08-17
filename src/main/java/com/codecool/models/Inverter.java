@@ -20,10 +20,10 @@ public class Inverter extends Item {
     private InverterBrandEnum brand;
 
     @NotNull
-    private String optimalizerName;
+    private String optimizerName;
 
     @NotNull
-    private int optimalierPrice;
+    private int optimizerPrice;
 
     @NotNull
     private Integer phase;
@@ -38,17 +38,18 @@ public class Inverter extends Item {
 
 
     public Inverter(InverterBrandEnum brand, String name, Integer price, Integer phase, Double watt, String description,
-                    Integer wifiModule, Integer capacity, String optimalizerName, int optimalierPrice) {
+                    Integer wifiModule, Integer capacity, String optimizerName, int optimizerPrice) {
         super(name, description, BigDecimal.valueOf(price), ItemTypeEnum.Item);
         this.setBrand(brand);
         this.setPhase(phase);
         this.setWatt(watt);
         this.setWifiModule(wifiModule);
         this.setCapacity(capacity);
-        this.setOptimalizerName(optimalizerName);
-        this.setOptimalierPrice(optimalierPrice);
+        this.setOptimizerName(optimizerName);
+        this.setOptimizerPrice(optimizerPrice);
     }
 
     public Inverter() {
+        super();
     }
 }

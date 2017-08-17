@@ -26,5 +26,6 @@ public class OtherItem extends Item{
     }
 
     public OtherItem() {
+        super();
     }
 }
