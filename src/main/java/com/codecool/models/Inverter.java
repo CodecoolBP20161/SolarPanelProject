@@ -36,7 +36,7 @@ public class Inverter extends Item {
     @NotNull
     private int capacity;
 
-    private int priority;
+    private int priority = 2;
 
 
     public Inverter(InverterBrandEnum brand, String name, Integer price, Integer phase, Double watt, String description,
@@ -49,11 +49,9 @@ public class Inverter extends Item {
         this.setCapacity(capacity);
         this.setOptimizerName(optimizerName);
         this.setOptimizerPrice(optimizerPrice);
-        this.priority = 1;
     }
 
     public Inverter() {
         super();
-        priority = 1;
     }
 }

@@ -14,13 +14,12 @@ import java.math.BigDecimal;
 public class OtherItem extends Item{
 
     private int phase;
-    private int priority;
+    private int priority = 1;
 
     public OtherItem(String name, String description, Integer price, int phase, ItemTypeEnum type) {
         super(name, description, BigDecimal.valueOf(price), type);
         this.setPhase(phase);
         this.setType(type);
-        this.priority = 2;
     }
 
     public OtherItem(String name, String description, BigDecimal price, ItemTypeEnum item) {
@@ -29,6 +28,5 @@ public class OtherItem extends Item{
 
     public OtherItem() {
         super();
-        priority = 2;
     }
 }

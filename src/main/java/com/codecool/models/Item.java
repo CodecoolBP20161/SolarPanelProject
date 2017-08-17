@@ -42,13 +42,6 @@ public abstract class Item implements Comparable<Item> {
     public Item(){}
 
     public int compareTo(Item item){
-        final int BEFORE = -1;
-        final int EQUAL = 0;
-        final int AFTER = 1;
-
-        if (this == item) return EQUAL;
-        if(priority > item.getPriority()) return AFTER;
-        else if(priority < item.getPriority()) return BEFORE;
-        else return EQUAL;
+        return priority - item.getPriority();
     }
 }

@@ -24,11 +24,10 @@ public class SolarPanel extends Item{
     @NotNull
     private Integer capacity;
 
-    private int priority;
+    private int priority = 3;
 
     public SolarPanel(){
         super();
-        priority = 0;
     }
 
     public SolarPanel(String name, String optimizer, Integer price, Double vat, Integer capacity, String description) {
@@ -36,6 +35,5 @@ public class SolarPanel extends Item{
         this.setOptimalizer(optimizer);
         this.setWatt(vat);
         this.setCapacity(capacity);
-        this.priority = 0;
     }
 }

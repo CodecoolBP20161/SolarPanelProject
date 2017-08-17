@@ -5,13 +5,16 @@ import com.codecool.models.enums.ItemTypeEnum;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import javax.sound.sampled.Line;
 import java.math.BigDecimal;
 import java.util.*;
 
 @Data
+@Slf4j
 public class Offer {
 
 
@@ -34,13 +37,12 @@ public class Offer {
 
     public void addLineItem(LineItem lineItem) {
         lineItems.add(lineItem);
-        Collections.sort(lineItems);
-        nettoTotalPrice = nettoTotalPrice.add(lineItem.getTotal());
+        calculateNettoTotalPrice();
     }
 
     public void removeLineItem(LineItem lineItem) {
         lineItems.remove(lineItem);
-        nettoTotalPrice = nettoTotalPrice.subtract(lineItem.getTotal());
+        calculateNettoTotalPrice();
     }
 
     public void removeLineItem(Integer lineItemId) {
@@ -65,6 +67,10 @@ public class Offer {
         }
     }
 
+    public List<LineItem> getLineItems(){
+        return lineItems;
+    }
+
     public LineItem getLineItem(Integer lineItemId) {
         for (LineItem lineItem : lineItems) {
             if (lineItem.getId().equals(lineItemId)) return lineItem;
@@ -80,6 +86,16 @@ public class Offer {
             }
         }
         calculateNettoTotalPrice();
+    }
+
+    public void sortLineItems(){
+        Collections.sort(this.lineItems, Collections.reverseOrder());
+    }
+    public void printLineItems(){
+        log.info("LineItems: \n");
+        for (LineItem item : lineItems){
+            log.info(item.toJson().toString());
+        }
     }
 }
 
