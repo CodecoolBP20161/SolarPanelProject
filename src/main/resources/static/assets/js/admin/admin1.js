@@ -17,12 +17,12 @@ $(document).ready(function () {
     // This one just adds the same event listener to the 4 elements
     metricSelect.add(metricInput).add(phaseOneInput).add(phaseTwoInput)
         .on('ready change paste keyup', function () {
-            metricInput.val(numberWithCommas(metricInput.val()));
+            metricInput.val(accounting.formatNumber(metricInput.val(), {precision : 0, thousand : " "}));
             isNetworkUpgradeNeeded(phaseOneInput, metricSelect, metricInput);
         });
 
     $('#submit').on('click', function(){
-        metricInput.val(metricInput.val().replace(".", ""));
+        metricInput.val(accounting.unformat(metricInput.val()));
     });
 
 });
@@ -54,8 +54,4 @@ var isNetworkUpgradeNeeded = function(phaseOneInput, metricSelect, metricInput){
         });
     }
 
-};
-
-var numberWithCommas = function (x) {
-    return x.toString().replace(".", "").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 };
