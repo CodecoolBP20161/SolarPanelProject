@@ -225,6 +225,8 @@ public class AdminController {
             LineItem newItem = offerService.getLineItemFromItemIdAndType(itemId, type);
             offer.addLineItem(newItem);
         }
+        offer.sortLineItems();
+        offer.printLineItems();
         return new ResponseEntity<>(offer, HttpStatus.OK);
     }
 }
