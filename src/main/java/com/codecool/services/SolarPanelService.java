@@ -30,7 +30,7 @@ public class SolarPanelService {
         return piece;
     }
 
-    public double callculateSolarPanelSupportStructure(double solarPanelQuantity) {
+    public double calculateSolarPanelSupportStructure(double solarPanelQuantity) {
         double quantity = 0;
 
         if (solarPanelQuantity % 4 == 0) {

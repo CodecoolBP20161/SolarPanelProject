@@ -116,9 +116,9 @@ public class OfferService {
 
         inverterLineItem.setName(inverter.getBrand() + " " + inverter.getName());
         LineItem solarPanelLineItem = new LineItem(solarPanel);
-        int neededSolarpanelQuantity = solarPanelService.calculateSolarPanelQuantity(consumptionForm, solarPanel.getCapacity());
+        int neededSolarPanelQuantity = solarPanelService.calculateSolarPanelQuantity(consumptionForm, solarPanel.getCapacity());
 
-        solarPanelLineItem.setQuantity(neededSolarpanelQuantity);
+        solarPanelLineItem.setQuantity(neededSolarPanelQuantity);
         LineItem additionalStuffLineItem;
 
         lineItems.add(solarPanelLineItem);
@@ -126,11 +126,11 @@ public class OfferService {
 
 
         if (inverter.getBrand().equals(InverterBrandEnum.SOLAREDGE)) {
-            int quantityOfOptimlizer = (inverter.getOptimalizerName().contains("300")) ? neededSolarpanelQuantity : neededSolarpanelQuantity / 2;
-            OtherItem optimalizerItsNeeded = new OtherItem(inverter.getOptimalizerName(), "", inverter.getOptimalierPrice(), 0, ItemTypeEnum.Item);
-            LineItem optimalizerLineItem = new LineItem(optimalizerItsNeeded);
-            optimalizerLineItem.setQuantity(quantityOfOptimlizer);
-            lineItems.add(optimalizerLineItem);
+            int quantityOfOptimizer = (inverter.getOptimizerName().contains("300")) ? neededSolarPanelQuantity : neededSolarPanelQuantity / 2;
+            OtherItem optimizerIsNeeded = new OtherItem(inverter.getOptimizerName(), "", inverter.getOptimizerPrice(), 0, ItemTypeEnum.Item);
+            LineItem optimizerLineItem = new LineItem(optimizerIsNeeded);
+            optimizerLineItem.setQuantity(quantityOfOptimizer);
+            lineItems.add(optimizerLineItem);
         }
 
         OtherItem wifiModule = new OtherItem("Wifi modul", "", inverter.getWifiModule(), 0, ItemTypeEnum.Item);
@@ -155,11 +155,11 @@ public class OfferService {
                 } else if (additionalStuffLineItem.getName().contains("AC vezeték")) {
                     additionalStuffLineItem.setQuantity(10);
                 } else if (additionalStuffLineItem.getName().equals("Termék díj")) {
-                    additionalStuffLineItem.setQuantity(neededSolarpanelQuantity);
+                    additionalStuffLineItem.setQuantity(neededSolarPanelQuantity);
                 } else if (additionalStuffLineItem.getName().contains("Solaredge")) {
-                    additionalStuffLineItem.setQuantity(neededSolarpanelQuantity);
+                    additionalStuffLineItem.setQuantity(neededSolarPanelQuantity);
                 } else if (additionalStuffLineItem.getName().equals("Tartószerkezet szett (4panel/szett)")) {
-                    additionalStuffLineItem.setQuantity(solarPanelService.callculateSolarPanelSupportStructure(neededSolarpanelQuantity));
+                    additionalStuffLineItem.setQuantity(solarPanelService.calculateSolarPanelSupportStructure(neededSolarPanelQuantity));
                 }
                 lineItems.add(additionalStuffLineItem);
             }
@@ -197,6 +197,7 @@ public class OfferService {
         }
         return solarPanelLineItems;
     }
+
     public Offer createFromFormData(ConsumptionForm consumption, DeviceForm deviceForm){
         Offer offer = new Offer();
 
@@ -209,6 +210,8 @@ public class OfferService {
 
     public boolean containsItem(Offer offer, Integer itemId, String type){
         for (LineItem lineItem : offer.getLineItems()){
+            log.info(String.format("ItemName: %s", lineItem.getName()));
+            log.info(String.format("ItemId: %s", lineItem.getItemId()));
             if(lineItem.getItemId().equals(itemId)){
                 String inputName = lineItem.getName();
                 LineItem newItem = getLineItemFromItemIdAndType(itemId, type);
