@@ -1,5 +1,110 @@
 
-$(document).on('ready', function () {attachEventListeners()});
+$(document).on('ready', function () {var quantityURL = 'tetel/mennyisegvaltoztatas';
+    var addURL = 'tetel/uj';
+    var getListURL = 'tetel/listazas';
+    var deleteURL = 'tetel/torles';
+
+    $('.plus').on('click', function(){
+        var lineItemId = $(this).attr('data');
+        var thisInput = $('#quantity' + lineItemId);
+        var newQuantity = Number(thisInput.val()) + 1;
+        console.log('thisInput: ');
+        console.log(thisInput);
+
+
+        console.log('thisInputVal: ' + newQuantity);
+        var data = JSON.stringify({
+            "id": lineItemId,
+            "quantity" : newQuantity
+        });
+        console.log('Data: ' + data);
+        var callback = function(response) {reRenderTable(response);};
+        doAJAX(quantityURL, data, callback)
+    });
+
+    $('.minus').on('click', function(){
+        var lineItemId = $(this).attr('data');
+        var thisInput = $('#quantity' + lineItemId);
+        var newQuantity = Number(thisInput.val()) - 1;
+        console.log('thisInput: ');
+        console.log(thisInput);
+
+        console.log('thisInputVal: ' + newQuantity);
+        var data = JSON.stringify({
+            "id": lineItemId,
+            "quantity" : newQuantity
+        });
+        console.log('Data: ' + data);
+        var callback = function (response) {reRenderTable(response);};
+        doAJAX(quantityURL, data, callback)
+    });
+
+    $('.fa.fa-times.delete').on('click', function(){
+        var id = $(this).attr('data');
+        var data = JSON.stringify({
+            id: id
+        });
+        var callback = function (response) {
+            reRenderTable(response)
+        };
+
+        doAJAX(deleteURL, data, callback);
+    });
+
+    $('#categorySelect').on('change', function () {
+        var value = $(this).val();
+        var data = JSON.stringify({
+            type: value
+        });
+        var callback = function (response) {
+            fillItemSelect(response);
+        };
+
+        if(value == 'inverter'){
+            $('#brandSelect').attr('disabled', false).val('initial');
+            $('#itemSelect').attr('disabled', true);
+        } else if(value == 'panel'){
+            doAJAX(getListURL, data, callback);
+            $('#brandSelect').attr('disabled', true).val('warning');
+
+        } else if (value == 'other'){
+            doAJAX(getListURL, data, callback);
+            $('#brandSelect').attr('disabled', true).val('warning');
+
+        }
+    });
+
+    $('#brandSelect').on('change', function () {
+        var type = $('#categorySelect').val();
+        var brand = $(this).val();
+        var data = JSON.stringify({
+            type: type,
+            brand: brand
+        });
+        var callback = function (response) {
+            fillItemSelect(response);
+        };
+        doAJAX(getListURL, data, callback)
+    });
+
+    $('#itemSelect').on('change', function () {
+        if($(this).val() != 'inital'){
+            $('#submitAddItem').attr('disabled', false);
+        }
+    });
+
+    $('#submitAddItem').on('click', function (event) {
+        var callback = function (response) {
+            resetAddForm();
+            reRenderTable(response);
+        };
+        var data = JSON.stringify({
+            itemId: $('#itemSelect').val(),
+            type: $('#categorySelect').val()
+        });
+        doAJAX(addURL, data, callback);
+
+    })});
 
 var attachEventListeners = function () {
     var quantityURL = 'tetel/mennyisegvaltoztatas';
@@ -54,71 +159,66 @@ var attachEventListeners = function () {
         doAJAX(deleteURL, data, callback);
     });
 
-    $('#categorySelect').on('change', function () {
-
-        var value = $(this).val();
-        var data = JSON.stringify({
-            type: value
-        });
-        var callback = function (response) {
-            fillItemSelect(response);
-        };
-
-        if(value == 'inverter'){
-            $('#brandSelect').attr('disabled', false).val('initial');
-            $('#itemSelect').attr('disabled', true);
-        } else if(value == 'panel'){
-            doAJAX(getListURL, data, callback);
-            $('#brandSelect').attr('disabled', true).val('warning');
-
-        } else if (value == 'other'){
-            doAJAX(getListURL, data, callback);
-            $('#brandSelect').attr('disabled', true).val('warning');
-
-        }
-    });
-
-    $('#brandSelect').on('change', function () {
-        var type = $('#categorySelect').val();
-        var brand = $(this).val();
-        var data = JSON.stringify({
-            type: type,
-            brand: brand
-        });
-        var callback = function (response) {
-            fillItemSelect(response);
-        };
-        doAJAX(getListURL, data, callback)
-    });
-
-    $('#itemSelect').on('change', function () {
-        if($(this).val() != 'inital'){
-            $('#submitAddItem').attr('disabled', false);
-        }
-    });
-
-    $('#submitAddItem').on('click', function () {
-        var callback = function (response) {
-            resetAddForm();
-            reRenderTable(response);
-        };
-        var data = JSON.stringify({
-            itemId: $('#itemSelect').val(),
-            type: $('#categorySelect').val()
-        });
-        doAJAX(addURL, data, callback);
-        
-    })
+    // $('#categorySelect').on('change', function () {
+    //     var value = $(this).val();
+    //     var data = JSON.stringify({
+    //         type: value
+    //     });
+    //     var callback = function (response) {
+    //         fillItemSelect(response);
+    //     };
+    //
+    //     if(value == 'inverter'){
+    //         $('#brandSelect').attr('disabled', false).val('initial');
+    //         $('#itemSelect').attr('disabled', true);
+    //     } else if(value == 'panel'){
+    //         doAJAX(getListURL, data, callback);
+    //         $('#brandSelect').attr('disabled', true).val('warning');
+    //
+    //     } else if (value == 'other'){
+    //         doAJAX(getListURL, data, callback);
+    //         $('#brandSelect').attr('disabled', true).val('warning');
+    //
+    //     }
+    // });
+    //
+    // $('#brandSelect').on('change', function () {
+    //     var type = $('#categorySelect').val();
+    //     var brand = $(this).val();
+    //     var data = JSON.stringify({
+    //         type: type,
+    //         brand: brand
+    //     });
+    //     var callback = function (response) {
+    //         fillItemSelect(response);
+    //     };
+    //     doAJAX(getListURL, data, callback)
+    // });
+    //
+    // $('#itemSelect').on('change', function () {
+    //     if($(this).val() != 'inital'){
+    //         $('#submitAddItem').attr('disabled', false);
+    //     }
+    // });
+    //
+    // $('#submitAddItem').on('click', function (event) {
+    //     var callback = function (response) {
+    //         resetAddForm();
+    //         reRenderTable(response);
+    //     };
+    //     var data = JSON.stringify({
+    //         itemId: $('#itemSelect').val(),
+    //         type: $('#categorySelect').val()
+    //     });
+    //     doAJAX(addURL, data, callback);
+    //
+    // })
 
 };
 
 var reRenderTable = function(responseOffer){
     var root = $('.root');
     var header = $('.dynamic-header');
-    console.log("root: ");
-    console.log(root);
-    console.log('responseOffer: ');
-    console.log(responseOffer);
 
     root.html("");
     var lineItems = responseOffer.lineItems;
@@ -131,7 +231,6 @@ var reRenderTable = function(responseOffer){
 };
 
 var fillItemSelect = function (itemArray) {
-    console.log(itemArray);
     var select =  $('#itemSelect');
     select.html('');
     select.append(
