@@ -92,7 +92,9 @@ var attachEventListeners = function () {
     });
 
     $('#itemSelect').on('change', function () {
-
+        if($(this).val() != 'inital'){
+            $('#submitAddItem').attr('disabled', false);
+        }
     });
 
     $('#submitAddItem').on('click', function () {
