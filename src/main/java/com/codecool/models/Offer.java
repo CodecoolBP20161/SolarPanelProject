@@ -59,7 +59,7 @@ public class Offer {
 
     }
 
-    private void recalculateNettoTotalPrice() {
+    private void calculateNettoTotalPrice() {
         nettoTotalPrice = new BigDecimal(0);
         for (LineItem lineitem : lineItems) {
             nettoTotalPrice = nettoTotalPrice.add(lineitem.getTotal());
@@ -80,7 +80,7 @@ public class Offer {
                 break;
             }
         }
-        recalculateNettoTotalPrice();
+        calculateNettoTotalPrice();
     }
 }
 
