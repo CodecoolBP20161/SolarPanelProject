@@ -33,6 +33,6 @@ public class SolarPanel extends Item{
         this.setOptimalizer(optimizer);
         this.setWatt(vat);
         this.setCapacity(capacity);
-        this.priority = 2;
+        this.priority = 0;
     }
 }

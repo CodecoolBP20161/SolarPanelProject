@@ -18,11 +18,12 @@ public class LineItem extends Item {
 
     private static Integer idCount = 1;
 
-
     public Integer id;
 
     private  double quantity;
+
     private Integer itemId;
+
     private int priority;
 
     @NotNull

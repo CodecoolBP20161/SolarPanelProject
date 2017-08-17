@@ -20,7 +20,7 @@ public class OtherItem extends Item{
         super(name, description, BigDecimal.valueOf(price), type);
         this.setPhase(phase);
         this.setType(type);
-        this.priority = 0;
+        this.priority = 2;
     }
 
     public OtherItem(String name, String description, BigDecimal price, ItemTypeEnum item) {

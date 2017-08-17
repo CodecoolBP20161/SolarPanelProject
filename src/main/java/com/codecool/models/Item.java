@@ -47,8 +47,8 @@ public abstract class Item implements Comparable<Item> {
         final int AFTER = 1;
 
         if (this == item) return EQUAL;
-        if(priority > item.priority) return AFTER;
-        else if(priority < item.priority) return BEFORE;
+        if(priority > item.getPriority()) return AFTER;
+        else if(priority < item.getPriority()) return BEFORE;
         else return EQUAL;
     }
 }
