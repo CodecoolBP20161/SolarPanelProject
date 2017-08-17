@@ -6,8 +6,8 @@ $(document).ready(function () {
     var phaseTwoInput = $('#phase2RadioInput');
     var alertSpan = $('#alert-phase');
     if (metricInput.val() == "0.0") metricInput.val("");
-    else (metricInput.val(numberWithCommas(metricInput.val())));
-    submitted = false;
+    else (metricInput.val(accounting.formatNumber(metricInput.val(), {precision : 0, thousand : " "})));
+    var submitted = false;
 
     // Changes the metric type accordingly
     metricSelect.on('ready change', function () {
