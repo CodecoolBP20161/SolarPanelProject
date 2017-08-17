@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import javax.sound.sampled.Line;
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 @Data
 @Slf4j
@@ -21,7 +22,7 @@ public class Offer {
     private static long idCount = 1;
     private long id;
     private CompanyEnum company;
-    private List<LineItem> lineItems;
+    private volatile List<LineItem> lineItems;
     private boolean isNetworkUpgradeNeeded;
 
     @Setter(AccessLevel.NONE)
@@ -30,7 +31,7 @@ public class Offer {
 
     public Offer() {
         id = idCount++;
-        lineItems = new ArrayList<>();
+        lineItems = new CopyOnWriteArrayList<>();
         isNetworkUpgradeNeeded = false;
         nettoTotalPrice = new BigDecimal(0);
     }
@@ -62,8 +63,8 @@ public class Offer {
 
     private void calculateNettoTotalPrice() {
         nettoTotalPrice = new BigDecimal(0);
-        for (LineItem lineitem : lineItems) {
-            nettoTotalPrice = nettoTotalPrice.add(lineitem.getTotal());
+        for (LineItem lineItem : lineItems) {
+            nettoTotalPrice = nettoTotalPrice.add(lineItem.getTotal());
         }
     }
 
@@ -89,11 +90,11 @@ public class Offer {
     }
 
     public void sortLineItems(){
-        Collections.sort(this.lineItems, Collections.reverseOrder());
+        Collections.sort(this.lineItems);
     }
     public void printLineItems(){
         log.info("LineItems: \n");
-        for (LineItem item : lineItems){
+        for (LineItem item : lineItems) {
             log.info(item.toJson().toString());
         }
     }
