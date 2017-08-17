@@ -9,9 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Data
 public class Offer {
@@ -36,6 +34,7 @@ public class Offer {
 
     public void addLineItem(LineItem lineItem) {
         lineItems.add(lineItem);
+        Collections.sort(lineItems);
         nettoTotalPrice = nettoTotalPrice.add(lineItem.getTotal());
     }
 
