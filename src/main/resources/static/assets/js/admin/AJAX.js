@@ -1,5 +1,4 @@
 var doAJAX = function(URL, data, successFunction){
-    console.log('doAJAX: data:_' + data);
     // var csrfHeader = $("meta[name='_csrf_header']").attr("content");
     // var csrfToken = $("meta[name='_csrf']").attr("content");
     // var headers = {};
