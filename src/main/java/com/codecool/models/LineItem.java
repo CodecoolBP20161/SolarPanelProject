@@ -23,6 +23,7 @@ public class LineItem extends Item {
 
     private  double quantity;
     private Integer itemId;
+    private int priority;
 
     @NotNull
     ItemTypeEnum type;
@@ -37,6 +38,7 @@ public class LineItem extends Item {
         setItemId(item.getId());
         setQuantity(1);
         total = item.getPrice();
+        this.priority = item.getPriority();
     }
 
     public void setQuantity(double quantity){
