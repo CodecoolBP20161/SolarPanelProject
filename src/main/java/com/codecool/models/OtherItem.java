@@ -29,5 +29,6 @@ public class OtherItem extends Item{
 
     public OtherItem() {
         super();
+        priority = 2;
     }
 }

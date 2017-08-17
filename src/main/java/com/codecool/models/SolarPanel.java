@@ -26,7 +26,10 @@ public class SolarPanel extends Item{
 
     private int priority;
 
-    public SolarPanel(){}
+    public SolarPanel(){
+        super();
+        priority = 0;
+    }
 
     public SolarPanel(String name, String optimizer, Integer price, Double vat, Integer capacity, String description) {
         super(name, description, BigDecimal.valueOf(price), ItemTypeEnum.Item);

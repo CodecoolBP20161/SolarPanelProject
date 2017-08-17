@@ -54,5 +54,6 @@ public class Inverter extends Item {
 
     public Inverter() {
         super();
+        priority = 1;
     }
 }
