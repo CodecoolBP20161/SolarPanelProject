@@ -10,67 +10,73 @@
 
 
 <div th:fragment="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="heading-box ">
-                <h2 class="title">Új tétel hozzáadása</h2>
-                <span class="b-line l-left line-h"></span>
-                <br>
-                <br>
-            </div>
+    <!--Add New Section-->
+    <section>
+        <div class="container-fluid">
 
-        </div>
-        <div class="row">
-            <div class="col-xs-6">
-                <div class="romana_check_out_form">
-                    <div class="check_form_left common_input">
-                        <label for="categorySelect">Kategória:</label>
-                        <select name="categorySelect" id="categorySelect">
-                            <option selected="selected" hidden="hidden" value="initial">Nincs kiválasztva</option>
-                            <option value="panel">Napelem</option>
-                            <option value="inverter">Inverter</option>
-                            <option value="other">Egyéb</option>
-                        </select>
-                    </div>
+            <div class="row">
+                <div class="heading-box ">
+                    <h2 class="title">Új tétel hozzáadása</h2>
+                    <span class="b-line l-left line-h"></span>
+                    <br>
+                    <br>
                 </div>
-            </div>
-            <div class="col-xs-6">
-                <div class="romana_check_out_form">
-                    <div class="check_form_left common_input">
-                        <label for="brandSelect">Márka:</label>
-                        <select disabled="disabled" name="brandSelect" id="brandSelect">
-                            <option selected="selected" hidden="hidden" value="initial">Nincs kiválasztva</option>
-                            <option value="warning" hidden="hidden">Ennél a kategóriánál nem választhat márkát</option>
-                            <option th:each="brand : ${T(com.codecool.models.enums.InverterBrandEnum).values()}"
-                                    th:value="${brand}" th:text="${brand}"></option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="romana_check_out_form">
-                    <div class="check_form_left common_input">
-                        <label for="itemSelect">Név:</label>
-                        <select disabled="disabled" name="itemSelect" id="itemSelect">
-                            <option selected="selected" hidden="hidden" value="initial">Nincs kiválasztva</option>
-                            <option th:each="brand : ${T(com.codecool.models.enums.InverterBrandEnum).values()}"
-                                    th:value="${brand}" th:text="${brand}"></option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12 center">
-                <button disabled="disabled" class="btn-text" type="submit" id="submitAddItem" name="button">
-                    Hozzáadás
-                </button>
-            </div>
-        </div>
-    </div>
 
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="romana_check_out_form">
+                        <div class="check_form_left common_input">
+                            <label for="categorySelect">Kategória:</label>
+                            <select name="categorySelect" id="categorySelect">
+                                <option selected="selected" hidden="hidden" value="initial">Nincs kiválasztva</option>
+                                <option value="panel">Napelem</option>
+                                <option value="inverter">Inverter</option>
+                                <option value="other">Egyéb</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="romana_check_out_form">
+                        <div class="check_form_left common_input">
+                            <label for="brandSelect">Márka:</label>
+                            <select disabled="disabled" name="brandSelect" id="brandSelect">
+                                <option selected="selected" hidden="hidden" value="initial">Nincs kiválasztva</option>
+                                <option value="warning" hidden="hidden">Ennél a kategóriánál nem választhat márkát
+                                </option>
+                                <option th:each="brand : ${T(com.codecool.models.enums.InverterBrandEnum).values()}"
+                                        th:value="${brand}" th:text="${brand}"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="romana_check_out_form">
+                        <div class="check_form_left common_input">
+                            <label for="itemSelect">Név:</label>
+                            <select disabled="disabled" name="itemSelect" id="itemSelect">
+                                <option selected="selected" hidden="hidden" value="initial">Nincs kiválasztva</option>
+                                <option th:each="brand : ${T(com.codecool.models.enums.InverterBrandEnum).values()}"
+                                        th:value="${brand}" th:text="${brand}"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 center">
+                    <button disabled="disabled" class="btn-text" type="submit" id="submitAddItem" name="button">
+                        Hozzáadás
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--Table Section-->
     <section class="padding ptb-xs-60">
         <div class="cart_page_area sp100">
             <div class="container">
@@ -110,7 +116,8 @@
                                                             <button class="minus" type="button" th:data="${item.id}">
                                                                 <i class="fa fa-minus"></i>
                                                             </button>
-                                                            <input class="output" th:id="quantity+${item.id}" type="text"
+                                                            <input class="output" th:id="quantity+${item.id}"
+                                                                   type="text"
                                                                    th:value="${#numbers.formatInteger(item.quantity,0,'DEFAULT')}"
                                                                    onkeypress='return  event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
                                                             <button class="plus" th:data="${item.id}" type="button">
@@ -120,18 +127,19 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="padding_all" >
+                                            <td class="padding_all">
                                                 <p style="white-space: nowrap" class="total"
                                                    th:text="${#numbers.formatInteger(item.total,0,'DEFAULT')}+' Ft'"></p>
                                             </td>
-                                            <td class="padding_all"><i th:data="${item.id}" class="fa fa-times delete"></i></td>
+                                            <td class="padding_all"><i th:data="${item.id}"
+                                                                       class="fa fa-times delete"></i></td>
                                         </tr>
 
                                         </tbody>
                                         <thead class="dark-bg dynamic-header">
                                         <tr>
                                             <th colspan="3"><span></span></th>
-                                            <th class="text-right"><span >Nettó összeg:</span></th>
+                                            <th class="text-right"><span>Nettó összeg:</span></th>
                                             <th>
                                                 <span th:text="${#numbers.formatInteger(offer.nettoTotalPrice,0,'DEFAULT')+' Ft'}"
                                                       style="white-space: nowrap">
@@ -154,39 +162,40 @@
                                     </table>
                                     <!-- table End -->
                                 </div>
+                                <!--PDF download buttons-->
                                 <div class="row">
-                                <div class="col-sm-4">
-                                    <div class="single-sidebar-widget">
-                                        <ul class="brochure-btns">
-                                            <li>
-                                                <a href="#" class="clearfix"><i class="fa fa-file-pdf-o"></i> <span>Traditional Solutions PDF</span>
-                                                </a>
-                                            </li>
-                                        </ul>
+                                    <div class="col-sm-4">
+                                        <div class="single-sidebar-widget">
+                                            <ul class="brochure-btns">
+                                                <li>
+                                                    <a href="#" class="clearfix"><i class="fa fa-file-pdf-o"></i> <span>Traditional Solutions PDF</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="single-sidebar-widget">
-                                        <ul class="brochure-btns">
-                                            <li>
-                                                <a href="#" class="clearfix"><i class="fa fa-file-pdf-o"></i> <span> Stabil Invest PDF</span>
-                                                </a>
-                                            </li>
-                                        </ul>
+                                    <div class="col-sm-4">
+                                        <div class="single-sidebar-widget">
+                                            <ul class="brochure-btns">
+                                                <li>
+                                                    <a href="#" class="clearfix"><i class="fa fa-file-pdf-o"></i> <span> Stabil Invest PDF</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="single-sidebar-widget">
-                                        <ul class="brochure-btns">
-                                            <li>
-                                                <a href="#" class="clearfix"><i class="fa fa-file-pdf-o"></i> <span>Solar Provider PDF</span>
-                                                </a>
-                                            </li>
-                                        </ul>
+                                    <div class="col-sm-4">
+                                        <div class="single-sidebar-widget">
+                                            <ul class="brochure-btns">
+                                                <li>
+                                                    <a href="#" class="clearfix"><i class="fa fa-file-pdf-o"></i> <span>Solar Provider PDF</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
 
-                            </div>
+                                </div>
                             </div>
                             <!-- cart_btns End -->
                         </div>
@@ -197,7 +206,7 @@
             </div>
         </div>
         <!-- container End -->
-</section>
+    </section>
 </div>
 </body>
 </html>
