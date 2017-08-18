@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Data
-public class LineItem extends Item {
+public class LineItem extends Item implements Comparable<LineItem> {
 
     private static Integer idCount = 1;
 
@@ -45,6 +45,10 @@ public class LineItem extends Item {
     public void setQuantity(double quantity){
         this.quantity = quantity;
         this.total = price.multiply(BigDecimal.valueOf(quantity));
+    }
+
+    public int compareTo(LineItem lineItem){
+        return priority - lineItem.getPriority();
     }
 
     public JSONObject toJson(){

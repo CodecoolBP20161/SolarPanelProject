@@ -224,8 +224,9 @@ public class AdminController {
         if (!offerService.containsItem(offer, itemId, type)) {
             LineItem newItem = offerService.getLineItemFromItemIdAndType(itemId, type);
             offer.addLineItem(newItem);
+            offer.sortLineItems();
         }
-        offer.sortLineItems();
+
         offer.printLineItems();
         return new ResponseEntity<>(offer, HttpStatus.OK);
     }

@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 
 @MappedSuperclass
 @Data
-public abstract class Item implements Comparable<Item> {
+public abstract class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,8 +40,4 @@ public abstract class Item implements Comparable<Item> {
     }
 
     public Item(){}
-
-    public int compareTo(Item item){
-        return priority - item.getPriority();
-    }
 }

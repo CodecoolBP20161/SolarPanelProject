@@ -90,7 +90,8 @@ public class Offer {
     }
 
     public void sortLineItems(){
-        Collections.sort(this.lineItems);
+        Collections.sort(lineItems);
+        Collections.reverse(lineItems);
     }
     public void printLineItems(){
         log.info("LineItems: \n");

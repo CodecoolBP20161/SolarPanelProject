@@ -205,6 +205,7 @@ public class OfferService {
         List<LineItem> offerItem =  getLineItems(consumption, deviceForm);
 
         offerItem.forEach(offer::addLineItem);
+        offer.sortLineItems();
         return offer;
     }
 
