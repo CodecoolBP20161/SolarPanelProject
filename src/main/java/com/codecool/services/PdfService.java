@@ -26,9 +26,8 @@ public class PdfService {
     public File getPdf(Offer offer) throws UnirestException, IOException {
         InputStream pdfInputStream = doPost(offer).getRawBody();
         System.out.println("InputStream: " + pdfInputStream);
-        String offerId = "123456";
 
-        return  fileFromInputStream(pdfInputStream, offerId);
+        return  fileFromInputStream(pdfInputStream, String.valueOf(offer.getId()));
     }
 
     private File fileFromInputStream(InputStream inputstream, String offerId) throws IOException{
