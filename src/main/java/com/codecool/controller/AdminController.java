@@ -1,5 +1,6 @@
 package com.codecool.controller;
     import com.codecool.models.*;
+    import com.codecool.models.enums.CompanyEnum;
     import com.codecool.models.enums.InverterBrandEnum;
     import com.codecool.models.forms.ConsumptionForm;
     import com.codecool.models.forms.DeviceForm;
@@ -11,6 +12,7 @@ package com.codecool.controller;
     import com.codecool.services.PdfService;
     import com.codecool.services.ValidationService;
     import com.codecool.services.email.EmailService;
+    import com.mashape.unirest.http.exceptions.UnirestException;
     import lombok.extern.slf4j.Slf4j;
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.http.HttpStatus;
@@ -19,7 +21,12 @@ package com.codecool.controller;
     import org.springframework.ui.Model;
     import org.springframework.web.bind.annotation.*;
 
+    import javax.mail.MessagingException;
     import javax.servlet.http.HttpSession;
+    import java.io.File;
+    import java.io.IOException;
+    import java.net.URI;
+    import java.security.InvalidParameterException;
     import java.util.HashMap;
     import java.util.HashSet;
     import java.util.List;
@@ -29,6 +36,7 @@ package com.codecool.controller;
 public class AdminController {
     private OfferService offerService;
     private AdminService adminService;
+    private PdfService pdfService;
     private InverterRepository inverterRepository;
     private SolarPanelRepository solarPanelRepository;
     private OtherItemRepository otherItemRepository;
@@ -45,12 +53,13 @@ public class AdminController {
     @Autowired
     public AdminController(OfferService offerService, SolarPanelRepository solarPanelRepository,
                            InverterRepository inverterRepository, OtherItemRepository otherItemRepository,
-                           AdminService adminService) {
+                           AdminService adminService, PdfService pdfService) {
         this.solarPanelRepository = solarPanelRepository;
         this.otherItemRepository = otherItemRepository;
         this.inverterRepository = inverterRepository;
         this.offerService = offerService;
         this.adminService = adminService;
+        this.pdfService = pdfService;
     }
 
     @GetMapping("/admin")
@@ -230,4 +239,28 @@ public class AdminController {
         offer.printLineItems();
         return new ResponseEntity<>(offer, HttpStatus.OK);
     }
+
+    @PostMapping("admin/pdf")
+    @ResponseBody
+    public ResponseEntity<URI> getPDF(@RequestBody HashMap<String, String> data, HttpSession session) {
+
+        CompanyEnum company = CompanyEnum.valueOf(data.get("company"));
+
+        Offer offer = (Offer) session.getAttribute(OFFER);
+        offer.setCompany(company);
+        File pdf = null;
+        try {
+            pdf = pdfService.getPdf(offer);
+        } catch (UnirestException e) {
+            log.warn("Pdf Server is unavailable. UnirestException is thrown.");
+            e.printStackTrace();
+        } catch (IOException e) {
+            log.warn("Failed to convert PDF server's response to File.");
+            e.printStackTrace();
+        }
+
+            URI pdfUri = pdf.toURI();
+        return new ResponseEntity<>(pdfUri, HttpStatus.OK);
+    }
+
 }
