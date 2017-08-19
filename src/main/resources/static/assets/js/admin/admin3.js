@@ -2,8 +2,27 @@
 $(document).on('ready', function () {var quantityURL = 'tetel/mennyisegvaltoztatas';
     var addURL = 'tetel/uj';
     var getListURL = 'tetel/listazas';
+    var getPdfURL = 'pdf';
 
     attachEventListeners();
+    
+    $('.pdfLink').on('click', function () {
+        var thisA = $(this);
+        var company = $(this).attr('data');
+        var data = JSON.stringify({
+            "company": company
+        });
+        var callback = function (response) {
+            console.log(response);
+            var link = $('<a></a>');
+            link.html('sedasd');
+            link.attr('href', response);
+            link.click();
+            console.log(link);
+            $('body > div.wrapper > section.get-qoute.padding.ptb-xs-40.get-qoute > div > div > div > div > div > div > section.padding.ptb-xs-60 > div > div > div > div > div > div > div.row > div:nth-child(1) > div').append(link);
+        };
+        doAJAX(getPdfURL, data, callback)
+    });
 
     $('#categorySelect').on('change', function () {
         var value = $(this).val();
