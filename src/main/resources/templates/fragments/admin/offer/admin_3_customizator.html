@@ -168,8 +168,15 @@
                                         <div class="single-sidebar-widget">
                                             <ul class="brochure-btns">
                                                 <li>
-                                                    <a  class="clearfix pdfLink" data="TraditionalSolutions"><i class="fa fa-file-pdf-o" ></i> <span>Traditional Solutions PDF</span>
-                                                    </a>
+                                                    <form method="POST" id="TraditionalSolutionsPDF" th:action="@{/admin/pdf}" th:object="${consumption}">
+                                                        <input hidden="hidden" th:field="*{value}">
+                                                        <input hidden="hidden" th:field="*{phase}">
+                                                        <input hidden="hidden" th:field="*{company}" th:value="${T(com.codecool.models.enums.CompanyEnum).TraditionalSolutions}">
+                                                        <a href="javascript:{}" class="clearfix" onclick="document.getElementById('TraditionalSolutionsPDF').submit(); return false;">
+                                                            <i class="fa fa-file-pdf-o" ></i>
+                                                            <span>Solar Provider PDF</span>
+                                                        </a>
+                                                    </form>
                                                 </li>
                                             </ul>
                                         </div>
@@ -178,8 +185,15 @@
                                         <div class="single-sidebar-widget">
                                             <ul class="brochure-btns">
                                                 <li>
-                                                    <a class="clearfix pdfLink" data="StabilInvest"><i class="fa fa-file-pdf-o" ></i> <span> Stabil Invest PDF</span>
-                                                    </a>
+                                                    <form method="POST" id="StabilInvestPDF" th:action="@{/admin/pdf}" th:object="${consumption}">
+                                                        <input hidden="hidden" th:field="*{value}">
+                                                        <input hidden="hidden" th:field="*{phase}">
+                                                        <input hidden="hidden" th:field="*{company}" th:value="${T(com.codecool.models.enums.CompanyEnum).StabilInvest}">
+                                                        <a href="javascript:{}" class="clearfix" onclick="document.getElementById('StabilInvestPDF').submit(); return false;">
+                                                            <i class="fa fa-file-pdf-o" ></i>
+                                                            <span> Stabil Invest PDF</span>
+                                                        </a>
+                                                    </form>
                                                 </li>
                                             </ul>
                                         </div>
@@ -188,8 +202,15 @@
                                         <div class="single-sidebar-widget">
                                             <ul class="brochure-btns">
                                                 <li>
-                                                    <a  class="clearfix pdfLink" data="SolarProvider"><i class="fa fa-file-pdf-o" ></i> <span>Solar Provider PDF</span>
-                                                    </a>
+                                                    <form method="POST" id="SolarProviderPDF" th:action="@{/admin/pdf}" th:object="${consumption}">
+                                                        <input hidden="hidden" th:field="*{value}">
+                                                        <input hidden="hidden" th:field="*{phase}">
+                                                        <input hidden="hidden" th:field="*{company}" th:value="${T(com.codecool.models.enums.CompanyEnum).SolarProvider}">
+                                                        <a href="javascript:{}" class="clearfix" onclick="document.getElementById('SolarProviderPDF').submit(); return false;">
+                                                            <i class="fa fa-file-pdf-o" ></i>
+                                                            <span>Solar Provider PDF</span>
+                                                        </a>
+                                                    </form>
                                                 </li>
                                             </ul>
                                         </div>

@@ -10,25 +10,25 @@ package com.codecool.controller;
     import com.codecool.services.AdminService;
     import com.codecool.services.OfferService;
     import com.codecool.services.PdfService;
-    import com.codecool.services.ValidationService;
-    import com.codecool.services.email.EmailService;
     import com.mashape.unirest.http.exceptions.UnirestException;
     import lombok.extern.slf4j.Slf4j;
     import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.core.io.ByteArrayResource;
+    import org.springframework.core.io.Resource;
     import org.springframework.http.HttpStatus;
+    import org.springframework.http.MediaType;
     import org.springframework.http.ResponseEntity;
     import org.springframework.stereotype.Controller;
     import org.springframework.ui.Model;
     import org.springframework.web.bind.annotation.*;
 
-    import javax.mail.MessagingException;
     import javax.servlet.http.HttpSession;
     import java.io.File;
     import java.io.IOException;
-    import java.net.URI;
-    import java.security.InvalidParameterException;
+    import java.nio.file.Files;
+    import java.nio.file.Path;
+    import java.nio.file.Paths;
     import java.util.HashMap;
-    import java.util.HashSet;
     import java.util.List;
 
 @Slf4j
@@ -130,6 +130,7 @@ public class AdminController {
     public String getOfferStep3(Model model, HttpSession session) {
         DeviceForm deviceForm = (DeviceForm) session.getAttribute(DEVICE);
 
+
         if (deviceForm == null || !deviceForm.isValid()) {
             log.info("Step2 is not done, redirecting to /admin/eszkozok.");
             return "redirect:/admin/eszkozok";
@@ -141,6 +142,7 @@ public class AdminController {
         session.setAttribute(OFFER, offer);
 
         model.addAttribute(OFFER, offer);
+        model.addAttribute(CONSUMPTION, consumption);
         model.addAttribute(STEP, "admin3");
         return "admin";
     }
@@ -242,12 +244,12 @@ public class AdminController {
 
     @PostMapping("admin/pdf")
     @ResponseBody
-    public ResponseEntity<URI> getPDF(@RequestBody HashMap<String, String> data, HttpSession session) {
+    public ResponseEntity<Resource> getPDF(@ModelAttribute ConsumptionForm consumptionForm, HttpSession session) {
 
-        CompanyEnum company = CompanyEnum.valueOf(data.get("company"));
+//        CompanyEnum company = CompanyEnum.valueOf(data.get("company"));
 
         Offer offer = (Offer) session.getAttribute(OFFER);
-        offer.setCompany(company);
+        offer.setCompany(consumptionForm.getCompany());
         File pdf = null;
         try {
             pdf = pdfService.getPdf(offer);
@@ -258,9 +260,19 @@ public class AdminController {
             log.warn("Failed to convert PDF server's response to File.");
             e.printStackTrace();
         }
-
-            URI pdfUri = pdf.toURI();
-        return new ResponseEntity<>(pdfUri, HttpStatus.OK);
+        Path path = null;
+        if (pdf != null) {
+            path = Paths.get(pdf.getAbsolutePath());
+        }
+        ByteArrayResource resource = null;
+        try {
+            resource = new ByteArrayResource(Files.readAllBytes(path));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.ok()
+                .contentLength(pdf.length())
+                .contentType(MediaType.parseMediaType("application/download"))
+                .body(resource);
     }
-
 }
