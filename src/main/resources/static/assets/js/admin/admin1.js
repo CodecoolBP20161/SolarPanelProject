@@ -31,10 +31,16 @@ var isNetworkUpgradeNeeded = function(phaseOneInput, metricSelect, metricInput){
         var metric = metricSelect.find('option:selected').val();
         var value = accounting.unformat(metricInput.val());
 
+        var csrfHeader = $("meta[name='_csrf_header']").attr("content");
+        var csrfToken = $("meta[name='_csrf']").attr("content");
+        var headers = {};
+        headers[csrfHeader] = csrfToken;
+        console.log(headers);
         $.ajax({
             url: "/ajanlat/network-upgrade",
             type: 'POST',
             async: true,
+            headers: headers,
             contentType: "application/json",
             data: JSON.stringify({
                 "value": value,

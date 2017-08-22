@@ -267,7 +267,7 @@ public class AdminController {
         ByteArrayResource resource = null;
         try {
             resource = new ByteArrayResource(Files.readAllBytes(path));
-        } catch (IOException e) {
+        } catch (IOException | NullPointerException e) {
             e.printStackTrace();
         }
         return ResponseEntity.ok()

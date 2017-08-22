@@ -2,7 +2,7 @@
 $(document).on('ready', function () {var quantityURL = 'tetel/mennyisegvaltoztatas';
     var addURL = 'tetel/uj';
     var getListURL = 'tetel/listazas';
-    var getPdfURL = 'pdf';
+    var isCSRFNeeded = true;
 
     attachEventListeners();
 
@@ -15,15 +15,16 @@ $(document).on('ready', function () {var quantityURL = 'tetel/mennyisegvaltoztat
             fillItemSelect(response);
         };
 
+
         if(value == 'inverter'){
             $('#brandSelect').attr('disabled', false).val('initial');
             $('#itemSelect').attr('disabled', true);
         } else if(value == 'panel'){
-            doAJAX(getListURL, data, callback);
+            doAJAX(getListURL, data, callback, isCSRFNeeded);
             $('#brandSelect').attr('disabled', true).val('warning');
 
         } else if (value == 'other'){
-            doAJAX(getListURL, data, callback);
+            doAJAX(getListURL, data, callback, isCSRFNeeded);
             $('#brandSelect').attr('disabled', true).val('warning');
 
         }
@@ -39,7 +40,7 @@ $(document).on('ready', function () {var quantityURL = 'tetel/mennyisegvaltoztat
         var callback = function (response) {
             fillItemSelect(response);
         };
-        doAJAX(getListURL, data, callback)
+        doAJAX(getListURL, data, callback, isCSRFNeeded)
     });
 
     $('#itemSelect').on('change', function () {
@@ -57,7 +58,7 @@ $(document).on('ready', function () {var quantityURL = 'tetel/mennyisegvaltoztat
             itemId: $('#itemSelect').val(),
             type: $('#categorySelect').val()
         });
-        doAJAX(addURL, data, callback);
+        doAJAX(addURL, data, callback, isCSRFNeeded);
 
     })
 });
@@ -66,6 +67,7 @@ var attachEventListeners = function () {
     var quantityURL = 'tetel/mennyisegvaltoztatas';
     var previousData;
     var deleteURL = 'tetel/torles';
+    var isCSRFNeeded = true;
 
     $('.plus').on('click', function(){
         var lineItemId = $(this).attr('data');
@@ -77,7 +79,7 @@ var attachEventListeners = function () {
         });
         var callback = function(response) {reRenderTable(response);};
 
-        doAJAX(quantityURL, data, callback)
+        doAJAX(quantityURL, data, callback, isCSRFNeeded)
     });
 
     $('.minus').on('click', function(){
@@ -90,7 +92,7 @@ var attachEventListeners = function () {
         });
         var callback = function (response) {reRenderTable(response);};
 
-        doAJAX(quantityURL, data, callback)
+        doAJAX(quantityURL, data, callback, isCSRFNeeded)
     });
 
     $('.fa.fa-times.delete').on('click', function(){
@@ -118,7 +120,7 @@ var attachEventListeners = function () {
             });
             var callback = function (response) {reRenderTable(response);};
 
-            doAJAX(quantityURL, data, callback)
+            doAJAX(quantityURL, data, callback, isCSRFNeeded)
         }
     });
 
