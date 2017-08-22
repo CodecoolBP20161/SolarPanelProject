@@ -31,7 +31,7 @@ var isNetworkUpgradeNeeded = function(phaseOneInput, metricSelect, metricInput){
     var alertSpan = $('#alert-phase');
     if (phaseOneInput.val() == "1"){
         var metric = metricSelect.find('option:selected').val();
-        var value = metricInput.val().replace(".", "");
+        var value = accounting.unformat(metricInput.val());
 
         $.ajax({
             url: "/ajanlat/network-upgrade",
