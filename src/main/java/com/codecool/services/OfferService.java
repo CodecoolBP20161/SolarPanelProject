@@ -171,20 +171,15 @@ public class OfferService {
         return lineItems;
     }
 
-    private int getInstallationFee(int consumption) {
-        int installationFee;
-
+    public int getInstallationFee(int consumption) {
         if (consumption < 3000) {
-            installationFee = 100000;
+            return 100000;
         } else if (consumption >= 3000 && consumption < 6000) {
-            installationFee = 120000;
+            return  120000;
         } else if (consumption >= 6000 && consumption < 12000) {
-            installationFee = 140000;
-        } else {
-            installationFee = 0;
+            return  140000;
         }
-
-        return installationFee;
+        return 0;
     }
 
     public List<LineItem> getSolarPanelListAsLineItems(ConsumptionForm consumptionForm) {
