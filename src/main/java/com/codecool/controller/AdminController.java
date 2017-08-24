@@ -257,7 +257,7 @@ public class AdminController {
 
         String name = data.get("name");
         String description = data.get("description");
-        BigDecimal price = BigDecimal.valueOf(Integer.valueOf(data.get("price"));
+        BigDecimal price = BigDecimal.valueOf(Integer.valueOf(data.get("price")));
         ItemTypeEnum type = (ItemTypeEnum.valueOf(data.get("type")));
         int  priority = Integer.valueOf(data.get("priority"));
 
