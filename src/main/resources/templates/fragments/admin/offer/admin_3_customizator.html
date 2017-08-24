@@ -10,71 +10,174 @@
 
 
 <div th:fragment="content">
-    <!--Add New Section-->
-    <section>
-        <div class="container-fluid">
+    <div class="faq">
+        <div class="panel-group " id="accordion">
 
-            <div class="row">
-                <div class="heading-box ">
-                    <h2 class="title">Új tétel hozzáadása</h2>
-                    <span class="b-line l-left line-h"></span>
-                    <br>
-                    <br>
+            <!--Add New Section-->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title"><a aria-expanded="false" class="collapsed" data-parent="#accordion" data-toggle="collapse" href="#collapse-1"> Új tétel hozzáadása a listából:
+                        <i class="fa fa-plus collape-plus"></i></a></h4>
                 </div>
+                <div class="panel-collapse collapse" id="collapse-1">
+                    <div class="panel-body">
 
-            </div>
-            <div class="row">
-                <div class="col-xs-6">
-                    <div class="romana_check_out_form">
-                        <div class="check_form_left common_input">
-                            <label for="categorySelect">Kategória:</label>
-                            <select name="categorySelect" id="categorySelect">
-                                <option selected="selected" hidden="hidden" value="initial">Nincs kiválasztva</option>
-                                <option value="panel">Napelem</option>
-                                <option value="inverter">Inverter</option>
-                                <option value="other">Egyéb</option>
-                            </select>
-                        </div>
+                        <!--Content Section-->
+                        <section>
+                            <div class="container-fluid">
+
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <div class="romana_check_out_form">
+                                            <div class="check_form_left common_input">
+                                                <label for="categorySelect">Kategória:</label>
+                                                <select name="categorySelect" id="categorySelect">
+                                                    <option selected="selected" hidden="hidden" value="initial">Nincs kiválasztva</option>
+                                                    <option value="panel">Napelem</option>
+                                                    <option value="inverter">Inverter</option>
+                                                    <option value="other">Egyéb</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="romana_check_out_form">
+                                            <div class="check_form_left common_input">
+                                                <label for="brandSelect">Márka:</label>
+                                                <select disabled="disabled" name="brandSelect" id="brandSelect">
+                                                    <option selected="selected" hidden="hidden" value="initial">Nincs kiválasztva</option>
+                                                    <option value="warning" hidden="hidden">Ennél a kategóriánál nem választhat márkát
+                                                    </option>
+                                                    <option th:each="brand : ${T(com.codecool.models.enums.InverterBrandEnum).values()}"
+                                                            th:value="${brand}" th:text="${brand}"></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="romana_check_out_form">
+                                            <div class="check_form_left common_input">
+                                                <label for="itemSelect">Név:</label>
+                                                <select disabled="disabled" name="itemSelect" id="itemSelect">
+                                                    <option selected="selected" hidden="hidden" value="initial">Nincs kiválasztva</option>
+                                                    <option th:each="brand : ${T(com.codecool.models.enums.InverterBrandEnum).values()}"
+                                                            th:value="${brand}" th:text="${brand}"></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 center">
+                                        <button disabled="disabled" class="btn-text" type="submit" id="submitAddItem" name="button">
+                                            Hozzáadás
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
                     </div>
                 </div>
-                <div class="col-xs-6">
-                    <div class="romana_check_out_form">
-                        <div class="check_form_left common_input">
-                            <label for="brandSelect">Márka:</label>
-                            <select disabled="disabled" name="brandSelect" id="brandSelect">
-                                <option selected="selected" hidden="hidden" value="initial">Nincs kiválasztva</option>
-                                <option value="warning" hidden="hidden">Ennél a kategóriánál nem választhat márkát
-                                </option>
-                                <option th:each="brand : ${T(com.codecool.models.enums.InverterBrandEnum).values()}"
-                                        th:value="${brand}" th:text="${brand}"></option>
-                            </select>
-                        </div>
+            </div>
+
+            <br>
+            <br>
+
+            <!--Add Custom Section-->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title"><a aria-expanded="false" class="collapsed" data-parent="#accordion" data-toggle="collapse" href="#collapse-2"> Új egyéni tétel hozzáadása:
+                        <i class="fa fa-plus collape-plus"></i></a></h4>
+                </div>
+                <div class="panel-collapse collapse" id="collapse-2">
+                    <div class="panel-body">
+
+                        <!--Content Section-->
+                        <section>
+                            <div class="container-fluid">
+
+                                <div class="row">
+
+                                    <div class="col-xs-4">
+                                        <div class="form-field mb-30">
+                                            <div class="input-group">
+                                                <label for="sub">Név:</label>
+                                                <input class="input-lg form-full" id="sub" type="text" name="form-subject"
+                                                       placeholder="név" value="" required="required">
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-4">
+                                        <div class="form-field mb-30">
+                                            <div class="input-group">
+                                                <!--The 'onkeypress' event is to determine if the typed characters ASCII code is in our desired interval(numbers)-->
+                                                <label for="price">Egységár:</label>
+                                                <input class="input-lg form-full" id="price" type="text" name="form-subject"
+                                                       placeholder="egységár"
+                                                       value="" required="required"
+                                                       onkeypress='return  event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-4">
+                                        <div class="form-field mb-30">
+                                            <div class="input-group">
+                                                <div class="romana_check_out_form">
+                                                    <div class="row">
+                                                        <div class="col-xs-12">
+                                                            <div class="check_form_left common_input">
+                                                                <label for="prioritySelect">Tétel helye a listán:</label>
+                                                                <br>
+                                                                <select name="userSelect" id="prioritySelect">
+                                                                    <option>Inverterek mellett</option>
+                                                                    <option>Napelemek mellett</option>
+                                                                    <option selected>Egyebek között</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="form-field mb-30">
+                                            <label for="description">Leírás:</label>
+                                            <textarea class="input-lg form-full" id="description" name="form-subject"
+                                                      placeholder="leírás">
+                            </textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 center">
+                                        <button class="btn-text" type="submit" id="submitCustomItem" name="button">
+                                            Hozzáadás
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="romana_check_out_form">
-                        <div class="check_form_left common_input">
-                            <label for="itemSelect">Név:</label>
-                            <select disabled="disabled" name="itemSelect" id="itemSelect">
-                                <option selected="selected" hidden="hidden" value="initial">Nincs kiválasztva</option>
-                                <option th:each="brand : ${T(com.codecool.models.enums.InverterBrandEnum).values()}"
-                                        th:value="${brand}" th:text="${brand}"></option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12 center">
-                    <button disabled="disabled" class="btn-text" type="submit" id="submitAddItem" name="button">
-                        Hozzáadás
-                    </button>
-                </div>
-            </div>
+
+
         </div>
-    </section>
+    </div>
+
 
     <!--Table Section-->
     <section class="padding ptb-xs-60">
@@ -168,12 +271,15 @@
                                         <div class="single-sidebar-widget">
                                             <ul class="brochure-btns">
                                                 <li>
-                                                    <form method="POST" id="TraditionalSolutionsPDF" th:action="@{/admin/pdf}" th:object="${consumption}">
+                                                    <form method="POST" id="TraditionalSolutionsPDF"
+                                                          th:action="@{/admin/pdf}" th:object="${consumption}">
                                                         <input hidden="hidden" th:field="*{value}">
                                                         <input hidden="hidden" th:field="*{phase}">
-                                                        <input hidden="hidden" th:field="*{company}" th:value="${T(com.codecool.models.enums.CompanyEnum).TraditionalSolutions}">
-                                                        <a href="javascript:{}" class="clearfix" onclick="document.getElementById('TraditionalSolutionsPDF').submit(); return false;">
-                                                            <i class="fa fa-file-pdf-o" ></i>
+                                                        <input hidden="hidden" th:field="*{company}"
+                                                               th:value="${T(com.codecool.models.enums.CompanyEnum).TraditionalSolutions}">
+                                                        <a href="javascript:{}" class="clearfix"
+                                                           onclick="document.getElementById('TraditionalSolutionsPDF').submit(); return false;">
+                                                            <i class="fa fa-file-pdf-o"></i>
                                                             <span>Solar Provider PDF</span>
                                                         </a>
                                                     </form>
@@ -185,12 +291,15 @@
                                         <div class="single-sidebar-widget">
                                             <ul class="brochure-btns">
                                                 <li>
-                                                    <form method="POST" id="StabilInvestPDF" th:action="@{/admin/pdf}" th:object="${consumption}">
+                                                    <form method="POST" id="StabilInvestPDF" th:action="@{/admin/pdf}"
+                                                          th:object="${consumption}">
                                                         <input hidden="hidden" th:field="*{value}">
                                                         <input hidden="hidden" th:field="*{phase}">
-                                                        <input hidden="hidden" th:field="*{company}" th:value="${T(com.codecool.models.enums.CompanyEnum).StabilInvest}">
-                                                        <a href="javascript:{}" class="clearfix" onclick="document.getElementById('StabilInvestPDF').submit(); return false;">
-                                                            <i class="fa fa-file-pdf-o" ></i>
+                                                        <input hidden="hidden" th:field="*{company}"
+                                                               th:value="${T(com.codecool.models.enums.CompanyEnum).StabilInvest}">
+                                                        <a href="javascript:{}" class="clearfix"
+                                                           onclick="document.getElementById('StabilInvestPDF').submit(); return false;">
+                                                            <i class="fa fa-file-pdf-o"></i>
                                                             <span> Stabil Invest PDF</span>
                                                         </a>
                                                     </form>
@@ -202,12 +311,15 @@
                                         <div class="single-sidebar-widget">
                                             <ul class="brochure-btns">
                                                 <li>
-                                                    <form method="POST" id="SolarProviderPDF" th:action="@{/admin/pdf}" th:object="${consumption}">
+                                                    <form method="POST" id="SolarProviderPDF" th:action="@{/admin/pdf}"
+                                                          th:object="${consumption}">
                                                         <input hidden="hidden" th:field="*{value}">
                                                         <input hidden="hidden" th:field="*{phase}">
-                                                        <input hidden="hidden" th:field="*{company}" th:value="${T(com.codecool.models.enums.CompanyEnum).SolarProvider}">
-                                                        <a href="javascript:{}" class="clearfix" onclick="document.getElementById('SolarProviderPDF').submit(); return false;">
-                                                            <i class="fa fa-file-pdf-o" ></i>
+                                                        <input hidden="hidden" th:field="*{company}"
+                                                               th:value="${T(com.codecool.models.enums.CompanyEnum).SolarProvider}">
+                                                        <a href="javascript:{}" class="clearfix"
+                                                           onclick="document.getElementById('SolarProviderPDF').submit(); return false;">
+                                                            <i class="fa fa-file-pdf-o"></i>
                                                             <span>Solar Provider PDF</span>
                                                         </a>
                                                     </form>
