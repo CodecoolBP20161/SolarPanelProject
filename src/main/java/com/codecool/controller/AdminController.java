@@ -2,6 +2,7 @@ package com.codecool.controller;
     import com.codecool.models.*;
     import com.codecool.models.enums.CompanyEnum;
     import com.codecool.models.enums.InverterBrandEnum;
+    import com.codecool.models.enums.ItemTypeEnum;
     import com.codecool.models.forms.ConsumptionForm;
     import com.codecool.models.forms.DeviceForm;
     import com.codecool.repositories.InverterRepository;
@@ -25,6 +26,7 @@ package com.codecool.controller;
     import javax.servlet.http.HttpSession;
     import java.io.File;
     import java.io.IOException;
+    import java.math.BigDecimal;
     import java.nio.file.Files;
     import java.nio.file.Path;
     import java.nio.file.Paths;
@@ -242,6 +244,31 @@ public class AdminController {
         return new ResponseEntity<>(offer, HttpStatus.OK);
     }
 
+    /*{
+        type: String, one from: ["item", "service"],
+        name: String
+        description: String
+        price: String
+        priority: String
+    }*/
+    @PostMapping("admin/tetel/egyeni")
+    @ResponseBody
+    public ResponseEntity<Offer> addCustomItem(@RequestBody HashMap<String, String> data, HttpSession session) {
+
+        String name = data.get("name");
+        String description = data.get("description");
+        BigDecimal price = BigDecimal.valueOf(Integer.valueOf(data.get("price"));
+        ItemTypeEnum type = (ItemTypeEnum.valueOf(data.get("type")));
+        int  priority = Integer.valueOf(data.get("priority"));
+
+        Offer offer = (Offer) session.getAttribute(OFFER);
+
+        LineItem newItem = new LineItem(name, description, price, type, priority);
+        offer.addLineItem(newItem);
+        offer.sortLineItems();
+        return new ResponseEntity<>(offer, HttpStatus.OK);
+    }
+
     @PostMapping("admin/pdf")
     @ResponseBody
     public ResponseEntity<Resource> getPDF(@ModelAttribute ConsumptionForm consumptionForm, HttpSession session) {
@@ -275,4 +302,5 @@ public class AdminController {
                 .contentType(MediaType.parseMediaType("application/download"))
                 .body(resource);
     }
+
 }
