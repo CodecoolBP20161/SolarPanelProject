@@ -35,11 +35,20 @@ public class LineItem extends Item implements Comparable<LineItem> {
 
     public LineItem(Item item){
         super(item.getName(), item.getDescription(), item.getPrice(), item.getType());
-        id = idCount++;
+        setId(idCount++);
         setItemId(item.getId());
-        setQuantity(1);
+        setQuantity(item.getPriority());
         total = item.getPrice();
-        this.priority = item.getPriority();
+        setPriority(item.getPriority());
+    }
+    public LineItem(String name, String description, BigDecimal price, ItemTypeEnum type,
+                    int priority){
+        super(name, description, price, type);
+        setId(idCount++);
+        setItemId(null);
+        setQuantity(1);
+        total = price;
+        setPriority(priority);
     }
 
     public void setQuantity(double quantity){
@@ -47,7 +56,17 @@ public class LineItem extends Item implements Comparable<LineItem> {
         this.total = price.multiply(BigDecimal.valueOf(quantity));
     }
 
+    public void setPrice(BigDecimal price){
+        this.price = price;
+        this.total = price.multiply(BigDecimal.valueOf(quantity));
+    }
+
     public int compareTo(LineItem lineItem){
+        if (priority == lineItem.getPriority()){
+            if(type == ItemTypeEnum.Item && lineItem.getType() == ItemTypeEnum.Service) return 1;
+            else if(type == ItemTypeEnum.Service && lineItem.getType() == ItemTypeEnum.Item) return -1;
+            else return 0;
+        }
         return priority - lineItem.getPriority();
     }
 

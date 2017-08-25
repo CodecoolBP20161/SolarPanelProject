@@ -10,71 +10,221 @@
 
 
 <div th:fragment="content">
-    <!--Add New Section-->
-    <section>
-        <div class="container-fluid">
+    <div class="faq">
 
-            <div class="row">
-                <div class="heading-box ">
-                    <h2 class="title">Új tétel hozzáadása</h2>
-                    <span class="b-line l-left line-h"></span>
-                    <br>
-                    <br>
-                </div>
+        <div class="panel-group " id="accordion">
 
-            </div>
-            <div class="row">
-                <div class="col-xs-6">
-                    <div class="romana_check_out_form">
-                        <div class="check_form_left common_input">
-                            <label for="categorySelect">Kategória:</label>
-                            <select name="categorySelect" id="categorySelect">
-                                <option selected="selected" hidden="hidden" value="initial">Nincs kiválasztva</option>
-                                <option value="panel">Napelem</option>
-                                <option value="inverter">Inverter</option>
-                                <option value="other">Egyéb</option>
-                            </select>
-                        </div>
+            <!--Add New Section-->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title"><a aria-expanded="false" class="collapsed" data-parent="#accordion"
+                                               data-toggle="collapse" href="#collapse-1"> Új tétel hozzáadása a
+                        listából:
+                        <i class="fa fa-plus collape-plus"></i></a></h4>
+                </div>
+                <div class="panel-collapse collapse" id="collapse-1">
+                    <div class="panel-body">
+
+                        <!--Content Section-->
+                        <section>
+                            <div class="container-fluid">
+
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <div class="romana_check_out_form">
+                                            <div class="check_form_left common_input">
+                                                <label for="categorySelect">Kategória:</label>
+                                                <select name="categorySelect" id="categorySelect">
+                                                    <option selected="selected" hidden="hidden" value="initial">Nincs
+                                                        kiválasztva
+                                                    </option>
+                                                    <option value="panel">Napelem</option>
+                                                    <option value="inverter">Inverter</option>
+                                                    <option value="other">Egyéb</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="romana_check_out_form">
+                                            <div class="check_form_left common_input">
+                                                <label for="brandSelect">Márka:</label>
+                                                <select disabled="disabled" name="brandSelect" id="brandSelect">
+                                                    <option selected="selected" hidden="hidden" value="initial">Nincs
+                                                        kiválasztva
+                                                    </option>
+                                                    <option value="warning" hidden="hidden">Ennél a kategóriánál nem
+                                                        választhat márkát
+                                                    </option>
+                                                    <option th:each="brand : ${T(com.codecool.models.enums.InverterBrandEnum).values()}"
+                                                            th:value="${brand}" th:text="${brand}"></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="romana_check_out_form">
+                                            <div class="check_form_left common_input">
+                                                <label for="itemSelect">Név:</label>
+                                                <select disabled="disabled" name="itemSelect" id="itemSelect">
+                                                    <option selected="selected" hidden="hidden" value="initial">Nincs
+                                                        kiválasztva
+                                                    </option>
+                                                    <option th:each="brand : ${T(com.codecool.models.enums.InverterBrandEnum).values()}"
+                                                            th:value="${brand}" th:text="${brand}"></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 center">
+                                        <button disabled="disabled" class="btn-text" type="submit" id="submitAddItem"
+                                                name="button">
+                                            Hozzáadás
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
                     </div>
                 </div>
-                <div class="col-xs-6">
-                    <div class="romana_check_out_form">
-                        <div class="check_form_left common_input">
-                            <label for="brandSelect">Márka:</label>
-                            <select disabled="disabled" name="brandSelect" id="brandSelect">
-                                <option selected="selected" hidden="hidden" value="initial">Nincs kiválasztva</option>
-                                <option value="warning" hidden="hidden">Ennél a kategóriánál nem választhat márkát
-                                </option>
-                                <option th:each="brand : ${T(com.codecool.models.enums.InverterBrandEnum).values()}"
-                                        th:value="${brand}" th:text="${brand}"></option>
-                            </select>
-                        </div>
+            </div>
+
+            <br>
+            <br>
+
+            <!--Add Custom Section-->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title"><a aria-expanded="false" class="collapsed" data-parent="#accordion"
+                                               data-toggle="collapse" href="#collapse-2"> Új egyéni tétel hozzáadása:
+                        <i class="fa fa-plus collape-plus"></i></a></h4>
+                </div>
+                <div class="panel-collapse collapse" id="collapse-2">
+                    <div class="panel-body">
+
+                        <!--Content Section-->
+                        <section>
+
+                            <div class="container-fluid">
+
+                                <div class="row">
+
+                                    <!--Name Input-->
+                                    <div class="col-xs-3">
+                                        <div class="form-field mb-30">
+                                            <div class="input-group">
+                                                <label for="customName">Név:</label>
+                                                <input class="input-lg form-full" id="customName" type="text"
+                                                       name="form-subject"
+                                                       placeholder="név" value="" required="required">
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--Price Input-->
+                                    <div class="col-xs-3">
+                                        <div class="form-field mb-30">
+                                            <div class="input-group">
+                                                <!--The 'onkeypress' event is to determine if the typed characters ASCII code is in our desired interval(numbers)-->
+                                                <label for="customPrice">Egységár:</label>
+                                                <input class="input-lg form-full" id="customPrice" type="text"
+                                                       name="form-subject"
+                                                       placeholder="egységár"
+                                                       value="" required="required"
+                                                       onkeypress='return  event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--Type Select-->
+                                    <div class="col-xs-3">
+                                        <div class="form-field mb-30">
+                                            <div class="input-group">
+                                                <div class="romana_check_out_form">
+                                                    <div class="row">
+                                                        <div class="col-xs-12">
+                                                            <div class="check_form_left common_input">
+                                                                <label for="typeSelect">Tétel Típusa:</label>
+                                                                <br>
+                                                                <select id="typeSelect">
+                                                                    <option value="Item">Termék</option>
+                                                                    <option selected value="Service">Szolgáltatás
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--Priority Select-->
+                                    <div class="col-xs-3">
+                                        <div class="form-field mb-30">
+                                            <div class="input-group">
+                                                <div class="romana_check_out_form">
+                                                    <div class="row">
+                                                        <div class="col-xs-12">
+                                                            <div class="check_form_left common_input">
+                                                                <label for="prioritySelect">Tétel helye a
+                                                                    listán:</label>
+                                                                <br>
+                                                                <select name="userSelect" id="prioritySelect">
+                                                                    <option value="3">Napelemek mellett</option>
+                                                                    <option value="2">Inverterek mellett</option>
+                                                                    <option selected value="1">Egyebek között</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="form-field mb-30">
+                                            <label for="customDescription">Leírás:</label>
+                                            <textarea class="input-lg form-full" id="customDescription"
+                                                      name="form-subject"
+                                                      placeholder="leírás"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12 center">
+                                        <button disabled="disabled" class="btn-text" type="submit" id="submitCustomItem"
+                                                name="button">
+                                            Hozzáadás
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </section>
+
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="romana_check_out_form">
-                        <div class="check_form_left common_input">
-                            <label for="itemSelect">Név:</label>
-                            <select disabled="disabled" name="itemSelect" id="itemSelect">
-                                <option selected="selected" hidden="hidden" value="initial">Nincs kiválasztva</option>
-                                <option th:each="brand : ${T(com.codecool.models.enums.InverterBrandEnum).values()}"
-                                        th:value="${brand}" th:text="${brand}"></option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12 center">
-                    <button disabled="disabled" class="btn-text" type="submit" id="submitAddItem" name="button">
-                        Hozzáadás
-                    </button>
-                </div>
-            </div>
+
+
         </div>
-    </section>
+    </div>
+
 
     <!--Table Section-->
     <section class="padding ptb-xs-60">
@@ -85,7 +235,8 @@
                         <div class="col-sm-12">
                             <div class="cart_wrpaer">
                                 <div class="table_scroll table-responsive">
-                                    <table class=" table table-striped">
+                                    <table class="table table-striped">
+
                                         <thead class="dark-bg">
                                         <tr>
                                             <th><span>Tétel</span></th>
@@ -96,7 +247,9 @@
                                             <th><span></span></th>
                                         </tr>
                                         </thead>
+
                                         <tbody class="root">
+
                                         <tr th:each="item : ${offer.lineItems}">
                                             <td class="padding_all">
                                                 <p th:text="${item.name}"></p>
@@ -105,8 +258,19 @@
                                                 <p th:text="${item.description}"></p>
                                             </td>
                                             <td class="padding_all">
-                                                <p style="white-space: nowrap"
-                                                   th:text="${#numbers.formatInteger(item.price,0,'DEFAULT')}+' Ft'"></p>
+                                                <div class="romana_check_out_form">
+                                                    <div class="row">
+                                                        <div class="check_form_left common_input">
+                                                            <div class="select_option_one">
+                                                                <input class="input-lg form-full priceInput"
+                                                                       style="white-space: nowrap"
+                                                                       th:value="${#numbers.formatInteger(item.price,0,'DEFAULT')}"
+                                                                       th:id="${item.id}">
+                                                                </input>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </td>
                                             <td class="padding_all quantity">
 
@@ -136,7 +300,9 @@
                                         </tr>
 
                                         </tbody>
+
                                         <thead class="dark-bg dynamic-header">
+
                                         <tr>
                                             <th colspan="3"><span></span></th>
                                             <th class="text-right"><span>Nettó összeg:</span></th>
@@ -147,6 +313,7 @@
                                             </th>
                                             <th><span></span></th>
                                         </tr>
+
                                         <tr>
 
                                             <th colspan="3"><span></span></th>
@@ -158,22 +325,27 @@
                                             </th>
                                             <th><span></span></th>
                                         </tr>
+
                                         </thead>
                                     </table>
                                     <!-- table End -->
                                 </div>
                                 <!--PDF download buttons-->
                                 <div class="row">
+
                                     <div class="col-sm-4">
                                         <div class="single-sidebar-widget">
                                             <ul class="brochure-btns">
                                                 <li>
-                                                    <form method="POST" id="TraditionalSolutionsPDF" th:action="@{/admin/pdf}" th:object="${consumption}">
+                                                    <form method="POST" id="TraditionalSolutionsPDF"
+                                                          th:action="@{/admin/pdf}" th:object="${consumption}">
                                                         <input hidden="hidden" th:field="*{value}">
                                                         <input hidden="hidden" th:field="*{phase}">
-                                                        <input hidden="hidden" th:field="*{company}" th:value="${T(com.codecool.models.enums.CompanyEnum).TraditionalSolutions}">
-                                                        <a href="javascript:{}" class="clearfix" onclick="document.getElementById('TraditionalSolutionsPDF').submit(); return false;">
-                                                            <i class="fa fa-file-pdf-o" ></i>
+                                                        <input hidden="hidden" th:field="*{company}"
+                                                               th:value="${T(com.codecool.models.enums.CompanyEnum).TraditionalSolutions}">
+                                                        <a href="javascript:{}" class="clearfix"
+                                                           onclick="document.getElementById('TraditionalSolutionsPDF').submit(); return false;">
+                                                            <i class="fa fa-file-pdf-o"></i>
                                                             <span>Solar Provider PDF</span>
                                                         </a>
                                                     </form>
@@ -181,16 +353,20 @@
                                             </ul>
                                         </div>
                                     </div>
+
                                     <div class="col-sm-4">
                                         <div class="single-sidebar-widget">
                                             <ul class="brochure-btns">
                                                 <li>
-                                                    <form method="POST" id="StabilInvestPDF" th:action="@{/admin/pdf}" th:object="${consumption}">
+                                                    <form method="POST" id="StabilInvestPDF" th:action="@{/admin/pdf}"
+                                                          th:object="${consumption}">
                                                         <input hidden="hidden" th:field="*{value}">
                                                         <input hidden="hidden" th:field="*{phase}">
-                                                        <input hidden="hidden" th:field="*{company}" th:value="${T(com.codecool.models.enums.CompanyEnum).StabilInvest}">
-                                                        <a href="javascript:{}" class="clearfix" onclick="document.getElementById('StabilInvestPDF').submit(); return false;">
-                                                            <i class="fa fa-file-pdf-o" ></i>
+                                                        <input hidden="hidden" th:field="*{company}"
+                                                               th:value="${T(com.codecool.models.enums.CompanyEnum).StabilInvest}">
+                                                        <a href="javascript:{}" class="clearfix"
+                                                           onclick="document.getElementById('StabilInvestPDF').submit(); return false;">
+                                                            <i class="fa fa-file-pdf-o"></i>
                                                             <span> Stabil Invest PDF</span>
                                                         </a>
                                                     </form>
@@ -198,16 +374,20 @@
                                             </ul>
                                         </div>
                                     </div>
+
                                     <div class="col-sm-4">
                                         <div class="single-sidebar-widget">
                                             <ul class="brochure-btns">
                                                 <li>
-                                                    <form method="POST" id="SolarProviderPDF" th:action="@{/admin/pdf}" th:object="${consumption}">
+                                                    <form method="POST" id="SolarProviderPDF" th:action="@{/admin/pdf}"
+                                                          th:object="${consumption}">
                                                         <input hidden="hidden" th:field="*{value}">
                                                         <input hidden="hidden" th:field="*{phase}">
-                                                        <input hidden="hidden" th:field="*{company}" th:value="${T(com.codecool.models.enums.CompanyEnum).SolarProvider}">
-                                                        <a href="javascript:{}" class="clearfix" onclick="document.getElementById('SolarProviderPDF').submit(); return false;">
-                                                            <i class="fa fa-file-pdf-o" ></i>
+                                                        <input hidden="hidden" th:field="*{company}"
+                                                               th:value="${T(com.codecool.models.enums.CompanyEnum).SolarProvider}">
+                                                        <a href="javascript:{}" class="clearfix"
+                                                           onclick="document.getElementById('SolarProviderPDF').submit(); return false;">
+                                                            <i class="fa fa-file-pdf-o"></i>
                                                             <span>Solar Provider PDF</span>
                                                         </a>
                                                     </form>

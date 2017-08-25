@@ -49,9 +49,11 @@ public class Inverter extends Item {
         this.setCapacity(capacity);
         this.setOptimizerName(optimizerName);
         this.setOptimizerPrice(optimizerPrice);
+        this.setPriority(2);
     }
 
     public Inverter() {
         super();
+        this.setPriority(2);
     }
 }

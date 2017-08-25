@@ -45,8 +45,8 @@
                                     <div class="check_form_left common_input">
                                         <div class="select_option_one">
                                             <select name="userSelect" id="stepOneSelect" th:field="*{metric}">
-                                                <option value="Ft"><strong>Havi villanyszámla:</strong></option>
-                                                <option value="kWh"><strong>Éves fogyasztás:</strong></option>
+                                                <option value="Ft">Havi villanyszámla:</option>
+                                                <option value="kWh">Éves fogyasztás:</option>
                                             </select>
                                         </div>
                                     </div>
@@ -62,7 +62,6 @@
                                            value="" required="required"
                                            th:field="*{value}"
                                            onkeypress='return  event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
-                                    <div ></div>
                                     <span th:text="${metric}" class="input-group-addon" id="metricHeader">FT</span>
                                 </div>
                             </div>
