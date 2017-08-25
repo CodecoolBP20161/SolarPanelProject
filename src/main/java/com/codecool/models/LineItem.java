@@ -37,7 +37,7 @@ public class LineItem extends Item implements Comparable<LineItem> {
         super(item.getName(), item.getDescription(), item.getPrice(), item.getType());
         setId(idCount++);
         setItemId(item.getId());
-        setQuantity(1);
+        setQuantity(item.getPriority());
         total = item.getPrice();
         setPriority(item.getPriority());
     }
