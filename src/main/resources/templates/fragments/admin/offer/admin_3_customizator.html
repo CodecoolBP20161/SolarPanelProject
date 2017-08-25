@@ -264,7 +264,8 @@
                                                             <div class="select_option_one">
                                                                 <input class="input-sm form-full"
                                                                        style="white-space: nowrap"
-                                                                       th:value="${#numbers.formatInteger(item.price,0,'DEFAULT')}">
+                                                                       th:value="${#numbers.formatInteger(item.price,0,'DEFAULT')}"
+                                                                       th:data="${item.id}">
                                                                 </input>
                                                             </div>
                                                         </div>
