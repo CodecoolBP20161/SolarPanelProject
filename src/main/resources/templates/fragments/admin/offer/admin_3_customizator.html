@@ -17,7 +17,9 @@
             <!--Add New Section-->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title"><a aria-expanded="false" class="collapsed" data-parent="#accordion" data-toggle="collapse" href="#collapse-1"> Új tétel hozzáadása a listából:
+                    <h4 class="panel-title"><a aria-expanded="false" class="collapsed" data-parent="#accordion"
+                                               data-toggle="collapse" href="#collapse-1"> Új tétel hozzáadása a
+                        listából:
                         <i class="fa fa-plus collape-plus"></i></a></h4>
                 </div>
                 <div class="panel-collapse collapse" id="collapse-1">
@@ -33,7 +35,9 @@
                                             <div class="check_form_left common_input">
                                                 <label for="categorySelect">Kategória:</label>
                                                 <select name="categorySelect" id="categorySelect">
-                                                    <option selected="selected" hidden="hidden" value="initial">Nincs kiválasztva</option>
+                                                    <option selected="selected" hidden="hidden" value="initial">Nincs
+                                                        kiválasztva
+                                                    </option>
                                                     <option value="panel">Napelem</option>
                                                     <option value="inverter">Inverter</option>
                                                     <option value="other">Egyéb</option>
@@ -46,8 +50,11 @@
                                             <div class="check_form_left common_input">
                                                 <label for="brandSelect">Márka:</label>
                                                 <select disabled="disabled" name="brandSelect" id="brandSelect">
-                                                    <option selected="selected" hidden="hidden" value="initial">Nincs kiválasztva</option>
-                                                    <option value="warning" hidden="hidden">Ennél a kategóriánál nem választhat márkát
+                                                    <option selected="selected" hidden="hidden" value="initial">Nincs
+                                                        kiválasztva
+                                                    </option>
+                                                    <option value="warning" hidden="hidden">Ennél a kategóriánál nem
+                                                        választhat márkát
                                                     </option>
                                                     <option th:each="brand : ${T(com.codecool.models.enums.InverterBrandEnum).values()}"
                                                             th:value="${brand}" th:text="${brand}"></option>
@@ -62,7 +69,9 @@
                                             <div class="check_form_left common_input">
                                                 <label for="itemSelect">Név:</label>
                                                 <select disabled="disabled" name="itemSelect" id="itemSelect">
-                                                    <option selected="selected" hidden="hidden" value="initial">Nincs kiválasztva</option>
+                                                    <option selected="selected" hidden="hidden" value="initial">Nincs
+                                                        kiválasztva
+                                                    </option>
                                                     <option th:each="brand : ${T(com.codecool.models.enums.InverterBrandEnum).values()}"
                                                             th:value="${brand}" th:text="${brand}"></option>
                                                 </select>
@@ -72,7 +81,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-12 center">
-                                        <button disabled="disabled" class="btn-text" type="submit" id="submitAddItem" name="button">
+                                        <button disabled="disabled" class="btn-text" type="submit" id="submitAddItem"
+                                                name="button">
                                             Hozzáadás
                                         </button>
                                     </div>
@@ -90,7 +100,8 @@
             <!--Add Custom Section-->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title"><a aria-expanded="false" class="collapsed" data-parent="#accordion" data-toggle="collapse" href="#collapse-2"> Új egyéni tétel hozzáadása:
+                    <h4 class="panel-title"><a aria-expanded="false" class="collapsed" data-parent="#accordion"
+                                               data-toggle="collapse" href="#collapse-2"> Új egyéni tétel hozzáadása:
                         <i class="fa fa-plus collape-plus"></i></a></h4>
                 </div>
                 <div class="panel-collapse collapse" id="collapse-2">
@@ -108,7 +119,8 @@
                                         <div class="form-field mb-30">
                                             <div class="input-group">
                                                 <label for="customName">Név:</label>
-                                                <input class="input-lg form-full" id="customName" type="text" name="form-subject"
+                                                <input class="input-lg form-full" id="customName" type="text"
+                                                       name="form-subject"
                                                        placeholder="név" value="" required="required">
 
                                             </div>
@@ -121,7 +133,8 @@
                                             <div class="input-group">
                                                 <!--The 'onkeypress' event is to determine if the typed characters ASCII code is in our desired interval(numbers)-->
                                                 <label for="customPrice">Egységár:</label>
-                                                <input class="input-lg form-full" id="customPrice" type="text" name="form-subject"
+                                                <input class="input-lg form-full" id="customPrice" type="text"
+                                                       name="form-subject"
                                                        placeholder="egységár"
                                                        value="" required="required"
                                                        onkeypress='return  event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
@@ -139,9 +152,10 @@
                                                             <div class="check_form_left common_input">
                                                                 <label for="typeSelect">Tétel Típusa:</label>
                                                                 <br>
-                                                                <select  id="typeSelect">
+                                                                <select id="typeSelect">
                                                                     <option value="Item">Termék</option>
-                                                                    <option selected value="Service">Szolgáltatás</option>
+                                                                    <option selected value="Service">Szolgáltatás
+                                                                    </option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -160,7 +174,8 @@
                                                     <div class="row">
                                                         <div class="col-xs-12">
                                                             <div class="check_form_left common_input">
-                                                                <label for="prioritySelect">Tétel helye a listán:</label>
+                                                                <label for="prioritySelect">Tétel helye a
+                                                                    listán:</label>
                                                                 <br>
                                                                 <select name="userSelect" id="prioritySelect">
                                                                     <option value="3">Napelemek mellett</option>
@@ -182,7 +197,8 @@
                                     <div class="col-xs-12">
                                         <div class="form-field mb-30">
                                             <label for="customDescription">Leírás:</label>
-                                            <textarea class="input-lg form-full" id="customDescription" name="form-subject"
+                                            <textarea class="input-lg form-full" id="customDescription"
+                                                      name="form-subject"
                                                       placeholder="leírás"></textarea>
                                         </div>
                                     </div>
@@ -190,7 +206,8 @@
 
                                 <div class="row">
                                     <div class="col-sm-12 center">
-                                        <button disabled="disabled" class="btn-text" type="submit" id="submitCustomItem" name="button">
+                                        <button disabled="disabled" class="btn-text" type="submit" id="submitCustomItem"
+                                                name="button">
                                             Hozzáadás
                                         </button>
                                     </div>
@@ -232,6 +249,7 @@
                                         </thead>
 
                                         <tbody class="root">
+
                                         <tr th:each="item : ${offer.lineItems}">
                                             <td class="padding_all">
                                                 <p th:text="${item.name}"></p>
@@ -240,8 +258,18 @@
                                                 <p th:text="${item.description}"></p>
                                             </td>
                                             <td class="padding_all">
-                                                <p style="white-space: nowrap"
-                                                   th:text="${#numbers.formatInteger(item.price,0,'DEFAULT')}+' Ft'"></p>
+                                                <div class="romana_check_out_form">
+                                                    <div class="row">
+                                                        <div class="check_form_left common_input">
+                                                            <div class="select_option_one">
+                                                                <input class="input-sm form-full"
+                                                                       style="white-space: nowrap"
+                                                                       th:value="${#numbers.formatInteger(item.price,0,'DEFAULT')}">
+                                                                </input>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </td>
                                             <td class="padding_all quantity">
 
