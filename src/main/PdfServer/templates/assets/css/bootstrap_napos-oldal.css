@@ -8250,7 +8250,9 @@ button.close {
 .zoom7 {
     zoom: 0.7;
 }
-
+.zoom5{
+    zoom: 0.5;
+}
 .description {
     zoom: 0.8;
 }
