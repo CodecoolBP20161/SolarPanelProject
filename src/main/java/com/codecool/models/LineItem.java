@@ -57,6 +57,11 @@ public class LineItem extends Item implements Comparable<LineItem> {
     }
 
     public int compareTo(LineItem lineItem){
+        if (priority == lineItem.getPriority()){
+            if(type == ItemTypeEnum.Item && lineItem.getType() == ItemTypeEnum.Service) return 1;
+            else if(type == ItemTypeEnum.Service && lineItem.getType() == ItemTypeEnum.Item) return -1;
+            else return 0;
+        }
         return priority - lineItem.getPriority();
     }
 
