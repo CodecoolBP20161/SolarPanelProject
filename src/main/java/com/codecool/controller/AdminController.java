@@ -266,6 +266,7 @@ public class AdminController {
         LineItem newItem = new LineItem(name, description, price, type, priority);
         offer.addLineItem(newItem);
         offer.sortLineItems();
+        offer.printLineItems();
         return new ResponseEntity<>(offer, HttpStatus.OK);
     }
 
