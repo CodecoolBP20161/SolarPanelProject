@@ -28,6 +28,7 @@ public class SolarPanel extends Item{
 
     public SolarPanel(){
         super();
+        this.setPriority(3);
     }
 
     public SolarPanel(String name, String optimizer, Integer price, Double vat, Integer capacity, String description) {
@@ -35,5 +36,6 @@ public class SolarPanel extends Item{
         this.setOptimalizer(optimizer);
         this.setWatt(vat);
         this.setCapacity(capacity);
+        this.setPriority(3);
     }
 }
