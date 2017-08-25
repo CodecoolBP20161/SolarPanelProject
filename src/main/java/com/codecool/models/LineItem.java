@@ -56,6 +56,11 @@ public class LineItem extends Item implements Comparable<LineItem> {
         this.total = price.multiply(BigDecimal.valueOf(quantity));
     }
 
+    public void setPrice(BigDecimal price){
+        this.price = price;
+        this.total = price.multiply(BigDecimal.valueOf(quantity));
+    }
+
     public int compareTo(LineItem lineItem){
         if (priority == lineItem.getPriority()){
             if(type == ItemTypeEnum.Item && lineItem.getType() == ItemTypeEnum.Service) return 1;

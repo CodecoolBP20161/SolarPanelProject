@@ -193,6 +193,25 @@ public class AdminController {
         return new ResponseEntity<>(offer, HttpStatus.OK);
     }
 
+    @PostMapping("admin/tetel/egysegarvaltoztatas")
+    @ResponseBody
+    public ResponseEntity<Offer> updatePrice(@RequestBody HashMap<String, String> data, HttpSession session) {
+
+        Integer lineItemId = Integer.valueOf(data.get("id"));
+        BigDecimal price = new BigDecimal(data.get("price"));
+        Offer offer = (Offer) session.getAttribute(OFFER);
+
+        log.info(String.format("lineItemId: %s price: %s", lineItemId, price));
+
+        LineItem lineItem = offer.getLineItem(lineItemId);
+        lineItem.setPrice(price);
+
+        offer.updateLineItem(lineItem);
+
+        return new ResponseEntity<>(offer, HttpStatus.OK);
+    }
+
+
     @PostMapping("admin/tetel/torles")
     @ResponseBody
     public ResponseEntity<Offer> deleteLineItem(@RequestBody HashMap<String, String> data, HttpSession session) {
