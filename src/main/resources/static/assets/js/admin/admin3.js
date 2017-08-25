@@ -1,5 +1,6 @@
 
-$(document).on('ready', function () {var quantityURL = 'tetel/mennyisegvaltoztatas';
+$(document).on('ready', function () {
+    var quantityURL = 'tetel/mennyisegvaltoztatas';
     var addURL = 'tetel/uj';
     var getListURL = 'tetel/listazas';
     var isCSRFNeeded = true;
@@ -73,7 +74,7 @@ $(document).on('ready', function () {var quantityURL = 'tetel/mennyisegvaltoztat
 
     $('#submitCustomItem').on('click', function () {
         var name = $('#customName').val();
-        var price = accounting.unformat(Number($('#customPrice').val()));
+        var price = accounting.unformat($('#customPrice').val());
         var description = $('#customDescription').val();
         var priority = $('#prioritySelect').val();
         var type = $('#typeSelect').val();
@@ -103,7 +104,9 @@ $(document).on('ready', function () {var quantityURL = 'tetel/mennyisegvaltoztat
 
 var attachEventListeners = function () {
     var quantityURL = 'tetel/mennyisegvaltoztatas';
-    var previousData;
+    var priceURL = 'tetel/egysegarvaltoztatas';
+    var previousQuantity;
+    var previousPrice;
     var deleteURL = 'tetel/torles';
     var isCSRFNeeded = true;
 
@@ -148,7 +151,7 @@ var attachEventListeners = function () {
     $('.output')
         .on('focusout', function () {
             var thisInput = $(this);
-            if (thisInput.val() == '') thisInput.val(previousData);
+            if (thisInput.val() == '') thisInput.val(previousQuantity);
             else{
                 var idString = thisInput.attr('id');
                 var lineItemId = idString.replace('quantity', '');
@@ -162,11 +165,33 @@ var attachEventListeners = function () {
                 doAJAX(quantityURL, data, callback, isCSRFNeeded)
             }
     })  .on('focusin', function () {
-            previousData = $(this).val();
+            previousQuantity = $(this).val();
     });
 
+    $('.priceInput')
+        .on('focusout', function () {
+            var thisInput = $(this);
+            if (thisInput.val() == '') thisInput.val(previousPrice);
+            else {
+                var lineItemId = thisInput.attr('id');
+                var newPrice = accounting.unformat(thisInput.val());
+                var data = JSON.stringify({
+                    "id": lineItemId,
+                    "price": newPrice
+                });
+                var callback = function (response) {
+                    reRenderTable(response);
+                };
 
-
+                doAJAX(priceURL, data, callback, isCSRFNeeded)
+            }
+        })
+        .on('focusin', function () {
+                previousPrice = $(this).val();
+        })
+        .on('ready change keyup', function () {
+            $(this).val(accounting.formatNumber( $(this).val(), {precision : 0, thousand : " "}));
+    });
 };
 
 var reRenderTable = function(responseOffer){
@@ -215,14 +240,19 @@ var createRow =function (item) {
     return '<tr>' +
         '<td class="padding_all"><p>' + item.name + '</p></td>' +
         '<td class="padding_all"><p>' + item.description + '</p></td>' +
-        '<td class="padding_all"><p style="white-space: nowrap">' + price + ' Ft</p></td >' +
+        '<td class="padding_all">' +
+        '<div class="romana_check_out_form">' +
+        '<div class="row"><div class="check_form_left common_input"><div class="select_option_one">' +
+        '<input class="input-lg form-full priceInput" style="white-space: nowrap" id="'+ item.id +'" value="' + price + '">' +
+        '</div></div></div></div>' +
+        '</td >' +
         '<td class="padding_all quantity">' +
         '<div class="cart_amount_wrap">' +
         '<div class="product-regulator">'+
         '<div class ="input-group" style="white-space: nowrap">' +
         '<button class="minus" type="button" data="' + item.id + '"><i class="fa fa-minus" ></i></button>' +
         '<input class="output" id="quantity' + item.id + '" type = "text" value="' + quantity + '"' +
-        'onkeypress="return  event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)">' +
+        ' onkeypress="return  event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)">' +
         '<button class ="plus" data="' + item.id + '" type="button"><i class="fa fa-plus"></i></button>' +
         '</div></div></div></td>' +
         '<td class="padding_all"><p style="white-space: nowrap" class="total">' + total + ' Ft</p></td>' +
