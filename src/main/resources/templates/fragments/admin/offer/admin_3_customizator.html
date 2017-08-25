@@ -98,36 +98,62 @@
 
                         <!--Content Section-->
                         <section>
+
                             <div class="container-fluid">
 
                                 <div class="row">
 
-                                    <div class="col-xs-4">
+                                    <!--Name Input-->
+                                    <div class="col-xs-3">
                                         <div class="form-field mb-30">
                                             <div class="input-group">
-                                                <label for="sub">Név:</label>
-                                                <input class="input-lg form-full" id="sub" type="text" name="form-subject"
+                                                <label for="customName">Név:</label>
+                                                <input class="input-lg form-full" id="customName" type="text" name="form-subject"
                                                        placeholder="név" value="" required="required">
 
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-4">
+                                    <!--Price Input-->
+                                    <div class="col-xs-3">
                                         <div class="form-field mb-30">
                                             <div class="input-group">
                                                 <!--The 'onkeypress' event is to determine if the typed characters ASCII code is in our desired interval(numbers)-->
-                                                <label for="price">Egységár:</label>
-                                                <input class="input-lg form-full" id="price" type="text" name="form-subject"
+                                                <label for="customPrice">Egységár:</label>
+                                                <input class="input-lg form-full" id="customPrice" type="text" name="form-subject"
                                                        placeholder="egységár"
                                                        value="" required="required"
                                                        onkeypress='return  event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--Type Select-->
+                                    <div class="col-xs-3">
+                                        <div class="form-field mb-30">
+                                            <div class="input-group">
+                                                <div class="romana_check_out_form">
+                                                    <div class="row">
+                                                        <div class="col-xs-12">
+                                                            <div class="check_form_left common_input">
+                                                                <label for="typeSelect">Tétel Típusa:</label>
+                                                                <br>
+                                                                <select  id="typeSelect">
+                                                                    <option value="Item">Termék</option>
+                                                                    <option selected value="Service">Szolgáltatás</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-4">
+                                    <!--Priority Select-->
+                                    <div class="col-xs-3">
                                         <div class="form-field mb-30">
                                             <div class="input-group">
                                                 <div class="romana_check_out_form">
@@ -137,9 +163,9 @@
                                                                 <label for="prioritySelect">Tétel helye a listán:</label>
                                                                 <br>
                                                                 <select name="userSelect" id="prioritySelect">
-                                                                    <option>Inverterek mellett</option>
-                                                                    <option>Napelemek mellett</option>
-                                                                    <option selected>Egyebek között</option>
+                                                                    <option value="2">Inverterek mellett</option>
+                                                                    <option value="3">Napelemek mellett</option>
+                                                                    <option selected value="1">Egyebek között</option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -151,24 +177,28 @@
                                     </div>
 
                                 </div>
+
                                 <div class="row">
                                     <div class="col-xs-12">
                                         <div class="form-field mb-30">
-                                            <label for="description">Leírás:</label>
-                                            <textarea class="input-lg form-full" id="description" name="form-subject"
+                                            <label for="customDescription">Leírás:</label>
+                                            <textarea class="input-lg form-full" id="customDescription" name="form-subject"
                                                       placeholder="leírás">
-                            </textarea>
+                                            </textarea>
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="row">
                                     <div class="col-sm-12 center">
-                                        <button class="btn-text" type="submit" id="submitCustomItem" name="button">
+                                        <button disabled="disabled" class="btn-text" type="submit" id="submitCustomItem" name="button">
                                             Hozzáadás
                                         </button>
                                     </div>
                                 </div>
+
                             </div>
+
                         </section>
 
                     </div>
