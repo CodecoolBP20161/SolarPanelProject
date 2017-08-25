@@ -9,6 +9,8 @@
 
   "grossTotal": 9999999,
 
+  "company": "SolarProvider",
+
   "items" : [
     {
       "name": "Termék1",
