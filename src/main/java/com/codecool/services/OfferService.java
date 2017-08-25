@@ -1,7 +1,8 @@
 package com.codecool.services;
 
 import com.codecool.models.*;
-import com.codecool.models.enums.*;
+import com.codecool.models.enums.InverterBrandEnum;
+import com.codecool.models.enums.ItemTypeEnum;
 import com.codecool.models.forms.ConsumptionForm;
 import com.codecool.models.forms.DeviceForm;
 import com.codecool.repositories.InverterRepository;
@@ -11,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.sound.sampled.Line;
 import java.util.*;
 
 @Slf4j
@@ -96,8 +96,11 @@ public class OfferService {
     }
 
     public List<Inverter> calculateInverterList(int value, int phase) {
-
-        return inverterRepository.findByCustomerValue(value, phase);
+        List<Inverter> inverters = inverterRepository.findByCustomerValue(value, phase);
+        if (inverters.size() == 0){
+            return inverterRepository.findByCustomerValue(value, 3);
+        }
+        return inverters;
     }
 
     public List<LineItem> getLineItems(ConsumptionForm consumptionForm, DeviceForm deviceForm) {
