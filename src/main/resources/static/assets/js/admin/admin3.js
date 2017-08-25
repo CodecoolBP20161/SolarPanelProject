@@ -3,8 +3,11 @@ $(document).on('ready', function () {var quantityURL = 'tetel/mennyisegvaltoztat
     var addURL = 'tetel/uj';
     var getListURL = 'tetel/listazas';
     var isCSRFNeeded = true;
+    var addCustomURL = 'tetel/egyeni';
 
     attachEventListeners();
+
+    //Add New Item From List Event Listeners
 
     $('#categorySelect').on('change', function () {
         var value = $(this).val();
@@ -60,7 +63,42 @@ $(document).on('ready', function () {var quantityURL = 'tetel/mennyisegvaltoztat
         });
         doAJAX(addURL, data, callback, isCSRFNeeded);
 
+    });
+
+    // Add Custom New Item Event Listeners
+
+    $('#customPrice').on('change keyup', function () {
+        $(this).val(accounting.formatNumber( $(this).val(), {precision : 0, thousand : " "}));
+    });
+
+    $('#submitCustomItem').on('click', function () {
+        var name = $('#customName').val();
+        var price = accounting.unformat(Number($('#customPrice').val()));
+        var description = $('#customDescription').val();
+        var priority = $('#prioritySelect').val();
+        var type = $('#typeSelect').val();
+
+        var data = JSON.stringify({
+            name: name,
+            price: price,
+            description: description,
+            priority: priority,
+            type: type
+        });
+        var callback = function (response) {
+            resetCustomForm();
+            reRenderTable(response);
+        };
+
+        doAJAX(addCustomURL, data, callback, isCSRFNeeded);
+    });
+
+    $('#customPrice, #customName').on('change, keyup', function () {
+        if( $('#customName').val() !== '' && $('#customPrice').val() !== '')
+            $('#submitCustomItem').attr('disabled', false);
+        else  $('#submitCustomItem').attr('disabled', true);
     })
+
 });
 
 var attachEventListeners = function () {
@@ -104,29 +142,30 @@ var attachEventListeners = function () {
             reRenderTable(response)
         };
 
-        doAJAX(deleteURL, data, callback);
+        doAJAX(deleteURL, data, callback, isCSRFNeeded);
     });
 
-    $('.output').on('focusout', function () {
-        var thisInput = $(this);
-        if (thisInput.val() == '') thisInput.val(previousData);
-        else{
-            var idString = thisInput.attr('id');
-            var lineItemId = idString.replace('quantity', '');
-            var newQuantity = thisInput.val();
-            var data = JSON.stringify({
-                "id": lineItemId,
-                "quantity" : newQuantity
-            });
-            var callback = function (response) {reRenderTable(response);};
+    $('.output')
+        .on('focusout', function () {
+            var thisInput = $(this);
+            if (thisInput.val() == '') thisInput.val(previousData);
+            else{
+                var idString = thisInput.attr('id');
+                var lineItemId = idString.replace('quantity', '');
+                var newQuantity = thisInput.val();
+                var data = JSON.stringify({
+                    "id": lineItemId,
+                    "quantity" : newQuantity
+                });
+                var callback = function (response) {reRenderTable(response);};
 
-            doAJAX(quantityURL, data, callback, isCSRFNeeded)
-        }
+                doAJAX(quantityURL, data, callback, isCSRFNeeded)
+            }
+    })  .on('focusin', function () {
+            previousData = $(this).val();
     });
 
-    $('.output').on('focusin', function () {
-        previousData = $(this).val();
-    });
+
 
 };
 
@@ -212,4 +251,10 @@ var resetAddForm = function () {
     $('#categorySelect').val('initial');
     $('#brandSelect').val('initial').attr('disabled', true);
     $('#itemSelect').val('initial').attr('disabled', true);
+};
+
+var resetCustomForm = function () {
+    $('#customName, #customPrice, #customDescription').val('');
+    $('#typeSelect').val('Service');
+    $('#prioritySelect').val(1);
 };
