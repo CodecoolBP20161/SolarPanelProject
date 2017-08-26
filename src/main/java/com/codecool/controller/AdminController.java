@@ -293,11 +293,10 @@ public class AdminController {
     @ResponseBody
     public ResponseEntity<Resource> getPDF(@ModelAttribute ConsumptionForm consumptionForm, HttpSession session) {
 
-//        CompanyEnum company = CompanyEnum.valueOf(data.get("company"));
-
         Offer offer = (Offer) session.getAttribute(OFFER);
         offer.setCompany(consumptionForm.getCompany());
         File pdf = null;
+
         try {
             pdf = pdfService.getPdf(offer);
         } catch (UnirestException e) {
