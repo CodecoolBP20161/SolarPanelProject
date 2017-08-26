@@ -8256,7 +8256,7 @@ button.close {
 .description {
     zoom: 0.8;
 }
-.offer-id{
+.left-align{
     margin-left: 7.5%;
 }
 
@@ -8279,4 +8279,11 @@ button.close {
 }
 .text-right{
     text-align: right; !important;
+}
+
+.body2{
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    position: relative;
 }
