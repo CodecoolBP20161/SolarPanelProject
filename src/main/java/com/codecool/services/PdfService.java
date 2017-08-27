@@ -56,6 +56,7 @@ public class PdfService {
         offerJsonObject.put("netTotal", offer.getNettoTotalPrice());
         offerJsonObject.put("grossTotal", (offer.getNettoTotalPrice().multiply(BigDecimal.valueOf(offer.getCompany().getTaxRate()))));
         offerJsonObject.put("isNetworkUpgradeNeeded", offer.isNetworkUpgradeNeeded());
+        offerJsonObject.put("company", offer.getCompany());
 
         return Unirest.post(PDF_URL)
                       .header("accept", "application/pdf")
