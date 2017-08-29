@@ -23,9 +23,9 @@ exports.printpdf1 = function (req, res) {
 
     console.log(offer.company);
 
-    // if(offer.company == 'StabilInvest') htmlFileName = templateStabilInvest;
-    // else if(offer.company == 'SolarProvider') htmlFileName = templateSolarProvider;
-    htmlFileName = templateNaposOldal;
+    if(offer.company == 'StabilInvest') htmlFileName = templateStabilInvest;
+    else if(offer.company == 'SolarProvider') htmlFileName = templateSolarProvider;
+    else htmlFileName = templateNaposOldal;
 
     var renderedHtml = appmodule.env.render(templateRoute + htmlFileName, {formatNumber: accounting.formatNumber, offer: offer});
 
