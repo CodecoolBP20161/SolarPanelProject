@@ -341,7 +341,7 @@
                                                           th:action="@{/admin/pdf}" th:object="${consumption}">
                                                         <input hidden="hidden" th:field="*{value}">
                                                         <input hidden="hidden" th:field="*{phase}">
-                                                        <input hidden="hidden" th:field="*{company}"
+                                                        <input hidden="hidden" name="company"
                                                                th:value="${T(com.codecool.models.enums.CompanyEnum).TraditionalSolutions}">
                                                         <a href="javascript:{}" class="clearfix"
                                                            onclick="document.getElementById('TraditionalSolutionsPDF').submit(); return false;">
@@ -362,7 +362,7 @@
                                                           th:object="${consumption}">
                                                         <input hidden="hidden" th:field="*{value}">
                                                         <input hidden="hidden" th:field="*{phase}">
-                                                        <input hidden="hidden" th:field="*{company}"
+                                                        <input hidden="hidden" name="company"
                                                                th:value="${T(com.codecool.models.enums.CompanyEnum).StabilInvest}">
                                                         <a href="javascript:{}" class="clearfix"
                                                            onclick="document.getElementById('StabilInvestPDF').submit(); return false;">
@@ -383,8 +383,8 @@
                                                           th:object="${consumption}">
                                                         <input hidden="hidden" th:field="*{value}">
                                                         <input hidden="hidden" th:field="*{phase}">
-                                                        <input hidden="hidden" th:field="*{company}"
-                                                               th:value="${T(com.codecool.models.enums.CompanyEnum).SolarProvider}">
+                                                        <input hidden="hidden" name="company"
+                                                               th:value="#{T(com.codecool.models.enums.CompanyEnum).SolarProvider}">
                                                         <a href="javascript:{}" class="clearfix"
                                                            onclick="document.getElementById('SolarProviderPDF').submit(); return false;">
                                                             <i class="fa fa-file-pdf-o"></i>
