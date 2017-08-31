@@ -41,7 +41,7 @@
                                         <ul class="sub-nav">
 
                                             <li>
-                                                <a href="#!">Growatt</a>
+                                                <a th:href="@{/termekek/growatt}">Growatt</a>
                                             </li>
                                             <li>
                                                 <a href="#!">Solaredge</a>
@@ -52,8 +52,8 @@
                                     </li>
 
                                     <li>
-                                        <a th:href="@{/ajanlat/1}">Árajánlat</a>
-
+                                        <a sec:authorize="!isAuthenticated()" th:href="@{/ajanlat/1}">Árajánlat</a>
+                                        <a sec:authorize="isAuthenticated()" th:href="@{/admin}">Árajánlat</a>
                                     </li>
 
                                     <li>
@@ -87,7 +87,7 @@
                                         <ul class="sub-nav">
 
                                             <li>
-                                                <a href="#!">Growatt</a>
+                                                <a th:href="@{/termekek/growatt}">Growatt</a><span class="submenu-button"></span>
                                             </li>
                                             <li>
                                                 <a href="#!">Solaredge</a>
@@ -97,7 +97,12 @@
                                     </li>
 
                                     <li>
+                                        <a sec:authorize="!isAuthenticated()" th:href="@{/ajanlat/1}">Árajánlat</a><span class="submenu-button"></span>
+                                        <a sec:authorize="isAuthenticated()" th:href="@{/admin}">Árajánlat</a><span class="submenu-button"></span>
+
+<!--
                                         <a th:href="@{/ajanlat/1}">Árajánlat</a><span class="submenu-button"></span>
+-->
                                     </li>
 
                                     <li>
@@ -106,8 +111,8 @@
 
                                     <li>
                                     <li >
-                                        <a sec:authorize="!isAuthenticated()" th:href="@{/login}">Bejelentkezés</a>
-                                        <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Kijelentkezés</a>
+                                        <a sec:authorize="!isAuthenticated()" th:href="@{/login}">Bejelentkezés</a><span class="submenu-button"></span>
+                                        <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Kijelentkezés</a><span class="submenu-button"></span>
                                     </li>
                                     </li>
 
@@ -127,7 +132,14 @@
 
                         <div class="link_btn float_right">
 
+<!--
                             <a th:href="@{/ajanlat/1}" class="thm-btn bg-clr1">Árajánlat</a>
+-->
+
+                            <a sec:authorize="!isAuthenticated()" th:href="@{/ajanlat/1}" class="thm-btn bg-clr1">Árajánlat</a>
+                            <a sec:authorize="isAuthenticated()" th:href="@{/admin}" class="thm-btn bg-clr1">Árajánlat</a>
+
+
                         </div>
                     </div>
 
