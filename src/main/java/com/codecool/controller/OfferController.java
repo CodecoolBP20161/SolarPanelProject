@@ -87,8 +87,8 @@ public class OfferController {
         DeviceForm pAndIForm = session.getAttribute(DEVICE) == null ?
                 new DeviceForm() : (DeviceForm) session.getAttribute(DEVICE);
 
-        int calculatedConsumption = offerService.calculateConsumption(consumption);
-        List<Inverter> inverterList = offerService.calculateInverterList(calculatedConsumption, consumption.getPhase());
+        double calculatedConsumption = offerService.calculateConsumption(consumption);
+        List<Inverter> inverterList = offerService.calculateInverterList(calculatedConsumption);
         List<LineItem> solarPanelLineItems = offerService.getSolarPanelListAsLineItems(consumption);
 
         model.addAttribute(DEVICE, pAndIForm);
