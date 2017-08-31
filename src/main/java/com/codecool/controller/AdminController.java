@@ -1,37 +1,39 @@
 package com.codecool.controller;
-    import com.codecool.models.*;
-    import com.codecool.models.enums.CompanyEnum;
-    import com.codecool.models.enums.InverterBrandEnum;
-    import com.codecool.models.enums.ItemTypeEnum;
-    import com.codecool.models.forms.ConsumptionForm;
-    import com.codecool.models.forms.DeviceForm;
-    import com.codecool.repositories.InverterRepository;
-    import com.codecool.repositories.OtherItemRepository;
-    import com.codecool.repositories.SolarPanelRepository;
-    import com.codecool.services.AdminService;
-    import com.codecool.services.OfferService;
-    import com.codecool.services.PdfService;
-    import com.mashape.unirest.http.exceptions.UnirestException;
-    import lombok.extern.slf4j.Slf4j;
-    import org.springframework.beans.factory.annotation.Autowired;
-    import org.springframework.core.io.ByteArrayResource;
-    import org.springframework.core.io.Resource;
-    import org.springframework.http.HttpStatus;
-    import org.springframework.http.MediaType;
-    import org.springframework.http.ResponseEntity;
-    import org.springframework.stereotype.Controller;
-    import org.springframework.ui.Model;
-    import org.springframework.web.bind.annotation.*;
+    import com.codecool.models.Inverter;
+import com.codecool.models.LineItem;
+import com.codecool.models.Offer;
+import com.codecool.models.SolarPanel;
+import com.codecool.models.enums.InverterBrandEnum;
+import com.codecool.models.enums.ItemTypeEnum;
+import com.codecool.models.forms.ConsumptionForm;
+import com.codecool.models.forms.DeviceForm;
+import com.codecool.repositories.InverterRepository;
+import com.codecool.repositories.OtherItemRepository;
+import com.codecool.repositories.SolarPanelRepository;
+import com.codecool.services.AdminService;
+import com.codecool.services.OfferService;
+import com.codecool.services.PdfService;
+import com.mashape.unirest.http.exceptions.UnirestException;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
-    import javax.servlet.http.HttpSession;
-    import java.io.File;
-    import java.io.IOException;
-    import java.math.BigDecimal;
-    import java.nio.file.Files;
-    import java.nio.file.Path;
-    import java.nio.file.Paths;
-    import java.util.HashMap;
-    import java.util.List;
+import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -110,8 +112,8 @@ public class AdminController {
         DeviceForm pAndIForm = session.getAttribute(DEVICE) == null ?
                 new DeviceForm() : (DeviceForm) session.getAttribute(DEVICE);
 
-        int calculatedConsumption = offerService.calculateConsumption(consumption);
-        List<Inverter> inverterList = offerService.calculateInverterList(calculatedConsumption, consumption.getPhase());
+        double calculatedConsumption = offerService.calculateConsumption(consumption);
+        List<Inverter> inverterList = offerService.calculateInverterList(calculatedConsumption);
         List<LineItem> solarPanelLineItems = offerService.getSolarPanelListAsLineItems(consumption);
 
         model.addAttribute(DEVICE, pAndIForm);
@@ -144,6 +146,8 @@ public class AdminController {
         session.setAttribute(OFFER, offer);
 
         model.addAttribute(OFFER, offer);
+        model.addAttribute("serviceGrossTotal",offer.getNettoServiceTotalPrice().multiply(BigDecimal.valueOf(1.27)));
+        model.addAttribute("itemGrossTotal", offer.getNettoTotalPrice().multiply(BigDecimal.valueOf(offer.getCompany().getTaxRate())));
         model.addAttribute(CONSUMPTION, consumption);
         model.addAttribute(STEP, "admin3");
         return "admin";
