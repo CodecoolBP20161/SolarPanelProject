@@ -307,7 +307,7 @@
                                             <th colspan="3"><span></span></th>
                                             <th class="text-right"><span>Nettó összeg:</span></th>
                                             <th>
-                                                <span th:text="${#numbers.formatInteger(offer.nettoTotalPrice,0,'DEFAULT')+' Ft'}"
+                                                <span th:text="${#numbers.formatInteger(offer.nettoTotalPrice + offer.nettoServiceTotalPrice,0,'DEFAULT')+' Ft'}"
                                                       style="white-space: nowrap">
                                                 </span>
                                             </th>
@@ -319,7 +319,7 @@
                                             <th colspan="3"><span></span></th>
                                             <th class="text-right"><span>Bruttó összeg:</span></th>
                                             <th>
-                                                <span th:text="${#numbers.formatInteger(offer.nettoTotalPrice,0,'DEFAULT')+' Ft'}"
+                                                <span th:text="${#numbers.formatInteger(serviceGrossTotal + itemGrossTotal,0,'DEFAULT')+' Ft'}"
                                                       style="white-space: nowrap">
                                                 </span>
                                             </th>
