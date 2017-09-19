@@ -3,6 +3,7 @@ package com.codecool.controller;
 import com.codecool.models.Inverter;
 import com.codecool.models.LineItem;
 import com.codecool.models.Offer;
+import com.codecool.models.enums.CompanyEnum;
 import com.codecool.models.forms.ConsumptionForm;
 import com.codecool.models.forms.DeviceForm;
 import com.codecool.models.forms.EmailForm;
@@ -13,6 +14,10 @@ import com.codecool.services.email.EmailService;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +26,9 @@ import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.InvalidParameterException;
 import java.util.HashMap;
 import java.util.List;
@@ -91,6 +99,11 @@ public class OfferController {
         List<Inverter> inverterList = offerService.calculateInverterList(calculatedConsumption);
         List<LineItem> solarPanelLineItems = offerService.getSolarPanelListAsLineItems(consumption);
 
+        System.out.println(calculatedConsumption);
+        if (calculatedConsumption > 12000){
+            return "specialOfferNeeded";
+        }
+
         model.addAttribute(DEVICE, pAndIForm);
         model.addAttribute("solarPanelLineItems", solarPanelLineItems);
         model.addAttribute("inverterList", inverterList);
@@ -116,8 +129,12 @@ public class OfferController {
                 new EmailForm() : (EmailForm) session.getAttribute(EMAIL);
 
         ConsumptionForm consumption = (ConsumptionForm) session.getAttribute(CONSUMPTION);
+        consumption.setCompany(CompanyEnum.TraditionalSolutions);
+        Offer offer = offerService.createFromFormData(consumption, deviceForm);
+        session.setAttribute(OFFER, offer);
 
         model.addAttribute("email", email);
+        model.addAttribute(CONSUMPTION, consumption);
         model.addAttribute(STEP, '3');
         return "offer";
     }
@@ -129,6 +146,7 @@ public class OfferController {
         DeviceForm deviceForm = (DeviceForm) session.getAttribute(DEVICE);
 
         Offer offer = offerService.createFromFormData(consumption, deviceForm);
+        session.setAttribute(OFFER, offer);
         File pdf = null;
 
         try {
@@ -151,7 +169,6 @@ public class OfferController {
             e.printStackTrace();
             model.addAttribute(PDF, pdf.toURI());
             model.addAttribute("success", false);
-
         } catch (InvalidParameterException e) {
 
             log.warn("Failed to Send the email.");
@@ -164,6 +181,12 @@ public class OfferController {
 
     @GetMapping("/ajanlat/4")
     public String getOfferStep4 (Model model, HttpSession session){
+        DeviceForm deviceForm = (DeviceForm) session.getAttribute(DEVICE);
+
+        if (deviceForm == null) {
+            log.info("Step3 is not done, redirecting to /ajanlat/3.");
+            return "redirect:/ajanlat/3";
+        }
         model.addAttribute(STEP, '4');
         return "offer";
     }
@@ -174,5 +197,39 @@ public class OfferController {
     public String isNetworkUpgradeNeededCheck (@RequestBody HashMap < String, String > payload){
         log.info("Request arrived to validate, payload: " + payload.toString());
         return String.valueOf(validationService.validateNetworkUpgrade(payload));
+    }
+
+    @PostMapping("/ajanlat/pdf")
+    @ResponseBody
+    public ResponseEntity<Resource> getPDF(@ModelAttribute ConsumptionForm consumptionForm, HttpSession session) {
+
+        Offer offer = (Offer) session.getAttribute(OFFER);
+//        log.info(offer.toString());
+        offer.setCompany(CompanyEnum.TraditionalSolutions);
+        File pdf = null;
+
+        try {
+            pdf = pdfService.getPdf(offer);
+        } catch (UnirestException e) {
+            log.warn("Pdf Server is unavailable. UnirestException is thrown.");
+            e.printStackTrace();
+        } catch (IOException e) {
+            log.warn("Failed to convert PDF server's response to File.");
+            e.printStackTrace();
+        }
+        Path path = null;
+        if (pdf != null) {
+            path = Paths.get(pdf.getAbsolutePath());
+        }
+        ByteArrayResource resource = null;
+        try {
+            resource = new ByteArrayResource(Files.readAllBytes(path));
+        } catch (IOException | NullPointerException e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.ok()
+                .contentLength(pdf.length())
+                .contentType(MediaType.parseMediaType("application/download"))
+                .body(resource);
     }
     }
