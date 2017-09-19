@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.w3.org/1999/xhtml">
+      xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="fragments/head :: head"></head>
 
@@ -39,20 +38,21 @@
                     <div class="col-sm-6 col-sm-offset-3">
                         <strong class="big-font">4<i class="ion-android-happy"></i>4</strong>
                         <h2>A keresett oldal nem található</h2>
-                        <p>
+                        <!--<p>
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae odit iste exerc
                             ssumenda voluptas quidem sit maiores odio velit voluptate.
-                        </p>
+                        </p>-->
                         <a th:href="@{/}" class="btn-text mt-15">Vissza a főoldalra</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- FOOTER -->
-    <div th:replace="fragments/footer :: footer"></div>
-    <!-- END FOOTER -->
 </div>
+    <!-- FOOTER -->
+    <footer th:replace="fragments/footer :: footer"></footer>
+    <!-- END FOOTER -->
+
 
 </body>
 </html>
