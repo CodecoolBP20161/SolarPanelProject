@@ -31,7 +31,7 @@ public class PdfService {
     }
 
     private File fileFromInputStream(InputStream inputstream, String offerId) throws IOException{
-        File tempFile = File.createTempFile("Napos_Megoldás_Árajánlat_" + offerId, ".pdf");
+        File tempFile = File.createTempFile("Napos_Megoldás_Érajánlat_" + offerId, ".pdf");
         tempFile.deleteOnExit();
         FileOutputStream out = new FileOutputStream(tempFile);
         IOUtils.copy(inputstream, out);
@@ -54,7 +54,6 @@ public class PdfService {
             System.out.println(lineItem.getName() + " " + lineItem.getTotal());
         }
 
-        System.out.println("NetTotal: " + offer.getNettoTotalPrice());
         System.out.println("NET SERVICE " + offer.getNettoServiceTotalPrice());
         offerJsonObject.put("items", lineItemItems);
         offerJsonObject.put("services", lineItemsService);
