@@ -44,7 +44,7 @@ public class EmailService {
                 helper.setFrom(fromAddress);
                 helper.setTo(address);
                 helper.setSubject("Árajánlat_" + offerId);
-                helper.setText("<html><body>Tisztelt Érdeklődő!<br><br> Azért kapta ezt az e-mailt, mert árajánlatot kért a <a href='http://localhost:8080/'>www.naposoldal.hu</a> oldalon. Az ajánlatot a csatolmányban találja meg.<br> Amennyiben felkeltettük az érdeklődését,felveheti velünk a kapcsolatot az ajánlatban megadott elérhetőségeken. <br><br> Üdvözlettel, <br><br> A Napos Oldal csapata</body></html>", true);
+                helper.setText("<html><body>Tisztelt Érdeklődő!<br><br> Azért kapta ezt az e-mailt, mert árajánlatot kért a <a href='http://naposmegoldas.hu/'>www.naposmegoldas.hu</a> oldalon. Az ajánlatot a csatolmányban találja meg.<br> Amennyiben felkeltettük az érdeklődését,felveheti velünk a kapcsolatot az ajánlatban megadott elérhetőségeken. <br><br> Üdvözlettel, <br><br> A Napos Oldal csapata</body></html>", true);
                 helper.addAttachment(pdf.getName(), pdf);
                 javaMailSender.send(message);
                 log.debug("Email sent...");
@@ -70,8 +70,8 @@ public class EmailService {
         message = javaMailSender.createMimeMessage();
         try {
             helper = new MimeMessageHelper(message, true);
-           // helper.setFrom(emailForm.getEmailAddress());
-            helper.setTo("solarpowertest@gmail.com");
+            helper.setFrom(emailForm.getEmailAddress());
+            helper.setTo("matyastamas@naposmegoldas.hu");
             helper.setSubject(emailForm.getSubject());
             helper.setText("<html><body>Tisztelt Tradition Solution munkatárs!<br><br>Kérdés:<br><br>" + emailForm.getEmailMessage() + "<br><br> Tisztelettel,<br>" + emailForm.getName() +"<br>Feladó: " + emailForm.getEmailAddress(), true);
             javaMailSender.send(message);
@@ -79,6 +79,6 @@ public class EmailService {
         } catch (MessagingException e) {
             e.printStackTrace();
         }
-
+        log.info("Email was sent successfully");
     }
 }
