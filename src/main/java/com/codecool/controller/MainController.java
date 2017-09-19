@@ -1,6 +1,8 @@
 package com.codecool.controller;
 
 import com.codecool.models.forms.EmailForm;
+import com.codecool.models.ReadyProduct;
+import com.codecool.services.DataLoader;
 import com.codecool.services.email.EmailService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
 import java.security.InvalidParameterException;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -17,6 +20,9 @@ public class MainController {
 
     @Autowired
     EmailService emailService;
+
+    @Autowired
+    DataLoader dataLoader;
 
 
     @GetMapping("/")
@@ -54,6 +60,15 @@ public class MainController {
         model.addAttribute("emailForm", new EmailForm());
         return "contact";
     }
+
+    @GetMapping("/termekek/{brand}")
+    public String getReadyProduct(@PathVariable String brand ,Model model) {
+        List<ReadyProduct> offers = dataLoader.loadPresetProduct(brand);
+        model.addAttribute("allProduct", offers);
+        model.addAttribute("productBrand", brand);
+        return "readyProduct";
+    }
+
 
     @PostMapping("/üzenet")
     public String postSendMessage(@ModelAttribute EmailForm emailForm, Model model) {
