@@ -70,19 +70,18 @@
                     </tr>
                     {% endfor %}
 
-                    <!--Ezt majd kommenteld ki-->
-                    <!--<tr>-->
-                    <!--<td></td>-->
-                    <!--<td colspan="2" class="nowrap description"><strong>Áfa</strong> : 27 %</td>-->
-                    <!--<td class="nowrap description"><strong>Eszközök Nettó ára:</strong></td>-->
-                    <!--<td class="nowrap description">{{ formatNumber(offer.itemNetTotal, {precision : 0, thousand : " "}) }} Ft-->
-                    <!--</td>-->
-                    <!--</tr>-->
-                    <!--<tr>-->
-                    <!--<td colspan="3" ></td>-->
-                    <!--<td class="nowrap description"><strong>Eszközök Bruttó ára:</strong></td>-->
-                    <!--<td class="nowrap description">{{ formatNumber(offer.itemNetTotal, {precision : 0, thousand : " "}) }}Ft</td>-->
-                    <!--</tr>-->
+                    <tr>
+                        <td></td>
+                        <td colspan="2" class="nowrap description"><strong>Áfa</strong> : 27 %</td>
+                        <td class="nowrap description"><strong>Eszközök Nettó ára:</strong></td>
+                        <td class="nowrap description">{{ formatNumber(offer.itemNetTotal, {precision : 0, thousand : " "}) }} Ft
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" ></td>
+                        <td class="nowrap description"><strong>Eszközök Bruttó ára:</strong></td>
+                        <td class="nowrap description">{{ formatNumber(offer.itemGrossTotal, {precision : 0, thousand : " "}) }}Ft</td>
+                    </tr>
 
                     </tbody>
                     <thead>
@@ -101,31 +100,17 @@
                     </tr>
                     {% endfor %}
 
-                    <!--Ezt is kommenteld ki-->
-                    <!--<tr>-->
-                    <!--<td></td>-->
-                    <!--<td colspan="2" class="nowrap description"><strong>Áfa</strong> : 27 %</td>-->
-                    <!--<td class="nowrap description"><strong>Szolgáltatások Nettó ára:</strong></td>-->
-                    <!--<td class="nowrap description">{{ formatNumber(offer.serviceNetTotal, {precision : 0, thousand : " "}) }} Ft-->
-                    <!--</td>-->
-                    <!--</tr>-->
-                    <!--<tr>-->
-                    <!--<td colspan="3" ></td>-->
-                    <!--<td class="nowrap description"><strong>Szolgáltatások Bruttó ára:</strong></td>-->
-                    <!--<td class="nowrap description">{{ formatNumber(offer.serviceNetTotal, {precision : 0, thousand : " "}) }}Ft</td>-->
-                    <!--</tr>-->
-
                     <tr>
                         <td></td>
-                        <td colspan="2" class="nowrap description"><strong>Áfa</strong> : {{ offer.taxRate }} %</td>
-                        <td class="nowrap description"><strong>Nettó összeg:</strong></td>
-                        <td class="nowrap description">{{ formatNumber(offer.netTotal, {precision : 0, thousand : " "}) }} Ft
+                        <td colspan="2" class="nowrap description"><strong>Áfa</strong> : 27 %</td>
+                        <td class="nowrap description"><strong>Szolgáltatások Nettó ára:</strong></td>
+                        <td class="nowrap description">{{ formatNumber(offer.serviceNetTotal, {precision : 0, thousand : " "}) }} Ft
                         </td>
                     </tr>
                     <tr>
                         <td colspan="3" ></td>
-                        <td class="nowrap description"><strong>Bruttó összeg:</strong></td>
-                        <td class="nowrap description">{{ formatNumber(offer.grossTotal, {precision : 0, thousand : " "}) }}Ft</td>
+                        <td class="nowrap description"><strong>Szolgáltatások Bruttó ára:</strong></td>
+                        <td class="nowrap description">{{ formatNumber(offer.serviceGrossTotal, {precision : 0, thousand : " "}) }}Ft</td>
                     </tr>
                     </tbody>
                 </table>
