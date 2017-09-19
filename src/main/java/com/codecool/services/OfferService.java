@@ -12,7 +12,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -23,11 +25,7 @@ public class OfferService {
     private SolarPanelService solarPanelService;
     private OtherItemRepository otherItemRepository;
 
-
     private final String kWh = "kWh";
-    private final String lowerValue = "lowerValue";
-    private final String higherValue = "higherValue";
-
 
     @Autowired
     public OfferService(InverterRepository inverterRepository, SolarPanelRepository solarPanelRepository,
@@ -38,108 +36,61 @@ public class OfferService {
         this.otherItemRepository = otherItemRepository;
     }
 
-    private Map<String, Integer> calculateNearestValue(float value, String metric) {
-        float kWhRoundedValue = (value / 1100) * 1000;
-        float FtRoundedValue = (float) ((((value * 12) / 37.5) / 1100) * 1000);
-        value = metric.equals(kWh) ? kWhRoundedValue : FtRoundedValue;
-        Map<String, Integer> returnValue = new HashMap<>();
-
-        for (int i = 0; i < inverterRepository.findAllByOrderByCapacity().size(); i++) {
-            if (inverterRepository.findAllByOrderByCapacity().get(i).getCapacity() > value) {
-                returnValue.put(higherValue, inverterRepository.findAllByOrderByCapacity().get(i).getCapacity());
-                returnValue.put(lowerValue, inverterRepository.findAllByOrderByCapacity().get(i - 1).getCapacity());
-                break;
-            }
-        }
-        return returnValue;
+    public List<Inverter> calculateInverterList(double value) {
+        return inverterRepository.findByCustomerValue((int) ((value < 1650) ? 2000  : value),
+                                                            (value < 5000) ? 1 : 3);
     }
 
+    public double calculateConsumption(ConsumptionForm consumption) {
+        double consumptionValue = (consumption.getMetric().equals(kWh)) ? consumption.getValue() :
+                ((consumption.getValue() * 12)/37.5);
 
-    public int calculateConsumption(ConsumptionForm consumption) {
-        long returnValue = 0;
-        float value = consumption.getValue();
-        String metric = consumption.getMetric();
-        float kWhRoundedValue = (value / 1100) * 1000;
-        float FtRoundedValue = (float) ((((value * 12) / 37.5) / 1100) * 1000);
-        float roundedValue = metric.equals(kWh) ? kWhRoundedValue : FtRoundedValue;
-        Map<String, Integer> nearestValue;
-
-        // TODO: 12100 az ultimate szám ahol kiakad az inverterre, 12101 re 12 re kerekít, 12099 lefele
-
-        if (metric.equals(kWh)) {
-            if (value < 12000) {
-                returnValue = Math.round(value / 1100) * 1000;
-            } else if (value >= 12000 && value <= 21999) {
-                nearestValue = calculateNearestValue(value, metric);
-                returnValue = calculateValueToInverterFilter(roundedValue, nearestValue.get(higherValue), nearestValue.get(lowerValue));
-            }
-        } else {
-            if (value < 37500) {
-                returnValue = Math.round(((value * 12) / 37.5) / 1100) * 1000;
-            } else if (value >= 37500 && value <= 68746) {
-                nearestValue = calculateNearestValue(value, metric);
-                returnValue = calculateValueToInverterFilter(roundedValue, nearestValue.get(higherValue), nearestValue.get(lowerValue));
-            }
-        }
-        log.info("calculated value for inverter type: " + returnValue);
-        return (int) returnValue;
-    }
-
-    private int calculateValueToInverterFilter(float value, float higherValue, float lowerValue) {
-        float returnValue = 0;
-        if (value - lowerValue < higherValue - value) {
-            returnValue = lowerValue;
-        } else if (value - lowerValue > higherValue - value) {
-            returnValue = higherValue;
-        }
-        return (int) returnValue;
-    }
-
-    public List<Inverter> calculateInverterList(int value, int phase) {
-        List<Inverter> inverters = inverterRepository.findByCustomerValue(value, phase);
-        if (inverters.size() == 0){
-            return inverterRepository.findByCustomerValue(value, 3);
-        }
-        return inverters;
+        log.info("Given metric: " + consumption.getMetric() + " Rounded value " + Math.round(consumptionValue / 1100) +
+                " consumptionValue " + consumptionValue + " Given value " + consumption.getValue());
+        return (Math.round(consumptionValue / 1100)) * 1000;
     }
 
     public List<LineItem> getLineItems(ConsumptionForm consumptionForm, DeviceForm deviceForm) {
-        int consumptionValue = calculateConsumption(consumptionForm);
-
-        int inverterId = Integer.parseInt(deviceForm.getInverterId());
-        int panelID = Integer.parseInt(deviceForm.getPanelId());
+        double consumptionValue = (consumptionForm.getMetric().equals(kWh)) ? consumptionForm.getValue() :
+                ((consumptionForm.getValue() * 12)/37.5);
 
         List<LineItem> lineItems = new ArrayList<>();
 
-        SolarPanel solarPanel = solarPanelRepository.findOne(panelID);
-        Inverter inverter = inverterRepository.findOne(inverterId);
-        List<OtherItem> otherItems = otherItemRepository.findByPhaseIn(Arrays.asList(0, consumptionForm.getPhase()));
-        LineItem inverterLineItem = new LineItem(inverter);
-        inverterLineItem.setName(inverter.getBrand() + " " + inverter.getName());
-        log.info(inverterLineItem.toJson().toString());
+        int panelID = Integer.parseInt(deviceForm.getPanelId());
 
+        SolarPanel solarPanel = solarPanelRepository.findOne(panelID);
+
+        List<OtherItem> otherItems = otherItemRepository.findByPhaseIn(Arrays.asList(0, (calculateConsumption(consumptionForm) < 5000) ? 1 : 3));
 
         LineItem solarPanelLineItem = new LineItem(solarPanel);
-        int neededSolarPanelQuantity = solarPanelService.calculateSolarPanelQuantity(consumptionForm, solarPanel.getCapacity());
+        int neededSolarPanelQuantity = solarPanelService.calculateSolarPanelQuantity(consumptionValue, solarPanel.getCapacity());
 
         solarPanelLineItem.setQuantity(neededSolarPanelQuantity);
         LineItem additionalStuffLineItem;
 
         lineItems.add(solarPanelLineItem);
-        lineItems.add(inverterLineItem);
 
+        if (!deviceForm.getInverterId().equals("")) {
+            int inverterId = Integer.parseInt(deviceForm.getInverterId());
+            Inverter inverter = inverterRepository.findOne(inverterId);
+            LineItem inverterLineItem = new LineItem(inverter);
+            log.info(inverterLineItem.toJson().toString());
+            lineItems.add(inverterLineItem);
 
-        if (inverter.getBrand().equals(InverterBrandEnum.SOLAREDGE)) {
-            int quantityOfOptimizer = (inverter.getOptimizerName().contains("300")) ? neededSolarPanelQuantity : neededSolarPanelQuantity / 2;
-            OtherItem optimizerIsNeeded = new OtherItem(inverter.getOptimizerName(), "", inverter.getOptimizerPrice(), 0, ItemTypeEnum.Item);
-            LineItem optimizerLineItem = new LineItem(optimizerIsNeeded);
-            optimizerLineItem.setQuantity(quantityOfOptimizer);
-            lineItems.add(optimizerLineItem);
+            if (inverter.getBrand().equals(InverterBrandEnum.SOLAREDGE)) {
+                int quantityOfOptimizer = (inverter.getOptimizerName().contains("300")) ? neededSolarPanelQuantity : neededSolarPanelQuantity / 2;
+                OtherItem optimizerIsNeeded = new OtherItem(inverter.getOptimizerName(), "", inverter.getOptimizerPrice(), 0, ItemTypeEnum.Item);
+                LineItem optimizerLineItem = new LineItem(optimizerIsNeeded);
+                optimizerLineItem.setQuantity(quantityOfOptimizer);
+                lineItems.add(optimizerLineItem);
+            }
+
+            OtherItem wifiModule = new OtherItem("Wifi modul", "", inverter.getWifiModule(), 0, ItemTypeEnum.Item);
+            LineItem wifiLineItem = new LineItem(wifiModule);
+            lineItems.add(wifiLineItem);
         }
 
-        OtherItem wifiModule = new OtherItem("Wifi modul", "", inverter.getWifiModule(), 0, ItemTypeEnum.Item);
-        LineItem wifiLineItem = new LineItem(wifiModule);
-        lineItems.add(wifiLineItem);
+
 
 
         OtherItem installationFee = new OtherItem("Kivitelezés", "", getInstallationFee(consumptionValue),
@@ -171,7 +122,7 @@ public class OfferService {
         return lineItems;
     }
 
-    public int getInstallationFee(int consumption) {
+    private int getInstallationFee(double consumption) {
         if (consumption < 3000) {
             return 100000;
         } else if (consumption >= 3000 && consumption < 6000) {
@@ -185,9 +136,10 @@ public class OfferService {
     public List<LineItem> getSolarPanelListAsLineItems(ConsumptionForm consumptionForm) {
         LineItem solarPanelItem;
         List<LineItem> solarPanelLineItems = new ArrayList<>();
-
+        double consumptionValue = (consumptionForm.getMetric().equals(kWh)) ? consumptionForm.getValue() :
+                ((consumptionForm.getValue() * 12)/37.5);
         for (SolarPanel solarPanel : solarPanelRepository.findAllByOrderByCapacityAscPriceAsc()) {
-            int quantity = solarPanelService.calculateSolarPanelQuantity(consumptionForm, solarPanel.getCapacity());
+            int quantity = solarPanelService.calculateSolarPanelQuantity(consumptionValue, solarPanel.getCapacity());
 
             solarPanelItem = new LineItem(solarPanel);
             solarPanelItem.setQuantity(quantity);
