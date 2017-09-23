@@ -69,7 +69,10 @@ $(document).on('ready', function () {
     // Add Custom New Item Event Listeners
 
     $('#customPrice').on('change keyup', function () {
-        $(this).val(accounting.formatNumber( $(this).val(), {precision : 0, thousand : " "}));
+        var formattedInput = accounting.formatNumber(thisInput.val(), {precision : 0, thousand : " "});
+        var futureInput = (thisInput.val() != '' && thisInput.val() != '0') ?
+            formattedInput : '' ;
+        $(this).val(futureInput);
     });
 
     $('#submitCustomItem').on('click', function () {

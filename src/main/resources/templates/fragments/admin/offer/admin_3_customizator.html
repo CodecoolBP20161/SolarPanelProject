@@ -281,7 +281,7 @@
                                                                 <i class="fa fa-minus"></i>
                                                             </button>
                                                             <input class="output" th:id="quantity+${item.id}"
-                                                                   type="text"
+                                                                   type="text" required="required"
                                                                    th:value="${#numbers.formatInteger(item.quantity,0,'DEFAULT')}"
                                                                    onkeypress='return  event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
                                                             <button class="plus" th:data="${item.id}" type="button">
