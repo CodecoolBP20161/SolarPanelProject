@@ -10,7 +10,7 @@
 
 <!--The first step of the offer creation-->
 <div th:fragment="page_3">
-    <h2 class="title">Amennyiben szeretné megkapni emailben az ajánlatot, adja meg elérhetőségét vagy használja a
+    <h2 class="title">Amennyiben szeretné megkapni emailben az ajánlatot, adja meg elérhetőségét, vagy használja a
         Letöltés gombot.</h2>
 
     <section class="padding ptb-xs-60">
@@ -24,7 +24,6 @@
                                     <h2><span class="center">Kapcsolat</span></h2>
                                     <span class="b-line l-center line-h"></span>
                                 </div>
-
                                 <form method="post" th:action="@{/ajanlat/3}" th:object="${email}">
                                     <div class="row">
                                         <div class="col-sm-4"></div>
@@ -33,17 +32,19 @@
                                                    th:field="*{emailAddress}">
                                         </div>
                                         <div class="col-sm-4"></div>
-
+                                    </div>
 
                                     <div class="row">
-                                    <div class="caption sfb lowercase-caption text-center">
-                                        <button class="btn-text" type="submit" id="submitEmail" name="button">
-                                            Árajánlat kérése!
-                                        </button>
-                                    </div>
-                                    </div>
+                                        <div class="caption sfb lowercase-caption text-center">
+                                            <button class="btn-text" type="submit" id="submitEmail" name="button">
+
+                                                <i class="fa fa fa-envelope-o fa-lg"></i>
+                                                <span>Email</span>
+                                            </button>
+                                        </div>
                                     </div>
                                 </form>
+                                <br>
                                 <form method="POST" id="simplePdf" th:action="@{/ajanlat/pdf}"
                                       th:object="${consumption}">
                                     <input hidden="hidden" th:field="*{value}">
@@ -53,6 +54,7 @@
                                         <a href="javascript:{}" class="btn-text" type="submit" id="download"
                                            name="button"
                                            onclick="document.getElementById('simplePdf').submit(); return false;">
+                                            <i class="fa fa-floppy-o fa-lg"></i>
                                             <span>Letöltés</span>
                                         </a>
                                     </div>
