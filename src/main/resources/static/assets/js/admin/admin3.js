@@ -261,20 +261,27 @@ var createRow =function (item) {
 };
 
 var createTotal = function (offer) {
-    var nettoTotal = accounting.formatNumber(offer.nettoTotalPrice, {precision : 0, thousand : " "});
+    var nettoTotalPrice = accounting.formatNumber(offer.nettoTotalPrice, {precision : 0, thousand : " "});
+    var nettoServiceTotalPrice = accounting.formatNumber(offer.nettoServiceTotalPrice, {precision : 0, thousand : " "});
+    var nettoTotal = accounting.formatNumber(offer.nettoTotalPrice + offer.nettoServiceTotalPrice, {precision : 0, thousand : " "});
+
     return '<tr>' +
-        '<th colspan="3"><span></span></th>' +
-        '<th class="text-right"><span >Nettó összeg:</span></th>' +
-        '<th>' +
-        '<span style="white-space: nowrap">' + nettoTotal +' Ft' + '</span>'+
-        '</th><th><span></span></th></tr>'+
-        '<tr>'+
-        '<th colspan="3"><span></span></th>'+
-        '<th class="text-right"><span>Bruttó összeg:</span></th>'+
-        '<th>'+
-        //TODO:Change this to grossTotal
-        '<span style="white-space: nowrap">' + nettoTotal +' Ft' + '</span>'+
-        '</th> <th><span></span></th> </tr>'
+        '<th class="text-left"><span style="white-space: nowrap"> Nettó áru:</span></th>' +
+        ' <th>' +
+        '<span style="white-space: nowrap">' + nettoTotalPrice +' Ft' + '</span>' +
+        '</th>' +
+
+        '<th class="text-left"><span style="white-space: nowrap"> Nettó szolgáltatás:</span></th>' +
+        ' <th>' +
+        '<span style="white-space: nowrap">' + nettoServiceTotalPrice +' Ft' + '</span>' +
+        '</th>' +
+
+        '<th class="text-left"><span style="white-space: nowrap"> Nettó összesen:</span></th>' +
+        ' <th>' +
+        '<span style="white-space: nowrap">' + nettoTotal +' Ft' + '</span>' +
+        '</th>' +
+        '</tr>' +
+        '<tr>'
 };
 
 var resetAddForm = function () {

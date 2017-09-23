@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Slf4j
 @Configuration
@@ -17,12 +18,24 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-            .authorizeRequests().antMatchers("/", "/üzenet", "/rolunk", "/ajanlat/**", "/static/**", "/assets/**").permitAll()
+            .authorizeRequests().antMatchers("/", "/üzenet", "/rolunk", "/termekek/**", "/termekek/growatt/**", "/ajanlat/**", "/static/**", "/assets/**").permitAll()
             .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .defaultSuccessUrl("/", true)
+                .loginPage("/login")
+                .permitAll()
+                .and()
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/")
+                .permitAll();
+/*                //
             .and()
             .formLogin().loginPage("/login").permitAll()
             .and()
             .logout().permitAll();
+        //*/
         httpSecurity.headers().frameOptions().disable();
         httpSecurity .csrf().ignoringAntMatchers("/", "/üzenet", "/rolunk", "/ajanlat/**", "/static/**", "/assets/**");
     }

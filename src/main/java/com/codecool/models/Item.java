@@ -18,7 +18,6 @@ public abstract class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer id;
-
     public int priority;
 
     @NotEmpty

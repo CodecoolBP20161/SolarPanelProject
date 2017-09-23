@@ -1,4 +1,5 @@
 package com.codecool.controller;
+
     import com.codecool.models.*;
     import com.codecool.models.enums.CompanyEnum;
     import com.codecool.models.enums.InverterBrandEnum;
@@ -113,8 +114,8 @@ public class AdminController {
         DeviceForm pAndIForm = session.getAttribute(DEVICE) == null ?
                 new DeviceForm() : (DeviceForm) session.getAttribute(DEVICE);
 
-        int calculatedConsumption = offerService.calculateConsumption(consumption);
-        List<Inverter> inverterList = offerService.calculateInverterList(calculatedConsumption, consumption.getPhase());
+        double calculatedConsumption = offerService.calculateConsumption(consumption);
+        List<Inverter> inverterList = offerService.calculateInverterList(calculatedConsumption);
         List<LineItem> solarPanelLineItems = offerService.getSolarPanelListAsLineItems(consumption);
 
         model.addAttribute(DEVICE, pAndIForm);
@@ -147,6 +148,8 @@ public class AdminController {
         session.setAttribute(OFFER, offer);
 
         model.addAttribute(OFFER, offer);
+        model.addAttribute("serviceGrossTotal",offer.getNettoServiceTotalPrice().multiply(BigDecimal.valueOf(1.27)));
+        model.addAttribute("itemGrossTotal", offer.getNettoTotalPrice().multiply(BigDecimal.valueOf(offer.getCompany().getTaxRate())));
         model.addAttribute(CONSUMPTION, consumption);
         model.addAttribute(STEP, "admin3");
         return "admin";

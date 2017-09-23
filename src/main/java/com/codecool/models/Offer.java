@@ -6,12 +6,10 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
-import javax.sound.sampled.Line;
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @Data
@@ -28,22 +26,29 @@ public class Offer {
     @Setter(AccessLevel.NONE)
     private BigDecimal nettoTotalPrice;
 
+    @Setter(AccessLevel.NONE)
+    private BigDecimal nettoServiceTotalPrice;
+
 
     public Offer() {
         id = idCount++;
         lineItems = new CopyOnWriteArrayList<>();
         isNetworkUpgradeNeeded = false;
         nettoTotalPrice = new BigDecimal(0);
+        nettoServiceTotalPrice = new BigDecimal(0);
     }
 
     public void addLineItem(LineItem lineItem) {
         lineItems.add(lineItem);
         calculateNettoTotalPrice();
+        calculatenettoServiceTotalPrice();
     }
 
     public void removeLineItem(LineItem lineItem) {
         lineItems.remove(lineItem);
         calculateNettoTotalPrice();
+        calculatenettoServiceTotalPrice();
+
     }
 
     public void removeLineItem(Integer lineItemId) {
@@ -51,7 +56,11 @@ public class Offer {
         for (LineItem lineItem : lineItems) {
             if (lineItem.getId().equals(lineItemId)) {
                 itemToRemove = lineItem;
-                nettoTotalPrice = nettoTotalPrice.subtract(lineItem.getTotal());
+                if (lineItem.getType().equals(ItemTypeEnum.Item)) {
+                    nettoTotalPrice = nettoTotalPrice.subtract(lineItem.getTotal());
+                } else {
+                    nettoServiceTotalPrice = nettoServiceTotalPrice.subtract(lineItem.getTotal());
+                }
                 break;
             }
         }
@@ -64,8 +73,21 @@ public class Offer {
     private void calculateNettoTotalPrice() {
         nettoTotalPrice = new BigDecimal(0);
         for (LineItem lineItem : lineItems) {
-            nettoTotalPrice = nettoTotalPrice.add(lineItem.getTotal());
+            if (lineItem.getType() != ItemTypeEnum.Service) {
+                nettoTotalPrice = nettoTotalPrice.add(lineItem.getTotal());
+            }
         }
+        System.out.println("ITEM " + nettoTotalPrice);
+    }
+
+    private void calculatenettoServiceTotalPrice() {
+        nettoServiceTotalPrice = new BigDecimal(0);
+        for (LineItem lineItem : lineItems) {
+            if (lineItem.getType() == ItemTypeEnum.Service) {
+                nettoServiceTotalPrice = nettoServiceTotalPrice.add(lineItem.getTotal());
+            }
+        }
+        System.out.println("SERVICE " + nettoServiceTotalPrice);
     }
 
     public List<LineItem> getLineItems(){
@@ -87,6 +109,7 @@ public class Offer {
             }
         }
         calculateNettoTotalPrice();
+        calculatenettoServiceTotalPrice();
     }
 
     public void sortLineItems(){

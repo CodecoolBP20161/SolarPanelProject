@@ -3,19 +3,16 @@ package com.codecool.models;
 import com.codecool.models.enums.InverterBrandEnum;
 import com.codecool.models.enums.ItemTypeEnum;
 import lombok.Data;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
 @Entity
 @EntityScan
 @Data
 public class Inverter extends Item {
-
     @NotNull
     private InverterBrandEnum brand;
 
@@ -38,10 +35,16 @@ public class Inverter extends Item {
 
     private int priority = 2;
 
+    public Inverter() {
+        super();
+        this.setPriority(2);
+    }
 
+StringBuilder stringBuilder = new StringBuilder();
     public Inverter(InverterBrandEnum brand, String name, Integer price, Integer phase, Double watt, String description,
                     Integer wifiModule, Integer capacity, String optimizerName, int optimizerPrice) {
         super(name, description, BigDecimal.valueOf(price), ItemTypeEnum.Item);
+        this.setName(new StringBuilder(brand + " " + name).toString());
         this.setBrand(brand);
         this.setPhase(phase);
         this.setWatt(watt);
@@ -52,8 +55,5 @@ public class Inverter extends Item {
         this.setPriority(2);
     }
 
-    public Inverter() {
-        super();
-        this.setPriority(2);
-    }
+
 }

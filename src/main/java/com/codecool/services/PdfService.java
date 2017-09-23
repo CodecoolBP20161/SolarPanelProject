@@ -31,7 +31,7 @@ public class PdfService {
     }
 
     private File fileFromInputStream(InputStream inputstream, String offerId) throws IOException{
-        File tempFile = File.createTempFile("A_Napos_Oldal_Arajanlat_" + offerId, ".pdf");
+        File tempFile = File.createTempFile("Napos_Megoldás_Érajánlat_" + offerId, ".pdf");
         tempFile.deleteOnExit();
         FileOutputStream out = new FileOutputStream(tempFile);
         IOUtils.copy(inputstream, out);
@@ -49,11 +49,21 @@ public class PdfService {
                 lineItemsService.put(item.toJson());
             }
         }
+
+        for (LineItem lineItem : offer.getLineItems()) {
+            System.out.println(lineItem.getName() + " " + lineItem.getTotal());
+        }
+
+        System.out.println("NET SERVICE " + offer.getNettoServiceTotalPrice());
         offerJsonObject.put("items", lineItemItems);
         offerJsonObject.put("services", lineItemsService);
         offerJsonObject.put("id", 100);
         offerJsonObject.put("taxRate", offer.getCompany().getTaxRate());
         offerJsonObject.put("netTotal", offer.getNettoTotalPrice());
+        offerJsonObject.put("serviceNetTotal", offer.getNettoServiceTotalPrice());
+        offerJsonObject.put("serviceGrossTotal",offer.getNettoServiceTotalPrice().multiply(BigDecimal.valueOf(1.27)));
+        offerJsonObject.put("itemGrossTotal", offer.getNettoTotalPrice().multiply(BigDecimal.valueOf(offer.getCompany().getTaxRate())));
+        offerJsonObject.put("itemNetTotal",offer.getNettoTotalPrice());
         offerJsonObject.put("grossTotal", (offer.getNettoTotalPrice().multiply(BigDecimal.valueOf(offer.getCompany().getTaxRate()))));
         offerJsonObject.put("isNetworkUpgradeNeeded", offer.isNetworkUpgradeNeeded());
         offerJsonObject.put("company", offer.getCompany());
