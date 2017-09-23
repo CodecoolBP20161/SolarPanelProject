@@ -4,41 +4,48 @@ $(document).ready(function () {
     var metricInput = $('#sub');
     var phaseOneInput = $('#phase1RadioInput');
     var phaseTwoInput = $('#phase2RadioInput');
-    if (metricInput.val() == "0.0") metricInput.val("");
-    else (metricInput.val(accounting.formatNumber(metricInput.val(), {precision : 0, thousand : " "})));
 
-    // Changes the metric type accordingly
+    if (metricInput.val() == "0.0") {
+        metricInput.val("");
+    } else {
+        (metricInput.val(formatPrice(metricInput.val())));
+    }
+
     metricSelect.on('ready change', function () {
         $('#metricHeader').html(metricSelect.find('option:selected').val());
     });
 
-    // This one just adds the same event listener to the 4 elements
     metricSelect.add(metricInput).add(phaseOneInput).add(phaseTwoInput)
         .on('ready change paste keyup', function () {
-            var formattedInput = accounting.formatNumber(metricInput.val(), {precision : 0, thousand : " "});
-            if (metricInput.val() != ''){
-                console.log("nem egyenlő");
+            var formattedInput = formatPrice(metricInput.val());
+
+            if (isNumberInputFieldValueValid(metricInput.val())){
                 metricInput.val(formattedInput);
             }
+
             isNetworkUpgradeNeededAdmin(phaseOneInput, metricSelect, metricInput);
         });
 
     $('#submit').on('click', function(){
-        metricInput.val(accounting.unformat(metricInput.val()));
+        var inputValue = metricInput.val();
+        metricInput.val(formatPrice(inputValue));
     });
 
 });
 
 var isNetworkUpgradeNeededAdmin = function(phaseOneInput, metricSelect, metricInput){
     var alertSpan = $('#alert-phase');
+
     if (phaseOneInput.val() == "1"){
         var metric = metricSelect.find('option:selected').val();
-        var value = accounting.unformat(metricInput.val());
+        var value =unFormatPrice(metricInput.val());
 
         var csrfHeader = $("meta[name='_csrf_header']").attr("content");
         var csrfToken = $("meta[name='_csrf']").attr("content");
         var headers = {};
+
         headers[csrfHeader] = csrfToken;
+
         $.ajax({
             url: "/admin/network-upgrade",
             type: 'POST',

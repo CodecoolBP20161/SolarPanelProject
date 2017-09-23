@@ -55,9 +55,6 @@ $(document).on('ready', function(){
         panelInput.val(selectedPanel.attr('data')).change()
     });
 
-    // When an input is changed(panel or inverter), it checks whether there are still
-    // input with initial value (if the other one is chosen as well),
-    // and sets the buttons disabled property accordingly
     inverterInput.add(panelInput).on('ready change', function () {
         if (inverterInput.val() !== 'initial' && panelInput.val() !== 'initial')
             formSubmitbutton.prop('disabled', false);

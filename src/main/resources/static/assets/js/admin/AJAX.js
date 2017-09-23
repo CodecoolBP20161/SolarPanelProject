@@ -1,3 +1,4 @@
+
 var doAJAX = function(URL, data, successFunction, isCSRFNeeded){
     if (isCSRFNeeded == undefined) isCSRFNeeded = false;
     if (isCSRFNeeded){
@@ -6,7 +7,6 @@ var doAJAX = function(URL, data, successFunction, isCSRFNeeded){
         var headers = {};
         headers[csrfHeader] = csrfToken;
     }
-
 
     $.ajax({
         url: URL,
@@ -19,6 +19,17 @@ var doAJAX = function(URL, data, successFunction, isCSRFNeeded){
             successFunction(response);
         }
     });
+};
 
+var isNumberInputFieldValueValid = function (value) {
+    return value != '' && value != '0';
+};
+
+var formatPrice = function(rawPrice){
+    return accounting.formatNumber(rawPrice, {precision : 0, thousand : " "})
+};
+
+var unFormatPrice = function (formattedPrice) {
+    return accounting.unformat(formattedPrice);
 };
 

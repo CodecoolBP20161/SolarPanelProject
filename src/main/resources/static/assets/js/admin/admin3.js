@@ -69,15 +69,14 @@ $(document).on('ready', function () {
     // Add Custom New Item Event Listeners
 
     $('#customPrice').on('change keyup', function () {
-        var formattedInput = accounting.formatNumber(thisInput.val(), {precision : 0, thousand : " "});
-        var futureInput = (thisInput.val() != '' && thisInput.val() != '0') ?
-            formattedInput : '' ;
-        $(this).val(futureInput);
+        var formattedInput = formatPrice(thisInput.val());
+        var futureInput = isNumberInputFieldValueValid(thisInput.val()) ? formattedInput : '' ;
+        thisInput.val((futureInput));
     });
 
     $('#submitCustomItem').on('click', function () {
         var name = $('#customName').val();
-        var price = accounting.unformat($('#customPrice').val());
+        var price = unFormatPrice($('#customPrice').val());
         var description = $('#customDescription').val();
         var priority = $('#prioritySelect').val();
         var type = $('#typeSelect').val();
@@ -97,10 +96,15 @@ $(document).on('ready', function () {
         doAJAX(addCustomURL, data, callback, isCSRFNeeded);
     });
 
-    $('#customPrice, #customName').on('change, keyup', function () {
-        if( $('#customName').val() !== '' && $('#customPrice').val() !== '')
+    $('#customPrice, #customName, #customDescription, #prioritySelect, #categorySelect')
+        .on('change, keyup', function () {
+        if( $('#customName').val() !== '' && $('#customPrice').val() !== ''){
+            console.log("valid");
             $('#submitCustomItem').attr('disabled', false);
-        else  $('#submitCustomItem').attr('disabled', true);
+        }
+        else {
+            $('#submitCustomItem').attr('disabled', true);
+        }
     })
 
 });
@@ -116,7 +120,7 @@ var attachEventListeners = function () {
     $('.plus').on('click', function(){
         var lineItemId = $(this).attr('data');
         var thisInput = $('#quantity' + lineItemId);
-        var newQuantity = accounting.unformat(Number(thisInput.val())) + 1;
+        var newQuantity = unFormatPrice(Number(thisInput.val())) + 1;
         var data = JSON.stringify({
             "id": lineItemId,
             "quantity" : newQuantity
@@ -129,7 +133,7 @@ var attachEventListeners = function () {
     $('.minus').on('click', function(){
         var lineItemId = $(this).attr('data');
         var thisInput = $('#quantity' + lineItemId);
-        var newQuantity = accounting.unformat(Number(thisInput.val())) - 1;
+        var newQuantity =unFormatPrice(Number(thisInput.val())) - 1;
         var data = JSON.stringify({
             "id": lineItemId,
             "quantity" : newQuantity
@@ -177,7 +181,7 @@ var attachEventListeners = function () {
             if (thisInput.val() == '') thisInput.val(previousPrice);
             else {
                 var lineItemId = thisInput.attr('id');
-                var newPrice = accounting.unformat(thisInput.val());
+                var newPrice = unFormatPrice(thisInput.val());
                 var data = JSON.stringify({
                     "id": lineItemId,
                     "price": newPrice
@@ -193,7 +197,7 @@ var attachEventListeners = function () {
                 previousPrice = $(this).val();
         })
         .on('ready change keyup', function () {
-            $(this).val(accounting.formatNumber( $(this).val(), {precision : 0, thousand : " "}));
+            $(this).val(formatPrice( $(this).val()));
     });
 };
 
@@ -235,9 +239,9 @@ var createRow =function (item) {
 
     // Don't mind this, just formatting shit
 
-    var price = accounting.formatNumber(item.price, {precision : 0, thousand : " "});
-    var quantity = accounting.formatNumber(item.quantity, {precision : 0, thousand : " "});
-    var total = accounting.formatNumber(item.total, {precision : 0, thousand : " "});
+    var price = formatPrice(item.price);
+    var quantity = formatPrice(item.quantity);
+    var total = formatPrice(item.total);
     //---------------------------------------------------------------------------------------------
 
     return '<tr>' +
@@ -264,9 +268,9 @@ var createRow =function (item) {
 };
 
 var createTotal = function (offer) {
-    var nettoTotalPrice = accounting.formatNumber(offer.nettoTotalPrice, {precision : 0, thousand : " "});
-    var nettoServiceTotalPrice = accounting.formatNumber(offer.nettoServiceTotalPrice, {precision : 0, thousand : " "});
-    var nettoTotal = accounting.formatNumber(offer.nettoTotalPrice + offer.nettoServiceTotalPrice, {precision : 0, thousand : " "});
+    var nettoTotalPrice = formatPrice(offer.nettoTotalPrice);
+    var nettoServiceTotalPrice = formatPrice(offer.nettoServiceTotalPrice);
+    var nettoTotal = formatPrice(offer.nettoTotalPrice + offer.nettoServiceTotalPrice);
 
     return '<tr>' +
         '<th class="text-left"><span style="white-space: nowrap"> Nettó áru:</span></th>' +
@@ -298,3 +302,4 @@ var resetCustomForm = function () {
     $('#typeSelect').val('Service');
     $('#prioritySelect').val(1);
 };
+
