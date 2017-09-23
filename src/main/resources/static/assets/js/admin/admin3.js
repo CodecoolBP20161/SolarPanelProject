@@ -1,6 +1,5 @@
 
 $(document).on('ready', function () {
-    var quantityURL = 'tetel/mennyisegvaltoztatas';
     var addURL = 'tetel/uj';
     var getListURL = 'tetel/listazas';
     var isCSRFNeeded = true;
@@ -8,7 +7,7 @@ $(document).on('ready', function () {
 
     attachEventListeners();
 
-    //Add New Item From List Event Listeners
+
 
     $('#categorySelect').on('change', function () {
         var value = $(this).val();
@@ -66,12 +65,12 @@ $(document).on('ready', function () {
 
     });
 
-    // Add Custom New Item Event Listeners
+
 
     $('#customPrice').on('change keyup', function () {
-        var formattedInput = formatPrice(thisInput.val());
-        var futureInput = isNumberInputFieldValueValid(thisInput.val()) ? formattedInput : '' ;
-        thisInput.val((futureInput));
+        var formattedInput = formatPrice($(this).val());
+        var futureInput = isNumberInputFieldValueValid(formattedInput) ? formattedInput : '' ;
+        $(this).val((futureInput));
     });
 
     $('#submitCustomItem').on('click', function () {
@@ -96,13 +95,13 @@ $(document).on('ready', function () {
         doAJAX(addCustomURL, data, callback, isCSRFNeeded);
     });
 
-    $('#customPrice, #customName, #customDescription, #prioritySelect, #categorySelect')
-        .on('change, keyup', function () {
+    $('#customPrice').add($('#customName')).on('change, keyup', function () {
         if( $('#customName').val() !== '' && $('#customPrice').val() !== ''){
             console.log("valid");
             $('#submitCustomItem').attr('disabled', false);
         }
         else {
+            console.log("invalid");
             $('#submitCustomItem').attr('disabled', true);
         }
     })
@@ -237,12 +236,9 @@ var fillItemSelect = function (itemArray) {
 
 var createRow =function (item) {
 
-    // Don't mind this, just formatting shit
-
     var price = formatPrice(item.price);
     var quantity = formatPrice(item.quantity);
     var total = formatPrice(item.total);
-    //---------------------------------------------------------------------------------------------
 
     return '<tr>' +
         '<td class="padding_all"><p>' + item.name + '</p></td>' +
