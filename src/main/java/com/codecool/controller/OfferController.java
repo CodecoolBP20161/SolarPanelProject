@@ -99,7 +99,6 @@ public class OfferController {
         List<Inverter> inverterList = offerService.calculateInverterList(calculatedConsumption);
         List<LineItem> solarPanelLineItems = offerService.getSolarPanelListAsLineItems(consumption);
 
-        System.out.println(calculatedConsumption);
         if (calculatedConsumption > 12000){
             return "specialOfferNeeded";
         }

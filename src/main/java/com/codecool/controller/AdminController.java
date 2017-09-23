@@ -301,6 +301,7 @@ public class AdminController {
     public ResponseEntity<Resource> getPDF(@ModelAttribute ConsumptionForm consumptionForm, HttpSession session) {
 
         Offer offer = (Offer) session.getAttribute(OFFER);
+
         log.info(consumptionForm.getCompany().toString());
         offer.setCompany(consumptionForm.getCompany());
         File pdf = null;

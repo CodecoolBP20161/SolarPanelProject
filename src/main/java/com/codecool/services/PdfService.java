@@ -25,7 +25,6 @@ public class PdfService {
 
     public File getPdf(Offer offer) throws UnirestException, IOException {
         InputStream pdfInputStream = doPost(offer).getRawBody();
-        System.out.println("InputStream: " + pdfInputStream);
 
         return  fileFromInputStream(pdfInputStream, String.valueOf(offer.getId()));
     }
@@ -56,10 +55,6 @@ public class PdfService {
             } else {
                 lineItemsService.put(item.toJson());
             }
-        }
-
-        for (LineItem lineItem : offer.getLineItems()) {
-            System.out.println(lineItem.getName() + " " + lineItem.getTotal());
         }
 
         offerJsonObject.put("items", lineItemItems);

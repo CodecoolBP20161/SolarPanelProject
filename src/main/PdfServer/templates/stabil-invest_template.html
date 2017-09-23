@@ -17,23 +17,23 @@
 <section>
     <div class="container">
         <div class="row">
-            <div class="header-panel" id=""><img src="http://via.placeholder.com/1000x30/6aaf08/6aaf08"></div>
+            <div class="header-panel" id=""><img src="http://via.placeholder.com/1000x30/60bc6c/60bc6c"></div>
         </div>
         <br>
         <div class="row imag">
             <div class="col-xs-5">
                 <div class="row home">
-                    <div class="h4 text-center">Stabil-Invest</div>
+                    <div class="h4 text-center">Stabil-Invest Kft</div>
                 </div>
                 <div class="col-xs-12 text-center">
-                    <h6>3500 Miskolc, <br> Dóczy József utca 30.</h6>
-                    <h6>+36 20 323-4567</h6>
-                    <h6>info@email.com</h6>
+                    <h6>Mátészalka,<br>  Curtis utca 6.</h6>
+                    <h6>+36 70 940 6734</h6>
+                    <h6>napeleminfo.vigyinszki@gmail.com</h6>
                 </div>
             </div>
             <div class="col-xs-3"></div>
             <div class="col-xs-4">
-                <img class="pull-right small-marg" src="http://via.placeholder.com/130x130">
+                <img class="pull-right small-marg" src="http://via.placeholder.com/130x130/60bc6c/60bc6c">
             </div>
         </div>
     </div>
@@ -61,11 +61,11 @@
                     {% for item in offer.items %}
                     <tr>
                         <td class="zoom7">{{ item.name }}</td>
-                        <td class="nowrap description">{{ formatNumber(item.price, {precision : 0, thousand : " "}) }} Ft</td>
+                        <td class="nowrap description">{{ formatNumber(item.price) }} Ft</td>
                         <td class="description">{{ item.quantity }} db</td>
-                        <td class="nowrap description"> {{ formatNumber(item.subtotal, {precision : 0, thousand : " "}) }} Ft</td>
+                        <td class="nowrap description"> {{ formatNumber(item.subtotal) }} Ft</td>
                         <td>
-                            <div class="nowrap zoom5">{{ item.description }}</div>
+                            <div class="zoom7">{{ item.description }}</div>
                         </td>
                     </tr>
                     {% endfor %}
@@ -74,13 +74,13 @@
                         <td></td>
                         <td colspan="2" class="nowrap description"><strong>Áfa</strong> : 27 %</td>
                         <td class="nowrap description"><strong>Eszközök Nettó ára:</strong></td>
-                        <td class="nowrap description">{{ formatNumber(offer.itemNetTotal, {precision : 0, thousand : " "}) }} Ft
+                        <td class="nowrap description">{{ formatNumber(offer.itemNetTotal) }} Ft
                         </td>
                     </tr>
                     <tr>
                         <td colspan="3" ></td>
                         <td class="nowrap description"><strong>Eszközök Bruttó ára:</strong></td>
-                        <td class="nowrap description">{{ formatNumber(offer.itemGrossTotal, {precision : 0, thousand : " "}) }}Ft</td>
+                        <td class="nowrap description">{{ formatNumber(offer.itemGrossTotal) }}Ft</td>
                     </tr>
 
                     </tbody>
@@ -91,11 +91,11 @@
                     {% for service in offer.services %}
                     <tr>
                         <td class="zoom7">{{ service.name }}</td>
-                        <td class="nowrap description">{{ formatNumber(service.price, {precision : 0, thousand : " "}) }} Ft</td>
+                        <td class="nowrap description">{{ formatNumber(service.price) }} Ft</td>
                         <td class="description">{{ service.quantity }} db</td>
-                        <td class="nowrap description">{{ formatNumber(service.subtotal, {precision : 0, thousand : " "}) }} Ft</td>
+                        <td class="nowrap description">{{ formatNumber(service.subtotal) }} Ft</td>
                         <td>
-                            <div class="nowrap description">{{ service.description }}</div>
+                            <div class="zoom7">{{ service.description }}</div>
                         </td>
                     </tr>
                     {% endfor %}
@@ -103,13 +103,26 @@
                         <td></td>
                         <td colspan="2" class="nowrap description"><strong>Áfa</strong> : 27 %</td>
                         <td class="nowrap description"><strong>Szolgáltatások Nettó ára:</strong></td>
-                        <td class="nowrap description">{{ formatNumber(offer.serviceNetTotal, {precision : 0, thousand : " "}) }} Ft
+                        <td class="nowrap description">{{ formatNumber(offer.serviceNetTotal) }} Ft
                         </td>
                     </tr>
                     <tr>
                         <td colspan="3" ></td>
                         <td class="nowrap description"><strong>Szolgáltatások Bruttó ára:</strong></td>
-                        <td class="nowrap description">{{ formatNumber(offer.serviceGrossTotal, {precision : 0, thousand : " "}) }}Ft</td>
+                        <td class="description">{{ formatNumber(offer.serviceGrossTotal) }}Ft</td>
+                    </tr>
+
+                    <tr>
+                        <td></td>
+                        <td colspan="2" class="nowrap description"></td>
+                        <td class="nowrap description"><strong>Nettó ár összesen:</strong></td>
+                        <td class="nowrap description">{{ formatNumber(offer.netTotal) }} Ft
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" ></td>
+                        <td class="nowrap description"><strong>Bruttó ár összesen:</strong></td>
+                        <td class="description">{{ formatNumber(offer.grossTotal) }}Ft</td>
                     </tr>
                     </tbody>
                 </table>
@@ -118,14 +131,14 @@
     </div>
 </section>
 <!--Footer section-->
-<div class="footer"><img  src="http://via.placeholder.com/1000x30/6aaf08/6aaf08"></div>
+<div class="footer"><img  src="http://via.placeholder.com/1000x30/60bc6c/60bc6c"></div>
 
 <div style="page-break-after:always;"></div>
 
 <div class="body2">
     <div class="container-fluid">
         <div class="row">
-            <div class="header-panel"><img src="http://via.placeholder.com/1000x30/6aaf08/6aaf08"></div>
+            <div class="header-panel"><img src="http://via.placeholder.com/1000x30/60bc6c/60bc6c"></div>
         </div>
         <div class="row">
             <div class="col-xs-12">
@@ -152,7 +165,7 @@
     </div>
 
     <!--Footer section-->
-    <div class="footer"><img  src="http://via.placeholder.com/1000x30/6aaf08/6aaf08"></div>
+    <div class="footer"><img  src="http://via.placeholder.com/1000x30/60bc6c/60bc6c"></div>
 </div>
 </body >
 

@@ -61,11 +61,11 @@
                     {% for item in offer.items %}
                     <tr>
                         <td class="zoom7">{{ item.name }}</td>
-                        <td class="nowrap description">{{ formatNumber(item.price, {precision : 0, thousand : " "}) }} Ft</td>
+                        <td class="nowrap description">{{ formatNumber(item.price) }} Ft</td>
                         <td class="description">{{ item.quantity }} db</td>
-                        <td class="nowrap description"> {{ formatNumber(item.subtotal, {precision : 0, thousand : " "}) }} Ft</td>
+                        <td class="nowrap description"> {{ formatNumber(item.subtotal) }} Ft</td>
                         <td>
-                            <div class="nowrap zoom5">{{ item.description }}</div>
+                            <div class="zoom7">{{ item.description }}</div>
                         </td>
                     </tr>
                     {% endfor %}
@@ -74,13 +74,13 @@
                         <td></td>
                         <td colspan="2" class="nowrap description"><strong>Áfa</strong> : 27 %</td>
                         <td class="nowrap description"><strong>Eszközök Nettó ára:</strong></td>
-                        <td class="nowrap description">{{ formatNumber(offer.itemNetTotal, {precision : 0, thousand : " "}) }} Ft
+                        <td class="nowrap description">{{ formatNumber(offer.itemNetTotal) }} Ft
                         </td>
                     </tr>
                     <tr>
                         <td colspan="3" ></td>
                         <td class="nowrap description"><strong>Eszközök Bruttó ára:</strong></td>
-                        <td class="nowrap description">{{ formatNumber(offer.itemGrossTotal, {precision : 0, thousand : " "}) }}Ft</td>
+                        <td class="nowrap description">{{ formatNumber(offer.itemGrossTotal) }}Ft</td>
                     </tr>
 
                     </tbody>
@@ -91,26 +91,38 @@
                     {% for service in offer.services %}
                     <tr>
                         <td class="zoom7">{{ service.name }}</td>
-                        <td class="nowrap description">{{ formatNumber(service.price, {precision : 0, thousand : " "}) }} Ft</td>
+                        <td class="nowrap description">{{ formatNumber(service.price) }} Ft</td>
                         <td class="description">{{ service.quantity }} db</td>
-                        <td class="nowrap description">{{ formatNumber(service.subtotal, {precision : 0, thousand : " "}) }} Ft</td>
+                        <td class="nowrap description">{{ formatNumber(service.subtotal) }} Ft</td>
                         <td>
-                            <div class="nowrap description">{{ service.description }}</div>
+                            <div class="zoom7">{{ service.description }}</div>
                         </td>
                     </tr>
                     {% endfor %}
-
                     <tr>
                         <td></td>
                         <td colspan="2" class="nowrap description"><strong>Áfa</strong> : 27 %</td>
                         <td class="nowrap description"><strong>Szolgáltatások Nettó ára:</strong></td>
-                        <td class="nowrap description">{{ formatNumber(offer.serviceNetTotal, {precision : 0, thousand : " "}) }} Ft
+                        <td class="nowrap description">{{ formatNumber(offer.serviceNetTotal) }} Ft
                         </td>
                     </tr>
                     <tr>
                         <td colspan="3" ></td>
                         <td class="nowrap description"><strong>Szolgáltatások Bruttó ára:</strong></td>
-                        <td class="nowrap description">{{ formatNumber(offer.serviceGrossTotal, {precision : 0, thousand : " "}) }}Ft</td>
+                        <td class="description">{{ formatNumber(offer.serviceGrossTotal) }}Ft</td>
+                    </tr>
+
+                    <tr>
+                        <td></td>
+                        <td colspan="2" class="nowrap description"></td>
+                        <td class="nowrap description"><strong>Nettó ár összesen:</strong></td>
+                        <td class="nowrap description">{{ formatNumber(offer.netTotal) }} Ft
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" ></td>
+                        <td class="nowrap description"><strong>Bruttó ár összesen:</strong></td>
+                        <td class="description">{{ formatNumber(offer.grossTotal) }}Ft</td>
                     </tr>
                     </tbody>
                 </table>
