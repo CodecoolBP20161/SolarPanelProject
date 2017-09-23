@@ -15,8 +15,12 @@ $(document).ready(function () {
     // This one just adds the same event listener to the 4 elements
     metricSelect.add(metricInput).add(phaseOneInput).add(phaseTwoInput)
         .on('ready change paste keyup', function () {
-            metricInput.val(accounting.formatNumber(metricInput.val(), {precision : 0, thousand : " "}));
-            isNetworkUpgradeNeeded(phaseOneInput, metricSelect, metricInput);
+            var formattedInput = accounting.formatNumber(metricInput.val(), {precision : 0, thousand : " "});
+            if (metricInput.val() != ''){
+                console.log("nem egyenlő");
+                metricInput.val(formattedInput);
+            }
+            isNetworkUpgradeNeededAdmin(phaseOneInput, metricSelect, metricInput);
         });
 
     $('#submit').on('click', function(){
@@ -25,7 +29,7 @@ $(document).ready(function () {
 
 });
 
-var isNetworkUpgradeNeeded = function(phaseOneInput, metricSelect, metricInput){
+var isNetworkUpgradeNeededAdmin = function(phaseOneInput, metricSelect, metricInput){
     var alertSpan = $('#alert-phase');
     if (phaseOneInput.val() == "1"){
         var metric = metricSelect.find('option:selected').val();
@@ -35,9 +39,8 @@ var isNetworkUpgradeNeeded = function(phaseOneInput, metricSelect, metricInput){
         var csrfToken = $("meta[name='_csrf']").attr("content");
         var headers = {};
         headers[csrfHeader] = csrfToken;
-        console.log(headers);
         $.ajax({
-            url: "/ajanlat/network-upgrade",
+            url: "/admin/network-upgrade",
             type: 'POST',
             async: true,
             headers: headers,

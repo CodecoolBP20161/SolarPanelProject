@@ -158,6 +158,7 @@ public class OfferController {
             model.addAttribute(PDF, pdf.toURI());
             model.addAttribute("success", false);
         }
+
             model.addAttribute(STEP, "4");
             return "offer";
         }
@@ -169,10 +170,10 @@ public class OfferController {
     }
 
 
-    @PostMapping(value = "/ajanlat/network-upgrade")
+    @PostMapping("/ajanlat/network-upgrade")
     @ResponseBody
     public String isNetworkUpgradeNeededCheck (@RequestBody HashMap < String, String > payload){
         log.info("Request arrived to validate, payload: " + payload.toString());
         return String.valueOf(validationService.validateNetworkUpgrade(payload));
     }
-    }
+}

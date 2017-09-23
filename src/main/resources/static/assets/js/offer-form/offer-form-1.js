@@ -4,9 +4,11 @@ $(document).ready(function () {
     var metricInput = $('#sub');
     var phaseOneInput = $('#phase1RadioInput');
     var phaseTwoInput = $('#phase2RadioInput');
+    var formattedInputValue = accounting.formatNumber(metricInput.val(), {precision : 0, thousand : " "});
     var alertSpan = $('#alert-phase');
-    if (metricInput.val() == "0.0") metricInput.val("");
-    else (metricInput.val(accounting.formatNumber(metricInput.val(), {precision : 0, thousand : " "})));
+    if (metricInput.val() == "0.0" || formattedInputValue == '0') metricInput.val("");
+    else (metricInput.val(formattedInputValue));
+
     submitted = false;
 
     // Changes the metric type accordingly
@@ -17,7 +19,10 @@ $(document).ready(function () {
     // This one just adds the same event listener to the 4 elements
     metricSelect.add(metricInput).add(phaseOneInput).add(phaseTwoInput)
         .on('ready change paste keyup', function () {
-            metricInput.val(accounting.formatNumber(metricInput.val(), {precision : 0, thousand : " "}));
+            var formattedInput = accounting.formatNumber(metricInput.val(), {precision : 0, thousand : " "});
+            var futureInput = (metricInput.val() != '' && metricInput.val() != '0') ?
+                formattedInput : '' ;
+            metricInput.val(futureInput);
             isNetworkUpgradeNeeded(phaseOneInput, metricSelect, metricInput);
         });
 

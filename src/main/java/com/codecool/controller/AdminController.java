@@ -11,6 +11,7 @@ package com.codecool.controller;
     import com.codecool.services.AdminService;
     import com.codecool.services.OfferService;
     import com.codecool.services.PdfService;
+    import com.codecool.services.ValidationService;
     import com.mashape.unirest.http.exceptions.UnirestException;
     import lombok.extern.slf4j.Slf4j;
     import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,7 @@ public class AdminController {
     private OfferService offerService;
     private AdminService adminService;
     private PdfService pdfService;
+    private ValidationService validationService;
     private InverterRepository inverterRepository;
     private SolarPanelRepository solarPanelRepository;
     private OtherItemRepository otherItemRepository;
@@ -55,13 +57,14 @@ public class AdminController {
     @Autowired
     public AdminController(OfferService offerService, SolarPanelRepository solarPanelRepository,
                            InverterRepository inverterRepository, OtherItemRepository otherItemRepository,
-                           AdminService adminService, PdfService pdfService) {
+                           AdminService adminService, PdfService pdfService, ValidationService validationService) {
         this.solarPanelRepository = solarPanelRepository;
         this.otherItemRepository = otherItemRepository;
         this.inverterRepository = inverterRepository;
         this.offerService = offerService;
         this.adminService = adminService;
         this.pdfService = pdfService;
+        this.validationService = validationService;
     }
 
     @GetMapping("/admin")
@@ -294,6 +297,7 @@ public class AdminController {
     public ResponseEntity<Resource> getPDF(@ModelAttribute ConsumptionForm consumptionForm, HttpSession session) {
 
         Offer offer = (Offer) session.getAttribute(OFFER);
+        log.info(consumptionForm.getCompany().toString());
         offer.setCompany(consumptionForm.getCompany());
         File pdf = null;
 
@@ -322,4 +326,10 @@ public class AdminController {
                 .body(resource);
     }
 
+    @PostMapping("/admin/network-upgrade")
+    @ResponseBody
+    public String isNetworkUpgradeNeededCheck (@RequestBody HashMap < String, String > payload){
+        log.info("Request arrived to validate, payload: " + payload.toString());
+        return String.valueOf(validationService.validateNetworkUpgrade(payload));
+    }
 }

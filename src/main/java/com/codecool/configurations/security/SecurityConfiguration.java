@@ -24,6 +24,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .and()
             .logout().permitAll();
         httpSecurity.headers().frameOptions().disable();
+        httpSecurity .csrf().ignoringAntMatchers("/", "/üzenet", "/rolunk", "/ajanlat/**", "/static/**", "/assets/**");
     }
 
     @Autowired

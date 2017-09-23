@@ -60,7 +60,6 @@
                             <div class="input-group">
                                 <!--The 'onkeypress' event is to determine if the typed characters ASCII code is in our desired interval(numbers)-->
                                 <input class="input-lg form-full" id="sub" type="text" name="form-subject"
-                                       placeholder="0"
                                        value="" required="required"
                                        th:field="*{value}"
                                        onkeypress='return  event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
