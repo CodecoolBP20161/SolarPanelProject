@@ -147,11 +147,11 @@ public class OfferController {
 
         Offer offer = offerService.createFromFormData(consumption, deviceForm);
         session.setAttribute(OFFER, offer);
-        File pdf = null;
+        File ajanlatPdf = null;
 
         try {
-            pdf = pdfService.getPdf(offer);
-            emailService.sendEmailWithPDf(email.getEmailAddress(), String.valueOf(offer.getId()), pdf);
+            ajanlatPdf = pdfService.getPdf(offer);
+            emailService.sendEmailWithPDf(email.getEmailAddress(), String.valueOf(offer.getId()), ajanlatPdf);
             model.addAttribute("success", true);
 
         } catch (UnirestException e) {
@@ -167,12 +167,12 @@ public class OfferController {
         } catch (MessagingException e) {
 
             e.printStackTrace();
-            model.addAttribute(PDF, pdf.toURI());
+            model.addAttribute(PDF, ajanlatPdf.toURI());
             model.addAttribute("success", false);
         } catch (InvalidParameterException e) {
 
             log.warn("Failed to Send the email.");
-            model.addAttribute(PDF, pdf.toURI());
+            model.addAttribute(PDF, ajanlatPdf.toURI());
             model.addAttribute("success", false);
         }
 

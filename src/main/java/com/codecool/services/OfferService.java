@@ -161,7 +161,6 @@ public class OfferService {
 
     public boolean containsItem(Offer offer, Integer itemId, String type){
         for (LineItem lineItem : offer.getLineItems()){
-            //TODO: line 214 should be removed when all the OtherItems are in the db and they will have id-s
             if(lineItem.getItemId() != null){
                 if(lineItem.getItemId().equals(itemId)) {
                     String inputName = lineItem.getName();

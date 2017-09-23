@@ -31,7 +31,7 @@ public class PdfService {
     }
 
     private File fileFromInputStream(InputStream inputstream, String offerId) throws IOException{
-        File tempFile = File.createTempFile("Napos_Megoldás_Érajánlat_" + offerId, ".pdf");
+        File tempFile = File.createTempFile("Napos_Megoldás_Árajánlat_" + offerId, ".pdf");
         tempFile.deleteOnExit();
         FileOutputStream out = new FileOutputStream(tempFile);
         IOUtils.copy(inputstream, out);
@@ -39,6 +39,14 @@ public class PdfService {
     }
 
     private HttpResponse<InputStream> doPost(Offer offer) throws UnirestException {
+        return Unirest.post(PDF_URL)
+                      .header("accept", "application/pdf")
+                      .header("Content-type", "application/json")
+                      .body(toJSONObject(offer))
+                      .asBinary();
+    }
+
+    private JSONObject toJSONObject(Offer offer) {
         JSONObject offerJsonObject = new JSONObject();
         JSONArray lineItemItems = new JSONArray();
         JSONArray lineItemsService = new JSONArray();
@@ -54,7 +62,6 @@ public class PdfService {
             System.out.println(lineItem.getName() + " " + lineItem.getTotal());
         }
 
-        System.out.println("NET SERVICE " + offer.getNettoServiceTotalPrice());
         offerJsonObject.put("items", lineItemItems);
         offerJsonObject.put("services", lineItemsService);
         offerJsonObject.put("id", 100);
@@ -67,13 +74,7 @@ public class PdfService {
         offerJsonObject.put("grossTotal", (offer.getNettoTotalPrice().multiply(BigDecimal.valueOf(offer.getCompany().getTaxRate()))));
         offerJsonObject.put("isNetworkUpgradeNeeded", offer.isNetworkUpgradeNeeded());
         offerJsonObject.put("company", offer.getCompany());
-
-        return Unirest.post(PDF_URL)
-                      .header("accept", "application/pdf")
-                      .header("Content-type", "application/json")
-                      .body(offerJsonObject)
-                      .asBinary();
+        return offerJsonObject;
     }
-
 
 }

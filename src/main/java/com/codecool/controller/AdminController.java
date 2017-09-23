@@ -261,6 +261,7 @@ public class AdminController {
         Offer offer = (Offer) session.getAttribute(OFFER);
         if (!offerService.containsItem(offer, itemId, type)) {
             LineItem newItem = offerService.getLineItemFromItemIdAndType(itemId, type);
+            log.info("New Item: ", newItem.toString());
             offer.addLineItem(newItem);
             offer.sortLineItems();
         }
