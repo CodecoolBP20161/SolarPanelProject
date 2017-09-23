@@ -35,7 +35,7 @@ $(document).ready(function () {
         var inputValue = metricInput.val();
 
         // debugger;
-        if (inputValue === ""){
+        if (inputValue === "" || inputValue == 0){
             metricInput.val(null);
         } else {
             metricInput.val(unFormatPrice(metricInput.val()));
