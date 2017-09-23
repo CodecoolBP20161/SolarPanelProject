@@ -6,10 +6,7 @@
 <head th:replace="fragments/head :: head"></head>
 
 <body class="full-intro background--dark">
-<!--loader-->
-<!--
-<div th:replace="fragments/preloader :: preloader"></div>
--->
+
 <div id="preloader">
     <div class="sk-circle">
         <div class="sk-circle1 sk-child"></div>
@@ -34,7 +31,6 @@
     <div th:replace="fragments/header :: header"></div>
     <div th:replace="fragments/navbar :: navbar"></div>
 
-
     <!-- Intro Section -->
     <section class="inner-intro  padding bg-img1 overlay-dark light-color">
         <div class="container">
@@ -47,7 +43,6 @@
         </div>
     </section>
     <!-- End Intro Section -->
-
 
     <!-- Offer Form-->
     <section class="get-qoute padding ptb-xs-40 get-qoute">
@@ -99,7 +94,6 @@
                         </div>
                         <div class="media-body">
                             <h4 class="text-uppercase"><a href="#!">Megbízható szakemberek</a></h4>
-
                             <p>
                                 at vero eos et accusam justo duo dolores
                             </p>
@@ -128,8 +122,6 @@
     <th:block th:switch="${step}">
         <script th:case="'1'" type="text/javascript" src="../assets/js/offer-form/offer-form-1.js"></script>
         <script th:case="'2'" type="text/javascript" src="../assets/js/offer-form/offer-form-2.js"></script>
-        <script th:case="'3'" type="text/javascript" src="../assets/js/offer-form/offer-form-3.js"></script>
-        <script th:case="'4'" type="text/javascript" src="../assets/js/offer-form/offer-form-4.js" ></script>
     </th:block>
     <!-- FOOTER -->
     <div th:replace="fragments/footer :: footer"></div>
