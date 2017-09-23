@@ -30,12 +30,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/")
                 .permitAll();
-/*                //
-            .and()
-            .formLogin().loginPage("/login").permitAll()
-            .and()
-            .logout().permitAll();
-        //*/
         httpSecurity.headers().frameOptions().disable();
         httpSecurity .csrf().ignoringAntMatchers("/", "/üzenet", "/rolunk", "/ajanlat/**", "/static/**", "/assets/**");
     }
