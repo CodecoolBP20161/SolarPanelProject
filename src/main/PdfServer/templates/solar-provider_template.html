@@ -46,7 +46,7 @@
                 <h6 class="left-align">Ajánlatszám: {{offer.id}}</h6>
                 <table class="table table-hover tables" >
                     <thead>
-                    <td colspan="5" class="text-center"><strong>Termékek</strong></td>
+                    <td colspan="5" style="text-align: left"><h3>Termékek</h3></td>
                     </thead>
                     <thead>
                     <tr>
@@ -71,45 +71,42 @@
                     {% endfor %}
 
                     <tr>
-                        <td></td>
-                        <td colspan="2" class="nowrap description"><strong>Áfa</strong> : 27 %</td>
+                        <td class="nowrap description"><strong>Áfa</strong> : 27 %</td>
                         <td class="nowrap description"><strong>Eszközök Nettó ára:</strong></td>
                         <td class="nowrap description"><strong>{{ formatNumber(offer.itemNetTotal) }} Ft </strong></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" ></td>
                         <td class="nowrap description"><strong>Eszközök Bruttó ára:</strong></td>
                         <td class="nowrap description"><strong>{{ formatNumber(offer.itemGrossTotal) }} Ft</strong></td>
                     </tr>
-                    <br>
                     </tbody>
                     <thead>
-                    <td colspan="5" class="text-center"><strong>Egyéb költségek</strong></td>
+                    <td colspan="5" style="text-align: left"><h3>Egyéb költségek</h3></td>
                     </thead>
                     <tbody>
+                    <tr>
+                        <th class="description" style="text-align: left">Név</th>
+                        <th class="description" style="text-align: right">Egységár</th>
+                        <th class="description" style="text-align: right">Mennyiség</th>
+                        <th class="nowrap description" style="text-align: right">Összesen</th>
+                        <th class="description">Megjegyzés</th>
+                    </tr>
                     {% for service in offer.services %}
                     <tr>
                         <td class="zoom7" style="text-align: left">{{ service.name }}</td>
                         <td class="nowrap description" style="text-align: right">{{ formatNumber(service.price) }} Ft</td>
                         <td class="description" style="text-align: right">{{ service.quantity }} db</td>
-                        <td class="nowrap description">{{ formatNumber(service.subtotal) }} Ft</td>
+                        <td class="nowrap description" style="text-align: right">{{ formatNumber(service.subtotal) }} Ft</td>
                         <td>
                             <div class="zoom7">{{ service.description }}</div>
                         </td>
                     </tr>
                     {% endfor %}
                     <tr>
-                        <td></td>
-                        <td colspan="2" class="nowrap description"><strong>Áfa</strong> : 27 %</td>
+                        <td class="nowrap description"><strong>Áfa</strong> : 27 %</td>
                         <td class="nowrap description"><strong>Szolgáltatások Nettó ára:</strong></td>
                         <td class="nowrap description"><strong>{{ formatNumber(offer.serviceNetTotal) }} Ft</strong></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" ></td>
                         <td class="nowrap description"><strong>Szolgáltatások Bruttó ára:</strong></td>
                         <td class="description"><strong>{{ formatNumber(offer.serviceGrossTotal) }} Ft</strong></td>
                     </tr>
-
                     <tr>
                         <td></td>
                         <td class="nowrap description"><strong>Nettó ár összesen:</strong></td>
