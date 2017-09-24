@@ -50,22 +50,22 @@
                     </thead>
                     <thead>
                     <tr>
-                        <th class="description">Név</th>
-                        <th class="description">Egységár</th>
-                        <th class="description">Mennyiség</th>
-                        <th class="nowrap description">Összesen (Ft)</th>
+                        <th class="description" style="text-align: left">Név</th>
+                        <th class="description" style="text-align: right">Egységár</th>
+                        <th class="description" style="text-align: right">Mennyiség</th>
+                        <th class="nowrap description" style="text-align: right">Összesen</th>
                         <th class="description">Megjegyzés</th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for item in offer.items %}
                     <tr>
-                        <td class="zoom7">{{ item.name }}</td>
-                        <td class="nowrap description">{{ formatNumber(item.price) }} Ft</td>
-                        <td class="description">{{ item.quantity }} db</td>
-                        <td class="nowrap description"> {{ formatNumber(item.subtotal) }} Ft</td>
+                        <td class="zoom7" style="text-align: left">{{ item.name }}</td>
+                        <td class="nowrap description" style="text-align: right">{{ formatNumber(item.price) }} Ft</td>
+                        <td class="description" style="text-align: right">{{ item.quantity }} db</td>
+                        <td class="nowrap description" style="text-align: right"> {{ formatNumber(item.subtotal) }} Ft</td>
                         <td>
-                            <div class="zoom7">{{ item.description }}</div>
+                            <div class="zoom7" >{{ item.description }}</div>
                         </td>
                     </tr>
                     {% endfor %}
@@ -74,15 +74,14 @@
                         <td></td>
                         <td colspan="2" class="nowrap description"><strong>Áfa</strong> : 27 %</td>
                         <td class="nowrap description"><strong>Eszközök Nettó ára:</strong></td>
-                        <td class="nowrap description">{{ formatNumber(offer.itemNetTotal) }} Ft
-                        </td>
+                        <td class="nowrap description"><strong>{{ formatNumber(offer.itemNetTotal) }} Ft </strong></td>
                     </tr>
                     <tr>
                         <td colspan="3" ></td>
                         <td class="nowrap description"><strong>Eszközök Bruttó ára:</strong></td>
-                        <td class="nowrap description">{{ formatNumber(offer.itemGrossTotal) }}Ft</td>
+                        <td class="nowrap description"><strong>{{ formatNumber(offer.itemGrossTotal) }} Ft</strong></td>
                     </tr>
-
+                    <br>
                     </tbody>
                     <thead>
                     <td colspan="5" class="text-center"><strong>Egyéb költségek</strong></td>
@@ -90,9 +89,9 @@
                     <tbody>
                     {% for service in offer.services %}
                     <tr>
-                        <td class="zoom7">{{ service.name }}</td>
-                        <td class="nowrap description">{{ formatNumber(service.price) }} Ft</td>
-                        <td class="description">{{ service.quantity }} db</td>
+                        <td class="zoom7" style="text-align: left">{{ service.name }}</td>
+                        <td class="nowrap description" style="text-align: right">{{ formatNumber(service.price) }} Ft</td>
+                        <td class="description" style="text-align: right">{{ service.quantity }} db</td>
                         <td class="nowrap description">{{ formatNumber(service.subtotal) }} Ft</td>
                         <td>
                             <div class="zoom7">{{ service.description }}</div>
@@ -103,26 +102,20 @@
                         <td></td>
                         <td colspan="2" class="nowrap description"><strong>Áfa</strong> : 27 %</td>
                         <td class="nowrap description"><strong>Szolgáltatások Nettó ára:</strong></td>
-                        <td class="nowrap description">{{ formatNumber(offer.serviceNetTotal) }} Ft
-                        </td>
+                        <td class="nowrap description"><strong>{{ formatNumber(offer.serviceNetTotal) }} Ft</strong></td>
                     </tr>
                     <tr>
                         <td colspan="3" ></td>
                         <td class="nowrap description"><strong>Szolgáltatások Bruttó ára:</strong></td>
-                        <td class="description">{{ formatNumber(offer.serviceGrossTotal) }}Ft</td>
+                        <td class="description"><strong>{{ formatNumber(offer.serviceGrossTotal) }} Ft</strong></td>
                     </tr>
 
                     <tr>
                         <td></td>
-                        <td colspan="2" class="nowrap description"></td>
                         <td class="nowrap description"><strong>Nettó ár összesen:</strong></td>
-                        <td class="nowrap description">{{ formatNumber(offer.netTotal) }} Ft
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" ></td>
+                        <td class="nowrap description"><strong>{{ formatNumber(offer.netTotal) }} Ft</strong></td>
                         <td class="nowrap description"><strong>Bruttó ár összesen:</strong></td>
-                        <td class="description">{{ formatNumber(offer.grossTotal) }}Ft</td>
+                        <td class="description"><strong>{{ formatNumber(offer.grossTotal) }} Ft</strong></td>
                     </tr>
                     </tbody>
                 </table>
