@@ -17,7 +17,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class Offer {
 
 
-    private static long idCount = 1;
+    private static long idCount = 1113;
     private long id;
     private CompanyEnum company;
     private volatile List<LineItem> lineItems;
@@ -77,7 +77,6 @@ public class Offer {
                 nettoTotalPrice = nettoTotalPrice.add(lineItem.getTotal());
             }
         }
-        System.out.println("ITEM " + nettoTotalPrice);
     }
 
     private void calculatenettoServiceTotalPrice() {
@@ -87,7 +86,6 @@ public class Offer {
                 nettoServiceTotalPrice = nettoServiceTotalPrice.add(lineItem.getTotal());
             }
         }
-        System.out.println("SERVICE " + nettoServiceTotalPrice);
     }
 
     public List<LineItem> getLineItems(){

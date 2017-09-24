@@ -26,15 +26,15 @@ public class PdfService {
     public File getPdf(Offer offer) throws UnirestException, IOException {
         InputStream pdfInputStream = doPost(offer).getRawBody();
 
-        return  fileFromInputStream(pdfInputStream, String.valueOf(offer.getId()));
+        return  fileFromInputStream(pdfInputStream, String.valueOf(offer.getId()), offer.getCompany().toString());
     }
 
-    private File fileFromInputStream(InputStream inputstream, String offerId) throws IOException{
-        File tempFile = File.createTempFile("Napos_Megoldás_Árajánlat_" + offerId, ".pdf");
-        tempFile.deleteOnExit();
-        FileOutputStream out = new FileOutputStream(tempFile);
+    private File fileFromInputStream(InputStream inputstream, String offerId, String companyName) throws IOException{
+        File offerFile = File.createTempFile(companyName + "_árajánlat_" + offerId + "@", ".pdf");
+        offerFile.deleteOnExit();
+        FileOutputStream out = new FileOutputStream(offerFile);
         IOUtils.copy(inputstream, out);
-        return tempFile;
+        return offerFile;
     }
 
     private HttpResponse<InputStream> doPost(Offer offer) throws UnirestException {

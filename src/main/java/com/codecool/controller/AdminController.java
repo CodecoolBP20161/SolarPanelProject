@@ -155,10 +155,6 @@ public class AdminController {
         return "admin";
     }
 
-    /*   {
-        brand: String, (Uppercase letters)
-        phase: String, (1 or 3)
-    } */
     @PostMapping("admin/tetel/inverterek")
     @ResponseBody
     public ResponseEntity<List<Inverter>> filterItemType(@RequestBody HashMap<String, String> data) {
@@ -177,10 +173,6 @@ public class AdminController {
         return new ResponseEntity<>(solarPanels, HttpStatus.OK);
     }
 
-    /*{
-        quantity: String, (the updated quantity)
-        id: String,
-    } */
     @PostMapping("admin/tetel/mennyisegvaltoztatas")
     @ResponseBody
     public ResponseEntity<Offer> updateQuantity(@RequestBody HashMap<String, String> data, HttpSession session) {
@@ -231,10 +223,6 @@ public class AdminController {
         return new ResponseEntity<>(offer, HttpStatus.OK);
     }
 
-    /*{
-        type: String, one from: ["panel", "inverter", "other"]
-        brand: String, UPPERCASE // Only in case of type inverter, must be provided
-    }*/
     @PostMapping("admin/tetel/listazas")
     @ResponseBody
     public ResponseEntity<List> getList(@RequestBody HashMap<String, String> data) {
@@ -246,10 +234,6 @@ public class AdminController {
         return new ResponseEntity<>(adminService.getListOfItems(type, brand), HttpStatus.OK);
     }
 
-    /*{
-        type: String, one from: ["panel", "inverter", "other"],
-        itemId: String
-    }*/
     @PostMapping("admin/tetel/uj")
     @ResponseBody
     public ResponseEntity<Offer> addNewItem(@RequestBody HashMap<String, String> data, HttpSession session) {
@@ -270,13 +254,6 @@ public class AdminController {
         return new ResponseEntity<>(offer, HttpStatus.OK);
     }
 
-    /*{
-        type: String, one from: ["item", "service"],
-        name: String
-        description: String
-        price: String
-        priority: String
-    }*/
     @PostMapping("admin/tetel/egyeni")
     @ResponseBody
     public ResponseEntity<Offer> addCustomItem(@RequestBody HashMap<String, String> data, HttpSession session) {
@@ -327,6 +304,7 @@ public class AdminController {
         }
         return ResponseEntity.ok()
                 .contentLength(pdf.length())
+                .header("Content-Disposition", "attachment; filename=" + convertPdfName(pdf.getName()))
                 .contentType(MediaType.parseMediaType("application/download"))
                 .body(resource);
     }
@@ -336,5 +314,9 @@ public class AdminController {
     public String isNetworkUpgradeNeededCheck (@RequestBody HashMap < String, String > payload){
         log.info("Request arrived to validate, payload: " + payload.toString());
         return String.valueOf(validationService.validateNetworkUpgrade(payload));
+    }
+
+    private String convertPdfName(String name){
+        return name.substring(0, name.indexOf('@')) + ".pdf";
     }
 }
