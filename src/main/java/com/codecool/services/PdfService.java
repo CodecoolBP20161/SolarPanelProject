@@ -69,6 +69,12 @@ public class PdfService {
         offerJsonObject.put("grossTotal", (offer.getNettoTotalPrice().multiply(BigDecimal.valueOf(offer.getCompany().getTaxRate()))));
         offerJsonObject.put("isNetworkUpgradeNeeded", offer.isNetworkUpgradeNeeded());
         offerJsonObject.put("company", offer.getCompany());
+        offerJsonObject.put("nettFull", offer.getNettoServiceTotalPrice().add(offer.getNettoTotalPrice()));
+        offerJsonObject.put("grossFull", (offer.getNettoServiceTotalPrice().multiply(BigDecimal.valueOf(1.27))).
+                add(offer.getNettoTotalPrice().multiply(BigDecimal.valueOf(offer.getCompany().getTaxRate()))));
+        System.out.println(offer.getNettoServiceTotalPrice().add(offer.getNettoTotalPrice()));
+        System.out.println((offer.getNettoServiceTotalPrice().multiply(BigDecimal.valueOf(1.27))).
+                add(offer.getNettoTotalPrice().multiply(BigDecimal.valueOf(offer.getCompany().getTaxRate()))));
         return offerJsonObject;
     }
 
