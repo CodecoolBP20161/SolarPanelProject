@@ -71,7 +71,7 @@
                     {% endfor %}
 
                     <tr>
-                        <td class="nowrap description"><strong>Áfa</strong> : 27 %</td>
+                        <td class="nowrap description"><strong>Áfa</strong> : 20 %</td>
                         <td class="nowrap description"><strong>Eszközök Nettó ára:</strong></td>
                         <td class="nowrap description"><strong>{{ formatNumber(offer.itemNetTotal) }} Ft </strong></td>
                         <td class="nowrap description"><strong>Eszközök Bruttó ára:</strong></td>
@@ -110,9 +110,9 @@
                     <tr>
                         <td></td>
                         <td class="nowrap description"><strong>Nettó ár összesen:</strong></td>
-                        <td class="nowrap description"><strong>{{ formatNumber(offer.netTotal) }} Ft</strong></td>
+                        <td class="nowrap description"><strong>{{ formatNumber(offer.nettFull) }} Ft</strong></td>
                         <td class="nowrap description"><strong>Bruttó ár összesen:</strong></td>
-                        <td class="description"><strong>{{ formatNumber(offer.grossTotal) }} Ft</strong></td>
+                        <td class="description"><strong>{{ formatNumber(offer.grossFull) }} Ft</strong></td>
                     </tr>
                     </tbody>
                 </table>
