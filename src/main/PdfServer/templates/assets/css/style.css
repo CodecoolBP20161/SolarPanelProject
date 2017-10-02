@@ -619,16 +619,16 @@ p.lead, .lead {
 	background-size: cover;
 }
 .inner-intro {
-	background: url(http://placehold.it/1920x850) no-repeat;
+	background: url(../images/sample1920x850.png) no-repeat;
 }
 .light-color  {
 	color: #fff;
 }
 .parallax {
-	background: url(http://placehold.it/1920x850) no-repeat;
+	background: url(../images/sample1920x850.png) no-repeat;
 }
 #overlay_block, .bg_img {
-	background: url(http://placehold.it/1920x850) no-repeat;
+	background: url(../images/sample1920x850.png) no-repeat;
 }
 .parallax, #overlay_block, .inner-intro {
 
@@ -4684,7 +4684,7 @@ a.btn.xplus-btn.pricing.active:hover {
 	position: relative;
 }
 .image_cover {
-	background-image: url(http://placehold.it/1920x1280);
+	background-image: url(../images/sample1920x1280.png);
 	background-size: cover;
 	display: block;
 	position: absolute;
@@ -4700,7 +4700,7 @@ a.btn.xplus-btn.pricing.active:hover {
 	width:50%;
 	right:0;
 	left:auto;
-	background-image: url(http://placehold.it/1920x1280);
+	background-image: url(../images/sample1920x1280.png);
 }
 @media(max-width:767px){
 .image_cover{

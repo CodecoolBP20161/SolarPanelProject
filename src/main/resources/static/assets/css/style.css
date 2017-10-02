@@ -628,7 +628,7 @@ p.lead, .lead {
 	background: url(../images/custom/inverter-lookalike.jpeg) no-repeat;
 }
 #overlay_block, .bg_img {
-	background: url(http://placehold.it/1920x850) no-repeat;
+	background: url(../images/sample1920x850.png) no-repeat;
 }
 .parallax, #overlay_block, .inner-intro {
 
@@ -4707,7 +4707,7 @@ a.btn.xplus-btn.pricing.active:hover {
 	position: relative;
 }
 .image_cover {
-	background-image: url(http://placehold.it/1920x1280);
+	background-image: url(../images/sample1920x1280.png);
 	background-size: cover;
 	display: block;
 	position: absolute;
