@@ -223,8 +223,13 @@ public class OfferController {
         }
         return ResponseEntity.ok()
                 .contentLength(pdf.length())
+                .header("Content-Disposition", "attachment; filename=" + convertPdfName(pdf.getName()))
                 .contentType(MediaType.parseMediaType("application/download"))
                 .body(resource);
+    }
+
+    private String convertPdfName(String name){
+        return name.substring(0, name.indexOf('@')) + ".pdf";
     }
 }
 
