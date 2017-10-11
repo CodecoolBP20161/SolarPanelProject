@@ -16,7 +16,7 @@ config = {
     "orientation": "portrait",
     "border": "0",
     // Rendering options
-    "base": "file://http://52.15.84.238:1350/templates/assets/" // Base path that's used to load files (images, css, js) when they aren't referenced using a host
+    "base": "file://http://18.194.36.195:1350/templates/assets/" // Base path that's used to load files (images, css, js) when they aren't referenced using a host
 };
 
 var formatNumber = function (rawPrice) {
