@@ -21,7 +21,7 @@ import java.math.BigDecimal;
 @Slf4j
 @Service
 public class PdfService {
-    private final String PDF_URL = "http://52.15.84.238:1350/api/getofferpdf";
+    private final String PDF_URL = "http://18.194.36.195:1350/api/getofferpdf";
 
     public File getPdf(Offer offer) throws UnirestException, IOException {
         InputStream pdfInputStream = doPost(offer).getRawBody();
@@ -30,7 +30,7 @@ public class PdfService {
     }
 
     private File fileFromInputStream(InputStream inputstream, String offerId, String companyName) throws IOException{
-        File offerFile = File.createTempFile(companyName + "_árajánlat_" + offerId + "@", ".pdf");
+        File offerFile = File.createTempFile(companyName + "_arajanlat_" + offerId + "@", ".pdf");
         offerFile.deleteOnExit();
         FileOutputStream out = new FileOutputStream(offerFile);
         IOUtils.copy(inputstream, out);
