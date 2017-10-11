@@ -6,12 +6,14 @@ import lombok.Data;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Entity
 @EntityScan
 @Data
+@Table(name = "inverter")
 public class Inverter extends Item {
     @NotNull
     private InverterBrandEnum brand;
