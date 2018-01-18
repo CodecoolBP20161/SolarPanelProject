@@ -22,3 +22,7 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+.ebextensions
+.ebextensions/nginx/conf.d/force-https.conf
+src/main/resources/static/assets/images/galery
+src/main/resources/static/assets/pdf
