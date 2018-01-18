@@ -18,7 +18,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-            .authorizeRequests().antMatchers("/", "/üzenet", "/rolunk", "/termekek/**", "/termekek/growatt/**", "/ajanlat/**", "/static/**", "/assets/**").permitAll()
+            .authorizeRequests().antMatchers("/", "/referencia", "/tmp/**", "/aszf", "/finanszirozas", "/rolunk", "/termekek/**", "/termekek/growatt/**", "/ajanlat/**", "/static/**", "/assets/**", "/pdf**/").permitAll()
             .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -31,14 +31,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/")
                 .permitAll();
         httpSecurity.headers().frameOptions().disable();
-        httpSecurity .csrf().ignoringAntMatchers("/", "/üzenet", "/rolunk", "/ajanlat/**", "/static/**", "/assets/**");
+        httpSecurity .csrf().ignoringAntMatchers("/", "/aszf","/referencia", "/finanszirozas", "/rolunk", "/ajanlat/**", "/static/**", "/assets/**", "/pdf**/");
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .inMemoryAuthentication()
-                .withUser("admin").password("admin").roles("ADMIN")
+                .withUser("naposOldal").password("naposOldal1298").roles("ADMIN")
         ;
     }
 }

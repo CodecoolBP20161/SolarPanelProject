@@ -5,9 +5,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
     <div th:fragment="content">
+        <div id="chart_div" style="width: 600px; height: 500px;"></div>
         <div class="container">
             <form method="post" id="mainForm" th:action="@{/admin/fogyasztas}" th:object="${consumption}">
                 <div class="row">

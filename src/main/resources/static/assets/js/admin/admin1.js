@@ -31,6 +31,65 @@ $(document).ready(function () {
         metricInput.val(formatPrice(inputValue));
     });
 
+
+
+    var csrfHeader = $("meta[name='_csrf_header']").attr("content");
+    var csrfToken = $("meta[name='_csrf']").attr("content");
+    var headers = {};
+
+    headers[csrfHeader] = csrfToken;
+
+    var facebookData;
+    var googleData;
+    var suggestionData;
+
+    $.ajax({
+        url: "/admin/statistics",
+        type: 'GET',
+        dataType: "json",
+        headers: headers,
+        success: function (data) {
+
+            for (var i=0; i<data.length; i++) {
+               if (data[i].type === 1) {
+                   facebookData = data[i].value;
+               } else if (data[i].type === 2){
+                   googleData = data[i].value;
+               } else {
+                   suggestionData = data[i].value;
+               }
+            }
+        }
+    });
+
+
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Nézettség');
+        data.addColumn('number', 'Érték');
+        data.addRows([
+            ['Facebook', facebookData],
+            ['Google', googleData],
+            ['Ajánlás', suggestionData]
+
+        ]);
+
+        var options = {
+            title: 'Látogatottság megoszlása',
+            sliceVisibilityThreshold: .2
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
+
+
+
+
 });
 
 var isNetworkUpgradeNeededAdmin = function(phaseOneInput, metricSelect, metricInput){

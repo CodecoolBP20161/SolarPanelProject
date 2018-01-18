@@ -37,10 +37,63 @@
                 </div>
             </div>
 
+
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-5 no-pad">
+                    <h4 class="title">Kérjük adja meg, honnan értesült oldalunkról.</h4>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="col-sm-5 pad-left">
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <div class="checkbox">
+                                <input type="radio" th:field="*{advertisement}" id="advertisementRadioInput1"
+                                       name="advertisementRadio" value="1" required/>
+                                <label class="">Facebook</label>
+                            </div>
+                        </li>
+                        <li class="list-inline-item">
+                            <div class="checkbox">
+                                <input type="radio" th:field="*{advertisement}" name="advertisementRadio" id="advertisementRadioInput2" value="2"/>
+                                <label class="">Google</label>
+                            </div>
+                        </li>
+                        <li class="list-inline-item">
+                            <div class="checkbox">
+                                <input type="radio" th:field="*{advertisement}" id="advertisementRadioInput3" name="advertisementRadioInput3" value="3"/>
+                                <label class="">Ajánlás</label>
+                            </div>
+                        </li>
+                        <!--<li class="list-inline-item">
+                            <div class="checkbox">
+                                <input type="radio" name="advertisementRadio" id="advertisementRadioInput4" value="4"/>
+                                <label class="">Egyéb</label>
+                                <div id="others" style="display: none">
+                                    <input type="text" id="othersInput" placeholder="Egyéb"/>
+                                </div>
+                            </div>
+                        </li>-->
+                    </ul>
+
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-5 no-pad">
+                    <h4 class="title">A mezőre kattintva válassza ki mi alapján szeretne kalkulálni: </h4>
+                </div>
+
+            </div>
+
+
             <div class="row">
                 <div class="widget_shop-title">
 
                     <div class="col-sm-2"></div>
+
                     <div class="col-sm-5">
                         <div class="romana_check_out_form">
                             <div class="row">

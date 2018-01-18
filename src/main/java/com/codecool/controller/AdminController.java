@@ -1,39 +1,39 @@
 package com.codecool.controller;
 
     import com.codecool.models.*;
-    import com.codecool.models.enums.CompanyEnum;
     import com.codecool.models.enums.InverterBrandEnum;
-    import com.codecool.models.enums.ItemTypeEnum;
-    import com.codecool.models.forms.ConsumptionForm;
-    import com.codecool.models.forms.DeviceForm;
+import com.codecool.models.enums.ItemTypeEnum;
+import com.codecool.models.forms.ConsumptionForm;
+import com.codecool.models.forms.DeviceForm;
+    import com.codecool.repositories.AdvertisingRepository;
     import com.codecool.repositories.InverterRepository;
-    import com.codecool.repositories.OtherItemRepository;
-    import com.codecool.repositories.SolarPanelRepository;
-    import com.codecool.services.AdminService;
-    import com.codecool.services.OfferService;
-    import com.codecool.services.PdfService;
-    import com.codecool.services.ValidationService;
-    import com.mashape.unirest.http.exceptions.UnirestException;
-    import lombok.extern.slf4j.Slf4j;
-    import org.springframework.beans.factory.annotation.Autowired;
-    import org.springframework.core.io.ByteArrayResource;
-    import org.springframework.core.io.Resource;
-    import org.springframework.http.HttpStatus;
-    import org.springframework.http.MediaType;
-    import org.springframework.http.ResponseEntity;
-    import org.springframework.stereotype.Controller;
-    import org.springframework.ui.Model;
-    import org.springframework.web.bind.annotation.*;
+import com.codecool.repositories.OtherItemRepository;
+import com.codecool.repositories.SolarPanelRepository;
+import com.codecool.services.AdminService;
+import com.codecool.services.OfferService;
+import com.codecool.services.PdfService;
+import com.codecool.services.ValidationService;
+import com.mashape.unirest.http.exceptions.UnirestException;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
-    import javax.servlet.http.HttpSession;
-    import java.io.File;
-    import java.io.IOException;
-    import java.math.BigDecimal;
-    import java.nio.file.Files;
-    import java.nio.file.Path;
-    import java.nio.file.Paths;
-    import java.util.HashMap;
-    import java.util.List;
+import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -45,6 +45,7 @@ public class AdminController {
     private InverterRepository inverterRepository;
     private SolarPanelRepository solarPanelRepository;
     private OtherItemRepository otherItemRepository;
+    private AdvertisingRepository advertisingRepository;
 
 
     private final String CONSUMPTION = "consumption";
@@ -58,7 +59,8 @@ public class AdminController {
     @Autowired
     public AdminController(OfferService offerService, SolarPanelRepository solarPanelRepository,
                            InverterRepository inverterRepository, OtherItemRepository otherItemRepository,
-                           AdminService adminService, PdfService pdfService, ValidationService validationService) {
+                           AdminService adminService, PdfService pdfService, ValidationService validationService,
+                            AdvertisingRepository advertisingRepository) {
         this.solarPanelRepository = solarPanelRepository;
         this.otherItemRepository = otherItemRepository;
         this.inverterRepository = inverterRepository;
@@ -66,6 +68,7 @@ public class AdminController {
         this.adminService = adminService;
         this.pdfService = pdfService;
         this.validationService = validationService;
+        this.advertisingRepository = advertisingRepository;
     }
 
     @GetMapping("/admin")
@@ -314,6 +317,12 @@ public class AdminController {
     public String isNetworkUpgradeNeededCheck (@RequestBody HashMap < String, String > payload){
         log.info("Request arrived to validate, payload: " + payload.toString());
         return String.valueOf(validationService.validateNetworkUpgrade(payload));
+    }
+
+    @RequestMapping(value = "admin/statistics", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<List<Advertising>> listAdvertisements(){
+        List<Advertising> advertisingList = advertisingRepository.findAll();
+        return new ResponseEntity<List<Advertising>>(advertisingList, HttpStatus.OK);
     }
 
     private String convertPdfName(String name){

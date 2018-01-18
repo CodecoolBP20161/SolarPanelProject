@@ -7,13 +7,14 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity
 @EntityScan
 @Data
-@Table(name = "solarpanel")
-public class SolarPanel extends Item{
+@Table(name = "solarpanels")
+public class SolarPanel extends Item implements Serializable{
 
     @NotEmpty
     private String optimalizer;
@@ -38,4 +39,6 @@ public class SolarPanel extends Item{
         this.setCapacity(capacity);
         this.setPriority(3);
     }
+
+
 }

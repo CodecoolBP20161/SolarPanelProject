@@ -1,12 +1,10 @@
 package com.codecool.services;
 
 
-import com.codecool.models.Inverter;
-import com.codecool.models.OtherItem;
-import com.codecool.models.SolarPanel;
+import com.codecool.models.*;
 import com.codecool.models.enums.InverterBrandEnum;
 import com.codecool.models.enums.ItemTypeEnum;
-import com.codecool.models.ReadyProduct;
+import com.codecool.repositories.AdvertisingRepository;
 import com.codecool.repositories.InverterRepository;
 import com.codecool.repositories.OtherItemRepository;
 import com.codecool.repositories.SolarPanelRepository;
@@ -26,6 +24,7 @@ public class DataLoader {
     private InverterRepository inverterRep;
     private SolarPanelRepository solarPanelRep;
     private OtherItemRepository otherItemRep;
+    private AdvertisingRepository advertisingRep;
     private OfferService offerService;
     // private OfferRepository offerRep;
 
@@ -36,19 +35,35 @@ public class DataLoader {
 
 
     @Autowired
-    public DataLoader(InverterRepository inverterRep, SolarPanelRepository solarPanelRep, OtherItemRepository otherItemRep, OfferService offerService) {
+    public DataLoader(InverterRepository inverterRep, SolarPanelRepository solarPanelRep, OtherItemRepository otherItemRep, AdvertisingRepository advertisingRep, OfferService offerService) {
         this.inverterRep = inverterRep;
         this.solarPanelRep = solarPanelRep;
         this.otherItemRep = otherItemRep;
+        this.advertisingRep = advertisingRep;
         this.offerService = offerService;
-        //this.offerRep = offerRep;
     }
+
+
 
     @PostConstruct
     public void loadData() {
-        loadSolarPanels();
-        loadInverters();
-        loadOtherItems();
+        //loadSolarPanels();
+        //loadInverters();
+        //loadOtherItems();
+        //loadDefaultadvertising();
+    }
+
+    private void loadDefaultadvertising(){
+        List<Advertising> advertisementList = new ArrayList<>();
+
+        advertisementList.add(new Advertising(1));
+        advertisementList.add(new Advertising(2));
+        advertisementList.add(new Advertising(3));
+
+        for (Advertising item : advertisementList) {
+            advertisingRep.save(item);
+        }
+
     }
 
     private void loadSolarPanels() {

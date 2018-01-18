@@ -43,6 +43,18 @@ $(document).ready(function () {
 
     });
 
+ /*   $(function () {
+        $("input[name='advertisementRadio']").click(function () {
+            if ($("#advertisementRadioInput4").is(":checked")) {
+                $("#others").show();
+            } else {
+                $("#others").hide();
+                $("#othersInput").val("");
+            }
+        });
+    });*/
+
+
 });
 
 var isNetworkUpgradeNeeded = function(phaseOneInput, metricSelect, metricInput){

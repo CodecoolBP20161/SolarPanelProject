@@ -589,6 +589,10 @@ p.lead, .lead {
 	background: #f7f7f7;
 	color: #323232;
 }
+.green-bg {
+	background: #6aaf08;;
+	color: #fff;
+}
 .dark-bg {
 	background: #323232;
 	color: #fff;
@@ -3054,7 +3058,7 @@ form .error {
 .contact-form textarea {
 	height: 202px;
 }
-.contact-form input[type="text"] {
+.contact-form input[type="text"], input[type="email"] {
 	display: block;
 	height: 46px;
 	margin-bottom: 32px;
@@ -3067,7 +3071,7 @@ form .error {
 	-webkit-appearance: none;
 	border-radius: 0;
 }
-.contact-form input[type="text"]:focus, .contact-form textarea:focus {
+.contact-form input[type="text"]:focus, input[type="email"]:focus, .contact-form textarea:focus {
 	border: 1px solid #6aaf08;
 }
 .i-block {
@@ -6785,14 +6789,14 @@ ul.tags li {
 	border: 1px solid #DEDEDE;
 	margin-bottom: 0;
 }
-.widget-search input[type="text"]:focus {
+.widget-search input[type="text"]:focus, input[type="email"]:focus {
 	border: 1px solid #6aaf08;
 }
-.blog-post-hr input[type="text"], .blog-post-hr textarea {
+.blog-post-hr input[type="text"], input[type="email"], .blog-post-hr textarea {
 	border: 1px solid #DEDEDE;
 	margin-bottom: 20px;
 }
-.blog-post-hr input[type="text"]:focus, .blog-post-hr textarea:focus {
+.blog-post-hr input[type="text"]:focus, input[type="email"]:focus ,.blog-post-hr textarea:focus {
 	border: 1px solid #6aaf08;
 }
 .widget-search input[type="submit"] {

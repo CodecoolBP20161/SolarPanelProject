@@ -64,64 +64,15 @@
     <!-- End of Offer Form -->
 
         <div class="clearfix"></div>
-    <!--  Main Banner End Here-->
 
-    <section  class="choose-us padding light-color pb-xs-0 overflow_hidden secondary_bg">
-
-        <!-- half image background element -->
-        <div class="container">
-            <div class="row">
-
-                <div class="col-sm-6">
-                    <div class="creative_heading light-color pb-30">
-                        <h2>Miért mi?</h2>
-                    </div>
-
-                    <div class="media ">
-                        <div class="media-left">
-                            <i class="flaticon-nature fontsize_28"></i>
-                        </div>
-                        <div class="media-body">
-                            <h4 class="text-uppercase"><a href="offer.html">Kedvező finanszírozási feltételek</a></h4>
-                            <p>
-                                clita kasd guberren no sea takimata sanctus est
-                            </p>
-                        </div>
-                    </div>
-                    <div class="media">
-                        <div class="media-left">
-                            <i class="flaticon-people-2 fontsize_28"></i>
-                        </div>
-                        <div class="media-body">
-                            <h4 class="text-uppercase"><a href="#!">Megbízható szakemberek</a></h4>
-                            <p>
-                                at vero eos et accusam justo duo dolores
-                            </p>
-                        </div>
-                    </div>
-                    <div class="media ">
-                        <div class="media-left">
-                            <i class="flaticon-people-1 fontsize_28"></i>
-                        </div>
-                        <div class="media-body">
-                            <h4 class="text-uppercase"><a href="#!">Tiszta munka</a></h4>
-                            <p>
-                                lorem ipsum dolor sit amet, consetetur
-                            </p>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-        <div class="image_cover image_cover_right"></div>
-    </section>
     <script src="../assets/js/accounting.js" type="text/javascript"></script>
     <script src="../assets/js/jquery-1.12.4.min.js" type="text/javascript"></script>
     <th:block th:switch="${step}">
         <script th:case="'1'" type="text/javascript" src="../assets/js/offer-form/offer-form-1.js"></script>
         <script th:case="'2'" type="text/javascript" src="../assets/js/offer-form/offer-form-2.js"></script>
+        <script th:case="'3'" type="text/javascript" src="../assets/js/offer-form/offer-form-3.js"></script>
+
+
     </th:block>
     <!-- FOOTER -->
     <div th:replace="fragments/footer :: footer"></div>

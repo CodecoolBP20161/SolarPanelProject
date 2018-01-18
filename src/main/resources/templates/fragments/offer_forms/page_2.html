@@ -56,15 +56,13 @@
                     <div th:each="inverter : ${inverterList}">
                         <div class="carousel-item col-sm-4">
                             <div class="testimonial-block cyan-background inverter" th:data="${inverter.id}">
-                                <h3 class="testimonial-author" th:text="${inverter.brand}"></h3>
-                                <br>
                                 <h3 class="testimonial-author" th:text="${inverter.name}"></h3>
                                 <hr class="small-divider">
-                                <p>
-                                    Ide nem tudom mi kell majd írni.
-                                </p>
-
-                                <h4 class="testimonial-price" th:text="'Egységár: '+${#numbers.formatInteger(inverter.price, 0,'DEFAULT')}+' Ft'"></h4>
+                                <h4 th:text="${inverter.phase}+' fázisú inverter'">
+                                </h4>
+                                <br>
+                                <br>
+                                <h4 class="testimonial-price" th:text="'Egységár: '+${#numbers.formatInteger(inverter.price * 1.27, 0,'DEFAULT')}+' Ft'"></h4>
                                 <!--TODO: Ide kellene a quantity már kiszámolva, lehet field kellene belőle-->
                                 <h4 class="testimonial-price">Szükséges mennyiség: 1 db</h4>
                             </div>
@@ -99,8 +97,8 @@
                                 <p>Ide mit akarunk írni?</p>
                                 <h5 class="testimonial-price"
                                     th:text="'Szükséges mennyiség: '+${#numbers.formatInteger(panel.quantity, 0,'DEFAULT')}+' db'"></h5>
-                                <h5 class="testimonial-price" th:text="'Egységár: '+${#numbers.formatInteger(panel.price, 0,'DEFAULT')}+' Ft'"></h5>
-                                <h4 class="testimonial-price" th:text="'Összesen: '+${#numbers.formatInteger(panel.total, 0,'DEFAULT')}+' Ft'"></h4>
+                                <h5 class="testimonial-price" th:text="'Egységár: '+${#numbers.formatInteger(panel.price*1.27, 0,'DEFAULT')}+' Ft'"></h5>
+                                <h4 class="testimonial-price" th:text="'Összesen: '+${#numbers.formatInteger(panel.total*1.27, 0,'DEFAULT')}+' Ft'"></h4>
                             </div>
                         </div>
                     </div>

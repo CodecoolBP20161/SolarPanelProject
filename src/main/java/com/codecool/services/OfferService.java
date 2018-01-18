@@ -138,13 +138,19 @@ public class OfferService {
         List<LineItem> solarPanelLineItems = new ArrayList<>();
         double consumptionValue = (consumptionForm.getMetric().equals(kWh)) ? consumptionForm.getValue() :
                 ((consumptionForm.getValue() * 12)/37.5);
-        for (SolarPanel solarPanel : solarPanelRepository.findAllByOrderByCapacityAscPriceAsc()) {
-            int quantity = solarPanelService.calculateSolarPanelQuantity(consumptionValue, solarPanel.getCapacity());
+        System.out.println("Ajanlat 2 controller, getSolarPanelListAsLineItems before for loop ");
+        System.out.println("consumption " + consumptionValue);
+       // if (consumptionValue < 12000) {
+            for (SolarPanel solarPanel : solarPanelRepository.findAllByOrderByCapacityAscPriceAsc()) {
+                System.out.println(solarPanel.toString());
+                int quantity = solarPanelService.calculateSolarPanelQuantity(consumptionValue, solarPanel.getCapacity());
 
-            solarPanelItem = new LineItem(solarPanel);
-            solarPanelItem.setQuantity(quantity);
-            solarPanelLineItems.add(solarPanelItem);
-        }
+                solarPanelItem = new LineItem(solarPanel);
+                solarPanelItem.setQuantity(quantity);
+                solarPanelLineItems.add(solarPanelItem);
+            }
+        //}
+        System.out.println("Ajanlat 2 controller, getSolarPanelListAsLineItems after for loop ");
         return solarPanelLineItems;
     }
 

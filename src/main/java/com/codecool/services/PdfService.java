@@ -59,7 +59,7 @@ public class PdfService {
 
         offerJsonObject.put("items", lineItemItems);
         offerJsonObject.put("services", lineItemsService);
-        offerJsonObject.put("id", 100);
+        offerJsonObject.put("id", offer.getId());
         offerJsonObject.put("taxRate", offer.getCompany().getTaxRate());
         offerJsonObject.put("netTotal", offer.getNettoTotalPrice());
         offerJsonObject.put("serviceNetTotal", offer.getNettoServiceTotalPrice());

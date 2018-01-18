@@ -7,6 +7,7 @@ import com.codecool.models.enums.CompanyEnum;
 import com.codecool.models.forms.ConsumptionForm;
 import com.codecool.models.forms.DeviceForm;
 import com.codecool.models.forms.EmailForm;
+import com.codecool.services.AdvertisingService;
 import com.codecool.services.OfferService;
 import com.codecool.services.PdfService;
 import com.codecool.services.ValidationService;
@@ -41,6 +42,7 @@ public class OfferController {
     private OfferService offerService;
     private PdfService pdfService;
     private ValidationService validationService;
+    private AdvertisingService advertisingService;
 
     private final String CONSUMPTION = "consumption";
     private final String DEVICE = "deviceForm";
@@ -49,14 +51,17 @@ public class OfferController {
     private final String OFFER = "offer";
     private final String PDF = "pdf";
     private final String METRIC = "metric";
+    private final String SESSIONID = "sessionId";
 
     @Autowired
     public OfferController(OfferService offerService, PdfService pdfService,
-                           EmailService emailService, ValidationService validationService) {
+                           EmailService emailService, ValidationService validationService,
+                           AdvertisingService advertisingService) {
         this.offerService = offerService;
         this.emailService = emailService;
         this.pdfService = pdfService;
         this.validationService = validationService;
+        this.advertisingService = advertisingService;
     }
 
     @GetMapping("/ajanlat/1")
@@ -66,7 +71,6 @@ public class OfferController {
 
         session.setAttribute(DEVICE, null);
         session.setAttribute(OFFER, null);
-
 
         if (session.getAttribute(CONSUMPTION) != null){
             model.addAttribute(METRIC, consumptionForm.getMetric());
@@ -81,27 +85,37 @@ public class OfferController {
     @PostMapping("/ajanlat/1")
     public String postOfferStep1(@ModelAttribute ConsumptionForm consumption, HttpSession session) {
         session.setAttribute(CONSUMPTION, consumption);
-        log.info("Consumption: " + consumption.getValue() + consumption.getMetric() + " No.Phase: " + consumption.getPhase());
+
+        if (session.getAttribute(SESSIONID) == null) {
+            advertisingService.increaseAdvertisement(consumption.getAdvertisement());
+            session.setAttribute(SESSIONID, session.getId());
+            log.info("advertisingService.increaseAdvertisement is done");
+
+        }
+
+        log.info("Advertisement " + consumption.getAdvertisement() + "Consumption: " + consumption.getValue() + consumption.getMetric() + " No.Phase: " + consumption.getPhase());
         return "redirect:/ajanlat/2";
     }
 
     @GetMapping("/ajanlat/2")
     public String getOfferStep2(Model model, HttpSession session) {
-        ConsumptionForm consumption = (ConsumptionForm) session.getAttribute(CONSUMPTION);
-        if (consumption == null) {
+        if (session.getAttribute("consumption") == null) {
             log.info("Step1 is not done, redirecting to /ajanlat/1.");
             return "redirect:/ajanlat/1";
+        }
+        ConsumptionForm consumption = (ConsumptionForm) session.getAttribute(CONSUMPTION);
+
+        double calculatedConsumption = offerService.calculateConsumption(consumption);
+
+        if (calculatedConsumption > 12000){
+            session.setAttribute(CONSUMPTION, null);
+            return "specialOfferNeeded";
         }
         DeviceForm pAndIForm = session.getAttribute(DEVICE) == null ?
                 new DeviceForm() : (DeviceForm) session.getAttribute(DEVICE);
 
-        double calculatedConsumption = offerService.calculateConsumption(consumption);
         List<Inverter> inverterList = offerService.calculateInverterList(calculatedConsumption);
         List<LineItem> solarPanelLineItems = offerService.getSolarPanelListAsLineItems(consumption);
-
-        if (calculatedConsumption > 12000){
-            return "specialOfferNeeded";
-        }
 
         model.addAttribute(DEVICE, pAndIForm);
         model.addAttribute("solarPanelLineItems", solarPanelLineItems);
@@ -119,6 +133,12 @@ public class OfferController {
 
     @GetMapping("/ajanlat/3")
     public String getOfferStep3(Model model, HttpSession session) {
+
+        if (session.getAttribute(CONSUMPTION) == null) {
+            log.info("Step1 is not done, redirecting to /ajanlat/1.");
+            return "redirect:/ajanlat/1";
+        }
+
         DeviceForm deviceForm = (DeviceForm) session.getAttribute(DEVICE);
         if (deviceForm == null) {
             log.info("Step2 is not done, redirecting to /ajanlat/2.");
@@ -152,6 +172,8 @@ public class OfferController {
             ajanlatPdf = pdfService.getPdf(offer);
             emailService.sendEmailWithPDf(email.getEmailAddress(), String.valueOf(offer.getId()), ajanlatPdf);
             model.addAttribute("success", true);
+            model.addAttribute(STEP, "4");
+            return "offer";
 
         } catch (UnirestException e) {
 
@@ -221,11 +243,13 @@ public class OfferController {
         } catch (IOException | NullPointerException e) {
             e.printStackTrace();
         }
+        session.removeAttribute(CONSUMPTION);
         return ResponseEntity.ok()
                 .contentLength(pdf.length())
                 .header("Content-Disposition", "attachment; filename=" + convertPdfName(pdf.getName()))
                 .contentType(MediaType.parseMediaType("application/download"))
                 .body(resource);
+
     }
 
     private String convertPdfName(String name){

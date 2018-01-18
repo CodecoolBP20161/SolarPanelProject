@@ -6,12 +6,13 @@ import lombok.Data;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import javax.persistence.Entity;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Data
 @Entity
 @EntityScan
-public class OtherItem extends Item{
+public class OtherItem extends Item implements Serializable{
 
     private int phase;
     private int priority = 1;
