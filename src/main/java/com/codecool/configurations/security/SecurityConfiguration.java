@@ -18,8 +18,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-            .authorizeRequests().antMatchers("/", "/referencia", "/tmp/**", "/aszf", "/finanszirozas", "/rolunk", "/termekek/**", "/termekek/growatt/**", "/ajanlat/**", "/static/**", "/assets/**", "/pdf**/").permitAll()
-            .anyRequest().authenticated()
+                .requiresChannel().anyRequest().requiresSecure()
+                .and()
+                .authorizeRequests().antMatchers("/", "/referencia", "/tmp/**", "/aszf", "/finanszirozas", "/rolunk", "/termekek/**", "/termekek/growatt/**", "/ajanlat/**", "/static/**", "/assets/**", "/pdf**/").permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .defaultSuccessUrl("/", true)
