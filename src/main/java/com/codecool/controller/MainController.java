@@ -56,7 +56,7 @@ public class MainController {
     }
 
     @GetMapping("/termekek/{brand}")
-    public String getReadyProduct(@PathVariable String brand ,Model model) {
+    public String getReadyProduct(@PathVariable String brand,Model model) {
         List<ReadyProduct> offers = dataLoader.loadPresetProduct(brand);
         model.addAttribute("allProduct", offers);
         model.addAttribute("productBrand", brand);

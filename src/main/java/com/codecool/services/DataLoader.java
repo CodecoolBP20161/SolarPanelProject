@@ -47,10 +47,10 @@ public class DataLoader {
 
     @PostConstruct
     public void loadData() {
-        //loadSolarPanels();
-        //loadInverters();
-        //loadOtherItems();
-        //loadDefaultadvertising();
+        loadSolarPanels();
+        loadInverters();
+        loadOtherItems();
+        loadDefaultadvertising();
     }
 
     private void loadDefaultadvertising(){
@@ -69,11 +69,11 @@ public class DataLoader {
     private void loadSolarPanels() {
         List<SolarPanel> solarPanelList = new ArrayList<>();
 
-        solarPanelList.add(new SolarPanel("270 W-os Amerisolar polikristályos napelem", "van", 39110, 1.27, 270, "12év teljeskörű garancia")); //, 12 évre 91%-os telj.gar., 30 évre 80%-os telj.gar.
-        solarPanelList.add(new SolarPanel("270 W-os Heckert Solar polikristályos napelem", "nincs", 50000, 1.20, 270, ""));
+        //solarPanelList.add(new SolarPanel("270 W-os Amerisolar polikristályos napelem", "van", 39110, 1.27, 270, "12év teljeskörű garancia")); //, 12 évre 91%-os telj.gar., 30 évre 80%-os telj.gar.
+        //solarPanelList.add(new SolarPanel("270 W-os Heckert Solar polikristályos napelem", "nincs", 50000, 1.20, 270, ""));
         solarPanelList.add(new SolarPanel("305 W-os ALEO Solar HE Tech napelem", "nincs", 60000, 1.20, 305, ""));
-        solarPanelList.add(new SolarPanel("270 W-os Polikristályos napelem", "van", 40000, 1.20, 270, ""));
-        solarPanelList.add(new SolarPanel("270 W-os AXIworldplus SE napelem", "nincs", 55000, 1.20, 270, ""));
+        solarPanelList.add(new SolarPanel("275 W-os Polikristályos napelem", "van", 40000, 1.20, 270, ""));
+        //solarPanelList.add(new SolarPanel("270 W-os AXIworldplus SE napelem", "nincs", 55000, 1.20, 270, ""));
 
         for (SolarPanel item : solarPanelList) {
             solarPanelRep.save(item);
@@ -209,5 +209,12 @@ public class DataLoader {
         }
         return presetOffers;
     }
+
+
+        /*if (brand.equals("solaredge")) {
+            presetOffers.add(new ReadyProduct(inverterRep.getOne(1).getName(), Amerisolar, 10,
+                    (offerService.getFinalPriceForReadyProduct(inverterRep.getOne(1), solarPanelRep.getOne(4), new ConsumptionForm("kWh",2222.0, 1))),
+                    smallerThan12000Description, 1, inverterRep.getOne(1).getCapacity()/1000));*/
+
 
 }

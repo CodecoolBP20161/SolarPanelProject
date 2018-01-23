@@ -16,8 +16,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @Slf4j
 public class Offer {
 
-
-    private static long idCount = 1113;
     private long id;
     private CompanyEnum company;
     private volatile List<LineItem> lineItems;
@@ -31,7 +29,6 @@ public class Offer {
 
 
     public Offer() {
-        id = idCount++;
         lineItems = new CopyOnWriteArrayList<>();
         isNetworkUpgradeNeeded = false;
         nettoTotalPrice = new BigDecimal(0);

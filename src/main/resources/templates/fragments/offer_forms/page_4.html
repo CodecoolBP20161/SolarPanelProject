@@ -22,10 +22,25 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-12" th:if="${success}">
+            <div class="col-xs-12">
                 <h4 class="center">Az ajánlatot sikeresen elküldtük az e-mail címére.</h4>
             </div>
-            <div class="col-xs-12" th:if="${!success}">
+            <div class="center">
+                <br>
+                <br>
+                <div></div>
+                <div class="caption sfb lowercase-caption text-center"
+                     data-x="center"
+                     data-y="280"
+                     data-speed="1000"
+                     data-start="2000"
+                     data-easing="Sine.easeOut">
+                    <a class="btn-text secondary_bg" th:href="@{/ajanlat/1?key=} + ${consumptionId}">Új ajánlat</a>
+                    <div></div>
+                    <br>
+                </div>
+            </div>
+            <!--<div class="col-xs-12" th:if="${!success}">
                 <h4 class="center">Az ajánlatot letöltheti az alábbi linken:</h4>
                 <div class="center">
                 <br>
@@ -33,9 +48,9 @@
                     Letöltés
                 </a>
                     </div>
-            </div>
+            </div>-->
         </div>
     </div>
-
+</div>
 </body>
 </html>

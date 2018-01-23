@@ -11,7 +11,7 @@
 <!--The first step of the offer creation-->
 <div th:fragment="page_1">
     <div class="container">
-        <form method="post" id="mainForm" th:action="@{/ajanlat/1}" th:object="${consumption}">
+        <form method="post" id="mainForm" th:action="@{/ajanlat/1?key=} + ${consumptionId}" th:object="${consumption}">
             <div class="row">
                 <div class="col-sm-5"></div>
                 <div class="col-sm-4">

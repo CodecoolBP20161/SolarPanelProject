@@ -3,7 +3,6 @@ package com.codecool.services;
 import com.codecool.models.*;
 import com.codecool.models.enums.InverterBrandEnum;
 import com.codecool.models.enums.ItemTypeEnum;
-import com.codecool.models.forms.ConsumptionForm;
 import com.codecool.models.forms.DeviceForm;
 import com.codecool.repositories.InverterRepository;
 import com.codecool.repositories.OtherItemRepository;
@@ -41,7 +40,7 @@ public class OfferService {
                                                             (value < 5000) ? 1 : 3);
     }
 
-    public double calculateConsumption(ConsumptionForm consumption) {
+    public double calculateConsumption(Consumption consumption) {
         double consumptionValue = (consumption.getMetric().equals(kWh)) ? consumption.getValue() :
                 ((consumption.getValue() * 12)/37.5);
 
@@ -50,7 +49,7 @@ public class OfferService {
         return (Math.round(consumptionValue / 1100)) * 1000;
     }
 
-    public List<LineItem> getLineItems(ConsumptionForm consumptionForm, DeviceForm deviceForm) {
+    public List<LineItem> getLineItems(Consumption consumptionForm, DeviceForm deviceForm) {
         double consumptionValue = (consumptionForm.getMetric().equals(kWh)) ? consumptionForm.getValue() :
                 ((consumptionForm.getValue() * 12)/37.5);
 
@@ -133,13 +132,11 @@ public class OfferService {
         return 0;
     }
 
-    public List<LineItem> getSolarPanelListAsLineItems(ConsumptionForm consumptionForm) {
+    public List<LineItem> getSolarPanelListAsLineItems(Consumption consumptionForm) {
         LineItem solarPanelItem;
         List<LineItem> solarPanelLineItems = new ArrayList<>();
         double consumptionValue = (consumptionForm.getMetric().equals(kWh)) ? consumptionForm.getValue() :
                 ((consumptionForm.getValue() * 12)/37.5);
-        System.out.println("Ajanlat 2 controller, getSolarPanelListAsLineItems before for loop ");
-        System.out.println("consumption " + consumptionValue);
        // if (consumptionValue < 12000) {
             for (SolarPanel solarPanel : solarPanelRepository.findAllByOrderByCapacityAscPriceAsc()) {
                 System.out.println(solarPanel.toString());
@@ -150,11 +147,10 @@ public class OfferService {
                 solarPanelLineItems.add(solarPanelItem);
             }
         //}
-        System.out.println("Ajanlat 2 controller, getSolarPanelListAsLineItems after for loop ");
         return solarPanelLineItems;
     }
 
-    public Offer createFromFormData(ConsumptionForm consumption, DeviceForm deviceForm){
+    public Offer createFromFormData(Consumption consumption, DeviceForm deviceForm){
         Offer offer = new Offer();
 
         offer.setCompany(consumption.getCompany());

@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface SolarPanelRepository extends JpaRepository<SolarPanel, Integer> {
     List<SolarPanel> findAllByOrderByCapacityAscPriceAsc();
+    SolarPanel findByName(String name);
 }

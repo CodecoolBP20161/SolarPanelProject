@@ -18,8 +18,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                .requiresChannel().anyRequest().requiresSecure()
-                .and()
+                //.requiresChannel().anyRequest().requiresSecure()
+                //.and()
                 .authorizeRequests().antMatchers("/", "/referencia", "/tmp/**", "/aszf", "/finanszirozas", "/rolunk", "/termekek/**", "/termekek/growatt/**", "/ajanlat/**", "/static/**", "/assets/**", "/pdf**/").permitAll()
                 .anyRequest().authenticated()
                 .and()

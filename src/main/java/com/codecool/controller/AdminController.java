@@ -1,3 +1,4 @@
+/*
 package com.codecool.controller;
 
     import com.codecool.models.*;
@@ -328,4 +329,4 @@ public class AdminController {
     private String convertPdfName(String name){
         return name.substring(0, name.indexOf('@')) + ".pdf";
     }
-}
+}*/

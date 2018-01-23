@@ -28,14 +28,14 @@
                                     <span class="b-line l-center line-h"></span>
                                 </div>
                             </div>
-                            <form id="submitEmailForm" method="post" th:action="@{/ajanlat/3}" th:object="${email}">
+                            <form id="submitEmailForm" method="post" th:action="@{/ajanlat/3?key=} + ${consumptionId}" th:object="${email}">
                                 <div class="row">
                                     <div class="col-sm-3"></div>
                                     <div class="col-sm-6">
-                                        <input type="email" name="check_email" placeholder="Email"
+                                        <input type="email" id="emailInput" name="check_email" placeholder="Email"
                                                required="required" th:field="*{emailAddress}">
                                         <button class="btn-text" type="submit" value="Submit" id="submitEmail"
-                                                name="submitEmail" disabled>
+                                                name="submitEmail">
                                             <i class="fa fa fa-envelope-o fa-lg"></i>
                                             <span>Email</span>
                                         </button>
@@ -43,7 +43,7 @@
                                 </div>
                             </form>
                             <br>
-                            <form method="POST" id="simplePdf" name="simplePdf" th:action="@{/ajanlat/pdf}"
+                            <form method="POST" id="simplePdf" name="simplePdf" th:action="@{/ajanlat/pdf?key=} + ${consumptionId}"
                                   th:object="${consumption}">
                                 <input hidden="hidden" th:field="*{value}">
                                 <input hidden="hidden" th:field="*{phase}">
@@ -57,18 +57,42 @@
                                     </a>
                                 </div>
                             </form>
+                            <br>
+                            <div class="center">
+                                <br>
+                                <br>
+                                <div></div>
+                                <div class="caption sfb lowercase-caption text-center"
+                                     data-x="center"
+                                     data-y="280"
+                                     data-speed="1000"
+                                     data-start="2000"
+                                     data-easing="Sine.easeOut">
+                                    <a class="btn-text secondary_bg" th:href="@{/ajanlat/1?key=} + ${consumptionId}">Új ajánlat</a>
+                                    <div></div>
+                                    <br>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
 </div>
-</section>
+
 
 <!--End Contact-->
 
 
 </div>
+
+<!--<script>
+
+
+
+</script>-->
+
 
 </body>
 </html>

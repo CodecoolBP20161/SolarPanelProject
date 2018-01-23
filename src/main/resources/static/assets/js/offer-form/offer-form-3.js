@@ -1,20 +1,27 @@
-/*
-$(function () {
-    $("input[name='poll']").click(function () {
-        if ($("#phase3RadioInput").is(":checked")) {
-            $("#others").show();
-        } else {
-            $("#others").hide();
-            $("#othersInput").val("");
+
+/*$(function () {
+    $("button[name='submitEmail']").click(function () {
+        if ($("#check_email").val() !="") {
+            $("#check_email").val("");
+            $("button[name='submitEmail']").prop("disabled", false);
+
         }
     });
-});
-
-
-
-$(function(){
-    $("input[type='radio']").change(function(){
-        $("button[name='submitEmail']").prop("disabled", false);
-        $("div[id='downloadPdf']").show();
-    });
 });*/
+
+/*
+$('submitEmail').click(function(){
+    $('input[name="check_email"]').val('');
+});
+*/
+
+
+
+
+function validateForm() {
+    var x = document.forms["submitEmailForm"]["emailInput"].value;
+    if (x != "") {
+
+        document.getElementById("submitEmail").disabled = true;
+    }
+}
