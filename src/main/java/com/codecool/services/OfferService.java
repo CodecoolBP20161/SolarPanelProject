@@ -1,6 +1,7 @@
 package com.codecool.services;
 
 import com.codecool.models.*;
+import com.codecool.models.enums.CompanyEnum;
 import com.codecool.models.enums.InverterBrandEnum;
 import com.codecool.models.enums.ItemTypeEnum;
 import com.codecool.models.forms.DeviceForm;
@@ -35,9 +36,19 @@ public class OfferService {
         this.otherItemRepository = otherItemRepository;
     }
 
-    public List<Inverter> calculateInverterList(double value) {
-        return inverterRepository.findByCustomerValue((int) ((value < 1650) ? 2000  : value),
-                                                            (value < 5000) ? 1 : 3);
+    public List<Inverter> calculateInverterList(Consumption consumption) {
+        Double value = calculateConsumption(consumption);
+
+        if (consumption.getPhase() == 1 &&  value <= 5000) {
+            return inverterRepository.findByCustomerValue( (int) ((value < 1650) ? 2000  : value), 1);
+        }
+
+        if (consumption.getPhase() == 3 &&  value <= 5000 &&
+                inverterRepository.findByCustomerValue( (int) ((value < 1650) ? 2000  : value), 3).isEmpty()) {
+            return inverterRepository.findByCustomerValue( (int) ((value < 1650) ? 2000  : value), 1);
+
+        }
+        return inverterRepository.findByCustomerValue((int) ((value < 1650) ? 2000  : value), 3);
     }
 
     public double calculateConsumption(Consumption consumption) {
@@ -189,6 +200,29 @@ public class OfferService {
                 break;
         }
         return new LineItem(newItem);
+    }
+
+    public Integer getReadyProductPrice(Integer inverterId, Integer solarPanelId){
+        Inverter inverter = inverterRepository.findOne(inverterId);
+        SolarPanel solarPanel = solarPanelRepository.findOne(solarPanelId);
+
+        Consumption consumption = new Consumption();
+        consumption.setPhase(inverter.getPhase());
+        consumption.setValue((double) inverter.getCapacity());
+        consumption.setCompany(CompanyEnum.TraditionalSolutions);
+        consumption.setMetric(kWh);
+
+        DeviceForm deviceForm = new DeviceForm(inverter.getId().toString(), solarPanel.getId().toString());
+        double totalMainPriceBrutto = 0.0;
+
+
+        for(LineItem item : getLineItems(consumption, deviceForm)) {
+            totalMainPriceBrutto += item.getTotal().doubleValue();
+        }
+        return (int) (totalMainPriceBrutto * 1.27);
+
+
+
     }
 
 }

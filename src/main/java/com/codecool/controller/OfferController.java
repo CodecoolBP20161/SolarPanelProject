@@ -67,7 +67,6 @@ public class OfferController {
     @GetMapping("/ajanlat/1")
     public String getOfferStep1(@RequestParam(value = "key", required = false) String consumptionIDD, Model model) {
         Consumption consumption = new Consumption();
-
         model.addAttribute(METRIC, "Ft");
         if (null != consumptionIDD){
             model.addAttribute("consumptionId", consumptionIDD);
@@ -90,6 +89,7 @@ public class OfferController {
         String consumptionID = UUID.randomUUID().toString().replace("-","");
 
         consumption.setConsumptionID(consumptionID);
+        consumption.setPhase(consumptionForm.getPhase());
         consumption.setValue(consumptionForm.getValue());
         consumption.setAdvertisement(consumptionForm.getAdvertisement());
         consumption.setMetric(consumptionForm.getMetric());
@@ -118,7 +118,7 @@ public class OfferController {
         }
 
         DeviceForm pAndIForm = new DeviceForm();
-        List<Inverter> inverterList = offerService.calculateInverterList(calculatedConsumption);
+        List<Inverter> inverterList = offerService.calculateInverterList(consumption);
         List<LineItem> solarPanelLineItems = offerService.getSolarPanelListAsLineItems(consumption);
 
         model.addAttribute("consumptionId", consumptionID);
@@ -156,7 +156,7 @@ public class OfferController {
         }
         EmailForm email = new EmailForm();
 
-        consumption.setOfferId(1000 + consumptionService.rowCount());
+        consumption.setOfferId(1001 + consumptionService.rowCount());
         consumptionService.saveConsuption(consumption);
         Offer offer = offerService.createFromFormData(consumption, deviceForm);
 
