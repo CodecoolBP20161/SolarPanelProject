@@ -189,9 +189,9 @@ public class DataLoader {
             presetOffers.add(new ReadyProduct(new StringBuilder(GROWATT + " 8000UE").toString(), Amerisolar, 10, offerService.getReadyProductPrice(21,2), smallerThan12000Description, 3, 8));
             presetOffers.add(new ReadyProduct(new StringBuilder(GROWATT + " 9000UE").toString(), Amerisolar, 10, offerService.getReadyProductPrice(22,2), smallerThan12000Description, 3, 9));
             presetOffers.add(new ReadyProduct(new StringBuilder(GROWATT + " 10000UE").toString(), Amerisolar, 10, offerService.getReadyProductPrice(23,2), smallerThan12000Description, 3, 10));
-            presetOffers.add(new ReadyProduct(new StringBuilder(GROWATT + " 12000UE").toString(), Amerisolar, 10, 1234567, smallerThan12000Description, 3, 12));
-            presetOffers.add(new ReadyProduct(new StringBuilder(GROWATT + " 18000UE").toString(), Amerisolar, 10, 1234567, moreThan120000Description, 3, 18));
-            presetOffers.add(new ReadyProduct(new StringBuilder(GROWATT + " 20000UE").toString(), Amerisolar, 10, 1234567, moreThan120000Description, 3, 20));
+            presetOffers.add(new ReadyProduct(new StringBuilder(GROWATT + " 12000UE").toString(), Amerisolar, 10, 3711702, smallerThan12000Description, 3, 12));
+            presetOffers.add(new ReadyProduct(new StringBuilder(GROWATT + " 18000UE").toString(), Amerisolar, 10, 4641342, moreThan120000Description, 3, 18));
+            presetOffers.add(new ReadyProduct(new StringBuilder(GROWATT + " 20000UE").toString(), Amerisolar, 10, 5793740, moreThan120000Description, 3, 20));
 
         } else {
             presetOffers.add(new ReadyProduct(new StringBuilder(SOLAREDGE + " SE2200-ER-01").toString(), Amerisolar, 10, offerService.getReadyProductPrice(1,2), smallerThan12000Description, 1, 2.2));
@@ -203,9 +203,9 @@ public class DataLoader {
             presetOffers.add(new ReadyProduct(new StringBuilder(SOLAREDGE + " SE8K-ER-01").toString(), Amerisolar, 10, offerService.getReadyProductPrice(7,2), smallerThan12000Description, 3, 8));
             presetOffers.add(new ReadyProduct(new StringBuilder(SOLAREDGE + " SE9K-ER-01").toString(), Amerisolar, 10, offerService.getReadyProductPrice(8,2), smallerThan12000Description, 3, 9));
             presetOffers.add(new ReadyProduct(new StringBuilder(SOLAREDGE + " SE10K-ER-01").toString(), Amerisolar, 10, offerService.getReadyProductPrice(9,2), smallerThan12000Description, 3, 10));
-            presetOffers.add(new ReadyProduct(new StringBuilder(SOLAREDGE + " SE12.5K-ER-01").toString(), Amerisolar, 10, 1234567, moreThan120000Description, 3, 12.5));
-            presetOffers.add(new ReadyProduct(new StringBuilder(SOLAREDGE + " SE15K-ER-01").toString(), Amerisolar, 10, 1234567, moreThan120000Description, 3, 15));
-            presetOffers.add(new ReadyProduct(new StringBuilder(SOLAREDGE + " SE17K-ER-01").toString(), Amerisolar, 10, 1234567, moreThan120000Description, 3, 17));
+            presetOffers.add(new ReadyProduct(new StringBuilder(SOLAREDGE + " SE12.5K-ER-01").toString(), Amerisolar, 10, 4561586, moreThan120000Description, 3, 12.5));
+            presetOffers.add(new ReadyProduct(new StringBuilder(SOLAREDGE + " SE15K-ER-01").toString(), Amerisolar, 10, 4750562, moreThan120000Description, 3, 15));
+            presetOffers.add(new ReadyProduct(new StringBuilder(SOLAREDGE + " SE17K-ER-01").toString(), Amerisolar, 10, 5216144, moreThan120000Description, 3, 17));
         }
         return presetOffers;
     }
