@@ -1,19 +1,16 @@
-/*
+
 package com.codecool.controller;
 
     import com.codecool.models.*;
-    import com.codecool.models.enums.InverterBrandEnum;
+import com.codecool.models.enums.InverterBrandEnum;
 import com.codecool.models.enums.ItemTypeEnum;
 import com.codecool.models.forms.ConsumptionForm;
 import com.codecool.models.forms.DeviceForm;
-    import com.codecool.repositories.AdvertisingRepository;
-    import com.codecool.repositories.InverterRepository;
+import com.codecool.repositories.AdvertisingRepository;
+import com.codecool.repositories.InverterRepository;
 import com.codecool.repositories.OtherItemRepository;
 import com.codecool.repositories.SolarPanelRepository;
-import com.codecool.services.AdminService;
-import com.codecool.services.OfferService;
-import com.codecool.services.PdfService;
-import com.codecool.services.ValidationService;
+import com.codecool.services.*;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +32,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @Controller
@@ -47,6 +45,7 @@ public class AdminController {
     private SolarPanelRepository solarPanelRepository;
     private OtherItemRepository otherItemRepository;
     private AdvertisingRepository advertisingRepository;
+    private ConsumptionService consumptionService;
 
 
     private final String CONSUMPTION = "consumption";
@@ -61,7 +60,7 @@ public class AdminController {
     public AdminController(OfferService offerService, SolarPanelRepository solarPanelRepository,
                            InverterRepository inverterRepository, OtherItemRepository otherItemRepository,
                            AdminService adminService, PdfService pdfService, ValidationService validationService,
-                            AdvertisingRepository advertisingRepository) {
+                            AdvertisingRepository advertisingRepository, ConsumptionService consumptionService) {
         this.solarPanelRepository = solarPanelRepository;
         this.otherItemRepository = otherItemRepository;
         this.inverterRepository = inverterRepository;
@@ -70,6 +69,7 @@ public class AdminController {
         this.pdfService = pdfService;
         this.validationService = validationService;
         this.advertisingRepository = advertisingRepository;
+        this.consumptionService = consumptionService;
     }
 
     @GetMapping("/admin")
@@ -83,44 +83,53 @@ public class AdminController {
     }
 
     @GetMapping("/admin/fogyasztas")
-    public String getConsumptionData(Model model, HttpSession session) {
-        ConsumptionForm consumptionForm = session.getAttribute(CONSUMPTION) == null ?
-                new ConsumptionForm() : (ConsumptionForm) session.getAttribute(CONSUMPTION);
+    public String getConsumptionData(@RequestParam(value = "key", required = false) String consumptionIDD, Model model) {
+        Consumption consumption = new Consumption();
 
-        session.setAttribute(DEVICE, null);
-        session.setAttribute(OFFER, null);
-
-        if (session.getAttribute(CONSUMPTION) != null) {
-            model.addAttribute(METRIC, consumptionForm.getMetric());
-        } else {
-            model.addAttribute(METRIC, "Ft");
+        model.addAttribute(METRIC, "Ft");
+        if (null != consumptionIDD){
+            model.addAttribute("consumptionId", consumptionIDD);
         }
 
-        model.addAttribute(CONSUMPTION, consumptionForm);
+        model.addAttribute(CONSUMPTION, consumption);
         model.addAttribute(STEP, "admin1");
         return "admin";
     }
 
     @PostMapping("/admin/fogyasztas")
-    public String postConsumptionData(@ModelAttribute ConsumptionForm consumption, HttpSession session) {
-        session.setAttribute(CONSUMPTION, consumption);
-        log.info("Consumption: " + consumption.getValue() + consumption.getMetric() + " No.Phase: " + consumption.getPhase());
-        return "redirect:/admin/eszkozok";
+    public String postConsumptionData(@RequestParam(value = "key", required = false) String consumptionIDD, @ModelAttribute ConsumptionForm consumptionForm) {
+        log.info("Consumption: " + consumptionForm.getValue() + consumptionForm.getMetric() + " No.Phase: " + consumptionForm.getPhase());
+
+        Consumption consumption = new Consumption();
+
+        String consumptionID = UUID.randomUUID().toString().replace("-","");
+
+        consumption.setConsumptionID(consumptionID);
+        consumption.setPhase(consumptionForm.getPhase());
+        consumption.setValue(consumptionForm.getValue());
+        consumption.setAdvertisement(consumptionForm.getAdvertisement());
+        consumption.setMetric(consumptionForm.getMetric());
+
+        consumptionService.saveConsuption(consumption);
+        return "redirect:/admin/eszkozok?key="+consumption.getConsumptionID();
     }
 
     @GetMapping("/admin/eszkozok")
-    public String getOfferStep2(Model model, HttpSession session) {
-        ConsumptionForm consumption = (ConsumptionForm) session.getAttribute(CONSUMPTION);
-        if (consumption == null) {
-            log.info("Step1 is not done, redirecting to fogyasztas.");
-            return "redirect:/admin/fogyasztas";
+    public String getOfferStep2(@RequestParam(value = "key") String consumptionID, Model model) {
+        Consumption consumption = consumptionService.getConsumptionByconsumptionID(consumptionID);
+
+        if (consumptionService.getConsumptionByconsumptionID(consumptionID) == null) {
+            log.info("Step1 is not done, redirecting to /ajanlat/1.");
+            return "redirect:/ajanlat/1";
         }
-        DeviceForm pAndIForm = session.getAttribute(DEVICE) == null ?
-                new DeviceForm() : (DeviceForm) session.getAttribute(DEVICE);
 
         double calculatedConsumption = offerService.calculateConsumption(consumption);
-        List<Inverter> inverterList = offerService.calculateInverterList(calculatedConsumption);
+        DeviceForm pAndIForm = new DeviceForm();
+
+        List<Inverter> inverterList = offerService.calculateInverterList(consumption);
         List<LineItem> solarPanelLineItems = offerService.getSolarPanelListAsLineItems(consumption);
+
+        model.addAttribute("consumptionId", consumptionID);
 
         model.addAttribute(DEVICE, pAndIForm);
         model.addAttribute("solarPanelLineItems", solarPanelLineItems);
@@ -130,27 +139,36 @@ public class AdminController {
     }
 
     @PostMapping("/admin/eszkozok")
-    public String postOfferStep2(@ModelAttribute DeviceForm device, HttpSession session) {
-        session.setAttribute(DEVICE, device);
-        log.info("Devices: InvID: " + device.getInverterId() + "  PanelId: " + device.getPanelId());
-        return "redirect:/admin/szerkeszto";
+    public String postOfferStep2(@RequestParam(value = "key") String consumptionID, @ModelAttribute DeviceForm deviceForm, HttpSession session) {
+        Consumption consumption = consumptionService.getConsumptionByconsumptionID(consumptionID);
+
+        consumption.setInverterId(deviceForm.getInverterId());
+        consumption.setPanelId(deviceForm.getPanelId());
+        consumptionService.saveConsuption(consumption);
+        log.info("Devices: Inverter: " + consumption.getInverterId().toString() + "  Panel: " + consumption.getPanelId().toString());
+
+        return "redirect:/admin/szerkeszto?key=" + consumptionID;
     }
 
     @GetMapping("admin/szerkeszto")
-    public String getOfferStep3(Model model, HttpSession session) {
-        DeviceForm deviceForm = (DeviceForm) session.getAttribute(DEVICE);
+    public String getOfferStep3(@RequestParam(value="key") String consumptionID, Model model) {
+        Consumption consumption = consumptionService.getConsumptionByconsumptionID(consumptionID);
+        DeviceForm deviceForm = new DeviceForm(consumption.getInverterId(), consumption.getPanelId());
 
 
-        if (deviceForm == null || !deviceForm.isValid()) {
-            log.info("Step2 is not done, redirecting to /admin/eszkozok.");
-            return "redirect:/admin/eszkozok";
+        if (consumptionService.getConsumptionByconsumptionID(consumptionID) == null || !deviceForm.isValid()) {
+            log.info("Step1 is not done, redirecting to /ajanlat/1.");
+            return "redirect:/admin/eszkozok?key=" + consumptionID;
         }
-        ConsumptionForm consumption = (ConsumptionForm) session.getAttribute(CONSUMPTION);
-        Offer offer = session.getAttribute(OFFER) != null ?
-                (Offer) session.getAttribute(OFFER) : offerService.createFromFormData(consumption, deviceForm);
 
-        session.setAttribute(OFFER, offer);
+        consumption.setOfferId(1001 + consumptionService.rowCount());
+        consumptionService.saveConsuption(consumption);
+        Offer offer = offerService.createFromFormData(consumption, deviceForm);
+        offer.setConsumptionId(consumptionID);
+        offerService.saveOffer(offer);
 
+
+        model.addAttribute("consumptionId", consumptionID);
         model.addAttribute(OFFER, offer);
         model.addAttribute("serviceGrossTotal",offer.getNettoServiceTotalPrice().multiply(BigDecimal.valueOf(1.27)));
         model.addAttribute("itemGrossTotal", offer.getNettoTotalPrice().multiply(BigDecimal.valueOf(offer.getCompany().getTaxRate())));
@@ -161,7 +179,7 @@ public class AdminController {
 
     @PostMapping("admin/tetel/inverterek")
     @ResponseBody
-    public ResponseEntity<List<Inverter>> filterItemType(@RequestBody HashMap<String, String> data) {
+    public ResponseEntity<List<Inverter>> filterItemType(@RequestParam(value="key") String consumptionID, @RequestBody HashMap<String, String> data) {
         InverterBrandEnum brand = InverterBrandEnum.valueOf(data.get(BRAND));
         int phase = Integer.valueOf(data.get(PHASE));
 
@@ -179,29 +197,31 @@ public class AdminController {
 
     @PostMapping("admin/tetel/mennyisegvaltoztatas")
     @ResponseBody
-    public ResponseEntity<Offer> updateQuantity(@RequestBody HashMap<String, String> data, HttpSession session) {
+    public ResponseEntity<Offer> updateQuantity(@RequestParam(value="key") String consumptionID, @RequestBody HashMap<String, String> data, HttpSession session) {
 
         Integer lineItemId = Integer.valueOf(data.get("id"));
         double quantity = Double.valueOf(data.get("quantity"));
-        Offer offer = (Offer) session.getAttribute(OFFER);
+        Offer offer = offerService.getOfferByConsumptionId(consumptionID);
 
         log.info(String.format("lineItemId: %s quantity: %s", lineItemId, quantity));
 
         LineItem lineItem = offer.getLineItem(lineItemId);
+
         lineItem.setQuantity(quantity);
 
         offer.updateLineItem(lineItem);
-
+        offerService.saveOffer(offer);
         return new ResponseEntity<>(offer, HttpStatus.OK);
     }
 
     @PostMapping("admin/tetel/egysegarvaltoztatas")
     @ResponseBody
-    public ResponseEntity<Offer> updatePrice(@RequestBody HashMap<String, String> data, HttpSession session) {
+    public ResponseEntity<Offer> updatePrice(@RequestParam(value="key") String consumptionID, @RequestBody HashMap<String, String> data, HttpSession session) {
 
         Integer lineItemId = Integer.valueOf(data.get("id"));
         BigDecimal price = new BigDecimal(data.get("price"));
-        Offer offer = (Offer) session.getAttribute(OFFER);
+
+        Offer offer = offerService.getOfferByConsumptionId(consumptionID);
 
         log.info(String.format("lineItemId: %s price: %s", lineItemId, price));
 
@@ -209,27 +229,29 @@ public class AdminController {
         lineItem.setPrice(price);
 
         offer.updateLineItem(lineItem);
-
+        offerService.saveOffer(offer);
         return new ResponseEntity<>(offer, HttpStatus.OK);
     }
 
 
     @PostMapping("admin/tetel/torles")
     @ResponseBody
-    public ResponseEntity<Offer> deleteLineItem(@RequestBody HashMap<String, String> data, HttpSession session) {
+    public ResponseEntity<Offer> deleteLineItem(@RequestParam(value="key") String consumptionID, @RequestBody HashMap<String, String> data, HttpSession session) {
 
         Integer lineItemId = Integer.valueOf(data.get("id"));
         log.info(String.format("lineItemId: %s", lineItemId));
 
-        Offer offer = (Offer) session.getAttribute(OFFER);
+        Offer offer = offerService.getOfferByConsumptionId(consumptionID);
         offer.removeLineItem(lineItemId);
+        offerService.saveOffer(offer);
+
 
         return new ResponseEntity<>(offer, HttpStatus.OK);
     }
 
     @PostMapping("admin/tetel/listazas")
     @ResponseBody
-    public ResponseEntity<List> getList(@RequestBody HashMap<String, String> data) {
+    public ResponseEntity<List> getList(@RequestParam(value="key") String consumptionID, @RequestBody HashMap<String, String> data) {
         String type = data.get("type");
         String brand = null;
         if(type.equals("inverter")){
@@ -240,27 +262,29 @@ public class AdminController {
 
     @PostMapping("admin/tetel/uj")
     @ResponseBody
-    public ResponseEntity<Offer> addNewItem(@RequestBody HashMap<String, String> data, HttpSession session) {
+    public ResponseEntity<Offer> addNewItem(@RequestParam(value="key") String consumptionID, @RequestBody HashMap<String, String> data, HttpSession session) {
 
         Integer itemId = Integer.valueOf(data.get("itemId"));
         String type = data.get("type");
         log.info(String.format("New Item's itemId: %s, type: %s", itemId, type));
 
-        Offer offer = (Offer) session.getAttribute(OFFER);
+        Offer offer = offerService.getOfferByConsumptionId(consumptionID);
+
         if (!offerService.containsItem(offer, itemId, type)) {
             LineItem newItem = offerService.getLineItemFromItemIdAndType(itemId, type);
             log.info("New Item: ", newItem.toString());
             offer.addLineItem(newItem);
             offer.sortLineItems();
         }
-
         offer.printLineItems();
+        offerService.saveOffer(offer);
+
         return new ResponseEntity<>(offer, HttpStatus.OK);
     }
 
     @PostMapping("admin/tetel/egyeni")
     @ResponseBody
-    public ResponseEntity<Offer> addCustomItem(@RequestBody HashMap<String, String> data, HttpSession session) {
+    public ResponseEntity<Offer> addCustomItem(@RequestParam(value="key") String consumptionID, @RequestBody HashMap<String, String> data, HttpSession session) {
 
         String name = data.get("name");
         String description = data.get("description");
@@ -268,23 +292,30 @@ public class AdminController {
         ItemTypeEnum type = (ItemTypeEnum.valueOf(data.get("type")));
         int  priority = Integer.valueOf(data.get("priority"));
 
-        Offer offer = (Offer) session.getAttribute(OFFER);
+        Consumption consumption = consumptionService.getConsumptionByconsumptionID(consumptionID);
+        DeviceForm deviceForm = new DeviceForm(consumption.getInverterId(), consumption.getPanelId());
+        consumptionService.saveConsuption(consumption);
+        Offer offer = offerService.getOfferByConsumptionId(consumptionID);
 
         LineItem newItem = new LineItem(name, description, price, type, priority);
         offer.addLineItem(newItem);
         offer.sortLineItems();
         offer.printLineItems();
+        offerService.saveOffer(offer);
         return new ResponseEntity<>(offer, HttpStatus.OK);
     }
 
     @PostMapping("admin/pdf")
     @ResponseBody
-    public ResponseEntity<Resource> getPDF(@ModelAttribute ConsumptionForm consumptionForm, HttpSession session) {
+    public ResponseEntity<Resource> getPDF(@RequestParam(value="key") String consumptionID, @ModelAttribute ConsumptionForm consumptionForm, HttpSession session) {
+        Consumption consumption = consumptionService.getConsumptionByconsumptionID(consumptionID);
 
-        Offer offer = (Offer) session.getAttribute(OFFER);
+        Offer offer = offerService.getOfferByConsumptionId(consumptionID);
+        offer.setId(consumption.getOfferId());
 
         log.info(consumptionForm.getCompany().toString());
         offer.setCompany(consumptionForm.getCompany());
+        offerService.saveOffer(offer);
         File pdf = null;
 
         try {
@@ -329,4 +360,5 @@ public class AdminController {
     private String convertPdfName(String name){
         return name.substring(0, name.indexOf('@')) + ".pdf";
     }
-}*/
+}
+

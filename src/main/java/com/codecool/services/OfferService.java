@@ -6,6 +6,7 @@ import com.codecool.models.enums.InverterBrandEnum;
 import com.codecool.models.enums.ItemTypeEnum;
 import com.codecool.models.forms.DeviceForm;
 import com.codecool.repositories.InverterRepository;
+import com.codecool.repositories.OfferRepository;
 import com.codecool.repositories.OtherItemRepository;
 import com.codecool.repositories.SolarPanelRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -24,16 +25,19 @@ public class OfferService {
     private SolarPanelRepository solarPanelRepository;
     private SolarPanelService solarPanelService;
     private OtherItemRepository otherItemRepository;
+    private OfferRepository offerRepository;
 
     private final String kWh = "kWh";
 
     @Autowired
     public OfferService(InverterRepository inverterRepository, SolarPanelRepository solarPanelRepository,
-                        SolarPanelService solarPanelService, OtherItemRepository otherItemRepository) {
+                        SolarPanelService solarPanelService, OtherItemRepository otherItemRepository,
+                        OfferRepository offerRepository) {
         this.inverterRepository = inverterRepository;
         this.solarPanelRepository = solarPanelRepository;
         this.solarPanelService = solarPanelService;
         this.otherItemRepository = otherItemRepository;
+        this.offerRepository = offerRepository;
     }
 
     public List<Inverter> calculateInverterList(Consumption consumption) {
@@ -220,9 +224,13 @@ public class OfferService {
             totalMainPriceBrutto += item.getTotal().doubleValue();
         }
         return (int) (totalMainPriceBrutto * 1.27);
-
-
-
     }
 
+    public Offer saveOffer(Offer offer){
+        return offerRepository.save(offer);
+    }
+
+    public Offer getOfferByConsumptionId(String consumptionId){
+        return offerRepository.findByConsumptionId(consumptionId);
+    }
 }

@@ -6,20 +6,31 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @Data
 @Slf4j
+@Entity
+@EntityScan
 public class Offer {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long fuckId;
 
     private long id;
     private CompanyEnum company;
-    private volatile List<LineItem> lineItems;
+    @ElementCollection
+    @CollectionTable(name = "lineitems", joinColumns = @JoinColumn(name = "fuckId"))
+    private volatile List<LineItem> lineItems = new ArrayList<LineItem>();
     private boolean isNetworkUpgradeNeeded;
+    private String consumptionId;
 
     @Setter(AccessLevel.NONE)
     private BigDecimal nettoTotalPrice;

@@ -1,9 +1,13 @@
 
 $(document).on('ready', function () {
-    var addURL = 'tetel/uj';
-    var getListURL = 'tetel/listazas';
+    var fullURL = window.location.href;
+    var paramName = 'key';
+    var consumtionID = getParameterByName(paramName, fullURL);
+    console.log(consumtionID);
+    var addURL = 'tetel/uj?key='.concat(consumtionID);
+    var getListURL = 'tetel/listazas?key='.concat(consumtionID);
     var isCSRFNeeded = true;
-    var addCustomURL = 'tetel/egyeni';
+    var addCustomURL = 'tetel/egyeni?key='.concat(consumtionID);
 
     attachEventListeners();
 
@@ -109,11 +113,16 @@ $(document).on('ready', function () {
 });
 
 var attachEventListeners = function () {
-    var quantityURL = 'tetel/mennyisegvaltoztatas';
-    var priceURL = 'tetel/egysegarvaltoztatas';
+    var fullURL = window.location.href;
+    var paramName = 'key';
+    var consumtionID = getParameterByName(paramName, fullURL);
+
+    console.log(consumtionID);
+    var quantityURL = 'tetel/mennyisegvaltoztatas?key='.concat(consumtionID);
+    var priceURL = 'tetel/egysegarvaltoztatas?key='.concat(consumtionID);
     var previousQuantity;
     var previousPrice;
-    var deleteURL = 'tetel/torles';
+    var deleteURL = 'tetel/torles?key='.concat(consumtionID);
     var isCSRFNeeded = true;
 
     $('.plus').on('click', function(){
@@ -299,3 +308,12 @@ var resetCustomForm = function () {
     $('#prioritySelect').val(1);
 };
 
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}

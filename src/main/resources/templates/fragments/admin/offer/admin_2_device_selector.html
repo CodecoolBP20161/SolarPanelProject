@@ -110,7 +110,7 @@
     <br>
     <div class="container">
         <div class="row">
-            <form method="post" th:action="@{/admin/eszkozok}" th:object="${deviceForm}">
+            <form method="post" th:action="@{/admin/eszkozok?key=} + ${consumptionId}" th:object="${deviceForm}">
                 <input type="hidden" id="inverterInput" value="0"
                        th:field="*{inverterId}">
                 <input type="hidden" id="panelInput" value="0"

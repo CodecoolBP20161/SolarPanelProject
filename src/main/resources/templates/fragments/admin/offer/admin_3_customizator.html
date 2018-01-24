@@ -340,7 +340,7 @@
                                             <ul class="brochure-btns">
                                                 <li>
                                                     <form method="POST" id="TraditionalSolutionsPDF"
-                                                          th:action="@{/admin/pdf}" th:object="${consumption}">
+                                                          th:action="@{/admin/pdf?key=} + ${consumptionId}" th:object="${consumption}">
                                                         <input hidden="hidden" th:field="*{value}">
                                                         <input hidden="hidden" th:field="*{phase}">
                                                         <input hidden="hidden" name="company"
@@ -360,7 +360,7 @@
                                         <div class="single-sidebar-widget">
                                             <ul class="brochure-btns">
                                                 <li>
-                                                    <form method="POST" id="StabilInvestPDF" th:action="@{/admin/pdf}"
+                                                    <form method="POST" id="StabilInvestPDF" th:action="@{/admin/pdf?key=} + ${consumptionId}"
                                                           th:object="${consumption}">
                                                         <input hidden="hidden" th:field="*{value}">
                                                         <input hidden="hidden" th:field="*{phase}">
@@ -381,7 +381,7 @@
                                         <div class="single-sidebar-widget">
                                             <ul class="brochure-btns">
                                                 <li>
-                                                    <form method="POST" id="SolarProviderPDF" th:action="@{/admin/pdf}"
+                                                    <form method="POST" id="SolarProviderPDF" th:action="@{/admin/pdf?key=} + ${consumptionId}"
                                                           th:object="${consumption}">
                                                         <input hidden="hidden" th:field="*{value}">
                                                         <input hidden="hidden" th:field="*{phase}">

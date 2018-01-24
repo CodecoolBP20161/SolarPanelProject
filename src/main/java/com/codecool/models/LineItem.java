@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.json.JSONObject;
 
+import javax.persistence.Embeddable;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,6 +15,7 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Data
+@Embeddable
 public class LineItem extends Item implements Comparable<LineItem> {
 
     private static Integer idCount = 1;
@@ -49,6 +51,13 @@ public class LineItem extends Item implements Comparable<LineItem> {
         setQuantity(1);
         total = price;
         setPriority(priority);
+    }
+
+    public LineItem() {
+    }
+
+    public LineItem(String name, String description, BigDecimal price, ItemTypeEnum type) {
+        super(name, description, price, type);
     }
 
     public void setQuantity(double quantity){
