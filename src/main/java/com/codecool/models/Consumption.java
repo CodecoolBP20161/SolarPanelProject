@@ -23,8 +23,8 @@ public class Consumption {
     private String metric;
     private Double value;
     private Integer advertisement;
-    private String inverterId;
-    private String panelId;
+    private Integer inverterId;
+    private Integer panelId;
     private Long offerId;
     private Boolean alreadyGetOffer;
 

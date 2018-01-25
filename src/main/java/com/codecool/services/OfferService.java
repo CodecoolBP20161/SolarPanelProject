@@ -70,7 +70,7 @@ public class OfferService {
 
         List<LineItem> lineItems = new ArrayList<>();
 
-        int panelID = Integer.parseInt(deviceForm.getPanelId());
+        Integer panelID = deviceForm.getPanelId();
 
         SolarPanel solarPanel = solarPanelRepository.findOne(panelID);
 
@@ -85,7 +85,7 @@ public class OfferService {
         lineItems.add(solarPanelLineItem);
 
         if (!deviceForm.getInverterId().equals("")) {
-            int inverterId = Integer.parseInt(deviceForm.getInverterId());
+            Integer inverterId = deviceForm.getInverterId();
             Inverter inverter = inverterRepository.findOne(inverterId);
             LineItem inverterLineItem = new LineItem(inverter);
             log.info(inverterLineItem.toJson().toString());
@@ -216,7 +216,7 @@ public class OfferService {
         consumption.setCompany(CompanyEnum.TraditionalSolutions);
         consumption.setMetric(kWh);
 
-        DeviceForm deviceForm = new DeviceForm(inverter.getId().toString(), solarPanel.getId().toString());
+        DeviceForm deviceForm = new DeviceForm(inverter.getId(), solarPanel.getId());
         double totalMainPriceBrutto = 0.0;
 
 

@@ -134,7 +134,7 @@ public class OfferController {
         consumption.setInverterId(deviceForm.getInverterId());
         consumption.setPanelId(deviceForm.getPanelId());
         consumptionService.saveConsuption(consumption);
-        log.info("Devices: Inverter: " + consumption.getInverterId().toString() + "  Panel: " + consumption.getPanelId().toString());
+        //log.info("Devices: Inverter: " + consumption.getInverterId().toString() + "  Panel: " + consumption.getPanelId().toString());
         return "redirect:/ajanlat/3?key=" + consumptionID;
     }
 
@@ -142,16 +142,18 @@ public class OfferController {
     public String getOfferStep3(@RequestParam(value="key") String consumptionID, Model model) {
         Consumption consumption = consumptionService.getConsumptionByconsumptionID(consumptionID);
 
-        if (consumptionService.getConsumptionByconsumptionID(consumptionID) == null) {
+        if (consumption == null) {
             log.info("Step1 is not done, redirecting to /ajanlat/1.");
             return "redirect:/ajanlat/1";
         }
 
-        DeviceForm deviceForm = new DeviceForm(consumption.getInverterId(), consumption.getPanelId());
-        if (deviceForm.getInverterId() == null || deviceForm.getPanelId() == null) {
+        if (null == consumption.getInverterId() || null == consumption.getPanelId()) {
             log.info("Step2 is not done, redirecting to /ajanlat/2.");
-            return "redirect:/ajanlat/2?key"+consumptionID;
+            return "redirect:/ajanlat/2?key="+consumptionID;
         }
+
+        DeviceForm deviceForm = new DeviceForm(consumption.getInverterId(), consumption.getPanelId());
+
         EmailForm email = new EmailForm();
 
         consumptionService.saveConsuption(consumption);

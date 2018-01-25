@@ -4,10 +4,10 @@ import lombok.Data;
 
 @Data
 public class DeviceForm {
-    private String inverterId;
-    private String panelId;
+    private Integer inverterId;
+    private Integer panelId;
 
-    public DeviceForm(String inverterId, String panelId) {
+    public DeviceForm(Integer inverterId, Integer panelId) {
         this.inverterId = inverterId;
         this.panelId = panelId;
     }
