@@ -22,9 +22,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class Offer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long fuckId;
-
     private long id;
+    private long generatedOfferId;
     private CompanyEnum company;
     @ElementCollection
     @CollectionTable(name = "lineitems", joinColumns = @JoinColumn(name = "fuckId"))

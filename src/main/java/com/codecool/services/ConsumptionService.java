@@ -24,6 +24,4 @@ public class ConsumptionService {
         return consumptionRepository.findByConsumptionID(consumptionID);
     };
 
-    public Long rowCount(){return consumptionRepository.countByOfferIdNotNull();}
-
 }

@@ -230,7 +230,8 @@ public class OfferService {
         return offerRepository.save(offer);
     }
 
-    public Offer getOfferByConsumptionId(String consumptionId){
-        return offerRepository.findByConsumptionId(consumptionId);
-    }
+    public Offer getOfferByConsumptionId(String consumptionId){return offerRepository.findByConsumptionId(consumptionId);}
+
+    public Long getOfferIdNumber(){return offerRepository.countById();}
+
 }

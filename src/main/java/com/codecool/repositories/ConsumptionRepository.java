@@ -8,6 +8,4 @@ import org.springframework.stereotype.Repository;
 public interface ConsumptionRepository extends JpaRepository<Consumption, Integer>{
     Consumption findByConsumptionID(String consumptionID);
 
-    Long countByOfferIdNotNull();
-
 }

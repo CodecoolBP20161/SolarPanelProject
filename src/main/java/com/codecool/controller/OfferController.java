@@ -1,9 +1,6 @@
 package com.codecool.controller;
 
-import com.codecool.models.Consumption;
-import com.codecool.models.Inverter;
-import com.codecool.models.LineItem;
-import com.codecool.models.Offer;
+import com.codecool.models.*;
 import com.codecool.models.enums.CompanyEnum;
 import com.codecool.models.forms.ConsumptionForm;
 import com.codecool.models.forms.DeviceForm;
@@ -82,6 +79,8 @@ public class OfferController {
 
         if (consumptionService.getConsumptionByconsumptionID(consumptionIDD) == null) {
             consumption.setAdvertisement(consumptionForm.getAdvertisement());
+            advertisingService.increaseAdvertisement(consumptionForm.getAdvertisement());
+
         } else {
             consumption.setAlreadyGetOffer(true);
             consumption.setAdvertisement(consumption.getAdvertisement());
@@ -96,7 +95,6 @@ public class OfferController {
         consumption.setCompany(CompanyEnum.TraditionalSolutions);
 
         consumptionService.saveConsuption(consumption);
-
         return "redirect:/ajanlat/2?key="+consumption.getConsumptionID();
     }
     // uricomponentbuilder
@@ -156,10 +154,12 @@ public class OfferController {
         }
         EmailForm email = new EmailForm();
 
-        consumption.setOfferId(1001 + consumptionService.rowCount());
         consumptionService.saveConsuption(consumption);
         Offer offer = offerService.createFromFormData(consumption, deviceForm);
-
+        offer.setGeneratedOfferId(1001 + offerService.getOfferIdNumber());
+        offer.setConsumptionId(consumptionID);
+        offer.setCompany(CompanyEnum.TraditionalSolutions);
+        offerService.saveOffer(offer);
 
         model.addAttribute("consumptionId", consumptionID);
         model.addAttribute("email", email);
@@ -170,10 +170,7 @@ public class OfferController {
 
     @PostMapping("/ajanlat/3")
     public String postOfferStep3(@RequestParam(value="key") String consumptionID, @ModelAttribute EmailForm email, Model model) {
-        Consumption consumption = consumptionService.getConsumptionByconsumptionID(consumptionID);
-        DeviceForm deviceForm = new DeviceForm(consumption.getInverterId(), consumption.getPanelId());
-        Offer offer = offerService.createFromFormData(consumption, deviceForm);
-        offer.setId(consumption.getOfferId());
+        Offer offer = offerService.getOfferByConsumptionId(consumptionID);
         File ajanlatPdf = null;
 
         try {
@@ -226,12 +223,8 @@ public class OfferController {
     @PostMapping("/ajanlat/pdf")
     @ResponseBody
     public ResponseEntity<Resource> getPDF(@RequestParam(value="key") String consumptionID, @ModelAttribute ConsumptionForm consumptionForm) {
+        Offer offer = offerService.getOfferByConsumptionId(consumptionID);
 
-        Consumption consumption = consumptionService.getConsumptionByconsumptionID(consumptionID);
-        DeviceForm device = new DeviceForm(consumption.getInverterId(), consumption.getPanelId());
-        Offer offer = offerService.createFromFormData(consumption, device);
-        offer.setId(consumption.getOfferId());
-        offer.setCompany(CompanyEnum.TraditionalSolutions);
         File pdf = null;
 
         try {

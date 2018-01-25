@@ -161,10 +161,11 @@ public class AdminController {
             return "redirect:/admin/eszkozok?key=" + consumptionID;
         }
 
-        consumption.setOfferId(1001 + consumptionService.rowCount());
         consumptionService.saveConsuption(consumption);
         Offer offer = offerService.createFromFormData(consumption, deviceForm);
+        offer.setGeneratedOfferId(1001 + offerService.getOfferIdNumber());
         offer.setConsumptionId(consumptionID);
+
         offerService.saveOffer(offer);
 
 
@@ -307,11 +308,8 @@ public class AdminController {
 
     @PostMapping("admin/pdf")
     @ResponseBody
-    public ResponseEntity<Resource> getPDF(@RequestParam(value="key") String consumptionID, @ModelAttribute ConsumptionForm consumptionForm, HttpSession session) {
-        Consumption consumption = consumptionService.getConsumptionByconsumptionID(consumptionID);
-
+    public ResponseEntity<Resource> getPDF(@RequestParam(value="key") String consumptionID, @ModelAttribute ConsumptionForm consumptionForm) {
         Offer offer = offerService.getOfferByConsumptionId(consumptionID);
-        offer.setId(consumption.getOfferId());
 
         log.info(consumptionForm.getCompany().toString());
         offer.setCompany(consumptionForm.getCompany());
