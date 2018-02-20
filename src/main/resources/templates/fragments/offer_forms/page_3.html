@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!--The first step of the offer creation-->
+<div th:fragment="page_3">
+    <h2 class="title">Amennyiben szeretné megkapni emailben az árajánlatunkat, adja meg elérhetőségét, vagy használja a
+        Letöltés gombot.
+    </h2>
+
+    <section class="padding ptb-xs-60">
+        <div class="romana_chect_out_form_area sp">
+            <div class="container">
+                <div class="romana_check_out_form">
+                    <div class="row">
+                        <div class="col-sm-12 center">
+                            <div class="check_form_center common_input">
+                                <div class="heading-box pb-30">
+                                    <h2><span class="center">Kapcsolat</span></h2>
+                                    <span class="b-line l-center line-h"></span>
+                                </div>
+                            </div>
+                            <form id="submitEmailForm" method="post" th:action="@{/ajanlat/3?key=} + ${consumptionId}" th:object="${email}">
+                                <div class="row">
+                                    <div class="col-sm-3"></div>
+                                    <div class="col-sm-6">
+                                        <input type="email" id="emailInput" name="check_email" placeholder="Email"
+                                               required="required" th:field="*{emailAddress}">
+                                        <button class="btn-text" type="submit" value="Submit" id="submitEmail"
+                                                name="submitEmail">
+                                            <i class="fa fa fa-envelope-o fa-lg"></i>
+                                            <span>Email</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                            <br>
+                            <form method="POST" id="simplePdf" name="simplePdf" th:action="@{/ajanlat/pdf?key=} + ${consumptionId}"
+                                  th:object="${consumption}">
+                                <input hidden="hidden" th:field="*{value}">
+                                <input hidden="hidden" th:field="*{phase}">
+                                <input hidden="hidden" th:field="*{company}">
+                                <div class="caption sfb lowercase-caption text-center">
+                                    <a href="javascript:{}" class="btn-text" type="submit" id="download"
+                                       onclick="document.getElementById('simplePdf').submit();
+                                        return false;" disabled="">
+                                        <i class="fa fa-floppy-o fa-lg"></i>
+                                        <span>Letöltés</span>
+                                    </a>
+                                </div>
+                            </form>
+                            <br>
+                            <div class="center">
+                                <br>
+                                <br>
+                                <div></div>
+                                <div class="caption sfb lowercase-caption text-center"
+                                     data-x="center"
+                                     data-y="280"
+                                     data-speed="1000"
+                                     data-start="2000"
+                                     data-easing="Sine.easeOut">
+                                    <a class="btn-text secondary_bg" th:href="@{/ajanlat/1?key=} + ${consumptionId}">Új ajánlat</a>
+                                    <div></div>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<!--End Contact-->
+
+
+</div>
+
+<!--<script>
+
+
+
+</script>-->
+
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head th:replace="fragments/head :: head"></head>
+
+<body class="full-intro background--dark">
+<!--loader-->
+<!--
+<div th:replace="fragments/preloader :: preloader"></div>
+-->
+
+<div id="preloader">
+    <div class="sk-circle">
+        <div class="sk-circle1 sk-child"></div>
+        <div class="sk-circle2 sk-child"></div>
+        <div class="sk-circle3 sk-child"></div>
+        <div class="sk-circle4 sk-child"></div>
+        <div class="sk-circle5 sk-child"></div>
+        <div class="sk-circle6 sk-child"></div>
+        <div class="sk-circle7 sk-child"></div>
+        <div class="sk-circle8 sk-child"></div>
+        <div class="sk-circle9 sk-child"></div>
+        <div class="sk-circle10 sk-child"></div>
+        <div class="sk-circle11 sk-child"></div>
+        <div class="sk-circle12 sk-child"></div>
+    </div>
+</div>
+<!--loader-->
+<!-- Site Wraper -->
+<div class="wrapper">
+
+    <div th:replace="fragments/header :: header"></div>
+    <div th:replace="fragments/navbar :: navbar"></div>
+
+    <section class="inner-intro  padding bg-img1 overlay-dark light-color">
+        <div class="container">
+            <div class="row title">
+                <h1>Ajánlat Kérése</h1>
+                <div class="page-breadcrumb">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+
+
+        <div class="col-xs-12">
+            <br>
+            <br>
+            <h4 class="center">Az ön által igényelt rendszermérethez további egyeztetés szükséges, kérjük vegye fel
+                velünk a kapcsolatot e-mailban vagy telefonon.</h4>
+            <div class="center">
+                <br>
+                <br>
+                <div></div>
+                <div class="caption sfb lowercase-caption text-center"
+                     data-x="center"
+                     data-y="280"
+                     data-speed="1000"
+                     data-start="2000"
+                     data-easing="Sine.easeOut">
+                    <a class="btn-text secondary_bg" th:href="@{/}">Főoldal</a>
+                    <div></div>
+                    <br>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+    <!-- FOOTER -->
+    <div th:replace="fragments/footer :: footer"></div>
+    <!-- END FOOTER -->
+
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+language: java
+script: mvn clean install -DskipTests -e -X
+sudo: false
+addons:
+  apt:
+    packages:
+      - oracle-java8-installer
+jdk:
+  - oraclejdk8
+notifications:
+  email: false

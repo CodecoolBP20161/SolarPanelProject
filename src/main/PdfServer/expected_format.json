@@ -1,0 +1,83 @@
+{
+  "id": 123321,
+
+  "isNetworkUpgradeNeeded": true,
+
+  "taxRate": 27,
+
+  "netTotal": 9999999,
+
+  "grossTotal": 9999999,
+
+  "company": "SolarProvider",
+
+  "items" : [
+    {
+      "name": "Termék1",
+      "price": 10000,
+      "quantity": 10,
+      "subtotal": 100000,
+      "description": "Legjobb termék"
+    },
+    {
+      "name": "Termék3",
+      "price": 10000,
+      "quantity": 10,
+      "subtotal": 100000,
+      "description": "Legjobb termék"
+    },
+    {
+      "name": "Termék4",
+      "price": 10000,
+      "quantity": 10,
+      "subtotal": 100000,
+      "description": "Legjobb termék"
+    },
+    {
+      "name": "Termék5",
+      "price": 10000,
+      "quantity": 10,
+      "subtotal": 100000,
+      "description": "Legjobb termék"
+    }
+  ],
+
+  "services" : [
+    {
+      "name": "Beszerelési költség",
+      "price": 10000,
+      "quantity": 10,
+      "subtotal": 100000,
+      "description": "Legjobb termék"
+    },
+    {
+      "name": "Termékdíj",
+      "price": 10000,
+      "quantity": 10,
+      "subtotal": 100000,
+      "description": "Legjobb termék"
+    },
+    {
+      "name": "Engedélyeztetés",
+      "price": 10000,
+      "quantity": 10,
+      "subtotal": 100000,
+      "description": "Legjobb termék"
+    },
+    {
+      "name": "Előzetes felmérés díja",
+      "price": 10000,
+      "quantity": 10,
+      "subtotal": 100000,
+      "description": "Legjobb termék"
+    },
+    {
+      "name": "Service5",
+      "price": 10000,
+      "quantity": 10,
+      "subtotal": 100000,
+      "description": "Legjobb termék"
+    }
+
+  ]
+}

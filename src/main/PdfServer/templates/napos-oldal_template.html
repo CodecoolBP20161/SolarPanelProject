@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--Production imports-->
+
+    <base href="http://18.194.36.195:1350/templates/assets/">
+    <link href="css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="css/bootstrap_napos-oldal.css" rel="stylesheet" type="text/css">
+
+    <!--end production imports-->
+
+</head>
+
+<body>
+<!--Header section-->
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="header-panel" id=""><img src="http://via.placeholder.com/1000x30/6aaf08/6aaf08"></div>
+        </div>
+        <br>
+        <div class="row imag">
+            <div class="col-xs-6">
+                <div class="row home">
+                    <div class="h4 text-center">Traditional Solutions</div>
+                </div>
+                <div class="col-xs-12 text-center">
+                    <h6>3500 Miskolc, Dóczy József utca 30.</h6>
+                    <h6>Ritó Zsolt értékesítési vezető</h6>
+                    <h6>+36-30-504-8148</h6>
+                    <h6>zsolt.rito.ts@naposoldal.hu</h6>
+                </div>
+            </div>
+            <div class="col-xs-2"></div>
+            <div class="col-xs-4">
+                <img class="pull-right small-marg" src="images/500x150.png">
+            </div>
+        </div>
+    </div>
+</section>
+<!--Table section-->
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h6 class="left-align">Ajánlatszám: {{offer.id}}</h6>
+                <table class="table table-hover tables" >
+                    <thead>
+                        <td colspan="5" style="text-align: left"><h3>Termékek</h3></td>
+                    </thead>
+                    <thead>
+                    <tr>
+                        <th class="description" style="text-align: left">Név</th>
+                        <th class="description" style="text-align: right">Egységár</th>
+                        <th class="description" style="text-align: right">Mennyiség</th>
+                        <th class="nowrap description" style="text-align: right">Összesen</th>
+                        <th class="description">Megjegyzés</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in offer.items %}
+                    <tr>
+                        <td class="zoom7" style="text-align: left">{{ item.name }}</td>
+                        <td class="nowrap description" style="text-align: right">{{ formatNumber(item.price) }} Ft</td>
+                        <td class="description" style="text-align: right">{{ item.quantity }} db</td>
+                        <td class="nowrap description" style="text-align: right"> {{ formatNumber(item.subtotal) }} Ft</td>
+                        <td>
+                            <div class="zoom7" >{{ item.description }}</div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                    <tr>
+                        <td class="nowrap description"><strong>Áfa</strong> : 27 %</td>
+                        <td class="nowrap description"><strong>Eszközök Nettó ára:</strong></td>
+                        <td class="nowrap description"><strong>{{ formatNumber(offer.itemNetTotal) }} Ft </strong></td>
+                        <td class="nowrap description"><strong>Eszközök Bruttó ára:</strong></td>
+                        <td class="nowrap description"><strong>{{ formatNumber(offer.itemGrossTotal) }} Ft</strong></td>
+                    </tr>
+                    </tbody>
+                    <thead>
+                        <td colspan="5" style="text-align: left"><h3>Egyéb költségek</h3></td>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th class="description" style="text-align: left">Név</th>
+                        <th class="description" style="text-align: right">Egységár</th>
+                        <th class="description" style="text-align: right">Mennyiség</th>
+                        <th class="nowrap description" style="text-align: right">Összesen</th>
+                        <th class="description">Megjegyzés</th>
+                    </tr>
+                    {% for service in offer.services %}
+                    <tr>
+                        <td class="zoom7" style="text-align: left">{{ service.name }}</td>
+                        <td class="nowrap description" style="text-align: right">{{ formatNumber(service.price) }} Ft</td>
+                        <td class="description" style="text-align: right">{{ service.quantity }} db</td>
+                        <td class="nowrap description" style="text-align: right">{{ formatNumber(service.subtotal) }} Ft</td>
+                        <td>
+                            <div class="zoom7">{{ service.description }}</div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td class="nowrap description"><strong>Áfa</strong> : 27 %</td>
+                        <td class="nowrap description"><strong>Szolgáltatások Nettó ára:</strong></td>
+                        <td class="nowrap description"><strong>{{ formatNumber(offer.serviceNetTotal) }} Ft</strong></td>
+                        <td class="nowrap description"><strong>Szolgáltatások Bruttó ára:</strong></td>
+                        <td class="description"><strong>{{ formatNumber(offer.serviceGrossTotal) }} Ft</strong></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="nowrap description"><strong>Nettó ár összesen:</strong></td>
+                        <td class="nowrap description"><strong>{{ formatNumber(offer.nettFull) }} Ft</strong></td>
+                        <td class="nowrap description"><strong>Bruttó ár összesen:</strong></td>
+                        <td class="description"><strong>{{ formatNumber(offer.grossFull) }} Ft</strong></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--Footer section-->
+<div class="footer"><img  src="http://via.placeholder.com/1000x30/6aaf08/6aaf08"></div>
+
+<div style="page-break-after:always;"></div>
+
+<div class="body2">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="header-panel"><img src="http://via.placeholder.com/1000x30/6aaf08/6aaf08"></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <h3 class="left-align"> Megjegyzések</h3>
+                <p class="zoom7 left-align">
+                    Az ajánlat tájékoztató jellegű, a rendelés során további költségek is felmerülhetnek, amelyeket a kapcsolatfelvételt követően tudunk felmérni.
+                </p>
+                {% if offer.isNetworkUpgradeNeeded %}
+                <p class="zoom7 left-align">Figyelem! Ennek a rendszernek a telepítéséhez hálózatfejlesztésre lesz szüksége!</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!--Footer section-->
+    <div class="footer"><img  src="http://via.placeholder.com/1000x30/6aaf08/6aaf08"></div>
+</div>
+</body >
+
+</html>

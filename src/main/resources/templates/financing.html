@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head th:replace="fragments/head :: head"></head>
+
+<body class="full-intro background--dark">
+<!--loader-->
+<!--
+<div th:replace="fragments/preloader :: preloader"></div>
+-->
+
+<div id="preloader">
+    <div class="sk-circle">
+        <div class="sk-circle1 sk-child"></div>
+        <div class="sk-circle2 sk-child"></div>
+        <div class="sk-circle3 sk-child"></div>
+        <div class="sk-circle4 sk-child"></div>
+        <div class="sk-circle5 sk-child"></div>
+        <div class="sk-circle6 sk-child"></div>
+        <div class="sk-circle7 sk-child"></div>
+        <div class="sk-circle8 sk-child"></div>
+        <div class="sk-circle9 sk-child"></div>
+        <div class="sk-circle10 sk-child"></div>
+        <div class="sk-circle11 sk-child"></div>
+        <div class="sk-circle12 sk-child"></div>
+    </div>
+</div>
+<!--loader-->
+<!-- Site Wraper -->
+<div class="wrapper">
+
+    <div th:replace="fragments/header :: header"></div>
+    <div th:replace="fragments/navbar :: navbar"></div>
+
+    <!-- CONTENT -->
+    <!-- Intro Section -->
+    <section class="inner-intro  padding bg-img1 overlay-dark light-color">
+        <div class="container">
+            <div class="row title">
+                <h1>Finanszírozás</h1>
+            </div>
+        </div>
+    </section>
+    <!-- End Intro Section -->
+
+    <section class="page-section pricing-2 padding ptb-xs-60 columns_padding_25 pricing-style2 gray-bg" id="pricing_table2">
+        <div class="container">
+            <div class="row text-center pb-30">
+                <div class="col-sm-12">
+                    <div class="heading-box ">
+                        <h2>Személyre <span>szabott,</span> Igény <span>szerinti finanszírozás</span></h2>
+                        <span class="b-line line-h"></span>
+                    </div>
+                </div>
+            </div>
+            <!-- row end -->
+            <div class="row">
+                <div class="col-md-4 col-sm-6 col-xs-12 mb-xs-30 mb-sm-30">
+                    <div class="pricing_table">
+                        <div class="package_title">
+                            <div class="pricing-top bg-color">
+                                <p>
+                                    PÁLYÁZATI FINANSZÍROZÁS
+                                </p>
+                            </div>
+                        </div>
+                        <ul class="price_feature">
+                            <li>
+                                0% kamat
+                            </li>
+                            <li>
+                                10% önerő
+                            </li>
+                            <li>
+                                Hosszú futamidő
+                            </li>
+                        </ul>
+                        <div class="single-sidebar-widget">
+                            <ul class="brochure-btns">
+                                <li>
+                                    <a target="_blank" href="./assets/pdf/Palyazati_Finanszirozas.pdf" download class="clearfix"><i class="fa fa-file-pdf-o"></i><span>Pályázati finanszírozás</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- table end -->
+                <div class="col-md-4 col-sm-6 col-xs-12 mb-xs-30 mb-sm-30">
+                    <div class="pricing_table shadow">
+                        <div class="package_title">
+                            <div class="pricing-top secondary_bg">
+                                <p>
+                                    LAKÁSTAKARÉK PÉNZTÁR
+                                </p>
+                            </div>
+                        </div>
+                        <ul class="price_feature">
+                            <li>
+                                Rögzített kamat
+                            </li>
+                            <li>
+                                30% állami támogatás
+                            </li>
+                            <li>
+                                Változó futamidő
+                            </li>
+                        </ul>
+                        <div class="single-sidebar-widget">
+                            <ul class="brochure-btns">
+                                <li>
+                                    <a target="_blank" href="./assets/pdf/Lakastakarekpenztari_finanszirozas.pdf" download class="clearfix"><i class="fa fa-file-pdf-o"></i> <span>Lakástakarék pénztár</span> </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- table end -->
+                <div class="col-md-4 col-sm-6 col-xs-12 mb-xs-30 mb-sm-30">
+                    <div class="pricing_table">
+                        <div class="package_title">
+                            <div class="pricing-top bg-color3">
+                                <p>
+                                    FINANSZÍROZÁS ÖNERŐBŐL
+                                </p>
+                            </div>
+                        </div>
+                        <ul class="price_feature">
+                            <li>
+                                Szerződéskötéstől
+                            </li>
+                            <li>
+                                akár 60 napon belül
+                            </li>
+                            <li>
+                                 megvalósítva
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <!-- row end -->
+        </div>
+    </section>
+</div>
+<!-- Site Wraper End -->
+
+<!-- FOOTER -->
+<div th:replace="fragments/footer :: footer"></div>
+<!-- END FOOTER -->
+</body>
+</html>

@@ -1,0 +1,335 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head th:replace="fragments/head :: head"></head>
+
+<body class="full-intro background--dark">
+<!--loader-->
+
+<!--
+		<div th:replace="fragments/preloader :: preloader"></div>
+-->
+
+<div id="preloader">
+    <div class="sk-circle">
+        <div class="sk-circle1 sk-child"></div>
+        <div class="sk-circle2 sk-child"></div>
+        <div class="sk-circle3 sk-child"></div>
+        <div class="sk-circle4 sk-child"></div>
+        <div class="sk-circle5 sk-child"></div>
+        <div class="sk-circle6 sk-child"></div>
+        <div class="sk-circle7 sk-child"></div>
+        <div class="sk-circle8 sk-child"></div>
+        <div class="sk-circle9 sk-child"></div>
+        <div class="sk-circle10 sk-child"></div>
+        <div class="sk-circle11 sk-child"></div>
+        <div class="sk-circle12 sk-child"></div>
+    </div>
+</div>
+<!--loader-->
+<!-- Site Wraper -->
+<div class="wrapper">
+
+    <div th:replace="fragments/header :: header"></div>
+    <div th:replace="fragments/navbar :: navbar"></div>
+
+    <!--  Main Banner Start Here-->
+    <section class="hero">
+        <!--rev slider start-->
+        <div class="fullwidthbanner">
+            <div class="tp-fullscreen-banner">
+                <ul>
+                    <!-- SLIDE -->
+                    <li data-transition="fade" data-slotamount="5" data-masterspeed="1000" data-title="Slide 1">
+                        <!-- MAIN IMAGE -->
+                        <img src="assets/images/custom/solar1.jpeg" alt="solar1" data-bgfit="cover"
+                             data-bgposition="left top" data-bgrepeat="no-repeat">
+                        <!-- Transparent Background -->
+                        <div class="tp-caption dark-translucent-bg"
+                             data-x="center"
+                             data-y="bottom"
+                             data-speed="500"
+                             data-easing="easeOutQuad"
+                             data-start="0"></div>
+                        <div class="caption sfb bold text-center"
+                             data-x="center"
+                             data-y="120"
+                             data-speed="900"
+                             data-start="800"
+                             data-easing="Sine.easeOut">
+                            <h2 class="font-s">Mindenre<span class="text-color"> Van </span>Megoldás!</h2>
+                        </div>
+                        <div class="caption sfb bold  text-center "
+                             data-x="center"
+                             data-y="200"
+                             data-speed="900"
+                             data-start="1500"
+                             data-easing="Sine.easeOIn">
+                            <p class="paragraph-s">
+                                Finanszírozási lehetőségek:
+                                <br>
+                                saját tőke, pályázat, hitel, lakástakarék pénztár...
+                            </p>
+                        </div>
+                        <div class="caption sfb lowercase-caption text-center"
+                             data-x="center"
+                             data-y="280"
+                             data-speed="1000"
+                             data-start="2000"
+                             data-easing="Sine.easeOut">
+                            <a class="btn-text" th:href="@{/finanszirozas}">Finanszírozás</a>
+                            <a class="btn-text secondary_bg" th:href="@{/rolunk}">Kapcsolat</a>
+                        </div>
+                    </li>
+                    <!-- SLIDE -->
+                    <!-- SLIDE -->
+                    <li data-transition="fade" data-slotamount="5" data-masterspeed="1000" data-title="Slide 1">
+                        <!-- MAIN IMAGE -->
+                        <img src="assets/images/custom/solar2.jpeg" alt="solar2" data-bgfit="cover"
+                             data-bgposition="left top" data-bgrepeat="no-repeat">
+                        <!-- Transparent Background -->
+                        <div class="tp-caption dark-translucent-bg"
+                             data-x="center"
+                             data-y="bottom"
+                             data-speed="500"
+                             data-easing="easeOutQuad"
+                             data-start="0"></div>
+                        <div class="caption sfb bold text-center"
+                             data-x="center"
+                             data-y="120"
+                             data-speed="900"
+                             data-start="800"
+                             data-easing="Sine.easeOut">
+                            <h2 class="font-s">Teljes körű <span class="text-color">ügyintézés</span> a megvalósításig</h2>
+                        </div>
+                        <div class="caption sfb bold  text-center "
+                             data-x="center"
+                             data-y="200"
+                             data-speed="900"
+                             data-start="1500"
+                             data-easing="Sine.easeOIn">
+                            <p class="paragraph-s">
+                                Ajánlatkérés, tervezés, kivitelezés
+                                <br>
+                            </p>
+                        </div>
+                        <div class="caption sfb lowercase-caption text-center"
+                             data-x="center"
+                             data-y="280"
+                             data-speed="1000"
+                             data-start="2000"
+                             data-easing="Sine.easeOut">
+                            <a class="btn-text" th:href="@{/finanszirozas}">Finanszírozás</a>
+                            <a class="btn-text secondary_bg" th:href="@{/rolunk}">Kapcsolat</a>
+                        </div>
+                    </li>
+                    <!-- SLIDE -->
+                    <!-- SLIDE -->
+                    <li data-transition="fade" data-slotamount="5" data-masterspeed="1000" data-title="Slide 1">
+                        <!-- MAIN IMAGE -->
+                        <img src="assets/images/custom/solar3.jpg" alt="solar1" data-bgfit="cover"
+                             data-bgposition="left top" data-bgrepeat="no-repeat">
+                        <!-- Transparent Background -->
+                        <div class="tp-caption dark-translucent-bg"
+                             data-x="center"
+                             data-y="bottom"
+                             data-speed="500"
+                             data-easing="easeOutQuad"
+                             data-start="0"></div>
+                        <div class="caption sfb bold text-center"
+                             data-x="center"
+                             data-y="120"
+                             data-speed="900"
+                             data-start="800"
+                             data-easing="Sine.easeOut">
+                            <h2 class="font-s">Váltson <span class="text-color"> Zöld </span> Energiára!</h2>
+                        </div>
+                        <div class="caption sfb bold  text-center "
+                             data-x="center"
+                             data-y="200"
+                             data-speed="900"
+                             data-start="1500"
+                             data-easing="Sine.easeOIn">
+                            <p class="paragraph-s">
+                                Olcsó, kényelmes, környezetbarát
+                            </p>
+                        </div>
+                        <div class="caption sfb lowercase-caption text-center"
+                             data-x="center"
+                             data-y="280"
+                             data-speed="1000"
+                             data-start="2000"
+                             data-easing="Sine.easeOut">
+                            <a class="btn-text" th:href="@{/finanszirozas}">Finanszírozás</a>
+                            <a class="btn-text secondary_bg" th:href="@{/rolunk}">Kapcsolat</a>
+                        </div>
+                    </li>
+                    <!-- SLIDE -->
+
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!--Our Services-->
+    <section id="our-services" class="padding ptb-xs-40 text-center">
+        <div class="container">
+            <div class="row pb-60">
+                <div class="col-sm-12 mb-20">
+                    <div class="heading-box ">
+                        <h2><span>Amit</span> garantálunk</h2>
+                        <span class="b-line line-h"></span>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-4 col-sm-6">
+                        <div class="featured-item feature-bg-box mb-100 gray-bg">
+                            <div class="icon">
+                                <img src="assets/images/custom/tanacsadas.png">
+                            </div>
+                            <div class="title text-uppercase">
+                                <h4>SZEMÉLYES TANÁCSADÁS</h4>
+                            </div>
+                            <div class="desc">
+                                Felmérjük igényeit, megoldási javaslatokat nyújtunk, elkészítjük árajánlatunkat.
+                            </div>
+                        </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                        <div class="featured-item feature-bg-box gray-bg mb-100 sub-color_hover">
+                            <div class="icon">
+                                <img src="assets/images/custom/tervezes.png">
+                            </div>
+                            <div class="title text-uppercase">
+                                <h4>TERVEZÉS</h4>
+                            </div>
+                            <div class="desc">
+                                Szakembereink egyedi igényei szerint készítik el HMKE tervét.
+                            </div>
+                        </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                        <div class="featured-item feature-bg-box gray-bg mb-100">
+                            <div class="icon">
+                                <img src="assets/images/custom/kivitelezes.png">
+                            </div>
+                            <div class="title text-uppercase">
+                                <h4>KIVITELEZÉS</h4>
+                            </div>
+                            <div class="desc">
+                                Szerelő egységeink gyorsan, pontosan, szakszerűen végeznek telepítést az ország teljes területén.                         </div>
+                        </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6">
+                        <div class="featured-item feature-bg-box gray-bg sub-color_hover mb-sm-100">
+                            <div class="icon">
+                                <img src="assets/images/custom/ugyintezes.png">
+                            </div>
+                            <div class="title text-uppercase">
+                                <h4>TELJES KÖRŰ ÜGYINTÉZÉS</h4>
+                            </div>
+                            <div class="desc">
+                                Megállapodást követően a projekt menedzselése a megvalósításig.
+                            </div>
+                        </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6">
+                        <div class="featured-item feature-bg-box gray-bg ">
+                            <div class="icon">
+                                <img src="assets/images/custom/karbantartas.png">
+                            </div>
+                            <div class="title text-uppercase">
+                                <h4>KARBANTARTÁS</h4>
+                            </div>
+                            <div class="desc">
+                                Gyorsan, szakszerűen, képzett szakemberekkel.
+                            </div>
+                        </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6">
+                    <a href="/finanszirozas">
+                        <div class="featured-item feature-bg-box green-bg mb-xs-0 ">
+                            <div class="icon">
+                                <img src="assets/images/custom/cash.png">
+                            </div>
+                            <div class="title text-uppercase">
+                                <h4>FINANSZÍROZÁSI MÓDOK</h4>
+                            </div>
+                            <div class="desc">
+                                Önerőből, pályázattal, hitellel, lakástakarék pénztár felhasználásával.
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="choose-us padding light-color pb-xs-0 overflow_hidden secondary_bg">
+
+        <!-- half image background element -->
+        <div class="container">
+            <div class="row">
+
+                <div class="col-sm-6">
+                    <div class="creative_heading light-color pb-30">
+                        <h2>Miért mi?</h2>
+                    </div>
+
+                    <div class="media ">
+                        <div class="media-left">
+                            <i class="flaticon-nature fontsize_28"></i>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="text-uppercase">LEGIDEÁLISABB FINANSZÍROZÁSI FELTÉTELEK</h4>
+                            <p>
+                                egyedi kidolgozása ésmegvalósítása
+                            </p>
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="media-left">
+                            <i class="flaticon-people-2 fontsize_28"></i>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="text-uppercase">TELJES KÖRŰ SZOLGÁLTATÁS</h4>
+                            <p>
+                                ajánlatkéréstől a megvalósításig
+                            </p>
+                        </div>
+                    </div>
+                    <div class="media ">
+                        <div class="media-left">
+                            <i class="flaticon-people-1 fontsize_28"></i>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="text-uppercase">RENDSZEREK KIÉPÍTÉSE</h4>
+                            <p>
+                                előleg fizetése nélkül
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="image_cover image_cover_right"></div>
+    </section>
+</div>
+    <!-- FOOTER -->
+    <footer th:replace="fragments/footer :: footer"></footer>
+    <!-- END FOOTER -->
+
+
+</body>
+</html>

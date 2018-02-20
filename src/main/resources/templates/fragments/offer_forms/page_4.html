@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!--The fourth step of the offer creation-->
+<div th:fragment="page_4">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="heading-box ">
+                    <h2 class="title center">Árajánlat</h2>
+                    <span class="b-line l-center line-h"></span>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <h4 class="center">Az ajánlatot sikeresen elküldtük az e-mail címére.</h4>
+            </div>
+            <div class="center">
+                <br>
+                <br>
+                <div></div>
+                <div class="caption sfb lowercase-caption text-center"
+                     data-x="center"
+                     data-y="280"
+                     data-speed="1000"
+                     data-start="2000"
+                     data-easing="Sine.easeOut">
+                    <a class="btn-text secondary_bg" th:href="@{/ajanlat/1?key=} + ${consumptionId}">Új ajánlat</a>
+                    <div></div>
+                    <br>
+                </div>
+            </div>
+            <!--<div class="col-xs-12" th:if="${!success}">
+                <h4 class="center">Az ajánlatot letöltheti az alábbi linken:</h4>
+                <div class="center">
+                <br>
+                <a th:href="${pdf}"  class="btn-text" type="submit" id="download" name="button">
+                    Letöltés
+                </a>
+                    </div>
+            </div>-->
+        </div>
+    </div>
+</div>
+</body>
+</html>
