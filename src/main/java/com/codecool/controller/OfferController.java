@@ -142,7 +142,7 @@ public class OfferController {
     public String getOfferStep3(@RequestParam(value="key") String consumptionID, Model model) {
         Consumption consumption = consumptionService.getConsumptionByconsumptionID(consumptionID);
 
-        if (consumption == null) {
+        if (null == consumption) {
             log.info("Step1 is not done, redirecting to /ajanlat/1.");
             return "redirect:/ajanlat/1";
         }
@@ -158,7 +158,7 @@ public class OfferController {
 
         consumptionService.saveConsuption(consumption);
         Offer offer = offerService.createFromFormData(consumption, deviceForm);
-        offer.setGeneratedOfferId(1001 + offerService.getOfferIdNumber());
+        offer.setGeneratedOfferId(1106 + offerService.getOfferIdNumber());
         offer.setConsumptionId(consumptionID);
         offer.setCompany(CompanyEnum.TraditionalSolutions);
         offerService.saveOffer(offer);
@@ -211,6 +211,7 @@ public class OfferController {
     @GetMapping("/ajanlat/4")
     public String getOfferStep4 (@RequestParam(value="key") String consumptionID, Model model){
         model.addAttribute(STEP, '4');
+        model.addAttribute("consumptionId", consumptionID);
         return "offer";
     }
 

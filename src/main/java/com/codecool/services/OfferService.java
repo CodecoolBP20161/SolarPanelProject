@@ -74,7 +74,7 @@ public class OfferService {
 
         SolarPanel solarPanel = solarPanelRepository.findOne(panelID);
 
-        List<OtherItem> otherItems = otherItemRepository.findByPhaseIn(Arrays.asList(0, (calculateConsumption(consumptionForm) < 5000) ? 1 : 3));
+        List<OtherItem> otherItems = otherItemRepository.findByPhaseIn(Arrays.asList(0, inverterRepository.findOne(deviceForm.getInverterId()).getPhase()));
 
         LineItem solarPanelLineItem = new LineItem(solarPanel);
         int neededSolarPanelQuantity = solarPanelService.calculateSolarPanelQuantity(consumptionValue, solarPanel.getCapacity());
@@ -84,7 +84,7 @@ public class OfferService {
 
         lineItems.add(solarPanelLineItem);
 
-        if (!deviceForm.getInverterId().equals("")) {
+        if (deviceForm.getInverterId() != null) {
             Integer inverterId = deviceForm.getInverterId();
             Inverter inverter = inverterRepository.findOne(inverterId);
             LineItem inverterLineItem = new LineItem(inverter);

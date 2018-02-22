@@ -145,7 +145,7 @@ public class AdminController {
         consumption.setInverterId(deviceForm.getInverterId());
         consumption.setPanelId(deviceForm.getPanelId());
         consumptionService.saveConsuption(consumption);
-        log.info("Devices: Inverter: " + consumption.getInverterId().toString() + "  Panel: " + consumption.getPanelId().toString());
+        //log.info("Devices: Inverter: " + consumption.getInverterId().toString() + "  Panel: " + consumption.getPanelId().toString());
 
         return "redirect:/admin/szerkeszto?key=" + consumptionID;
     }
@@ -163,7 +163,7 @@ public class AdminController {
 
         consumptionService.saveConsuption(consumption);
         Offer offer = offerService.createFromFormData(consumption, deviceForm);
-        offer.setGeneratedOfferId(1001 + offerService.getOfferIdNumber());
+        offer.setGeneratedOfferId(1106 + offerService.getOfferIdNumber());
         offer.setConsumptionId(consumptionID);
 
         offerService.saveOffer(offer);

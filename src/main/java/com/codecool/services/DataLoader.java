@@ -31,7 +31,7 @@ public class DataLoader {
     private final InverterBrandEnum SOLAREDGE = InverterBrandEnum.SOLAREDGE;
     private final InverterBrandEnum GROWATT = InverterBrandEnum.GROWATT;
     private final InverterBrandEnum FRONIUS = InverterBrandEnum.FRONIUS;
-    private final String Amerisolar = "275 W-os Amerisolar polikristályos napelem";
+    private final String Amerisolar = "275 W-os Polikristályos napelem";
 
 
     @Autowired
@@ -47,19 +47,27 @@ public class DataLoader {
 
     @PostConstruct
     public void loadData() {
-        loadSolarPanels();
-        loadInverters();
-        loadOtherItems();
-        loadDefaultadvertising();
+        //loadSolarPanels();
+        //loadInverters();
+        //loadOtherItems();
+        //loadDefaultadvertising();
     }
 
     private void loadDefaultadvertising(){
         List<Advertising> advertisementList = new ArrayList<>();
 
-        advertisementList.add(new Advertising(1));
-        advertisementList.add(new Advertising(2));
-        advertisementList.add(new Advertising(3));
+        Advertising advertising1 = new Advertising(1);
+        advertising1.setValue(15);
 
+        Advertising advertising2 = new Advertising(2);
+        advertising2.setValue(59);
+
+        Advertising advertising3 = new Advertising(3);
+        advertising3.setValue(7);
+
+        advertisementList.add(advertising1);
+        advertisementList.add(advertising2);
+        advertisementList.add(advertising3);
         for (Advertising item : advertisementList) {
             advertisingRep.save(item);
         }
@@ -83,18 +91,18 @@ public class DataLoader {
     private List<Inverter> loadSolaredgeInverters() {
         List<Inverter> solaredgeInverterList = new ArrayList<>();
 
-        solaredgeInverterList.add(new Inverter(SOLAREDGE, "SE2200-ER-01", 230000, 1, 1.27, "Beépített wifi modullal, 12 év garancia", 15000, 2200, "Optimalizáló (P300-5R M4M RS)", 13000));
-        solaredgeInverterList.add(new Inverter(SOLAREDGE, "SE3000-ER-01", 255000, 1, 1.27, "Beépített wifi modullal, 12 év garancia", 15000, 3000, "Optimalizáló (P300-5R M4M RS)", 13000));
-        solaredgeInverterList.add(new Inverter(SOLAREDGE, "SE4000-ER-01", 300000, 1, 1.27, "Beépített wifi modullal, 12 év garancia", 15000, 4000, "Optimalizáló (P300-5R M4M RS)", 13000));
-        solaredgeInverterList.add(new Inverter(SOLAREDGE, "SE5000-ER-01", 320000, 1, 1.27, "Beépített wifi modullal, 12 év garancia", 15000, 5000, "Optimalizáló (P300-5R M4M RS)", 13000));
-        solaredgeInverterList.add(new Inverter(SOLAREDGE, "SE5K-ER-01", 360000, 3, 1.27, "Beépített wifi modullal, 12 év garancia", 15000, 5000, "Optimalizáló (P300-5R M4M RS)", 13000));
-        solaredgeInverterList.add(new Inverter(SOLAREDGE, "SE7K-ER-01", 400000, 3, 1.27, "Beépített wifi modullal, 12 év garancia", 15000, 7000, "Optimalizáló (P300-5R M4M RS)", 13000));
-        solaredgeInverterList.add(new Inverter(SOLAREDGE, "SE8K-ER-01", 440000, 3, 1.27, "Beépített wifi modullal, 12 év garancia", 15000, 8000, "Optimalizáló (P300-5R M4M RS)", 13000));
-        solaredgeInverterList.add(new Inverter(SOLAREDGE, "SE9K-ER-01", 460000, 3, 1.27, "Beépített wifi modullal, 12 év garancia", 15000, 9000, "Optimalizáló (P300-5R M4M RS)", 13000));
-        solaredgeInverterList.add(new Inverter(SOLAREDGE, "SE10K-ER-01", 480000, 3, 1.27, "Beépített wifi modullal, 12 év garancia", 15000, 10000, "Optimalizáló (P300-5R M4M RS)", 13000));
-        solaredgeInverterList.add(new Inverter(SOLAREDGE, "SE12.5K-ER-01", 500000, 3, 1.27, "Beépített wifi modullal, 12 év garancia", 15000, 12500, "Optimalizáló (P300-5R M4M RS)", 13000));
-        solaredgeInverterList.add(new Inverter(SOLAREDGE, "SE15K-ER-01", 440000, 3, 1.27, "Beépített wifi modullal, 12 év garancia", 15000, 15000, "Optimalizáló (P600-5R M4M RL)", 16500));
-        solaredgeInverterList.add(new Inverter(SOLAREDGE, "SE17K-ER-01", 450000, 3, 1.27, "Beépített wifi modullal, 12 év garancia", 15000, 17000, "Optimalizáló (P600-5R M4M RL)", 16500));
+        solaredgeInverterList.add(new Inverter(SOLAREDGE, "SE2200-ER-01", 230000, 1, 1.27, "", 15000, 2200, "Optimalizáló (P300-5R M4M RS)", 13000));
+        solaredgeInverterList.add(new Inverter(SOLAREDGE, "SE3000-ER-01", 255000, 1, 1.27, "", 15000, 3000, "Optimalizáló (P300-5R M4M RS)", 13000));
+        solaredgeInverterList.add(new Inverter(SOLAREDGE, "SE4000-ER-01", 300000, 1, 1.27, "", 15000, 4000, "Optimalizáló (P300-5R M4M RS)", 13000));
+        solaredgeInverterList.add(new Inverter(SOLAREDGE, "SE5000-ER-01", 320000, 1, 1.27, "", 15000, 5000, "Optimalizáló (P300-5R M4M RS)", 13000));
+        solaredgeInverterList.add(new Inverter(SOLAREDGE, "SE5K-ER-01", 360000, 3, 1.27, "", 15000, 5000, "Optimalizáló (P300-5R M4M RS)", 13000));
+        solaredgeInverterList.add(new Inverter(SOLAREDGE, "SE7K-ER-01", 400000, 3, 1.27, "", 15000, 7000, "Optimalizáló (P300-5R M4M RS)", 13000));
+        solaredgeInverterList.add(new Inverter(SOLAREDGE, "SE8K-ER-01", 440000, 3, 1.27, "", 15000, 8000, "Optimalizáló (P300-5R M4M RS)", 13000));
+        solaredgeInverterList.add(new Inverter(SOLAREDGE, "SE9K-ER-01", 460000, 3, 1.27, "", 15000, 9000, "Optimalizáló (P300-5R M4M RS)", 13000));
+        solaredgeInverterList.add(new Inverter(SOLAREDGE, "SE10K-ER-01", 480000, 3, 1.27, "", 15000, 10000, "Optimalizáló (P300-5R M4M RS)", 13000));
+        solaredgeInverterList.add(new Inverter(SOLAREDGE, "SE12.5K-ER-01", 500000, 3, 1.27, "", 15000, 12500, "Optimalizáló (P300-5R M4M RS)", 13000));
+        solaredgeInverterList.add(new Inverter(SOLAREDGE, "SE15K-ER-01", 440000, 3, 1.27, "", 15000, 15000, "Optimalizáló (P600-5R M4M RL)", 16500));
+        solaredgeInverterList.add(new Inverter(SOLAREDGE, "SE17K-ER-01", 450000, 3, 1.27, "", 15000, 17000, "Optimalizáló (P600-5R M4M RL)", 16500));
         return solaredgeInverterList;
     }
 
@@ -102,12 +110,12 @@ public class DataLoader {
     private List<Inverter> loadGrowattInverters() {
         List<Inverter> growattInverterList = new ArrayList<>();
 
-        growattInverterList.add(new Inverter(GROWATT, "2000S", 150000, 1, 1.27, "", 15000, 2000, "", 0));
-        growattInverterList.add(new Inverter(GROWATT, "3000S", 185000, 1, 1.27, "", 15000, 3000, "", 0));
-        growattInverterList.add(new Inverter(GROWATT, "4200MTL-S", 245000, 1, 1.27, "", 15000, 4200, "", 0));
-        growattInverterList.add(new Inverter(GROWATT, "5000MTL-S", 255000, 1, 1.27, "", 15000, 5000, "", 0));
-        growattInverterList.add(new Inverter(GROWATT, "4000UE", 300000, 3, 1.27, "", 15000, 4000, "", 0));
-        growattInverterList.add(new Inverter(GROWATT, "5000UE", 320000, 3, 1.27, "", 15000, 5000, "", 0));
+        growattInverterList.add(new Inverter(GROWATT, "2000S", 155000, 1, 1.27, "", 15000, 2000, "", 0));
+        growattInverterList.add(new Inverter(GROWATT, "3000S", 180000, 1, 1.27, "", 15000, 3000, "", 0));
+        growattInverterList.add(new Inverter(GROWATT, "4200MTL-S", 240000, 1, 1.27, "", 15000, 4200, "", 0));
+        growattInverterList.add(new Inverter(GROWATT, "5000MTL-S", 265000, 1, 1.27, "", 15000, 5000, "", 0));
+        growattInverterList.add(new Inverter(GROWATT, "4000UE", 280000, 3, 1.27, "", 15000, 4000, "", 0));
+        growattInverterList.add(new Inverter(GROWATT, "5000UE", 310000, 3, 1.27, "", 15000, 5000, "", 0));
         growattInverterList.add(new Inverter(GROWATT, "6000UE", 340000, 3, 1.27, "", 15000, 6000, "", 0));
         growattInverterList.add(new Inverter(GROWATT, "7000UE", 390000, 3, 1.27, "", 15000, 7000, "", 0));
         growattInverterList.add(new Inverter(GROWATT, "8000UE", 420000, 3, 1.27, "", 15000, 8000, "", 0));
@@ -164,7 +172,7 @@ public class DataLoader {
         stuffs.add(new OtherItem("AC vezeték 3x4mm2", "Tervezett mennyiség", 600, 1, ItemTypeEnum.Item));
         stuffs.add(new OtherItem("AC vezeték 5x4mm2", "Tervezett mennyiség", 900, 3, ItemTypeEnum.Item));
         stuffs.add(new OtherItem("16mm2-es MKH vezeték", "Tervezett mennyiség", 440, 0, ItemTypeEnum.Item));
-        stuffs.add(new OtherItem("Termék díj", "", 2110, 0, ItemTypeEnum.Service));
+        stuffs.add(new OtherItem("Termék díj", "", 1055, 0, ItemTypeEnum.Service));
         stuffs.add(new OtherItem("Tervezés, engedélyeztetés", "", 45000, 0, ItemTypeEnum.Service));
 
         for (OtherItem item : stuffs) {
@@ -193,7 +201,7 @@ public class DataLoader {
             presetOffers.add(new ReadyProduct(new StringBuilder(GROWATT + " 18000UE").toString(), Amerisolar, 10, 4641342, moreThan120000Description, 3, 18));
             presetOffers.add(new ReadyProduct(new StringBuilder(GROWATT + " 20000UE").toString(), Amerisolar, 10, 5793740, moreThan120000Description, 3, 20));
 
-        } else {
+        } else if (brand.equals("solaredge")){
             presetOffers.add(new ReadyProduct(new StringBuilder(SOLAREDGE + " SE2200-ER-01").toString(), Amerisolar, 10, offerService.getReadyProductPrice(1,2), smallerThan12000Description, 1, 2.2));
             presetOffers.add(new ReadyProduct(new StringBuilder(SOLAREDGE + " SE3000-ER-01").toString(), Amerisolar, 10, offerService.getReadyProductPrice(2,2), smallerThan12000Description, 1, 3));
             presetOffers.add(new ReadyProduct(new StringBuilder(SOLAREDGE + " SE4000-ER-01").toString(), Amerisolar, 10, offerService.getReadyProductPrice(3,2), smallerThan12000Description, 1, 4));
@@ -206,15 +214,34 @@ public class DataLoader {
             presetOffers.add(new ReadyProduct(new StringBuilder(SOLAREDGE + " SE12.5K-ER-01").toString(), Amerisolar, 10, 4561586, moreThan120000Description, 3, 12.5));
             presetOffers.add(new ReadyProduct(new StringBuilder(SOLAREDGE + " SE15K-ER-01").toString(), Amerisolar, 10, 4750562, moreThan120000Description, 3, 15));
             presetOffers.add(new ReadyProduct(new StringBuilder(SOLAREDGE + " SE17K-ER-01").toString(), Amerisolar, 10, 5216144, moreThan120000Description, 3, 17));
+        } else if (brand.equals("fronius")){
+            presetOffers.add(new ReadyProduct(new StringBuilder(FRONIUS + " GALVO-2.0-1").toString(), Amerisolar, 10, offerService.getReadyProductPrice(27,2), smallerThan12000Description, inverterRep.getOne(27).getPhase(), 2));
+            presetOffers.add(new ReadyProduct(new StringBuilder(FRONIUS + " GALVO-3.0-1").toString(), Amerisolar, 10, offerService.getReadyProductPrice(28,2), smallerThan12000Description, inverterRep.getOne(28).getPhase(), 3));
+            presetOffers.add(new ReadyProduct(new StringBuilder(FRONIUS + " PRIMO-4.0-1").toString(), Amerisolar, 10, offerService.getReadyProductPrice(29,2), smallerThan12000Description, inverterRep.getOne(29).getPhase(), 4));
+            presetOffers.add(new ReadyProduct(new StringBuilder(FRONIUS + " PRIMO-4.6-1").toString(), Amerisolar, 10, offerService.getReadyProductPrice(30,2), smallerThan12000Description, inverterRep.getOne(30).getPhase(), 4.6));
+            presetOffers.add(new ReadyProduct(new StringBuilder(FRONIUS + " Symo-4.5-3-M").toString(), Amerisolar, 10, offerService.getReadyProductPrice(31,2), smallerThan12000Description, inverterRep.getOne(31).getPhase(), 4.5));
+            presetOffers.add(new ReadyProduct(new StringBuilder(FRONIUS + " SYMO-5.0-3-M").toString(), Amerisolar, 10, offerService.getReadyProductPrice(32,2), smallerThan12000Description, inverterRep.getOne(32).getPhase(), 5));
+            presetOffers.add(new ReadyProduct(new StringBuilder(FRONIUS + " SYMO-6.0-3-M").toString(), Amerisolar, 10, offerService.getReadyProductPrice(33,2), smallerThan12000Description, inverterRep.getOne(33).getPhase(), 6));
+            presetOffers.add(new ReadyProduct(new StringBuilder(FRONIUS + " SYMO-7.0-3-M").toString(), Amerisolar, 10, offerService.getReadyProductPrice(34,2), smallerThan12000Description, inverterRep.getOne(34).getPhase(), 7));
+            presetOffers.add(new ReadyProduct(new StringBuilder(FRONIUS + " SYMO-8.2-3-M").toString(), Amerisolar, 10, offerService.getReadyProductPrice(35,2), smallerThan12000Description, inverterRep.getOne(35).getPhase(), 8.2));
+            presetOffers.add(new ReadyProduct(new StringBuilder(FRONIUS + " SYMO-10.0-3-M").toString(), Amerisolar, 10, offerService.getReadyProductPrice(36,2), smallerThan12000Description, inverterRep.getOne(36).getPhase(), 10));
+            presetOffers.add(new ReadyProduct(new StringBuilder(FRONIUS + " SYMO-12.5-3-M").toString(), Amerisolar, 10, 3813302, moreThan120000Description, inverterRep.getOne(37).getPhase(), 12.5));
+            presetOffers.add(new ReadyProduct(new StringBuilder(FRONIUS + " SYMO-15.0-3-M").toString(), Amerisolar, 10, 4901540, moreThan120000Description, inverterRep.getOne(38).getPhase(), 15));
+            presetOffers.add(new ReadyProduct(new StringBuilder(FRONIUS + " SYMO-17.5-3-M").toString(), Amerisolar, 10, 5671287, moreThan120000Description, inverterRep.getOne(39).getPhase(),17.5));
+            presetOffers.add(new ReadyProduct(new StringBuilder(FRONIUS + " SYMO-20.0-3-M").toString(), Amerisolar, 10, 6180912, moreThan120000Description, inverterRep.getOne(40).getPhase(), 20));
+
+
         }
         return presetOffers;
     }
 
 
-        /*if (brand.equals("solaredge")) {
-            presetOffers.add(new ReadyProduct(inverterRep.getOne(1).getName(), Amerisolar, 10,
-                    (offerService.getFinalPriceForReadyProduct(inverterRep.getOne(1), solarPanelRep.getOne(4), new ConsumptionForm("kWh",2222.0, 1))),
-                    smallerThan12000Description, 1, inverterRep.getOne(1).getCapacity()/1000));*/
+
+
+
+
+
+
 
 
 }
